@@ -609,8 +609,9 @@ which implies $a_if_i = 0$ for all $i = 1,\dots, n$ and for all $x \in M$. Thus 
     \]
     Therefore, for any $[x] \in \bb{RP}^n \backslash \ti{U}$, there exists $(x_n) \in \bb{R}^{n + 1}$ such that $\pi(y_n) \to [x]$. Hence $\ti{U}$ is dense in $\bb{RP}^n$, as desired.
 \end{proof}
+
 \begin{problem}
-    Given a polynomial $p$ in one variable with complex coefficients, not identically zero, show that there is a unique smooth map $\tilde{p}: \mathbb{C P}^1 \rightarrow \mathbb{C} \mathbb{P}^1$ that makes the following diagram commute, where $\mathbb{C P}{ }^1$ is 1 -dimensional complex projective space and $G$ : $\mathbb{C} \rightarrow \mathbb{C} \mathbb{P}^1$ is the map of Problem 2-8:
+    Given a polynomial $p$ in one variable with complex coefficients, not identically zero, show that there is a unique smooth map $\tilde{p}: \mathbb{C P}^1 \rightarrow \mathbb{C} \mathbb{P}^1$ that makes the following diagram commute, where $\mathbb{C P}{ }^1$ is 1-dimensional complex projective space and $G$ : $\mathbb{C} \rightarrow \mathbb{C} \mathbb{P}^1$ is the map of Problem 2-8: 
     \[
     \begin{tikzcd}
     \mathbb{C} \arrow[r, "G"] \arrow[d, "p"'] & \mathbb{C}\mathbb{P}^1 \arrow[d, "\tilde{p}"] \\
@@ -619,7 +620,24 @@ which implies $a_if_i = 0$ for all $i = 1,\dots, n$ and for all $x \in M$. Thus 
     \]
 \end{problem}
 \begin{proof}
-    
+    It suffices to prove there exsits a unique map $\ti{p}: \bb{CP}^1 \to \bb{CP}^1$ satisfying $G \circ p = \ti{p} \circ G$. Suppose $p(z) = a_nz^n + \dots + a_1z + a_0$. By computing sufficiently, we have 
+    \begin{align*}
+            G \circ p (z) = [a_nz^n + \dots + a_1z + a_0,1] = [p(z),1].     
+    \end{align*}
+    Let $q(z_1,z_2) = \dsum_{i = 0}^n a_i z_1^{i}z_2^{n - i}$, this implies $q(z_1,z_2) =z_2^n P\left(\dfrac{z_1}{z_2}\right)$ if $z_2 \neq 0$, then we can construct the map $\ti{p}$ satisfying
+    \[  
+        \ti{p}(z_1,z_2) = [q(z_1,z_2),z_2^n].
+    \]
+    One can verify that $\ti{p} \circ G(z) = \ti{p}[z,1] = [q(z,1),1] = [p(z),1] = G \circ p(z)$. We now prove that $\ti{p}$ is unique. Assume that there exists $h : \bb{CP}^1 \to \bb{CP}^1$ satisfying $G \circ p = h\circ G$. If $z_2 \neq 0$, it follows that 
+    \[
+        h[z_1,z_2] = h\left[\frac{z_1}{z_2},1\right] = h \circ G \left(\frac{z_1}{z_2} \right) = \left[p\left(\frac{z_1}{z_2}\right),1\right] = \left[z_2^np\left(\frac{z_1}{z_2}\right),z_2^n\right] = \ti{p}[z_1,z_2]
+    \]
+    for all $z_1 \in \bb{C}$. Since $h$ is smooth on $\bb{CP}^1$, it must be continuous at $[1,0]$. Since $p$ is a polynomial, then there exists $K \in \bb{N}$ such that  $|p(k)| > 0$ for all real numbers $k > K$. Since $h$ is continuous at $[1,0]$, it follows that 
+    \[
+       h[1,0]=  \lim_{k \to +\infty}h\left[1, \frac{1}{k}\right] =\lim_{k \to +\infty} [p(k),1] = \lim_{k \to +\infty}\left[1,\frac{1}{p(k)}\right] = [1,0]
+    \]
+    Therefore $h[z] = \ti{p}[z]$ for all $[z] \in \bb{CP}^1$, which means $\ti{p}$ is unique, as desired.
+
 \end{proof}
 \begin{problem}
     For any topological space $M$, let $C(M)$ denote the algebra of continuous functions $f: M \rightarrow \mathbb{R}$. Given a continuous map $F: M \rightarrow N$, define $F^*: C(N) \rightarrow C(M)$ by $F^*(f)=f \circ F$.
