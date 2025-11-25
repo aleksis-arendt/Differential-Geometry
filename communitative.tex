@@ -1,0 +1,20 @@
+\documentclass{article}
+\usepackage{tikz-cd}
+
+\begin{document}
+
+% Loại bỏ khoảng trống đầu trang
+\vspace*{-\topskip} 
+
+% Đảm bảo chỉ có diagram trên trang
+\begin{center}
+\begin{tikzcd}[scale=1.5]
+A \arrow{r}{f} \arrow{d}{g} & B \arrow{d}{h} \\
+C \arrow{r}{i} & D
+\end{tikzcd}
+\end{center}
+
+% Đảm bảo rằng không có thừa không gian sau diagram
+\vspace*{\fill}
+
+\end{document}

@@ -1,0 +1,1160 @@
+\documentclass[10pt]{article}
+
+\usepackage{arxiv}
+% --- Thông tin tài liệu ---
+\title{\textbf{Differential Geometry}}
+\author{\textbf{Aleksis J. Arendt} \\ HCMC University of Science,\\Federal Institute of Technology Zurich
+}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+\section{Differential Topology}
+\subsection{Topological Spaces}
+\begin{definition}
+    Let $X$ be a set, a \textit{topology on $X$} is a collection $\mc{X} \subseteq \mc{P}(X)$ satisfying
+    \begin{enumerate}
+        \item $X$ and $\varnothing$ are element of $\mc{X}$.
+        \item Union of elements of $\mc{X}$ is itself an element of $\mc{X}$.
+        \item Intersection of elements of $\mc{X}$ is itself an element of $\mc{X}$.
+    \end{enumerate}
+    A pair $(X,\mc{X})$ is called a \textit{topological space}. Elements of $X$ is called \textit{points} and every set $U \in \mc{X}$ is called an \textit{open subset of $X$}. A \textit{neighborhood} of $p \in X$ is an open subset $U \subseteq X$ containing $p$.
+\end{definition}
+\begin{definition}[Closed subsets]
+    Let $X$ be a topological space, a subset $U \subseteq X$ is said to be a \textit{closed subset of $X$} if $X \backslash U$ is an open subset.
+\end{definition}
+\begin{definition}[Closure and Interior]
+    Let $X$ be a topological space, \textit{the closure of $A$ in $X$} is the smallest closed subset of $X$ containing $A$, defined by
+    \[
+        \clo{A} := \bigcap\{B \subseteq X\mid B \supseteq A \text{ and $B$ is closed in $X$}\}.
+    \]
+    \textit{The interior of $A$} is the largest open subset of $X$ contained by $A$, defined by 
+    \[
+        \inte{A} := \bigcup\{C \subseteq X \mid C \subseteq A \text{ and $C$ is open in $X$}\}.
+    \]
+    \textit{The exterior of $A$} is the largest open subset of $X$ outside $A$, defined by 
+    \[
+        \exte{A} := X \backslash \clo{A},
+    \]
+    and \textit{the boundary of $A$} is an closed subset of $X$, defined by 
+    \[
+        \partial A := X \backslash (\inte A \cup \exte A).
+    \]
+\end{definition}
+\begin{proposition}
+     Let $X$ be a topological space and let $A \subseteq X$ be any subset.
+     \begin{enumerate}[label=(\arabic*)]
+        \item $A$ point is in $\operatorname{Int} A$ if and only if it has a neighborhood contained in $A$.
+        \item $A$ point is in $\operatorname{Ext} A$ if and only if it has a neighborhood contained in $X \backslash A$.
+        \item $A$ point is in $\partial A$ if and only if every neighborhood of it contains both a point of $A$ and a point of $X \backslash A$.
+        \item A point is in $\bar{A}$ if and only if every neighborhood of it contains a point of $A$.
+        \item $\bar{A}=A \cup \partial A=\operatorname{Int} A \cup \partial A$.
+        \item $\operatorname{Int} A$ and $\operatorname{Ext} A$ are open in $X$, while $\bar{A}$ and $\partial A$ are closed in $X$.
+        \item The following are equivalent
+        
+             (a) $A$ is open in $X$.
+
+             (b) $A = \inte{A}$.
+
+             (c) $A$ contains none of its boundary points.
+
+             (d) Every point of $A$ has a neighborhood contained in $A$.
+         \item The following are equivalent
+        
+             (a) $A$ is closed in $X$.
+
+             (b) $A = \clo{A}$.
+
+             (c) $A$ contains all of its boundary points.
+
+             (d) Every point of $X \backslash A$ has a neighborhood contained in $X \backslash A$.
+     \end{enumerate}
+\end{proposition}
+\begin{proof}
+    (1) This is trivial since for every $a \in \inte{A}$, one can find an open neighborhood $C \subset A$ which contains $a$.
+
+    (2) By the Morgan law, we can rewrite
+    \[
+        \exte{A} = X \backslash \clo{A} = \bigcup\{B \subset X\mid B \subseteq X \backslash A \text{ and $B$ is open in $X$}\}
+    \]
+    Let $a \in \exte{A}$, one can find a neighborhood $U \subseteq X \backslash A$ which contains $a$.
+
+    (3) Suppose for the sake of condition, that $\partial A$ is nonempty, pick any $a \in \partial A$. Since we have 
+    \[
+        \partial{A} = (X\backslash \inte{A}) \cap (X\backslash \exte{A}) = (X\backslash \inte{A}) \cap \clo{A},
+    \]
+    it follows that any neighborhood $U$ containing $a$ must be contained by the intersection of the following closed subsets. Since $U \cap X \backslash \inte{A} \neq \varnothing$, which means this is the largest closed set outside $A$, we can find $u \in C \cap U$ and $C \subseteq X \backslash A$, where $C$ is an closed set. Since $U \cap \clo{A} \neq \varnothing$ and $U$ is open, then one can find $v \in U$ such that $v \in \clo{A}$. We define the set 
+    \[
+        D = \{v \in U \cap \clo{A}\mid v \in A\}.
+    \]
+    If $D$ is nonempty, one can choose $v \in D$ and we are done. Suppose $D = \varnothing$, then for all $v \in U \cap \clo{A}$, we must have $v \in X \backslash A$. Thus $U \subseteq X \backslash A$, that $U$ is open implies $U \subseteq \exte{A}$. Since $\exte{A} \cap \clo{A} = \varnothing$ leading to $U \cap \clo{A} = \varnothing$, this contradicts the property that $U \cap \clo{A} \neq \varnothing$.
+
+    To establish to reverse implication, we assume the contrary holds, that is, there exists $a \in \partial A$ and its neighborhood $U$ that contain only points in $A$ (or $X \backslash A$). Since $U$ is open, it follows that $U \subseteq \inte{A}$, and the fact that $\exte{A} \cap \inte{A} = \varnothing$ implies $U \cap \exte{A} = \varnothing$, which deduces a contradiction. The case for $U \subseteq X \backslash A$ is clearly similar, and hence we are done.
+
+    (4) Suppose the contrary holds, that there exsits $a \in \clo{A}$ and a neighborhood $U$ not containing any point in $A$. Since $U$ is open, it follows that $U \subseteq \exte{A}$ and hence $U \cap \{a\} = \varnothing$, contradiction.
+
+    (5) Since \[\clo{A} \backslash A = (X \backslash {\exte{A}}) \backslash A = X \backslash (\exte {A} \cup A)  \subseteq X \backslash (\exte{A} \cup \inte{A}) = \partial{A} \ra \clo{A} \subseteq \partial A \cup A\]
+    and 
+    \[
+         A \cup \partial A = A \cup (X \backslash (\exte{A} \cup \inte{A})) = A \cup [(X \backslash \exte{A}) \cap (X \backslash \inte{A})] = A \cup (\clo{A} \cap (X \backslash \inte{A})) \subseteq A \cup \clo{A} = \clo{A}.
+    \]
+    Hence $\clo{A} \subseteq A \cup \partial A$.
+
+    (6) This is trivial since union of open subsets is open and intersection of closed subsets is closed.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a topological space and $A \subseteq X$, we say $p \in X$ is a \textit{limit point of $A$} if for every neighborhood $U$ satisfies $U\backslash \{p\} \cap A \neq \varnothing$. Conversely, a point $p \in A$ is called \textit{isolated point of $A$} if $p$ has a neighborhood $U$ satisfies $U \cap A = \{p\}$.
+\end{definition}
+\begin{proposition}
+    A subset of a topological space is closed if and only if it contains all of its limit points.
+\end{proposition}
+\begin{proof}
+    $(\ra)$ Let $A$ be a closed subset of a topoglogical space $X$ and $x \in X$ be a limit point of $A$. Then for any neighborhood $U$ containing $p$, it follows that $U \backslash \{x\} \cap A \neq \varnothing$. Suppose $x \notin A$, since $X \backslash A$ is open, it follows that $U \cap (X \backslash A)$ is nonempty and open. By the proposition above, we thus have $x \in \partial A \subseteq \clo{A} = A$, contradiction. Thus $x \in A$.
+
+    $(\Leftarrow)$ Since every limit point is in $A$ or $\partial A$, and by the fact that all of them are in $A$, we thus have $\partial A \subseteq A$, hence $A$ is closed.
+\end{proof}
+\begin{definition}
+    A subset $A$ of a topological space $X$ is said to be \textit{dense in $X$} if $\clo{A} = X$.
+\end{definition}
+\begin{proposition}
+    Show that a subset $A \subseteq X$ is dense if and only if every nonempty open subset of $X$ contains a point of $A$.
+\end{proposition}
+\begin{proof}
+    ($\Rightarrow$) Assume the contrary holds, that one can find an open subset $U \subseteq X$ satisfying $A \cap U = \varnothing$. Since $X = A \cup \partial A \ra X \backslash\partial A \subseteq A$, then 
+    \[
+        (X \backslash \partial A)\cap U = \varnothing
+    \]
+    Since $U \subseteq X \backslash A$, we thus have $U \subseteq \partial A$. By the above proposition, it follows that $A \cap U \neq \varnothing$, contradiction.
+
+    ($\Leftarrow$) Suppose $A$ is not dense, in other words $X \backslash \clo{A}$ is an nonempty open subset, consequently, this implies $(X \backslash \clo{A})\cap A \neq \varnothing$. But since $A \subseteq \clo{A}$, we thus have $X \backslash \clo{A} \subseteq X \backslash A$, or $(X \backslash \clo{A}) \cap A \subset (X \backslash A)\cap A = \varnothing$, which implies a contradiction. Hence we are done.
+\end{proof}
+\subsection{Convergence and Continuity}
+\begin{definition}[Convergence]
+    Let $X$ be a topological space, $(x_n) \subseteq X$ is a sequence of points in $X$ and $x \in X$. We say $\nlim x_n = x$ or $x_n \to x$ if for every neighborhood $U$ of $x$, there exists $N(U) \in \bb{N}$ such that $x_n \in U$ for all $n \geq N(U)$.
+\end{definition}
+\begin{proposition}
+    Let $X$ be a topological space, $A$ is a subset of $X$ and $(x_n) \subset A$. If $x_n \to x \in X$, then $x \in \clo{A}$.
+\end{proposition}
+\begin{proof}
+    Let $U$ be a neighborhood of $x$, since $x_n \to x$, there exists $N(U) \in \bb{N}$ such that $x_n \in U$ for all $n \geq N$. Thus $U \cap A \neq \varnothing$. The above proposition implies that $x \in A$ or $U$ contains a point in $A$ and a point in $X \backslash A$. In either case, we always have $x \in \clo{A}$.
+\end{proof}
+\begin{definition}[Continuity]
+    Let $X$ and $Y$ be a topological spaces, a map $f: X \to Y$ is said to be \textit{continuous} if for every open subset $U \subseteq Y$, its preimage $f^{-1}(U)$ is open in $X$.
+\end{definition}
+\begin{proposition}
+    A map between topological spaces is continuous if and only if its preimage of every closed subset is closed.
+\end{proposition}
+\begin{proof}
+    Let $f: X \to Y$ be the map between topological spaces satisfying $f^{-1}(U)$ is closed for all closed subsets $U \subseteq Y$. This implies both $Y \backslash U$ and $X \backslash f^{-1}(U)$ is open. Since we have 
+    \[
+        X \backslash f^{-1}(U) = f^{-1}(Y) \backslash f^{-1}(U) = f^{-1}(Y \backslash U) \text{ is open, }
+    \]
+    and $U$ is abitrary closed subset, $f$ also preserve openess on preimage of the open subsets. Hence $f$ is continuous.
+\end{proof}
+\begin{proposition}
+    Let $X,Y$ and $Z$ be topological spaces.
+    \begin{enumerate}
+        \item Every constant map $f: X \to Y$ is continuous.
+        \item The indentity map $\mathrm{Id}_X:X \to X$ is continuous.
+        \item If $f: X \to Y$ and $g: Y \to Z$ are both continuous, then so is their composition $g \circ f: X \to Z$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    It suffices to prove the third property. Let $U \in Z$ by any open subsets, we need to prove $(g \circ f)^{-1}(U)$ is open, in other words, this can be rewriten as 
+    \[
+        (g \circ f)^{-1}(U) = (f^{-1}\circ g^{-1})(U) = f^{-1}(g^{-1}(U))
+    \]
+    Since $g^{-1}(U)$ is open, then $f^{-1}(g^{-1}(U))$ is also open. Hence $g \circ f$ is continuous.
+\end{proof}
+\begin{proposition}
+    A map $f: X \to Y$ between topological spaces is continuous if and only if each point of $X$ has a neighborhood on which the restriction of $f$ is continuous.
+\end{proposition}
+\begin{proof}
+    ($\ra$) If $f$ is continuous and $x \in X$, we simply consider the restriction of $f_U: U \to Y$, where $U$ is any neighborhood of $x$, and $f^{-1}_U(V) = f^{-1}(V) \cap U$ is open set. Hence $f_U$ is continuous.
+
+    ($\Leftarrow$) Suppose that $f$ is restrictly continuous on a neighborhood of every point $x \in X$. Let $U \subseteq Y$ be any open subset, it suffices to prove that $f^{-1}(U)$ is open. Let $u \in f^{-1}(U)$, by the hypothesis, one can find a neighborhood $V \subseteq X$ containing $u$ such that $f_V: V \to Y$ is continuous. Thus, the preimage
+    \[
+        f_V^{-1}(U) = f^{-1}(U) \cap V \text{ is open.}
+    \]
+    Since $f_V^{-1}(U) \subseteq f^{-1}(U)$, by the above proposition, it follows that $f^{-1}(U)$ is open, hence $f$ is continuous.
+\end{proof}
+\begin{definition}
+    A map $f: X \to Y$ is said to be an \textit{open map} if $f(U)$ is open for all open subsets $U \subset X$. Conversely, $f$ is said to be a \textit{closed map} if $f(U)$ is closed for all closed subsets $U \subset X$.
+\end{definition}
+\begin{proposition}
+    Suppose $X$ and $Y$ are topological spaces, and $f: X \to Y$ is a map. 
+    \begin{enumerate}
+        \item $f$ is continuous if and only if $f(\clo{A}) \subseteq \clo{f(A)}$ for all $A \subseteq X$.
+        \item $f$ is closed if and only if $f(\clo{A}) \supseteq \clo{f(A)}$ for all $A \subseteq X$.
+        \item $f$ is continuous if and only if $f^{-1}(\inte{B}) \subseteq \inte{f^{-1}(B)}$ for all $B \subseteq X$.
+    \end{enumerate}
+\end{proposition}
+\subsection{Hausdorff Spaces}
+\begin{definition}
+    A topological space $X$ is said to be \textit{Hausdorff} if two any distinct points in $X$ can be seperated by disjoint open subsets in $X$.
+\end{definition}
+\begin{proposition}
+    Let $X$ be a Hausdorff space.
+    \begin{enumerate}
+        \item Every finite subsets of $X$ is closed.
+        \item If a sequence $(x_n) \subseteq X$ converges to a limit $p \in X$, the limit is unique.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    Suppose $X$ is a Hausdorff space and $A \subseteq X$. If $p \in X$ is a limit point of $A$, then every neighborhood of $p$ contains infititely many points of $A$.
+\end{proposition}
+\subsection{Bases}
+\begin{definition}
+    Let $X$ be a topoglogical space, a basis for the topology $X$ is a collection $\mc{B}$ of subsets in $X$ satisfying two conditions:
+    \begin{enumerate}
+        \item Every element in $\mc{B}$ is an open subset of $X$.
+        \item Every open subset in $X$ is the union of some collection of elements of $\mc{B}$.
+    \end{enumerate}
+\end{definition}
+\subsection{Problems}
+\begin{problem} 
+    Let $X$ be the set of all points $(x,y) \in \bb{R}^2$ such that $y = \pm 1$ and let $M$ be the quotient of $X$ by the equivalence relation generated by $(x,-1) \sim (x,1)$ for all $x \neq 0$. Show that $M$ is locally Euclidean and second-countable, but not Hausdorff.
+\end{problem}
+\begin{proof}
+    Consider the continuous map $\pi: X \to M$ be the quotient map satisfying $U \subseteq M$ is open if and only if $\pi^{-1}(U)$ is open in $X$. We consider two cases:
+    
+    Case 1: $x_0 \neq 0$, consider the open neighborhood on $M$ of $[x_0]$ pulled back by $\pi^{-1}$ satisfying
+    \[
+        I_{[x_0]} = (x_0 - \ep, x_0 + \ep)\times\{-1,1\},
+    \]
+    where $\ep > 0$ is abitrary small such that $I_{[x_0]} \cap \{(0,-1),(0,1)\} = \varnothing$. We define a local chart $\varphi: \pi(I_{[x_0]}) \to (x_0 - \ep, x_0 + \ep) \subseteq \bb{R}$ satisfying
+    \[
+        \varphi([t]) = t \text{ for all }[t] \in \pi(I_{[x_0]})
+    \]
+    It suffices to check that $\varphi$ is homeomorphism. Since $\varphi([x_1]) = \varphi([x_2])$ implies $\pi(x_1) = \pi(x_2)$ and $[x_1] = [x_2]$, thus $\varphi$ is injective.
+    $\varphi$ is also surjective since we can pick any equivalent class $[x]$ for given $x \in \pi(I_{[x_0]})$. The map $\varphi(\pi): (t, \pm 1) \mapsto t$ implies $\varphi$ is  continuous and the map $\varphi([t,1])^{-1} = [t,1] = \pi(i(t))$ is continuous, since the map $i: (x_0 - \ep, x_0 + \ep) \to X$ satisfying $i(t) = (t,1)$ is continuous.
+    Hence $\varphi$ is homeomorphism and $M$ is locally Euclidean.
+
+
+    Case 2: $x_0 = 0$, since $(0,1)$ and $(0,-1)$ are distinct under the following equivalent relation, we just consider the open neighborhood on $M$ for $[(0,1)]$ (the same construct for $(0,-1)$) satisfying 
+    \[
+        I^+ = (-\ep,+\ep) \times \{1\}
+    \]
+    where $\ep > 0$ is abitrary. Then we define a local chart $\varphi^+: \pi(I^+) \to (-\ep, +\ep) \subseteq \bb{R}$ such that 
+    \[
+        \varphi^+([t,1]) = t \text{ for all } [t,1] \in \varphi(I^+)
+    \]
+    Notice that $\varphi^+$ is well-defined, continuous and bijective since 
+    \[
+        \varphi^+\circ \pi((t,1)) = t
+    \]
+    is continuous and $(\varphi^+)^{-1} = [(t,1)] = \pi(i(t))$ is also continuous. Thus, $\varphi$ is homeomorphism and hence $M$ is locally Euclidean.
+
+    To prove $M$ is second-countable, it suffices to prove $X$ is countable, we define the set
+    \[
+        \mc{B}_X = \{(a,b)\times\{1\}, (a,b)\times\{-1\} \mid a,b \in \bb{Q}\}
+    \]
+    Since the set $\{(a,b)\mid a,b \in \bb{Q}\}$ admits a countable basis for $\bb{R}$, therefore $\mc{B}_X$ is a countable basis of $X$. We define the set 
+    \[
+        \mc{B}_M = \{\pi(B) \mid B \in \mc{B}_X\},
+    \]
+    Since $\pi$ is a quotient map, $\{\mc{B}_M\}$ is a second-countable basis for $M$.
+
+    Now we aim to prove $M$ is not Hausdorff at two points $(0,1)$ and $(0,-1)$. Let $U $ and $V$ be abitrary neighborhood of $[(0,1)]$ and $[(0,-1)]$ in $M$. Since $\pi^{-1}(U)$ and $\pi^{-1}(V)$ are open in Euclidean, one can find an open interval 
+    \begin{align*} 
+        (-\ep_1, +\ep_1) \times \{1 \} \subseteq \pi^{-1}(U) \text{ and }(-\ep_1, +\ep_1) \times \{-1 \} \subseteq \pi^{-1}(V)
+    \end{align*}
+    Let $\ep_0 = \min\{\ep_1,\ep_2\}$ and $I = (-\ep_0,+\ep_0)$, we thus have 
+    \[
+        \varnothing \neq \pi(I \times \{1\}) = \pi(I \times \{-1\}) \subseteq \pi(\pi^{-1}(U) \cap \pi^{-1} (V)) \subseteq U \cap V
+    \]
+    Hence $U \cap V \neq \varnothing$ which implies $M$ is not Hausdorff.
+\end{proof}
+\begin{problem}
+    For some $t \in \bb{R}$, we denote the set 
+    \[
+        \bb{R}_t = \bb{R} \times \{t\}
+    \]
+    Let $I$ be an uncountable set, prove that the set 
+    \[  
+        \mc{R} = \bigsqcup_{\alpha \in I} \bb{R}_{\alpha}
+    \]
+    is locally Euclidean and Hausdorff, but not second-countable.
+\end{problem}
+\begin{proof}
+    Let $u \in \mc{R}$. Then there exists a unique $\alpha \in I$ such that  $u \in \bb{R}_{\alpha}$. Let $\psi_\alpha: \bb{R} \to \bb{R}_{\alpha}$ be the homeomorphism satisfying
+    \[
+        \psi(x) = (x,\alpha),
+    \]
+     Let $y = \psi^{-1}(u)$ and $U = (y - \ep, y + \ep) \times\{\alpha\}$ be an open neighborhood of $u$ pulled back by $\psi$. Since $\psi$ is a homeomorphism, it serves as a local chart around $u$, which implies $\mc{R}$ is locally Euclidean.
+
+     To prove $\mc{R}$ is Hausdorff, let $x = (u,\alpha),y= (v,\beta)$ be distinct points in $\mc{R}$, we consider two cases:
+
+     Case 1: $\alpha \neq \beta$, let $\ep > 0$ be abitrary, we choose 
+     \begin{align*}
+        &U_\alpha = (u - \ep, u + \ep) \times\{\alpha\},\\
+        &V_{\beta} = (v- \ep, v + \ep) \times\{\beta\}
+     \end{align*}
+     Since $U_{\alpha}$ and $V_{\beta}$ are disjoint, $\mc{R}$ is Hausdorff in this case.
+
+     Case 2: $\alpha = \beta$. We choose
+    \begin{align*}
+        &U_\alpha = \left(u - \ep, u + \ep\right) \times\{\alpha\},\\
+        &V_{\beta} = \left(v- \ep, v + \ep\right) \times\{\beta\},
+     \end{align*}
+     where $\ep$ satisfies $0 < \ep < \dfrac{|u - v|}{2}$. Since $U_{\alpha}$ and $V_{\beta}$ are disjoint, every pair of distinct points in $\mc{R}$ can be seperated by disjoint open neighborhoods, hence $\mc{R}$ is Hausdorff in general.
+
+    To prove $\mc{R}$ is not second-countable, we consider the following proposition
+    \begin{proposition}
+        If a topological space contains uncountably many nonempty disjoint sets, then it is not second-countable.
+    \end{proposition}
+    For every $\alpha \in I$, we denote a corresponding open neighborhood $U_{\alpha} = (-\ep,+\ep) \times \{\alpha\}$. Since the collection $\{U_{\alpha}\}_{\alpha \in I}$ consists of uncountably many pairwise disjoint open sets in $\mc{R}$, the above proposition implies $\mc{R}$ is not second-countable.
+\end{proof}
+\begin{problem}
+    Let $M$ be a topological manifold, and let $\mathcal{U}$ be an open cover of $M$.
+    \begin{enumerate}
+        \item Assuming that each set in $\mathcal{U}$ intersects only finitely many others, show that $U$ is locally finite.
+        \item Give an example to show that the converse to (a) may be false.
+        \item Now assume that the sets in $\mathcal{U}$ are precompact in $M$, and prove the converse: if $\mathcal{U}$ is locally finite, then each set in $\mathcal{U}$ intersects only finitely many others.
+    \end{enumerate}
+\end{problem}
+\begin{problem}
+    Suppose $M$ is a locally Euclidean Hausdorff space. Show that $M$ is secondcountable if and only if it is paracompact and has countably many connected components. [Hint: assuming $M$ is paracompact, show that each component of $M$ has a locally finite cover by precompact coordinate domains, and extract from this a countable subcover.]
+\end{problem}
+\begin{problem}
+Let $M$ be a nonempty topological manifold of dimension $n \geq 1$. If $M$ has a smooth structure, show that it has uncountably many distinct ones. [Hint: first show that for any $s>0, F_s(x)=|x|^{s-1} x$ defines a homeomorphism from $\mathbb{B}^n$ to itself, which is a diffeomorphism if and only if $s=1$.]
+\end{problem}
+\begin{problem}
+     Let $N$ denote the north pole $(0, \ldots, 0,1) \in \mathbb{S}^n \subseteq \mathbb{R}^{n+1}$, and let $S$ denote the south pole $(0, \ldots, 0,-1)$. Define the stereographic projection $\sigma: \mathbb{S}^n \backslash\{N\} \rightarrow \mathbb{R}^n$ by
+$$
+\sigma\left(x^1, \ldots, x^{n+1}\right)=\frac{\left(x^1, \ldots, x^n\right)}{1-x^{n+1}}
+$$
+
+Let $\tilde{\sigma}(x)=-\sigma(-x)$ for $x \in \mathbb{S}^n \backslash\{S\}$.
+\begin{enumerate}
+    \item For any $x \in \mathbb{S}^n \backslash\{N\}$, show that $\sigma(x)=u$, where ($u, 0$) is the point where the line through $N$ and $x$ intersects the linear subspace where $x^{n+1}=0$ (Fig. 1.13). Similarly, show that $\tilde{\sigma}(x)$ is the point where the line through $S$ and $x$ intersects the same subspace. (For this reason, $\tilde{\sigma}$ is called stereographic projection from the south pole.)
+    \item Show that $\sigma$ is bijective, and
+$$
+\sigma^{-1}\left(u^1, \ldots, u^n\right)=\frac{\left(2 u^1, \ldots, 2 u^n,|u|^2-1\right)}{|u|^2+1}
+$$
+    \item Compute the transition map $\tilde{\sigma} \circ \sigma^{-1}$ and verify that the atlas consisting of the two charts $\left(\mathbb{S}^n \backslash\{N\}, \sigma\right)$ and $\left(\mathbb{S}^n \backslash\{S\}, \tilde{\sigma}\right)$ defines a smooth structure on $\mathbb{S}^n$ (The coordinates defined by $\sigma$ or $\tilde{\sigma}$ are called stereographic coordinates).
+\end{enumerate}
+\end{problem}
+\begin{center}
+    \includegraphics[scale=0.36]{1.png}
+\end{center}
+    \begin{proof}
+
+        (1) Define the line passing through $N$ and $x$ by
+        \[
+            L(t) = N + t(x - N) = u(t)
+        \]
+        Consider the intersection between $L(t)$ and the linear subspace of $\bb{R}^{n + 1}$ where $x^{n + 1} = 0$, we have 
+        \[
+            u(t) = (tx^1, \dots ,tx^n, 1 + t(x^{n + 1} - 1)) = (u^1,\dots, u^n, 0)
+        \]
+        The $(n+1)-$term implies that $t = \dfrac{1}{1 - x^{n + 1}}$, thus we have 
+        \[
+            u(t) = \frac{(x^1,\dots,x^n)}{1 - x^{n + 1}} = \sigma(x)
+        \]
+        (2) Let $u = (u^1,\dots, u^n) \in \bb{R}^{n}$, it suffices to prove that there exists $(x^1,\dots,x^{n+1}) \in \bb{S}^n \backslash\{N\}$ satisfying 
+        \[
+            u^i = \frac{x^i}{1 - x^{n + 1}} \text{ for all }i = 1,\dots, n.
+        \]
+        Let $|u|^2 = \sum (u^i)^2$, it follows that 
+        \begin{align*}
+            |u|^2 & = \frac{\sum (x^i)^2}{(1 - x^{n + 1})^2}= \frac{1 - (x^{n + 1})^2}{(1 - x^{n + 1})^2} = \frac{1 + x^{n + 1}}{1 - x^{n + 1}} = \frac{2}{1 - x^{n + 1}} - 1\\
+            &\lra x^{n + 1} = \frac{|u|^2 - 1}{|u|^2 + 1} 
+        \end{align*}
+        Since $-1 < \dfrac{|u|^2 - 1}{|u|^2 + 1} < 1$, set $x^{n + 1}= \dfrac{|u|^2 - 1}{|u|^2 + 1} $ and $x^i = \dfrac{2u^i}{|u|^2 + 1}$. Thus $\sigma$ is surjective onto $\bb{R}^n$.
+        
+        To prove that  $\sigma$ is injective, suppose $\sigma(x) = \sigma(y)$,  we have
+        \begin{align*}
+            \frac{x^i}{1 - x^{n + 1}} = \frac{y^i}{1 - y^{n+ 1}} &\ra \frac{\sum (x^i)^2}{( 1 - x^{n + 1})^2}=\frac{\sum (y^i)^2}{( 1 - y^{n + 1})^2}\\
+            &\lra \frac{1 + x^{n + 1}}{1 - x^{n + 1}} = \frac{1 + y^{n + 1}}{1 - y^{n +1}}\\
+            &\lra \frac{2}{1 - x^{n + 1}} - 1 =\frac{2}{1 - y^{n + 1}} - 1\\
+            &\lra\frac{2}{1 - x^{n + 1}} = \frac{2}{1 - y^{n + 1}}\\
+            &\lra 1 - x^{n + 1} = 1 - y^{n + 1},
+        \end{align*}
+        which implies $x^{n + 1} = y^{n + 1}$ and hence $x^i = y^i$ for all $i = 1,\dots,n$. Therefore $\sigma$ is bijective and its inverse satisfies 
+        $$
+        \sigma^{-1}\left(u^1, \ldots, u^n\right)=\frac{\left(2 u^1, \ldots, 2 u^n,|u|^2-1\right)}{|u|^2+1}
+        $$
+        We will verify that $\sigma^{-1}(u) \in \bb{S}^{n}$ for all $u$. Let $(x^i) = \sigma^{-1}(u)$, since we have 
+        \[
+            \sum (x^i)^2 = \frac{\sum(2u^i)^2 + (|u|^2 - 1)^2}{(|u|^2 + 1)^2} = \frac{4|u|^2 + ( |u|^2 - 1)^2}{(|u|^2 + 1)^2} = \frac{(|u|^2 + 1)^2}{(|u|^2 + 1)^2} = 1
+        \]
+        Thus $\sigma^{-1}$ maps every point in $\bb{R}^{n}$ into the sphere $\bb{S}^n$.
+        (3) By the definition of $\tilde{\sigma}$, it can be written as 
+        \[
+            \tilde{\sigma}(x^1,\dots,x^{n + 1}) = \frac{(x^1,\dots,x^{n})}{1 + x^{n + 1}},
+        \]
+        and the same computation shows that $\tilde{\sigma}$ is bijective. Let $u = (u^i) \in \bb{R}^n\backslash\{0\}$ , the composition $\tilde{\sigma}\circ \sigma^{-1}: \bb{R}^n\backslash\{0\} \to \bb{R}^n\backslash\{0\}$ is computed by expressing 
+        \begin{align*}
+            \tilde{\sigma}\circ \sigma^{-1}(u) &=\tilde{\sigma}\left(\frac{2 u^1}{|u|^2+1}, \ldots, \frac{2 u^n}{|u|^2+1},\frac{|u|^2-1}{|u|^2+1}\right)\\
+            &= \frac{(u^1,\dots, u^n)}{|u|^2}.
+        \end{align*}
+        Since $\tilde{\sigma}\circ \sigma^{-1}$ is smooth and a diffeomorphism, $\sigma$ and $\tilde{\sigma}$ are compatible. Moreover, since the union of their domains covers entire $\bb{S}^n$, then they form an atlas which generates a smooth structure on $\bb{S}^n$.
+        
+    \end{proof}
+\begin{problem}
+    By identifying $\mathbb{R}^2$ with $\mathbb{C}$, we can think of the unit circle $\mathbb{S}^1$ as a subset of the complex plane. An angle function on a subset $U \subseteq \mathbb{S}^1$ is a continuous function $\theta: U \rightarrow \mathbb{R}$ such that $e^{i \theta(z)}=z$ for all $z \in U$. Show that there exists an angle function $\theta$ on an open subset $U \subseteq \mathbb{S}^1$ if and only if $U \neq \mathbb{S}^1$. For any such angle function, show that ($U, \theta$) is a smooth coordinate chart for $\mathbb{S}^1$ with its standard smooth structure.
+\end{problem}
+\begin{proof}
+    ($\ra$) Suppose there exists an angle function $\theta:\bb{S}^1 \to \bb{R}$ which is continuous. We aim to show that $\theta$ is discontinuous at $z = 1$. If we write $z = e^{i\pi \phi}$ then it follows that $\theta = \pi\phi + k2\pi$, where $k$ is some integer. Since $\theta$ is continuous, $k$ must be fixed. Let 
+    \[
+        a_n = e^{i\pi/n} \text{ and }b_n = e^{i(2\pi - 1/n)}
+    \]
+    Then we have 
+    \[
+        \nlim \theta(a_n) = \theta(0) = k2\pi\text{ and }\nlim\theta(b_n) =  \theta(2\pi) = 2\pi + k2\pi
+    \]
+    Since $2\pi \neq 0$, $\theta$ is not continuous at $z = 1$, hence there is no angle function for the case $U = \bb{S}^1$. We define $\alpha(z)$  as a unique function satisfying $z = e^{i\pi\alpha(z)}$ and $\alpha(z) \in [0,2\pi)$.
+    
+    If $U \neq \bb{S}^1$. In case that $1 \in U$, since there must exsits $z_0 \neq 1$ and $z_0 \notin U$. Since $\alpha$ is continuous, we choose  $\theta$ satisfying
+    \begin{align*}
+         \theta(z) = \alpha(z) , ( \alpha(z)  < \alpha(z_0) ) \text{ and }\\
+         \theta(z)=2\pi -  \alpha(z) , ( \alpha(z)  \geq \alpha(z_0) )
+    \end{align*}
+    If  $1 \notin U$, we choose $\theta(z) = \alpha(z)$ for all $z\in U$.  
+
+    Since $\theta$ is continuous and a homeomorphism on from open subset $U \subset \bb{S}^1$ onto an open interval $\theta(U)$, the pair $(U,\theta)$ is a smooth coordinate chart for $\bb{S}^1$ with its standard smooth structure.
+\end{proof}
+\begin{problem}
+     Complex projective $n$-space, denoted by $\mathbb{C P}^n$, is the set of all 1-dimensional complex-linear subspaces of $\mathbb{C}^{n+1}$, with the quotient topology inherited from the natural projection $\pi: \mathbb{C}^{n+1} \backslash\{0\} \rightarrow \mathbb{C} \mathbb{P}^n$. Show that $\mathbb{C} \mathbb{P}^n$ is a compact $2 n$-dimensional topological manifold, and show how to give it a smooth structure analogous to the one we constructed for $\mathbb{R P}^n$. (We use the correspondence
+$$
+\left(x^1+i y^1, \ldots, x^{n+1}+i y^{n+1}\right) \leftrightarrow\left(x^1, y^1, \ldots, x^{n+1}, y^{n+1}\right)
+$$
+to identify $\mathbb{C}^{n+1}$ with $\mathbb{R}^{2 n+2}$.) (Used on pp. 48, 96, 172, 560, 561.)
+\end{problem}
+\begin{proof}
+    Suppose $\bb{S}^n$ is an $n$-dimensional sphere, it suffices to prove the restriction map $$\pi|_{\bb{S}^n}: \bb{S}^n \to \bb{CP}^n$$ is continuous and surjective. For the sake of condition, we assume to write $\pi$ instead of $\pi|_{\bb{S}^n}$. Given $z \in \bb{CP}^n$, by the definiton of projective space, $z$ is an equivalent class satisfying
+    \[
+        [z^0: \dots : z^n] \sim [\lambda z^0: \dots :\lambda z^n]
+    \]
+    for all nonzero complex number $\lambda$. To prove $\pi$ is surjective, let $[z] \in \bb{CP}^n$ be abitrary, one can rewrite 
+    \[
+        [z] = [z^0: \dots : z^n] \sim \left[\frac{z^0}{|z|}: \dots : \frac{z^n}{|z|}\right]
+    \]
+    Since we have 
+    \[
+        \sum \dfrac{(z^i)^2}{|z|^2} = \frac{|z|^2}{|z|^2} = 1
+    \]
+    then $\left(\dfrac{z^0}{|z|}: \dots : \dfrac{z^n}{|z|}\right) \in \bb{S}^n$ and hence it follows that $\pi\left(\dfrac{z^0}{|z|}: \dots : \dfrac{z^n}{|z|}\right) = [z]$. Since the natural projection  $\pi: \mathbb{C}^{n+1} \backslash\{0\} \rightarrow \mathbb{C} \mathbb{P}^n$ is already continuous, the its restriction on closed subset $\bb{S}^n$ is also continuous. Since $\bb{S}^{n}$ is closed and bounded in $\bb{C}^{n + 1}$ by the corresponding identify $\bb{C}^{n + 1}$ with $\bb{R}^{2n + 2}$, by the Heine-Borrel theorem, $\bb{S}^n$ is compact. And since $\pi_{\bb{S}^n}(\bb{CP}^n) =\bb{S}^n$, $\bb{CP}^n$ is a compact.
+
+    To prove $\bb{CP}^n$ is locally Euclidean, for each $i = 0,\dots,n$, let $\tilde{U_i}\subset \bb{C}^{n + 1}$ be the subset containing all points $x \in \bb{C}^{n + 1}$ satisfying $x^{i} \neq 0$ and $\varphi_i: U_i \to \bb{C}^{n}$ be the local chart (where $U_i = \pi(\tilde{U_i})$) satisfying
+    \[  
+        \varphi[z^0: \dots : z^n] = \left(\frac{z^0}{z^i},\dots,\frac{z^{i -1}}{z^{i}},\frac{z^{i + 1}}{z^{i}}, \dots,\frac{z^n}{z^i}\right).
+    \]
+    This map is well-defined since the left-hand side remains if we replace $[z^1: \dots : z^n]$ by $\lambda[z^1: \dots : z^n]$. To prove $\varphi_i$ is injective, suppose $\varphi_i[a] = \varphi_i[b]$, then we have 
+    \[  
+        \frac{a^j}{a^i} = \frac{b^j}{b^i} \text{ for all }j = 0, \dots,n + 1
+    \]
+    Let $\lambda = \dfrac{a^i}{b^i}$ be fixed, it follows that $a^j = \lambda b^j$ for all $j = 0,\dots, n + 1$, hence $[a] = [b]$. To prove $\varphi_i$ is surjective, if $x \in \bb{C}^n$, we choose $[z] \in \bb{CP}^n$ satisfying $z^j = x^{j - 1}$ for all $j \neq i$ and $z^i = 1$, this implies $\varphi_{i}[z] =  x$. Therefore $\varphi_i$ is bijective. Moreover, $\varphi$ is smooth and its inverse given by
+    \[
+        \varphi_i^{-1}(x^i) = [x^0,\dots,x^{i - 1}, 1, x^{i + 1},\dots,x^n]
+    \]
+    is also smooth. Thus $\varphi_i$ is homeomorphism and $\bb{C}^n \cong \bb{R}^{2n}$ implies that $\bb{CP}^n$ is locally $2n$-dimensional Euclidean. In particular, since $\varphi_i$  is diffeomorphism, it follows that $(U_i,\varphi_i)$ is smooth local chart and they are parwise compatible since a composition of two diffeomorphism is again a diffeomorphism. Hence, the atlas $\{(U_i,\varphi_i)\}$ defines a smooth structure on $\bb{CP}^n$.
+
+    To prove $\bb{CP}^n$ is Hausdorff, let $[a],[b]$ be distinct equivalence classes in $\bb{CP}^n$, which means $[a] \neq [b]$, pushed forward by $\varphi_i$, where $i$ is the non-negative integer satisfying $a^i, b^i \neq 0$. By consider two open disks 
+    \begin{align*}
+        &\mc{D}_{\varphi_i(a)} = \{z \in \bb{C}^n \mid |z - \varphi_i(a)| < \ep\} \text{ and }\\
+        &\mc{D}_{\varphi_i(b)} = \{z \in \bb{C}^n \mid |z - \varphi_i(b)| < \ep\}
+    \end{align*}
+    where $\ep > 0$ satisfies $\ep < \dfrac{|\varphi(a) - \varphi(b)|}{2}$ implying $\mc{D}_{\varphi(a)} \cap \mc{D}_{\varphi(b)} = \varnothing$. Since $\varphi_i$ is homeomorphism, then any distinct points in $\bb{CP}^n$ can be seperated by two open disjoint neighborhoods, which is $\mc{D}_{\varphi(a)}$ and $\mc{D}_{\varphi(b)}$ in this case. Therefore $\bb{CP}^n$ is Hausdorff.
+
+    The fact that $ \bb{C}^n$ is second-countable and $\{(U_i,\varphi_i)\}$ is a smooth structure implies that $\bb{CP}^n$ is also second-countable. In conclusion, $\bb{CP}^n$ is a compact $2 n$-dimensional topological manifold, as desired.
+    
+
+\end{proof}
+\begin{problem}
+     Let $k$ and $n$ be integers satisfying $0<k<n$, and let $P, Q \subseteq \mathbb{R}^n$ be the linear subspaces spanned by $\left(e_1, \ldots, e_k\right)$ and $\left(e_{k+1}, \ldots, e_n\right)$, respectively, where $e_i$ is the $i$ th standard basis vector for $\mathbb{R}^n$. For any $k$-dimensional subspace $S \subseteq \mathbb{R}^n$ that has trivial intersection with $Q$, show that the coordinate representation $\varphi(S)$ constructed in Example 1.36 is the unique $(n-k) \times k$ matrix $B$ such that $S$ is spanned by the columns of the matrix $\binom{I_k}{B}$, where $I_k$ denotes the $k \times k$ identity matrix.
+\end{problem}
+\begin{problem}
+    Let $M=\overline{\mathbb{B}}^n$, the closed unit ball in $\mathbb{R}^n$. Show that $M$ is a topological manifold with boundary in which each point in $\mathbb{S}^{n-1}$ is a boundary point and each point in $\mathbb{B}^n$ is an interior point. Show how to give it a smooth structure such that every smooth interior chart is a smooth chart for the standard smooth structure on $\mathbb{B}^n$. [Hint: consider the map $\pi \circ \sigma^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n$, where $\sigma: \mathbb{S}^n \rightarrow \mathbb{R}^n$ is the stereographic projection (Problem 1-7) and $\pi$ is a projection from $\mathbb{R}^{n+1}$ to $\mathbb{R}^n$ that omits some coordinate other than the last.]    
+\end{problem}
+\begin{problem}
+    Prove Proposition 1.45 (a product of smooth manifolds together with one smooth manifold with boundary is a smooth manifold with boundary).
+\end{problem}
+\begin{problem}
+    Define $f: \mathbb{R} \rightarrow \mathbb{R}$ by
+$$
+f(x)= \begin{cases}1, & x \geq 0 \\ 0, & x<0\end{cases}
+$$
+
+Show that for every $x \in \mathbb{R}$, there are smooth coordinate charts $(U, \varphi)$ containing $x$ and $(V, \psi)$ containing $f(x)$ such that $\psi \circ f \circ \varphi^{-1}$ is smooth as a map from $\varphi\left(U \cap f^{-1}(V)\right)$ to $\psi(V)$, but $f$ is not smooth in the sense we have defined in this chapter.
+\end{problem}
+\begin{problem}
+    Prove Proposition 2.12 (smoothness of maps into product manifolds).
+\end{problem}
+\begin{problem}
+    For each of the following maps between spheres, compute sufficiently many coordinate representations to prove that it is smooth.
+\begin{enumerate}
+    \item $p_n: \mathbb{S}^1 \rightarrow \mathbb{S}^1$ is the ${n}$-th power map ${n} \in \mathbb{Z}$, given in complex notation by $p_n(z)=z^n$.
+    \item $\alpha: \mathbb{S}^n \rightarrow \mathbb{S}^n$ is the antipodal map $\alpha(x)=-x$.
+    \item  $F: \mathbb{S}^3 \rightarrow \mathbb{S}^2$ is given by $F(w, z)=(z \bar{w}+w \bar{z}, i w \bar{z}-i z \bar{w}, z \bar{z}-w \bar{w})$, where we think of $\mathbb{S}^3$ as the subset $\left\{(w, z):|w|^2+|z|^2=1\right\}$ of $\mathbb{C}^2$.
+\end{enumerate}
+\end{problem}
+\begin{proof}
+    (1) Since $\bb{S}^1 \subset \bb{C}$, consider the global coordinate chart $\varphi: \bb{S}^1 \to [0,2\pi)$ satisfying
+    \[
+        \varphi(z) = \varphi(e^{i\theta}) = \theta \in [0,2\pi)
+    \]
+    Thus, the coordinate representation in this case is 
+    \[
+    \tilde{f(x)} = \varphi \circ f \circ \varphi^{-1}(\theta) = n\theta
+    \]
+    Since $\varphi$ is smooth and $f$ is a smooth map, it follows that $\tilde{f}$ is also smooth.
+
+    (2) Consider the stereographic projection $\sigma: \bb{S}^n\backslash\{N\} \to \bb{C}^{n}$ satisfying
+    \[
+        \sigma\left(z^1, \ldots, z^{n+1}\right)=\frac{\left(x^1, \ldots, x^n\right)}{1-x^{n+1}}.
+    \]
+    Then the coordinate representation is computed by 
+    \[
+        \tilde{f}(x) = \sigma \circ f \circ \sigma^{-1}(u)= \sigma\left(\frac{-2u^1}{|u|^2 + 1},\dots, \frac{-2u^n}{|u|^2 + 1}, \frac{1 - |u|^2}{|u|^2 + 1}\right) = (-u^1,\dots,-u^n),
+    \]
+    which is smooth, the same construction on $\bb{S}^n\backslash \{S\}$.
+
+
+\end{proof}
+\begin{problem}
+    Show that the inclusion map $\overline{\mathbb{B}}^n \hookrightarrow \mathbb{R}^n$ is smooth when $\overline{\mathbb{B}}^n$ is regarded as a smooth manifold with boundary.
+2-5. Let $\mathbb{R}$ be the real line with its standard smooth structure, and let $\widetilde{\mathbb{R}}$ denote the same topological manifold with the smooth structure defined in Example 1.23. Let $f: \mathbb{R} \rightarrow \mathbb{R}$ be a function that is smooth in the usual sense.
+\begin{enumerate}
+    \item Show that $f$ is also smooth as a map from $\mathbb{R}$ to $\widetilde{\mathbb{R}}$.
+    \item Show that $f$ is smooth as a map from $\widetilde{\mathbb{R}}$ to $\mathbb{R}$ if and only if $f^{(n)}(0)=0$ whenever $n$ is not an integral multiple of 3.
+\end{enumerate}
+\end{problem}
+\begin{problem}
+    Let $P: \mathbb{R}^{n+1} \backslash\{0\} \rightarrow \mathbb{R}^{k+1} \backslash\{0\}$ be a smooth function, and suppose that for some $d \in \mathbb{Z}, P(\lambda x)=\lambda^d P(x)$ for all $\lambda \in \mathbb{R} \backslash\{0\}$ and $x \in \mathbb{R}^{n+1} \backslash\{0\}$. (Such a function is said to be homogeneous of degree $\boldsymbol{d}$.) Show that the map $\tilde{P}: \mathbb{R} \mathbb{P}^n \rightarrow \mathbb{R} \mathbb{P}^k$ defined by $\tilde{P}([x])=[P(x)]$ is well defined and smooth.
+\end{problem}
+\begin{proof}
+    We first prove that $\tilde{P}$ is well-defined. Suppose that $[x] = [y]$, it suffices to prove that $\tilde{P}([x]) = \tilde{P}([y])$ or $[P(x)] = [P(y)]$. Since we have the relation 
+    \[
+        [x^1,\dots,x^{n + 1}] =  [\lambda x^1,\dots,\lambda x^{n + 1}] \text{ for all }\lambda,
+    \]
+    it follows that
+    \[
+        \tilde{P}([\lambda x]) = [P(\lambda x)] = [\lambda P(x)] = [P(x)] =P([\lambda x]).
+    \]
+    Thus $\tilde{P}$ is well-defined. To prove $\ti{P}$ is smooth, for each $i = 0,\dots,n$, let $\tilde{U_i}\subset \bb{R}^{k + 1}$ be the subset containing all points $x \in \bb{R}^{n + 1}$ satisfying $x^{i} \neq 0$ and $\varphi_i: U_i \to \bb{R}^{k}$ be the local chart (where $U_i = \pi(\tilde{U_i})$, and $\pi$ is a natural quotient mapping from $\bb{R}^{k + 1}$ to $\bb{RP}^n$) satisfying
+    \[  
+        \varphi_i[x^1, \dots, x^{k + 1}] = \left(\frac{x^1}{x^i},\dots,\frac{x^{i -1}}{x^{i}},\frac{x^{i + 1}}{x^{i}}, \dots,\frac{x^{k + 1}}{x^i}\right).
+    \]
+    As proven above, $\varphi_i$ is well-defined and smooth, and $\{ \varphi_i\}$ defines a smooth structure on $\bb{RP}^k$. Let $x \in \bb{RP}^n$ and a neighborhood $U_i$ containing $x$, it suffices to prove the map $\varphi_i \circ \ti{P} \circ \varphi_i^{-1}: \varphi(U) \to \varphi(U)$ is smooth. Computating sufficiently yields
+    \begin{align*}
+        \varphi_i \circ \ti{P} \circ \varphi_i^{-1}(x) &= \varphi_i \circ \ti{P} ([x^1,\dots, x^{i - 1},1,\dots, x^k])\\
+        &=\varphi_i ([P(x^1,\dots, x^{i - 1},1,\dots,x^k)]).
+    \end{align*}
+    Let $P_i([x]) = P([x^1,\dots, x^{i - 1},1,\dots,x^k])$, we have 
+    \begin{align*}
+        \varphi_i ([P(x^1,\dots, x^{i - 1},1,\dots,x^k)]) = \varphi\circ P_i([x])\\
+        = \left(\frac{P_i^1}{P_i^i},\dots,\frac{P_i^{i -1}}{P_i^{i}},\frac{P_i^{i + 1}}{P_i^{i}}, \dots,\frac{P_i^{k + 1}}{P_i^i}\right).
+    \end{align*}
+    Since every component of $P$ is smooth, then the following composition is also smooth. Thus $\ti{P}$ is smooth, as desired. 
+\end{proof}
+\begin{problem}
+     Let $M$ be a nonempty smooth $n$-manifold with or without boundary, and suppose $n \geq 1$. Show that the vector space $C^{\infty}(M)$ is infinite-dimensional. [Hint: show that if $f_1, \ldots, f_k$ are elements of $C^{\infty}(M)$ with nonempty disjoint supports, then they are linearly independent.]
+\end{problem}
+\begin{proof}
+    We first prove that $M$ contains infinite closed subset. Since $M$ is locally Euclidean, there exists a smooth local chart $(U,\varphi)$ which maps the open subset $U \subseteq M$ into $\tilde{U} = \varphi(U)$, which is open in $\bb{R}^n$. Then we can find an open ball $B(x,q) \subseteq U$, and it contains infinitely disjoint open balls, denoted by the set $\{B(x_{\alpha}, q_{\alpha})\}_{\alpha \in A}$, where $A$ is a countably infinite set. Since $\varphi$ is a homeomorphism, one can consider the pull back $\{\varphi^{-1}(\clo{B(x_{\alpha}, q_{\alpha})})\}_{\alpha}$ as a disjoint collection of closed subsets of $M$. 
+
+    In particular, let $U \subseteq M$ be an closed subset, it suffices to construct a smooth function $f \in C^{\infty}(M)$ which support 
+    \[
+        \mathrm{supp}(f) = \clo{\{p \in M \mid f(p) \neq 0\}}
+    \]
+    is a subset of $U$. We consider the following lemma 
+    \begin{lemma}
+        Suppose $M$ is a smooth manifold with or without boundary, $A \subset M$ is a closed subset, and $f: A \to \bb{R}^k$ is a a smooth function. For any open subset $U$ containing $A$, there exists a smooth function $\tilde{f}: M \to \bb{R}^k$ such that $f_A = f$ and $\mathrm{supp} \tilde{f} \subseteq U$
+    \end{lemma}
+    \begin{proof}
+Use Partition of unity.
+\end{proof}
+The above lemma implies that there is a way to contruct a smooth function as required, and we denote the set of nonzero smooth functions $\{f_n\}_{n \in N}$  such that $f_i$ has support is a subset of $U_{\alpha_i}$. Now we supoose there exists $n \in \bb{N}$ and a $n$-tuple $(a_1,\dots,a_n) \in \bb{R}^n$ satisfying 
+\[
+    a_1f_1 + a_2f_2 + \dots + a_nf_n = 0 \text{ for all } x \in M
+\]
+Since the support of $f_1,\dots,f_n$ are disjoint. For every $i = 1,\dots,n $ by choosing  $x \in U_{\alpha_i}$, it follows that $f_i(x) = 0$ but $f_j(x) \neq 0$ for all $j \neq i$. We thus obtain a homogeneous system of equations
+\begin{equation}
+    \begin{aligned}
+    a_2 f_2 + a_3 f_3 + \dots + a_n f_n &= 0 \quad \text{for all } x \in M \\
+    a_1 f_1 + a_3 f_3 + \dots + a_n f_n &= 0 \quad \text{for all } x \in M \\
+    \dots\\
+    a_1 f_1 + a_2 f_2 + \dots + a_{n-1} f_{n-1} &= 0 \quad \text{for all } x \in M
+    \end{aligned}
+\end{equation}
+which implies $a_if_i = 0$ for all $i = 1,\dots, n$ and for all $x \in M$. Thus $a_1 = \dots = a_n$. Therefore $\{f_1,\dots, f_n\}$ is linearly independent in $C^{\infty}(M)$, but since $n$ is abitrary, $C^{\infty}(M)$ must be infinite-dimensional, as desired.
+\end{proof}
+
+\begin{problem}
+    Define $F: \mathbb{R}^n \rightarrow \mathbb{R P}^n$ by $F\left(x^1, \ldots, x^n\right)=\left[x^1, \ldots, x^n, 1\right]$. Show that $F$ is a diffeomorphism onto a dense open subset of $\mathbb{R P}^n$. Do the same for $G: \mathbb{C}^n \rightarrow \mathbb{C} \mathbb{P}^n$ defined by $G\left(z^1, \ldots, z^n\right)=\left[z^1, \ldots, z^n, 1\right]$ (see Problem 1-9).
+\end{problem}
+\begin{proof}
+    Let $U$ be the open subset of $\bb{R}^{n + 1}$ where $x^{n + 1} \neq 0$ and $\ti{U} = \pi(U)$ is an open subset of $\bb{RP}^n$, where $\pi: \bb{R}^{n + 1} \to \bb{RP}^n$ is a natural projection. It suffices to prove the restricted map $F: \bb{R}^n \to \ti{U}$ is a diffeomorphism. 
+
+    To prove $F$ is injective, suppose $F(x) = F(y)$, then there exists $\lambda \in \bb{R}$ such that 
+    \[
+        (x^1,\dots,x^n,1) = (\lambda y^1,\dots,\lambda y^n,\lambda),
+    \]
+    which implies $\lambda = 1$ and hence $x = y$. To prove $F$ is surjective, let $[y] \in \ti{U}$ be abitrary, we have 
+    \[
+        [y^1,\dots, y^{n + 1}] = \left[\frac{y^1}{y^{n + 1}},\dots, \frac{y^{n}}{y^{n + 1}},1\right] = F\left(\frac{y^1}{y^{n + 1}},\dots, \frac{y^n}{y^{n + 1}}\right).
+    \]
+    Thus, $F$ is a bijection. Since the map $F: \bb{R}^n \to \bb{RP}^n$ is smooth, then $F: \bb{R}^n \to \ti{U}$ is also smooth. Therefore, $F$ is a diffeomorphism onto $\ti{U}$. Now we prove $\ti{U}$ is a dense subset of $\bb{RP}^n$. Let $x \in \bb{RP}^n \backslash \ti{U}$, and $i$ be the positive integer such that $x_i \neq 0$, consider the sequence $(x_n) \in \bb{R}^{n + 1}$ satisfying
+    \[
+        x_n = \left(\frac{x^1}{x^i},\dots, \frac{x^n}{x^i}, \frac{1}{n} \right), n \in \bb{N}
+    \]
+    Then we have 
+    \[
+        \nlim \pi([x_n]) = \left[\nlim x_n \right]= \left[\frac{x^1}{x^i},\dots, \frac{x^n}{x^i}, 0\right] = [x^1,\dots,x^n,0] = [x]
+    \]
+    Therefore, for any $[x] \in \bb{RP}^n \backslash \ti{U}$, there exists $(x_n) \in \bb{R}^{n + 1}$ such that $\pi(y_n) \to [x]$. Hence $\ti{U}$ is dense in $\bb{RP}^n$, as desired.
+\end{proof}
+\begin{problem}
+    Given a polynomial $p$ in one variable with complex coefficients, not identically zero, show that there is a unique smooth map $\tilde{p}: \mathbb{C P}^1 \rightarrow \mathbb{C} \mathbb{P}^1$ that makes the following diagram commute, where $\mathbb{C P}{ }^1$ is 1 -dimensional complex projective space and $G$ : $\mathbb{C} \rightarrow \mathbb{C} \mathbb{P}^1$ is the map of Problem 2-8:
+    \[
+    \begin{tikzcd}
+    \mathbb{C} \arrow[r, "G"] \arrow[d, "p"'] & \mathbb{C}\mathbb{P}^1 \arrow[d, "\tilde{p}"] \\
+    \mathbb{C} \arrow[r, "G"] & \mathbb{C}\mathbb{P}^1
+    \end{tikzcd}
+    \]
+\end{problem}
+\begin{problem}
+    For any topological space $M$, let $C(M)$ denote the algebra of continuous functions $f: M \rightarrow \mathbb{R}$. Given a continuous map $F: M \rightarrow N$, define $F^*: C(N) \rightarrow C(M)$ by $F^*(f)=f \circ F$.
+    \begin{enumerate}
+        \item Show that $F^*$ is a linear map.
+        \item Suppose $M$ and $N$ are smocth manifolds. Show that $F: M \rightarrow N$ is smooth if and only if $F^*\left(C^{\infty}(N)\right) \subseteq C^{\infty}(M)$.
+        \item Suppose $F: M \rightarrow N$ is a homeomorphism between smooth manifolds. Show that it is a diffeomorphism if and only if $F^*$ restricts to an isomorphism from $C^{\infty}(N)$ to $C^{\infty}(M)$.
+        
+    \end{enumerate}
+[Remark: this result shows that in a certain sense, the entire smooth structure of $M$ is encoded in the subset $C^{\infty}(M) \subseteq C(M)$. In fact, some authors define a smooth structure on a topological manifold $M$ to be a subalgebra of $C(M)$ with certain properties; see, e.g., [Nes03].] (Used on p. 75.)
+\end{problem}
+\begin{problem}
+    Suppose $V$ is a real vector space of dimension $n \geq 1$. Define the projectivization of $V$, denoted by $\mathbb{P}(V)$, to be the set of 1 -dimensional linear subspaces of $V$, with the quotient topology induced by the map $\pi: V \backslash\{0\} \rightarrow \mathbb{P}(V)$ that sends $x$ to its span. (Thus $\mathbb{P}\left(\mathbb{R}^n\right)=\mathbb{R} \mathbb{P}^{n-1}$.) Show that $\mathbb{P}(V)$ is a topological $(n-1)$-manifold. and has a unique smooth structure with the property that for each basis $\left(E_1, \ldots, E_n\right)$ for $V$, the map $E: \mathbb{R P}^{n-1} \rightarrow \mathbb{P}(V)$ defined by $E\left[v^1, \ldots, v^n\right]=\left[v^i E_i\right]$ (where brackets denote equivalence classes) is a diffeomorphism. (Used on p. 561.)
+
+\end{problem}
+\begin{problem}
+     State and prove an analogue of Problem 2-11 for complex vector spaces.
+\end{problem}
+\begin{problem}
+    Suppose $M$ is a topological space with the property that for every indexed open cover $\mathcal{X}$ of $M$, there exists a partition of unity subordinate to $\mathcal{X}$. Show that $M$ is paracompact.
+\end{problem}
+\begin{problem}
+    Suppose $A$ and $B$ are disjoint closed subsets of a smooth manifold $M$. Show that there exists $f \in C^{\infty}(M)$ such that $0 \leq f(x) \leq 1$ for all $x \in M$, $f^{-1}(0)=A$, and $f^{-1}(1)=B$.
+\end{problem}
+\section{Tangent Space}
+\begin{definition}[First definition of Tangent Space]
+    Let $M$ be a smooth manifold, a derivation at $p \in M$ is a linear map $\ome: C^{\infty}(M) \to \bb{R}$ satisfying the Leibniz product rule: 
+    \[
+        \ome(fg) = f\ome(g) + g\ome(f) \text{ for all smooth maps }g,f \in C^{\infty}(M)
+    \]
+    We denote the set $T_p(M)$ to be the set containing all kind of following derivation, that is 
+    \[
+        T_pM := \{\ome: C^{\infty}(M) \to \bb{R} \mid \ome \text{ linear and Leibniz}\}.
+    \]
+\end{definition}
+\begin{definition}[Second definition of Tangent Space] Let $M$ be a smooth manifold and $p \in M$. We say every the smooth function $\zeta: (-\ep,+\ep) \to M$ such that $\zeta(0) = p$ is \textit{a $p$-path}. Two $p$-path $\alpha$ and $\beta$ is said to satisfies the $\sim$ equivalent relation if 
+    \[
+        \frac{d}{dt}(f(\alpha(t)))\bigg|_{t = 0}=  \frac{d}{dt}(f(\beta(t)))\bigg|_{t = 0}
+    \]
+    for all smooth map $f\in C^{\infty}(M)$. Then the tangent space at $p$ is defined as:
+    \[
+        T_p(M) := \{\left[\zeta'(0)\right]| \text{ Smooth curve }\zeta: (-\ep,+\ep) \to M, \zeta(0) = p \}
+    \]
+\end{definition}
+
+\begin{proposition}
+    The tangent spaces at $p$ in first and second definition are naturally isomorphic.
+\end{proposition}
+\begin{proposition}
+    If $M$ is a smooth manifolds with dimension $n$ and let $(x_1,x_2,\dots, x_n)$ be a smooth local chart around $p \in M$, then the set 
+    \[
+        \left\{\frac{\pa}{\pa x_1}\bigg|_p,\frac{\pa}{\pa x_2}\bigg|_p,\dots, \frac{\pa}{\pa x_n}\bigg|_p\right\}
+    \]
+    forms a basis for $T_pM$.
+\end{proposition}
+For convenience, if $v \in T_pM$ we write $v = (dx_1,dx_2,\dots,dx_n)$.
+\section{Cotangent Space}
+\begin{definition}
+    Suppose $M$ is a smooth manifolds and $T_pM$ is a tangent space of $M$ at $p \in M$, then \textit{cotangent space} $T^*_pM$ is defined as 
+    \[
+        T^*_pM = Hom(T_pM; \bb{R}) = \{\ome \mid \ome: T_pM \to \bb{R} \text{ linear}\}.
+    \]
+    Its element $\ome_p \in T^*_pM$ is called \textit{covector}, one can be written as:
+    \[
+        \ome_p (v)= a_1dx_1 + a_2 dx_2 + \dots + a_n dx_n.
+    \]
+
+\end{definition}
+\section{Wedge Product}
+\begin{definition}[Alternating Tensors]
+    A covariant $(0,k)$-tensor $\alpha$ is said to be \textit{alternating} if 
+    \[
+    \alpha(v_1,\dots,v_i,\dots,v_j,\dots,v_k) = -\alpha(v_1,\dots,v_j,\dots,v_i,\dots,v_k).
+    \]
+    The subspace of all alternating covariant $(0,k)$-tensor is denoted by $\Lambda (V^*) \subseteq T^k(V^*)$.
+\end{definition}
+\begin{proposition}
+    Let $\alpha$ be a covariant $(0,k)$-tensor on $V$. The followings are equivalent:
+    \begin{enumerate}
+        \item $\alpha$ is alternanting.
+        \item $\alpha(v_1,\dots,v_k) = 0$ if and only if the $k$-tuple $(v_1,\dots,v_k)$ is linearly dependent.
+        \item $\alpha(v_1,\dots,w,\dots,w,\dots,v_k) = 0$.
+    \end{enumerate}
+\end{proposition}
+\begin{definition}
+    We define the alternating projection $\alt: T^k(V^*) \to \Lambda^k(V^*)$ as follows:
+    \[
+        \alt(\alpha) = \frac{1}{k!}\sum_{\sigma \in S_k}\sgn(\sigma)\alpha(v_{\sigma_1}\dots, v_{\sigma_k})
+    \]
+\end{definition}
+\begin{definition}
+    Let $\ome \in \Lambda^k(V^*)$ and $\eta \in \Lambda^l(V^*)$, define the \textit{Wedge product} to be the following $(k + l)$-covector:
+    \[
+        \ome \wedge \eta = \frac{(k + l)!}{k!l!}\alt(\ome \otimes \eta).
+    \]
+\end{definition}
+\begin{definition}[Elementary Alternating Tensors]
+    Let $V$ be an $n$-dimensional vector space and $\{\ep_1,\dots,\ep_n\}$ be a basis of $V^*$. We define a covariant $(0,k)$-tensor $\ep^I = \ep^{i_1,\dots,i_k}$ by
+    \[
+        \ep^I(v_1,\dots,v_k) = \det\left[\vect{\ep^I(v_1)}, \dots, \vect{\ep^I(v_k)}\right] = \det \begin{bmatrix}
+            \ep_{i_1}(v_1) & \cdots & \ep_{i_1}(v_k)\\ \vdots & \ddots & \vdots \\\ep_{i_k}(v_1)&\cdots& \ep_{i_k}(v_k)
+        \end{bmatrix}
+        = \det\begin{bmatrix}
+            v_1^{i_1} &\cdots& v_k^{i_1}\\
+            \vdots & \ddots &\vdots \\
+            v_1^{i_k}& \cdots &  v_k^{i_k}
+        \end{bmatrix}
+    \]
+    As it is a $k$-covector, $\ep^I$ is called \textit{elementary $k$-vector.}
+\end{definition}
+\begin{proposition}
+    Let $(E_i)$ be a basis for $V$, $(\ep_i)$ be the dual basis for $V^*$, and let $\ep^I$ be an elementary $k$-covector be dual to $(E_i)$. Since $\ep^I$ is alternating, then these followings hold.
+    \begin{enumerate}
+        \item If $I$ has a repeated index, then $\ep^I = 0$.
+        \item If $J = I_{\sigma}$ for some $\sigma \in S_k$, then $\ep^I = \sgn(\sigma)\ep^J$.
+        \item $\ep^I(E_{j_1},\dots,E_{j_k}) = \delta_J^I.$
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    A multi-index $I = (i_1,\dots,i_k)$ is said to be \textit{increasing} if $i_1 < i_2 < \dots < i_k$.
+\end{definition}
+\begin{theorem}
+    Let $V$ be an $n$-dimensional vector space. If $(\ep^i)$ is any basis for $V^*$, then for each positive integer $k \leq n$, the collection of $k$-covectors 
+    \[
+    \mathcal{F} = \{\ep^{I} \mid I \text{ is increasing of length }k\}
+    \]
+    is a basis for $\Lambda^k(V^*)$. Consequently, 
+    \[
+        \dim \Lambda^k(V^*) = \binom{n}{k}.
+    \]
+\end{theorem}
+\begin{proof}
+    Let $\ome \in \Lambda^k(V)$, and $(E_i)$ be the basis of $V$ dual to $V^*$ since $\ome$ is alternating, for all abitrary and increasing multi-index representation of $S_n$, say $(j_1, \dots, j_k)$ and $(i_1, \dots, i_k)$, respectively, one can rewrite
+    \begin{align*}
+        \ome &= \ome_{I}\ep^{j_1} \otimes \cdots \otimes \ep^{j_k} = \ome(E_{j_1},\dots,E_{j_k}) \ep^{j_1} \otimes \cdots \otimes \ep^{j_k}\\
+        &=\ome(E_{i_1},\dots,E_{i_k}) \left(\sum_{\sigma \in (i_1,\dots,i_k)}\sgn(\sigma)\ep^{i_1} \otimes \cdots \otimes \ep^{i_k}\right)\\
+        &= \ome(E_{i_1},\dots,E_{i_k})\ep^{(i_1,\dots, i_k)}.
+    \end{align*}
+    Therefore $\mathcal{F}$ generates the $\Lambda^k(V^*)$. To prove $\mathcal{F}$ is linearly independent, suppose $\ome = 0$ and applying both sides for each $(E_{j_1},\dots, E_{j_k})$ yields
+    \[
+        0 = \ome(E_{i_1},\dots,E_{i_k})\left[\ep^{(i_1,\dots, i_k)}(E_{j_1},\dots, E_{j_k})\right]= \ome(E_{j_1},\dots,E_{j_k})\delta^J_J = \ome(E_{j_1},\dots,E_{j_k}).
+    \]
+    Thus, $\mathcal{F}$ is basis for $\Lambda^k(V^*)$, and the rule of counting implies $\dim \Lambda^k(V^*) = \binom{n}{k}$, as desired.
+\end{proof}
+\begin{theorem}
+    Suppose $V$ is an $n$-dimensional vector space and $\ome \in \Lambda^n(V^*)$. If $T: V \to V$ is any linear map and $v_1,\dots,v_n$ are abitrary vectors in $V$, then
+    \[
+        \ome(Tv_1,\dots, Tv_n) = (\det T)\ome(v_1,\dots v_n).
+    \]
+\end{theorem}
+\begin{proof}
+    Let $(\ep_i)$ be a dual basis for $V^*$ and $(E_i)$ be a basis for $V$ dual to $(\ep_i)$. Since $\mathcal{F}$ forms a basis for $\Lambda^n(V^*)$, one can express $\ome$ as 
+    \begin{align*}
+        &\ome(Tv_1,\dots, Tv_n) = \ome(E_{i_1},\dots,E_{i_k})\ep^{(i_1,\dots, i_k)}(Tv_1,\dots, Tv_n)= \ome(E_{i_1},\dots,E_{i_k})\det\begin{bmatrix}
+            (Tv_1)^{i_1} &\cdots& (Tv_k)^{i_1}\\
+            \vdots & \ddots &\vdots \\
+            (Tv_1)^{i_k}& \cdots &  (Tv_k)^{i_k}
+        \end{bmatrix}\\
+        &= \ome(E_{i_1},\dots,E_{i_k})\det\begin{bmatrix}
+            \dsum_{j = 1}^n T_{i_1,j}v_1^j&\dots& \dsum_{j = 1}^n T_{i_1,j}v_k^j\\\vdots & \ddots & \vdots\\\dsum_{j = 1}^n T_{i_k,j}v_1^j&\cdots&\dsum_{j = 1}^n T_{i_k,j}v_k^j
+        \end{bmatrix} = \ome(E_{i_1},\dots,E_{i_k}) \det  \left(T\cdot
+        \begin{bmatrix}
+            v_1^{i_1} &\cdots& v_k^{i_1}\\
+            \vdots & \ddots &\vdots \\
+            v_1^{i^k}& \cdots &  v_k^{i^k}
+        \end{bmatrix}\right)\\
+        &= (\det T)\ome(E_{i_1},\dots,E_{i_k})\ep^{(i_1,\dots, i_k)}(v_1,\dots,v_n) = (\det T)\ome(v_1,\dots,v_n).
+    \end{align*}
+    Hence, we are done.
+\end{proof}
+\begin{lemma}
+    Suppose $\alpha \in \Lambda^m(V^*),\beta \in \Lambda^n(V^*),\ome \in \Lambda^k(V^*)$, then we have $\alpha \wedge \beta \wedge \ome := (\alpha \wedge \beta)\wedge \ome = \alpha \wedge (\beta\wedge \ome)$.
+\end{lemma}
+\begin{proof}
+    We have 
+    \begin{align*}
+        (\alpha \wedge \beta) \wedge \omega &= \frac{1}{(m + n)! k!} \sum_{\eta \in S_{m+n+k}} \sgn(\eta) \left( \frac{1}{m! n!} \sum_{\sigma \in S_{m+n}} \sgn(\sigma) \alpha \otimes \beta \right) \otimes \omega(v^\sigma) \\
+        &= \frac{1}{m! n! k! (m+n)!} \sum_{\eta \in S_{m+n+k}} \sum_{\sigma \in S_{m+n}} \sgn(\eta) \sgn(\sigma) \alpha \otimes \beta \otimes \omega(v^\sigma) \\
+        &= \frac{1}{m! n! k!} \sum_{\eta \in S_{m+n+k}} \sgn(\eta) \alpha \otimes \beta \otimes \omega(v^\sigma) \\
+        &= \frac{1}{m! n! k! (n+k)!} \sum_{\eta \in S_{m+n+k}} \sum_{\phi \in S_{n+k}} \sgn(\eta) \sgn(\phi) \alpha \otimes \beta \otimes \omega(v^\sigma) \\
+        &= \alpha \wedge (\beta \wedge \omega).
+    \end{align*}
+Hence, we are done.
+\end{proof}
+\begin{lemma}
+Let $(\ep^i)$ be any basis for $V^*$ and $I = (i_1,\dots, i_k)$ be any multi-index, then we have 
+\[
+    \ep^{i_1}\wedge\dots\wedge\ep^{i_k} = \ep^I
+\] 
+\end{lemma}
+\begin{proof}
+    Let $(v_i)$ be abitrary $k$-vector tuple in $V$ represented by the basis $(E_i)$ of $V$ dual to $(\ep^i)$. We will show the following holds by induction. For $k = 1$, this is trivial since $\ep^{I} = \ep^{i_1}$. For $n = 2$, we have 
+    \[
+        \ep^{i_1}\wedge\ep^{i_2}(v_1,v_2) = \ep^{i_1}\otimes\ep^{i_2}(v_1,v_2)- \ep^{i_1}\otimes\ep^{i_2}(v_2,v_1) = \det\begin{bmatrix}
+            v_1^1 & v_2^1 \\ v_1^2 & v_2^2 
+        \end{bmatrix}= \ep^{(i_1,i_2)}(v_1,v_2).
+    \]
+    Suppose the following hypothesis holds for $k \in \bb{N}$, it follows that 
+    \begin{align*}
+         &\ep^{i_1}\wedge \dots \wedge \ep^{i_k} \wedge \ep^{i_{k + 1}}(v_1,\dots,v_{k+ 1}) = (\ep^{i_1}\wedge \dots \wedge \ep^{i_k}) \wedge \ep^{i_{k + 1}}(v_1,\dots,v_{k+ 1}) = \ep^{(i_1,\dots,i_k)} \wedge \ep^{i_{k + 1}}(v_1,\dots,v_{k+ 1})\\
+        &= \frac{1}{k!}\sum_{\sigma \in S_{k + 1}}\sgn(\sigma) \ep^{(i_1,\dots,i_k)} \otimes \ep^{i_{k + 1}}(v_1,\dots,v_{k+ 1}) = \frac{1}{k!}\sum_{\sigma \in S_{k + 1}}\sgn(\sigma) \ep^{(i_1,\dots,i_k)} \otimes \ep^{i_{k + 1}}(v_{\sigma_1},\dots,v_{\sigma_{k + 1}})\\
+        &= \frac{1}{k!}\sum_{\sigma \in S_{k + 1}}\sgn(\sigma)\ep^{(i_1,\dots,i_k)}(v_{\sigma_1},\dots, v_{\sigma_k})\cdot \ep^{i_{k + 1}}(v_{\sigma_{k + 1}}) = \sum_{i = 1}^k (-1)^{k + 1 + i}\ep^{(i_1,\dots,i_k)}(v_1,\dots,v_{i - 1},v_{i + 1})\ep^{i_{k + 1}}(v_i)\\
+        &= \det\begin{bmatrix}
+            v_1^{i_1} &\dots& v_{k + 1}^{i_{k + 1}}\\
+            \vdots &\ddots & \vdots\\
+            v_1^{i_{k + 1}}&\dots& v_{k + 1}^{i_{k + 1}}
+        \end{bmatrix} = \ep^{(i_1,\dots, i_{k + 1})}
+    \end{align*}
+    Hence the following is proven, as desired.
+    
+\end{proof}
+\section{Differential Forms on Manifolds}
+\begin{definition}[$m$-forms]
+    Suppose $M$ is a smooth manifold with dimension $n$ and $p \in M$, an \textbf{$m$-form at $p$}  is a covector $\ome_p$, that is
+    \[
+        \ome_p: (T_pM)^m \to \bb{R} \text{ linear, or }\ome \in \Lambda^m(T^*_pM)
+    \]
+    Alternatively, a $m$-form at $p$ takes $m$ tangent vectors and returns a real number linearly. We denote the vector space of smooth $k$-forms by 
+    \[
+        \Omega^k(M) := \Gamma(\Lambda^kT^*M).
+    \]
+\end{definition}
+
+Consider a local smooth chart $(\varphi,U)$ for some neighborhood of $p$, for $m = 1$, as $\ome_p$ is linear, one can rewrite the output of $\ome_p$ by the following formula:
+\[
+    \ome_p(v) = a_1dx^1 + a_2dx^2 + \dots +a_ndx^n = \begin{bmatrix}
+        a_1 & a_2 & \dots & a_n
+    \end{bmatrix}\cdot v
+\]
+For $m = 2$, let $u = u^i\dfrac{\partial}{\partial x^i}$ and $v = v^i\dfrac{\partial}{\partial x^i} $ (Einstein's summation convention), since $\ome_p$ is multilinear and alternating, it would follow that 
+\begin{align*}
+        \ome_p(u,v) &= \ome_p\left(u^i\dfrac{\partial}{\partial x^i},v^i\dfrac{\partial}{\partial x^i}\right) = \sum_{i \neq j} u^iv^j \ome_p\left(\dfrac{\partial}{\partial x^i},\dfrac{\partial}{\partial x^j}\right)\\
+        &=\sum_{i < j}(u^iv^j - u^jv^i)\ome_p\left(\dfrac{\partial}{\partial x^i},\dfrac{\partial}{\partial x^j}\right) 
+\end{align*}
+
+Let $dx^i \wedge dx^j (u,v) := u^iv^j - u^jv^i = \det\begin{pmatrix}
+    u^i & v^i \\ u^j & v^j
+\end{pmatrix}$, and $\ome_{ij} := \ome_p\left(\dfrac{\partial}{\partial x^i},\dfrac{\partial}{\partial x^j}\right) $, one can reduce the following equality to 
+\[
+    \ome_p(u,v) = \sum_{i < j} \ome_{ij} dx^i \wedge dx^j (u,v)
+\]
+or equivalently, i would like to use the reduced notation based on Einstein's summation convention,
+\[
+    \ome_p = \ome_{N} dx^{i} \wedge dx^j,
+\]
+for each $N  \in [n]^2 := \{(i,j) \mid i,j \in [n]\}$. By our definition of $dx^i \wedge dx^j$, since $$\det[u^{i,j},v^{i,j}] = dx^i \wedge dx^j(u,v)$$ is multilinear, one can be extended to the generalized operation, which is 
+\[
+    \boxed{dx^{i_1} \wedge \dots \wedge dx^{i_n}(v_1,\dots, v_m) := \det[v_1^{i_1,\dots,i_n},\dots, v_n^{i_1,\dots,i_m}] = \det[v_i^{N}]} \tag{*}.
+\]
+
+This is called the \textbf{Wedge product}. Moreover, it is worth noting that this operation holds only for the basis of tangent space, we want it also works for any two forms. But beforehand, we state the general formula for any higher $m$-forms:
+\begin{theorem}
+    Any $m$-form of dimension $n$ can be expressed uniquely as
+    \[
+        \ome_p = \ome_N dx^{i_1} \wedge \dots \wedge dx^{i_m}
+    \]
+    where $N \in [n]^m := \{(i_1,\dots, i_m) \mid i_1,\dots,i_m \in [n]\}$. Generally, since $(T^*_pM)^m$ is a vector space, it thus have basis, which is  
+    \[
+        \{dx^{i_1}\wedge \dots \wedge dx^{i_m}\mid i_1 < i_2 < \dots < i_m \in [n] \}
+    \]
+    Consequently, the dimension of $(T^*_pM)^{m}$ is $\binom{n}{m}$.
+\end{theorem}
+Now we construct a Wedge product operation between any forms. Consider vectors $$\{v_1,\dots, v_{m + n}\} \in (T_pM)^{m + n},$$ and $m$-form $\ome_1$ and $n$-form $\ome_2$. 
+By writiting $\ome_1$ and $\ome_2$ in basis of $(*)$ and since Wedge is multilinear to forms, it follows that 
+\begin{align*}
+    &\ome_1 \wedge \ome_2 (v_1, \dots, v_{m + n}) = (\sum \ome_{1M}dx^{i_1}\wedge\dots\wedge dx^{i_m})\wedge(\sum \ome_{2N}dx^{j_1}\wedge\dots\wedge dx^{j_n})\\
+    &= \sum \ome_{1M}\ome_{2N}dx^{i_1}\wedge\dots\wedge dx^{i_m}\wedge dx^{j_1} \wedge\dots \wedge dx^{j_n}\\
+    &= \frac{1}{m!n!}\sum_{\sigma \in S_{m + n }} \sgn(\sigma)\ome_{\sigma_1\dots\sigma_m}dx^{\sigma_1}\wedge\dots\wedge dx^{\sigma_{m}}\ome_{\sigma_{m + 1}\dots\sigma_{m + n}}dx^{\sigma_{m+ 1}}\wedge\dots\wedge dx^{\sigma_{m+n}}\\
+    &= \frac{1}{m!n!}\sum_{\sigma \in S_{m + n}} \sgn(\sigma)\ome_{\sigma_1\dots\sigma_m}(v_{\sigma_1},\dots, v_{\sigma_m})\ome_{\sigma{m + 1}\dots\sigma{m +n}}(v_{\sigma_{m + 1}},\dots, v_{\sigma_{m + n}})
+\end{align*}
+
+\begin{proposition}
+    Given two any $m$-form $x$, $n$-form $y$ and $p$-form $z$ , then we have 
+    \begin{enumerate}
+        \item $x \wedge x = 0$,
+        \item $x \wedge y = (-1)^{nm}y \wedge x$,
+        \item $(x \wedge y)\wedge z = x\wedge (y \wedge z)$,
+        \item If $m = n$ then $(x + y)\wedge z = x\wedge z + y \wedge z$.
+        \item ($m$ - form)$\wedge$($n$ - form) = $(m + n)$ - form.
+    \end{enumerate}
+\end{proposition}
+\begin{definition}
+    Let $F: M \to N$ be a smooth map between smooth manifolds $M$ and $N$, $\ome$ is a differential form on $N$ . The \textit{pullback} $F^*\ome$ is a differential form on $M$, which is defined as
+    \[
+        (F^*\ome)_p(v_1,\dots,v_k) = \ome_{F(p)}(dF_p(v_1),\dots,dF_p(v_k))
+    \]
+\end{definition}
+\begin{proposition}
+    Let $F: M \to N$ be smooth map.
+    \begin{enumerate}
+        \item $F^*: \Omega^k(N) \to \Omega^k(M)$ is linear over $\bb{R}$.
+        \item $F^*(\ome \wedge \eta) = (F^*(\ome))\wedge(F^*(\eta))$.
+        \item In any smooth chart,
+        \[
+            F^*\left(\sum \ome_I dx^{i_1}\wedge\dots\wedge dx^{i_k}\right) = \sum (\ome_I \circ F)d(x^{i_1} \circ F)\wedge \dots \wedge d(x^{i_k}\circ F).
+        \]
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Let $(v_i)$ and $(w_i)$ be abitrary $k$-vector tuple of $T_pM$, $\alpha$ be abitrary real number. We have 
+    \begin{align*}
+    (F^*\ome)_p(v_1 + \alpha w_1, \dots, v_k + \alpha w_k) &= \ome_{F(p)}(dF_p(v_1 + w_1),\dots dF_p(v_k + w_k))\\
+    &= \ome_{F(p)}(dF_p(v_1) + dF_p(\alpha w_1),\dots dF_p(v_k) + dF_p(\alpha w_k))\\
+    &= \ome_{F(p)}(dF_p(v_1),\dots,dF_p(v_k)) + \alpha\ome_{F(p)}(dF_p(w_1),\dots,dF_p(w_k))\\
+    &=  (F^*\ome)_p(v_1 , \dots, v_k ) + \alpha(F^*\ome)_p(w_1 , \dots, w_k ).
+    \end{align*}
+    Thus $F^*$ is linear over $\bb{R}$. To prove the second property, suppose $\ome$ is $k$-form and $\eta$ is $l$-form on $N$, one can be expressed so that
+    \begin{align*}
+        F^*(\ome \wedge \eta)&= \ome_{F(p)}\wedge \eta_{F(p)}(dF_p) = \frac{1}{k!l!}\sum_{\sigma \in S_{k + l}}\sgn(\sigma)\ome_{F(p)}\otimes \eta_{F(p)}(d(v_{\sigma_{1}}),\dots,d(v_{\sigma{k + l}}))\\
+        &= \frac{1}{k!l!}\sum_{\sigma \in S_{k + l}}(F^*\ome)_p\otimes (F^*\eta)(d(v_{\sigma_{1}}),\dots,d(v_{\sigma{k + l}}))\\
+        &= \frac{(k + l)!}{k!l!}\alt(F^*(\ome)_p \otimes F^*(\eta)_p)\\
+        &= F^*(\ome)_p \wedge F^*(\eta)_p.
+    \end{align*}
+    Since $F^*$ is proven to be linear and pull back of a real-valued function is just a composition, one can obtain
+    \begin{align*}
+        F^*\left(\sum \ome_I dx^{i_1}\wedge\dots\wedge dx^{i_k}\right) &= \sum F^*\left(\ome_I dx^{i_1}\wedge\dots\wedge dx^{i_k}\right)\\
+        &= \sum (\ome_I\circ F)  F^*(dx^{i_1})\wedge\dots\wedge F^*(dx^{i_k})\\
+        &= \sum (\ome_I\circ F)  dx^{i_1}(dF_p^1)\wedge\dots\wedge dx^{i_1}(dF_p^k)\\
+        &= \sum  (\ome_I \circ F) d(x^{i_1}\circ F)\wedge \dots d(x^{i_k}\circ F)
+    \end{align*}
+    Hence, we are done.
+\end{proof}
+\begin{theorem}
+    Let $F: M \to N$ be smooth map between $n$-dimensional manifolds, $(x^i)$ and $(y^i)$ be smooth coordinates on open subsets $U \subseteq M$ and $V \subseteq N$, respectively, and $u$ be a continuous real-valued function on $V$, then the following holds on $U \cap F^{-1}(V)$:
+    \[
+        F^*(udy^1\wedge \dots dy^n) = (u \circ F)(\det J_F)dx^1\wedge\dots\wedge dx^n.
+    \]
+\end{theorem}
+\begin{proof}
+    Since $F^*$ is linear over $\bb{R}$, it follows that 
+    \begin{align*}
+        &F^*(udy^1\wedge \dots dy^n) = (u \circ F) d(y^1 \circ F)\wedge\dots\wedge d(y^n\circ F) = (u \circ F) dF^1\wedge\dots \wedge dF^n\\
+    \end{align*}
+    For abitrary $1 \leq j \leq n$, by writings $dF^j$ in basis of $(x^i)$
+    \[
+        dF^j = \frac{\partial F^j}{\partial x^i}dx^i.
+    \]
+    Since $a \wedge a = 0$ for any form, this implies 
+    \begin{align*}
+    dF^1 \wedge \dots \wedge dF^n &= \sum_{\sigma \in S_n} \left(\frac{\partial F^1}{\partial x^{\sigma_1}}\cdots\frac{\partial F^n}{\partial x^{\sigma_n}}\right) dx^{\sigma_1}\wedge\dots\wedge dx^{\sigma_n}\\
+    &= \sum_{\sigma \in S_n}\sgn(\sigma)\left(\frac{\partial F^1}{\partial x^{\sigma_1}}\cdots\frac{\partial F^n}{\partial x^{\sigma_n}}\right) dx^{1}\wedge\dots \wedge dx^{n}\\
+    &= \det\begin{bmatrix}
+        \frac{\partial F^1}{\partial x^1}&\cdots& \frac{\partial F^1}{\partial x_n}\\
+        \vdots & \ddots & \vdots\\
+        \frac{\partial F_n}{x^1}& \cdots & \frac{\partial F_n}{x^n} 
+    \end{bmatrix}dx^{1}\wedge\dots \wedge dx^{n}\\
+    &= J_F  dx^{1}\wedge\dots \wedge dx^{n}\\.
+    \end{align*}
+    Hence we are done.
+\end{proof}
+\section{Measure Theory}
+\begin{definition}[$\sigma$-algebra] Let $X$ be a set, a collection $\mathcal{X} \in \mathcal{P}(X)$ is called a $\sigma$-algebra if it is
+    \begin{enumerate}
+        \item The set $X$ is itself in $\mathcal{X}$.
+        \item \textit{Closed under unions: }Let $(E_i)\subseteq \mathcal{X}$ be countable subset of $\mathcal{X}$, then 
+        \[
+            \bigcup_{n = 1}^{\infty}E_i \in X.
+        \]
+        \item \textit{Closed under complements: } If $A \in \mathcal{X}$, then 
+        \[
+            A^c := X\backslash A \in \mathcal{X}
+        \]
+    \end{enumerate}
+\end{definition}
+\begin{proposition}
+    If $\mathcal{X}$ is a $\sigma$-algebra and $(X_i)\subseteq \mathcal{X}$ be countable subset of $\mathcal{X}$, then we have 
+    \[
+        \bigcap_{n = 1}^{\infty} X_n \in \mathcal{X}
+    \]
+\end{proposition}
+\begin{proof}
+    By the Morgan law, we have 
+    \[
+        \bigcap_{n = 1}^{\infty} E_n = X\backslash\bigcap_{n = 1}^{\infty} (X\backslash X_n)=\left(\bigcup_{n = 1}^{\infty} E_n^c\right)^c .
+    \]
+    Using those above condition yields
+    \begin{align*}
+         X_n^c \in \mathcal{X} &\ra E_n^c \in \mathcal{X} \text{ for all n,}&\text{(condition 3),}\\
+        &\ra \bigcup_{n = 1}^{\infty} E_n^c \in \mathcal{X} &\text{(condition 2),}\\
+        &\ra \left(\bigcup_{n = 1}^{\infty} X_n^c\right)^c \in \mathcal{X} &\text{(condition 3),}\\
+        &\ra \bigcap_{n = 1}^{\infty} E_n \in X
+    \end{align*}
+    Hence, we are done. 
+\end{proof}
+\begin{definition}[Measure]
+    Let $X$ be a set with $\sigma$-algebra $\mc{M}$. A \textit{measure} on $(X,\mc{M})$ is a function $\mu: \mc{M} \to [0,\infty]$ satisfying 
+    \begin{enumerate}
+        \item $\mu(\varnothing) = 0$,
+        \item If $(E_n)$ is a countably disjoint subset of $\mc{M}$, then 
+        \[
+            \mu\left(\bigcup_{n = 1}^{\infty}E_i\right) = \sum_{n = 1}^{\infty}\mu(E_i).
+        \]
+    \end{enumerate}
+    The triple $(X,\mc{M},\mu)$ is called a \textit{measure space} and the pair $(X,\mc{M})$ is called a \textit{measurable space}.
+\end{definition}
+\begin{theorem}
+    Let $(X,\mc{M},\mu)$ be a measure space, then the followings hold.
+    \begin{enumerate}
+        \item \textit{Monotonicity:} If $E,F \in \mc{M}$ and $E \subseteq F$, then $\mu(E) \leq \mu(F)$.
+        \item \textit{Subadditivity:} If $(E_n)$ is a countably disjoint subset of $\mc{M}$, then 
+        \[
+            \mu\left(\bigcup_{n = 1}^{\infty} E_n\right) \leq \sum_{n = 1}^{\infty} \mu(E_n)
+        \]
+        \item \textit{Continuity from below:} If $(E_n) \subset \mc{M}$ and $E_1 \subseteq E_2 \subseteq \cdots$, then 
+        \[
+            \mu\left(\bigcup_{n = 1}^{\infty}E_n\right) = \lim_{n \to +\infty}\mu(E_n)
+        \]
+        \item \textit{Continuity from above:} If $(E_n) \subset \mc{M}$ and $E_1 \supseteq E_2 \supseteq \cdots$, and $\mu(E_1) < \infty$, then 
+        \[
+            \mu\left(\bigcap_{n = 1}^{\infty}E_n\right) = \lim_{n \to +\infty}\mu(E_n)
+        \]
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    1. Since $F\backslash E$ and $E$ is disjoint, we have $\mu(F) = \mu((F\backslash E) \cup E)= \mu(F \backslash E) + \mu(E)\geq \mu(E)$.
+
+    2. Let $X_n = E_n \cup E_{n + 1}\cup \dots$, it follows that 
+    \begin{align*}
+        \mu\left(\bigcup_{n = 1}^{\infty}E_n\right) &= \mu\left((E_1\backslash X_1) \cup \bigcup_{n = 2}^{\infty}E_n\right) = \mu(E_1\backslash X_1) + \mu\left(\bigcup_{n = 2}^{\infty}E_n\right)\\
+        &\leq \mu(E_1) + \mu\left(\bigcup_{n = 2}^{\infty}E_n\right)\\
+        &\leq \mu(E_1) + \mu(E_2)\mu\left(\bigcup_{n = 3}^{\infty}E_n\right)\\
+        &\leq \cdots\\
+        &\leq \sum_{n = 1}^{\infty}\mu(E_n).
+    \end{align*}
+
+    3. Let $n \in \bb{N}$, we have 
+    \[
+        \mu\left(\bigcup_{i = 1}^nE_i\right) = \mu(E_n)
+    \]
+    Hence,
+    \[
+        \lim_{n \to +\infty}\mu\left(\bigcup_{i = 1}^nE_i\right) =\mu\left(\bigcup_{i = 1}^{\infty}E_i\right) \lim_{n \to +\infty}\mu(E_n)
+    \]
+    4. Similar to the third property, since 
+    \[
+        \mu\left(\bigcap_{i = 1}^nE_i\right) = \mu(E_n)
+    \]
+    This implies 
+    \[
+        \mu\left(\bigcap_{i = 1}^{\infty}E_i\right) \lim_{n \to +\infty}\mu(E_n)
+    \]
+\end{proof}
+\begin{definition}
+    Let $(X,\mc{M},\mu)$ be a measure space, define the set 
+    \[
+        \ker(\mu) := \{E \in \mc{M}\mid \mu(E)  = 0\}.
+    \]
+    A measure whose domain includes all subset of an element $E \in \ker(\mu)$ is called \textit{complete}.
+\end{definition}
+\begin{theorem}
+    Let $(X,\mc{M},\mu)$ be a measure space. Let $\overline{\mc{M}}$ be the collection satisfying 
+    \[
+        \overline{\mc{M}} = \{E \cup F \mid E \in \mc{M} \text{ and }F \in \ker(\mu)\}.
+    \]
+Then $\overline{\mc{M}}$ is a $\sigma$-algebra, and there is a unique extension $\overline{\mu}$ to $\mu$ to a comple measure on $\overline{\mc{M}}$.
+\end{theorem}
+\section{Orientations}
+\begin{definition}
+    Two ordered basis $(E_1,\dots,E_n)$ and $(\tilde{E_1},\dots,\tilde{E_n})$ for $V$ are called \textit{consistently oriented} if the transition matrix $[B]_{E\to\tilde{E}}$ defined by 
+    \[
+        [E] = B[\tilde{E}]
+    \]
+    has positive determeniant.
+\end{definition}
+\begin{definition}
+    Let $V$ be a vector space, We denote the set 
+    \[
+        \mathcal{O}(V) := \mathcal{B}(V)/ \mathcal{R}(V),
+    \]
+     as the set of \textit{all possible orientation of $V$}, where  $\mathcal{R}(V):= \left\{\left([E_i],[\tilde{E_i}]\right) \in V^2\mid \det[E_i]\cdot\det[\tilde{E_i}] > 0\right\}$, and each element of $\mathcal{O}(V)$ (which is a equivalent class) is said to be the \textit{orientation for $V$}.
+\end{definition}
+\begin{definition}
+    A vector space with a choice of orientation $(V,[E_i])$ (where $[E_i] \in \mathcal{O}(V)$) is called an \textit{oriented vector space}. Any ordered basis $(E_i)$ that is in the given orientation is said to be \textit{positively oriented}. Any basis that is not in the given orientation is said to be \textit{negatively oriented}.
+\end{definition}
+\begin{remark}
+    To prove a set of ordered basis determines an orientation for a vector space $V$, it suffices to prove every element of the following set belongs to only one equivalent class of $\mathcal{O}(V)$.
+\end{remark}
+\begin{theorem}
+    Let $V$ be a vector space of dimension $n \geq 1$. Each nonzero element $\ome \in \Lambda^n(V^*)$ determines an orientation of $V$ as the set of ordered bases $(E_i)$ such that $\ome(E_i) > 0$. Two nonzero $n$-covectors $\ome$ and $\eta$ determines the same orientation if and only if $\ome \cdot \eta > 0$.
+\end{theorem}
+\begin{proof}
+    Let $(E_i)$ and $(\tilde{E_i})$ be the ordered basis of $V$, we denote the set 
+    \[
+        \mathcal{O}_{\ome} =  \left\{\left([E_i],[\tilde{E_i}]\right) \mid \ome(E_i) > 0 \text{ and }\ome(\tilde{E_i}) > 0\right\}.
+    \] Since those two sets are linearly independent, one can find a linear map $\mathcal{B}: V \to V$ such that $[E_i] = B[\tilde{E_i}]$. By the above proposition, it follows that 
+    \[
+        \ome(E_i) = \det(\mathcal{B})\ome(\tilde{E_i})
+    \]
+    which implies $\det(\mathcal{B}) > 0$ or $\det[E_i]\cdot\det[\tilde{E_i}] > 0$ if and only if $\ome(E_i) > 0 \text{ and }\ome(\tilde{E_i}) > 0$. Thus $\mathcal{O}_\ome$ is an equivalent class of $\mathcal{O}(V)$, which implies it is an orientation of $V$. In addition, that $\ome$ and $\eta$ determines the same orientation implies that $\ome(E_i)\cdot \eta(E_i) > 0$ since $\eta(E_i) > 0$, and vice versa, as desired.
+\end{proof}
+\begin{definition}
+    If $V$ is an oriented $n$-dimensional vector space and $\ome$ is an $n$-covector determines the orientation of $V$ that satifying the above theorem, $\ome$ is called a \textit{positively oriented} $n$-covector.
+\end{definition}
+\begin{definition}
+    Let $M$ be a smooth manifold, a \textit{vector field on $M$} is a map 
+    \begin{align*}
+        X: M &\to TM\\
+        p &\mapsto X(p) \in T_p(M)\\
+    \end{align*}
+    such that $X$ is a smooth section of the tangent bundle $\pi \circ X = Id_{M}$, where $\pi: TM \to M$ is a projection.
+\end{definition}
+\begin{definition}
+    Let $(E_1,\dots,E_n)$ be a collection of vector fields determined on the open set $U \subseteq M$. If for every point $p \in M$, the set $(E_i(p))$ form a basis of the tangent space $T_pM$, the collection $(E_i)$ is said to be \textit{a local frame}.
+\end{definition}
+\begin{definition}
+    Let $M$ be a smooth $n$-manifold, $(E_i)$ be a local frame for $TM$ and let $\varphi$ be the map satisfying
+    \begin{align*}
+        \sigma: M \to \{-1,+1\}
+    \end{align*}
+    We say that $(E_i)$ is \textit{positively oriented} if $(E_i)$ is a positively oriented basis for $(T_pM, \sigma(p))$. The function $\sigma$ is called \textit{pointwise orientation}.
+\end{definition}
+\begin{definition}
+    A pointwise orientation $\sigma$ is said to be continuous if for every point $p \in M$, there exists an open neighborhood $U$ of $p$ and the local frame $(E_i)$ defined $U$ such that $(E_i(q))$ is positively oriented respect to restricted $\sigma_U$ for all $q \in U$. $\sigma$ is called an \textit{orientation on $M$}.
+\end{definition}
+\begin{definition}
+    An \textit{oriented manifold} is an ordered pair $(M,\mathcal{O})$, where $M$ is an orientable smooth manifold and $\mathcal{O}$ is a choice of orientation for $M$.
+\end{definition}
+\section{Integration on Manifolds}
+\begin{definition}[Measure Zero set]
+    An \textit{open rectangle} is the set of the form \[C^b_a := (a^1,b^1)\times\dots\times(a^n, b^n),\] where $a^i < b^i$. The \textit{volume of $C^b_a$} is denoted by:
+    \[
+        \vol(C^b_a) := (b^1 - a^1)\dots(b^n - a^n).
+    \]
+    A subset $X \subset \bb{R}^n$ is said to have \textit{measure zero} if for every $\ep > 0$, there exists a countable cover of open rectangles $\{C_i\}$ such that 
+    \[
+        \sum_{i} \vol(C_i) < \ep.
+    \]
+    A \textit{domain of integration} in $\bb{R}^n$ is the bounded subset whose boundary has measure zero.
+\end{definition}
+\begin{definition}
+    Let $D \subset \bb{R}^n$ be a domain of integration and $\ome = fdx^1\wedge\dots \wedge dx^n$ be a differential n-form on $\clo{D}$, where $f: \clo{D} \to \bb{R}$ is some continuous function. We define the integral of $\ome$ over $D$ as
+    \[
+        \int_{D}\ome = \int_D fdx^1\dots dx^n = \int_D f dV.
+    \]
+    More generally, let $U$ be an open subset of $\bb{R}^n$ or $\bb{H}^n$, and $D$ be any domain of integration containing the compact set $\mathrm{supp} (\ome)$, then 
+    \[
+        \int_U \ome = \int_D \ome.
+    \]
+\end{definition}
+\end{document}
