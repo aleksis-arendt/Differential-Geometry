@@ -214,6 +214,73 @@
         \item Every open subset in $X$ is the union of some collection of elements of $\mc{B}$.
     \end{enumerate}
 \end{definition}
+\section{Partition of Unity}
+\begin{lemma}
+    The function $f: \bb{R} \to \bb{R}$ defined by 
+    \[  
+        f(t) = \begin{cases}
+            e^{-1/t}, t > 0,\\
+            0, t \leq 0,
+        \end{cases}
+    \]
+    is smooth.
+\end{lemma}
+\begin{lemma}
+    Given any real numbers $r_1$ and $r_2$ such that $r_1 < r_2$, there exists a smooth function $h: \bb{R} \to \bb{R}$ such that $h(t) = 1$ for $t \leq r_1$, $0 < h(t) <1$ for $r_1 < t < r_2$ and $h(t) = 0$ for $t \geq r_2$.
+\end{lemma}
+\begin{proof}
+    Let $f$ be the smooth function of the previous lemma, and set 
+    \[
+        h(t) = \frac{f(r_2 - t)}{f(r_2 - t) + f(t - r_1)}
+    \]
+    Then $h$ satisfies the desired properties.
+\end{proof}
+\begin{lemma}
+    Given any positive numbers $r_1 < r_2$, there exists a smooth function $H: \bb{R}^n \to \bb{R}$ such that $H = 1$ on $\clo{B}_{r_1}(0)$, $0 < H < 1$ for all $x \in B_{r_2}(0)\backslash \clo{B}_{r_1}(0)$ and $H = 0$ on $\bb{R}^n\backslash B_{r_2}(0)$.
+\end{lemma}
+\begin{proof}
+    By setting $H(x) = h(|x|)$ and we are done.
+\end{proof}
+\begin{definition}
+    Let $\mc{X} = (X_{\alpha})_{\alpha \in }$ be an abitrary open cover of $M$. A \textit{partition of unity subordinate to $\mc{X}$} is an indexed family $(\psi_{\alpha})_{\alpha \in A}$ of continuous functions $\psi_{\alpha}: M \to \bb{R}$ satisfying the following:
+    \begin{enumerate}
+        \item $0 \leq \psi_{\alpha}(x) \leq 1$ for all $\alpha \in A$ and all $x \in M$.
+        \item $\supp \psi_{\alpha} \subseteq X_{\alpha}$ for each $\alpha \in A$.
+        \item Every point has a neighborhood that intersects $\supp \psi_{\alpha}$ for finite values of $\alpha$.
+        \item $\dsum_{\alpha \in A}\psi_{\alpha} = 1$ for all $x \in M$.
+    \end{enumerate}
+\end{definition}
+\begin{theorem}
+    Suppose $M$ is a smooth manifold with or without boundary, and $\mc{X} = (X_\alpha)_{\alpha \in A}$ is any indexed open cover of $M$. Then there exists a smooth partition of unity subordinate to $\mc{X}$.
+\end{theorem}
+
+\begin{proof}
+    Naturally, if we can find an indexed family support where each of them is a regular coordinate ball, then the construction of smooth function satisfying those following conditions is possible. However, its worth noting that the given open cover $\mc{X}$ is not locally finite. Therefore, our idea to find an indexed locally finite refinement of $\mc{X}$ and every element also a regular coordinate ball.
+
+    The fact that $M$ is smooth manifold implies that there exsists an atlas $\{(U_{i},\varphi_{i}) \}$ where $\{ U_i\}$ is a basis for the topology of $M$ and we can define every regular coordinate ball by some charts of this atlas. Since every $X_\alpha$ is itself a smooth manifold, thus it has a basis of regular coordinate balls $\mc{B}_{\alpha}$, and then $\mc{B} = \bigcup_{\alpha \in A} \mc{B}_{\alpha}$ defines a basis for the topology on $M$. Since $M$ is Hausdorff and second-countable, hence it is paracompact, then there exists a subset of $\mc{B}$, denoted by $\{ B_i\}$, is a locally finite open refinement of $\mc{X}$, and hence $\{ \clo{B}_i\}$ is also locally finite.  Since each $B_i$ is an open subset of some $X_{\alpha}$, then there exists a larger coordinate ball $ \ti{B}_i$ of $X_{\alpha}$ such that  $\ti{B}_i \supset B_i$ and a corresponding local chart $\varphi_i: \ti{B}_i \to \bb{R}^n$ that maps $\varphi(B_i) = B_{r_1}(0)$ and $\varphi(\ti{B}_i) = B_{r_2}(0)$, where $r_1 < r_2$ are two positive real numbers. Then we can define a smooth function $f_i: M \to \bb{R}$ as follows: 
+    \begin{equation*}
+        f_i(x) = \begin{cases}
+            H_i \circ \varphi_i (x) \text{ on }\ti{B}_i\\
+            0 \text{ on }M \backslash \clo{\ti{B}_i}
+        \end{cases}
+    \end{equation*}
+    where $H_i$ is the smooth function defined in the previous lemma for  $B_{r_1}(0)$ and $B_{r_2}(0)$.Consequently, it follows that $\supp f_i = \clo{\ti{B_i}}$ for all $i$. Since every $f_i$ is non-negative everywhere on $M$ and each point in $M$ is contained by some $B_i$, then the function $f: M \to \bb{R}$ defined by 
+    \[
+        f(x) = \sum_{i} f_i(x)
+    \]
+    never vanishing to zero and $f$ is well-defined since the following sum is finite for all point in $M$. Hence, $f$ is smooth. Let $g_i := \dfrac{f_i}{f}$, we thus have 
+    \[
+        \sum_{i} g_i(x) = 1 \text{ for all }x \in M.
+    \]
+    For every $\alpha \in A$, we define $\psi_{\alpha}$ as the partition sum of $g_i$ satisfying
+    \[
+        \psi_{\alpha} = \sum_{i \mid \ti{B}_i \subseteq X_{\alpha}}g_i,
+    \]
+    This partition of $\psi_{\alpha}$ satisfies $\sum_{\alpha \in A} \psi_{\alpha} = 1$ and $$\supp \psi_\alpha \subseteq \bigcup_{i \mid \ti{B}_i \subseteq X_{\alpha}} \supp g_i \subseteq X_{\alpha},$$ and is a smooth function as we can verify. Hence the indexed family $\{\psi_{\alpha}\}_{\alpha \in A}$ is a smooth partition of unity subordinate to $\mc{X}$.
+\end{proof}
+\begin{definition}
+    Let $M$ be a topological space, $A \subseteq M$ is a closed subset and $U \subseteq M$ is an open subset containing $A$, a continuous function $\psi: M \to \bb{R}$ is called a \textit{bump function for $A$ supported in $U$} if $0 \leq \psi \leq 1$ on $M$, $\psi = 1$ on $A$ and $\supp \psi \subseteq U$.
+\end{definition}
 \subsection{Problems}
 \begin{problem} 
     Let $X$ be the set of all points $(x,y) \in \bb{R}^2$ such that $y = \pm 1$ and let $M$ be the quotient of $X$ by the equivalence relation generated by $(x,-1) \sim (x,1)$ for all $x \neq 0$. Show that $M$ is locally Euclidean and second-countable, but not Hausdorff.
@@ -649,6 +716,23 @@ which implies $a_if_i = 0$ for all $i = 1,\dots, n$ and for all $x \in M$. Thus 
     \end{enumerate}
 [Remark: this result shows that in a certain sense, the entire smooth structure of $M$ is encoded in the subset $C^{\infty}(M) \subseteq C(M)$. In fact, some authors define a smooth structure on a topological manifold $M$ to be a subalgebra of $C(M)$ with certain properties; see, e.g., [Nes03].] (Used on p. 75.)
 \end{problem}
+\begin{proof}
+    1. Since we have 
+    \[
+        F^*(f + g) = (f + g)\circ F = f \circ F + g\circ F,
+    \]
+    and
+    \[
+        F^*(\alpha f) = (\alpha f) \circ F = \alpha (f \circ F) = \alpha F^*(f).
+    \]
+    Hence $F^*$ is linear.
+
+    2. Suppose $F: M \to N$ is smooth. Since $F^*(f) = f\circ F$ is smooth in $M$, we thus have $F^*\left(C^{\infty}(N)\right) \subseteq C^{\infty}(M)$. To prove the converse implication, since $\mathrm{Id}_N \in C^{\infty}(N) \subset C(N)$, we have 
+    \[
+        F^*(\mathrm{Id}_N) = \mathrm{Id}_N \circ F  = F \in C^{\infty}(M),
+    \]
+    which implies $F$ is smooth on $M$.
+\end{proof}
 \begin{problem}
     Suppose $V$ is a real vector space of dimension $n \geq 1$. Define the projectivization of $V$, denoted by $\mathbb{P}(V)$, to be the set of 1 -dimensional linear subspaces of $V$, with the quotient topology induced by the map $\pi: V \backslash\{0\} \rightarrow \mathbb{P}(V)$ that sends $x$ to its span. (Thus $\mathbb{P}\left(\mathbb{R}^n\right)=\mathbb{R} \mathbb{P}^{n-1}$.) Show that $\mathbb{P}(V)$ is a topological $(n-1)$-manifold. and has a unique smooth structure with the property that for each basis $\left(E_1, \ldots, E_n\right)$ for $V$, the map $E: \mathbb{R P}^{n-1} \rightarrow \mathbb{P}(V)$ defined by $E\left[v^1, \ldots, v^n\right]=\left[v^i E_i\right]$ (where brackets denote equivalence classes) is a diffeomorphism. (Used on p. 561.)
 
