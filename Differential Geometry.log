@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.7.30)  28 NOV 2025 17:09
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.7.30)  28 NOV 2025 21:03
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1137,8 +1137,11 @@ File: 1.png Graphic file (type bmp)
 Underfull \vbox (badness 2970) has occurred while \output is active []
 
  [10]
-[11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23] [24] [25]
-[26] [27] [28] (Differential Geometry.aux)
+[11] [12] [13] [14] [15] [16] [17] [18] [19] [20] [21] [22] [23]
+Underfull \vbox (badness 4886) has occurred while \output is active []
+
+ [24]
+[25] [26] [27] [28] [29] [30] [31] (Differential Geometry.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
@@ -1154,10 +1157,10 @@ Package rerunfilecheck Info: File `"Differential Geometry".out' has not changed
 Here is how much of TeX's memory you used:
  27687 strings out of 409617
  562481 string characters out of 5774013
- 1946191 words of memory out of 5000000
+ 1947191 words of memory out of 5000000
  49338 multiletter control sequences out of 15000+600000
  565987 words of font info for 69 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  117i,17n,121p,1207b,1096s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on Differential Geometry.pdf (28 pages).
+Output written on Differential Geometry.pdf (31 pages).

@@ -818,7 +818,138 @@ which implies $a_if_i = 0$ for all $i = 1,\dots, n$ and for all $x \in M$. Thus 
     Since the case for $ x \in V \backslash B$ is analogous, we obtain $f(x) = 1$ if and only if $x \in A$ and $f(x) = 0$ if and only if $x \in B$. Hence $f$ satisfies the desired condition.
 \end{proof}
 \section{Tangent Space}
+
+\subsection{Derivatives in Multivariable Calculus}
+\begin{definition}
+    Let $E$ be a subset of $\bb{R}^n, f: E \to \bb{R}^m$ be a function, $x_0 \in E$ be a point, and let $L: \bb{R}^n \to \bb{R}^m$ be a linear transformation. We say that $f$ is differentiable at $x_0$ with derivative $L$ if we have 
+    \[
+    \lim_{x \to x_0, x \in E \backslash \{x_0\}} \frac{\norm{f(x) - f(x_0) - L(x - x_0)}}{\norm{x - x_0}} = 0
+    \]
+\end{definition}
+\begin{proposition}
+    Suppose $f$ is differentiable at $x_0$ with derivative $L_1$, and also differentiable  at $x_0$ with derivative $L_2$. Then $L_1 = L_2$.
+\end{proposition}
+\begin{proof}
+    Since $f$ is differentiable at $x_0$ with derivative $L_1$ and $L_2$, we have 
+    \begin{align*}
+                \limit_{x \to x_0} \frac{\norm{L_1(x - x_0) - L_2(x - x_0)}}{\norm{x - x_0}} \leq \limit_{x \to x_0} \frac{\norm{f(x) - f(x_0) - L_2(x - x_0)}}{\norm{x - x_0}} +\\ \limit_{x \to x_0} \frac{\norm{L_1(x - x_0) - (f(x) - f(x_0))}}{\norm{x - x_0}}\\
+                = 0
+    \end{align*}
+    Let $h = x - x_0$, one obtain that 
+    \[
+        \limit_{h \to 0} \frac{\norm{L_1(h) - L_2(h)}}{\norm{h}} = 0
+    \]
+    Given $x \in E$ and $t$ be a scalar such that $t \to 0$, then it follows that $tx \to 0$. Since $L_1$ and $L_2$ are linear map, we have 
+    \[
+        \norm{L_1(x) - L_2(x)} = \frac{\norm{L_1(tx) - L2(tx)}}{\norm{tx}} \to 0
+    \]
+    Thus $L_1 = L_2$, we are done.
+\end{proof}
+
+\begin{definition}
+    Let $E$ be a subset of $\bb{R}^n$, $f: E \to \bb{R}^m$ be a function, let $x_0$ be an interior point of $E$, and let $v$ be a vector in $\bb{R}^n$. If the limit
+    \[
+        \limit_{t \to 0^+, x_0 + tv \in E} \frac{f(x_0 + tv) - f(x_0)}{t}
+    \]
+    exsists, we say that $f$ is \textit{differentiable in the direction $v$ at $x_0$}, and we denote the above limit by $D_vf(x_0)$:
+    \[
+        D_vf(x_0) := \limit_{t \to 0^+}\frac{f(x_0 + tv) - f(x_0)}{t}
+    \]
+\end{definition}
+\begin{proposition}
+    If $f$ is differentiable at $x_0$, then $f$ is also differentiable in the direction $v$ at $x_0$, and 
+    \[
+        D_vf(x_0) = f'(x_0)v
+    \]
+\end{proposition}
+\begin{proof}
+    This is trivial if $v = 0$, assume that $v \neq 0$. Since $f$ is differentiable at $a$, then there exists a linear map $f'(a): \bb{R}^n \to \bb{R}^n$ satisfying
+    \[
+        0 = \lim_{h \to 0}\frac{f(a + h) - f(a) - hf'(a)}{\norm{h}},
+    \]
+    Replacing $h$ by $tv$ and $t \to 0$ yields
+    \[
+        0 = \lim_{t \to 0^+}\frac{f(a + tv) - f(a) - tvf'(a)}{t\norm{v}}  =\lim_{t \to 0^-}\frac{f(a + tv) - f(a) - tvf'(a)}{t\norm{v}}  
+    \]
+    Since $\norm{v} \neq 0$, we thus have 
+    \[
+    0 =\lim_{t \to 0}\frac{f(a + tv) - f(a) - tvf'(a)}{t}  = D_v|af = f'(a)\cdot v.
+    \]
+
+\end{proof}
+\begin{definition} Let $E$ be a subset of $\bb{R}^n$, let $f: E \to \bb{R}^m$ be a function let $x_0$ be an interior point of $E$, and let $1 \leq j \leq n$. Then the partial derivative of $f$ respect to the $x_j$ variable at $x_0$, denoted $\de{f}{x_j}(x_j)$, is defined by
+\[
+\de{f}{x_j}(x_j) = \limit_{t \to 0, x_0 + te_j \in E} \frac{f(x_0 + te_j) - f(x_0)}{t} = \frac{d}{dt}f(x_0 + te_j)_{t = 0}
+\]
+    
+\end{definition}
+\begin{theorem}
+    Let $E$ be a subset of $\bb{R}^n$, $f: E \to \bb{R}^m$ be a function, $F$ be a subset of $E$, and $x_0$ be an interior pint of $F$. If all the partial derivatives $\de{f}{x_j}$ exist on $F$ and are continuous at $x_0$, then $f$ is differentiable at $x_0$. Moreover if $v = (v_1,v_2,\dots,v_n) \in \bb{R}^n$, the linear transformation $f'(x_0): \bb{R}^n \to \bb{R}^m$ is defined by 
+    \[
+        f'(x_0)(v) = \sum_{j = 1}^n v_j \de{f}{x_j}(x_0)
+    \]
+\end{theorem}
+\begin{proof}
+    We first suppose $L: \bb{R}^n \to \bb{R}^m$ be the linear transformation such that if $v$ is a vector of $\bb{R}^n$ and $v = (v_1,v_2,\dots,v_n)$, then
+    \[
+        L(v) = \sum_{j = 1}^n v_j \de{f}{x_j}(x_0)
+    \]
+    We attempt to prove that $L = f'(x_0)$, in other words, this is equivalent to 
+    \[
+        \limit_{h \to 0}\frac{\norm{f(x_0 + h) - f(x_0) - L(h)}}{\norm{h}}.
+    \]
+    Indeed, given $\ep > 0$, it suffices to find $\delta > 0$ such that  whenever $h \in B(0,\delta) \backslash \{0\}$, we should have 
+    \[
+        \norm{f(x_0 + h) - f(x) - L(h)} < \ep\norm{h}.
+    \]
+    For every $1 \leq j \leq n$, since the partial derivative $\de{f}{x_j}$ exists, the function $g_j(x) = \de{f}{x_j}(x)$ is also continuous in at $x_0$. Thus we can find $\delta_j > 0$ such that whenever $h \in B(0,\delta_i) \backslash \{0\}$, we have 
+    $\norm{g_j(x) - g_j(x_0)} < \frac{\ep}{mn}$. Let $\delta = \min\{\delta_1,\dots,\delta_n\}$ and fix $h \in  B(0,\delta) \backslash \{0\}$, it is possible to determine the scalars $(h_1,h_2,\dots,h_n) \in \bb{R}^n$ such that
+    \[
+        h = h_1e_1 + h_2e_2 + \dots + h_ne_n,
+    \]
+    where $\{e_1,e_2,\dots, e_n\}$ is standard ordered basis of $\bb{R}^n$. Indeed, by writing $f$ in components as $f = (f_1,\dots,f_m)$, it would follow that 
+    \[
+        \de{f}{x_j}(x_0) = \left(\de{f_1}{x_j}(x_0), \de{f_2}{x_j}(x_0),\dots, \de{f_n}{x_j}(x_0)\right) \tag{1}.
+    \]
+    Let $1 \leq i \leq n$, by the Mean Value Theorem, one may locate $t_1$ between $0$ and $h_1$ such that \[f_i(x_0 + h_1e_1) - f_i(x_0) = \de{f_i}{x_1}(x_0 + t_1e_1)h_1.\]
+    In particular, since 
+    \[
+        \norm{\de{f_i}{x_1}(x_0 + t_1e_1) - \de{f_i}{x_1}(x_0)} \leq \norm{\de{f}{x_1}(x_0) - \de{f}{x_1}(x_0)} < \frac{\ep}{mn}
+    \]
+    Multiplying both sides by $\norm{h_1}$ and replacing the left-side term with $(1)$ obtains that 
+    \[
+        \norm{f_i(x_0 + h_1e_1) - f_i(x_0) - \de{f_i}{x_1}(x_0)} < \frac{\ep}{mn}\norm{h_1} \leq \frac{\ep}{mn}\norm{h}
+    \]
+    whenever $1 \leq i \leq n$. Adding $n$ above inequalities for specific $f_1,f_2,\dots,f_n$ and using triangle inequality that $\norm{(y_1,\dots,y_m)} \leq \norm{y_1} + \dots + \norm{y_m}$ yields
+    \[  
+    \norm{f(x_0 + h_1e_1) - f(x_0) - \de{f}{x_1}(x_0)} < \frac{\ep\norm{h}}{n}.
+    \]
+    Similarly, by developing the analogous process with $x_0 + h_1e_1$ and $x_0 + h_1e_1 + h_2e_2$, we thus have 
+    \[
+     \norm{f(x_0 + h_1e_1 + h_2e_2) - f(x_0 + h_1e_1) - \de{f}{x_1}(x_0)} < \frac{\ep\norm{h}}{n}.
+    \]
+    whenever $h \in B(0,\delta)\backslash \{0\}$. More generally, for each $0 \leq k\leq n - 1$, one can obtain 
+    \[
+       \norm{u_k} = \norm{ f\left(x_0 + \sum_{j = 1}^{k + 1} h_je_j\right)  - f\left(x_0 + \sum_{j = 1}^{k} h_je_j\right) - \de{f}{x_k}(x_0)} < \frac{\ep\norm{h}}{n}.
+    \]
+    Summing all these terms together implies
+    \begin{align*}
+        \norm{u_1 + u_2 + \dots + u_n} &= \norm{f(x_0 + h_1e_1 + \dots + h_ne_n) - f(x_0) - \sum_{j = 1}^n h_j\de{f}{x_j}(x_0)}\\
+        &= \norm{f(x_0 + h) - f(x_0) - L(h)}\\
+        &\leq \norm{u_1} + \norm{u_2} + \dots + \norm{u_n}\\
+        &< \ep \norm{h}
+    \end{align*}
+    Therefore, $L$ is derivative of $f$ at $x_0$, as desired.
+    
+\end{proof}
+\begin{definition}
+    If $f: E \to \bb{R}$ is a real-valued function, and we define the gradient $\nabla f(x_0)$ of $f$ at $x_0$ to be the $n$-dimensional row vector 
+    \[
+        \nabla f(x_0):= \left(\de{f}{x_1}(x_0), \de{f}{x_2}(x_0), \dots, \de{f}{x_n}(x_0)\right)
+    \]
+\end{definition}
 \subsection{Tangent Vectors of Euclidean Space}
+
 \begin{definition}
    A derivation at $p \in \bb{R}^n$ is a linear map $\ome: C^{\infty}(\bb{R}^n) \to \bb{R}$ satisfying the Leibniz product rule: 
     \[
@@ -830,9 +961,28 @@ which implies $a_if_i = 0$ for all $i = 1,\dots, n$ and for all $x \in M$. Thus 
     \]  
 \end{definition}
 \begin{proposition}
-    Let $a \in \bb{R}^n$
+    Let $a \in \bb{R}^n$, for each geometric tangent vector $v_a \in \bb{R}$, the map $\nabla \cdot v_a: C^{\infty}(\bb{R}^n)\to \bb{R}$ is a derivation at $a$. Moreover, the operation $v_a \mapsto \nabla(a) \cdot v_a$ is an isomorphism from $\bb{R}^n_a$ onto $T_a\bb{R}^n$.
 \end{proposition}
-\begin{definition}[First definition of Tangent Space]
+\begin{proof}
+    The fact $\nabla \cdot v_a$ is a consequence of the linearity and Lebniz implies that it is a derivation. It suffices to prove that $\mc{L}: v_a \mapsto \nabla \cdot v_a$ is an isomorphism. 
+
+    For injectivity, suppose $\mc{L}(v_a) = \mc{L}(w_a)$ for some geometric tangent vector $v_a, w_a$, it folows that 
+    \begin{align*}
+        0 &= \mc{L}(v_a - w_a)(x^j) = \nabla \cdot (v_a - w_a)(x^j) =  \left(\frac{\partial}{\partial x^1}(x^j), \dots, \frac{\partial}{\partial x^n}(x^j)\right)\left(v_a - w_a\right)\\
+        &= \frac{\pa}{\pa x_i}(x^j)(v^i -w^i) = \delta_{ij}(v^i - w^i) = v^j - w^j,
+    \end{align*}
+    for all $j = 1, \dots, n$. Thus $\mc{L}$ is injective. To prove surjectivity, let $w \in T_a\bb{R}^n$ be abitrary and let $v$ the the tangent vector of $\bb{R}^n_a$ such that $w(x^i)= v^i$, it suffices to prove that $w = \nabla\cdot v_a$. By the Taylor's theorem, one can write 
+    \[
+        f(x) = f(a) + \left[\frac{\pa f}{\pa x^i}(a)(x^i - a^i)\right] + \left[(x^i - a^i)(x^j - a^j)\int_{0}^1(1 - t)\frac{\pa^2f}{\pa x^i x^j}(a + t(x-a))dt\right]
+    \]
+    Differentiating both sides by $w$ yields 
+    \[
+        w(f(x)) = w(f(a)) + \frac{\pa f}{\pa x^i}(a)(w(x^i) - a^i) = \frac{\pa f}{\pa x^i}(a)v^i = \nabla \cdot v_a (a)
+    \]
+    Hence, $\bb{R}^n_a$ is isomorphic to $T_a\bb{R}^n$ by the following operation.
+\end{proof}
+
+\begin{definition}[Tangent Vectors on Manifolds]
     Let $M$ be a smooth manifold, a derivation at $p \in M$ is a linear map $\ome: C^{\infty}(M) \to \bb{R}$ satisfying the Leibniz product rule: 
     \[
         \ome(fg) = f\ome(g) + g\ome(f) \text{ for all smooth maps }g,f \in C^{\infty}(M)
