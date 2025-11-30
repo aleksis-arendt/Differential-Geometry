@@ -1,0 +1,144 @@
+\section{Wedge Product}
+\begin{definition}[Alternating Tensors]
+    A covariant $(0,k)$-tensor $\alpha$ is said to be \textit{alternating} if 
+    \[
+    \alpha(v_1,\dots,v_i,\dots,v_j,\dots,v_k) = -\alpha(v_1,\dots,v_j,\dots,v_i,\dots,v_k).
+    \]
+    The subspace of all alternating covariant $(0,k)$-tensor is denoted by $\Lambda (V^*) \subseteq T^k(V^*)$.
+\end{definition}
+\begin{proposition}
+    Let $\alpha$ be a covariant $(0,k)$-tensor on $V$. The followings are equivalent:
+    \begin{enumerate}
+        \item $\alpha$ is alternanting.
+        \item $\alpha(v_1,\dots,v_k) = 0$ if and only if the $k$-tuple $(v_1,\dots,v_k)$ is linearly dependent.
+        \item $\alpha(v_1,\dots,w,\dots,w,\dots,v_k) = 0$.
+    \end{enumerate}
+\end{proposition}
+\begin{definition}
+    We define the alternating projection $\alt: T^k(V^*) \to \Lambda^k(V^*)$ as follows:
+    \[
+        \alt(\alpha) = \frac{1}{k!}\sum_{\sigma \in S_k}\sgn(\sigma)\alpha(v_{\sigma_1}\dots, v_{\sigma_k})
+    \]
+\end{definition}
+\begin{definition}
+    Let $\ome \in \Lambda^k(V^*)$ and $\eta \in \Lambda^l(V^*)$, define the \textit{Wedge product} to be the following $(k + l)$-covector:
+    \[
+        \ome \wedge \eta = \frac{(k + l)!}{k!l!}\alt(\ome \otimes \eta).
+    \]
+\end{definition}
+\begin{definition}[Elementary Alternating Tensors]
+    Let $V$ be an $n$-dimensional vector space and $\{\ep_1,\dots,\ep_n\}$ be a basis of $V^*$. We define a covariant $(0,k)$-tensor $\ep^I = \ep^{i_1,\dots,i_k}$ by
+    \[
+        \ep^I(v_1,\dots,v_k) = \det\left[\vect{\ep^I(v_1)}, \dots, \vect{\ep^I(v_k)}\right] = \det \begin{bmatrix}
+            \ep_{i_1}(v_1) & \cdots & \ep_{i_1}(v_k)\\ \vdots & \ddots & \vdots \\\ep_{i_k}(v_1)&\cdots& \ep_{i_k}(v_k)
+        \end{bmatrix}
+        = \det\begin{bmatrix}
+            v_1^{i_1} &\cdots& v_k^{i_1}\\
+            \vdots & \ddots &\vdots \\
+            v_1^{i_k}& \cdots &  v_k^{i_k}
+        \end{bmatrix}
+    \]
+    As it is a $k$-covector, $\ep^I$ is called \textit{elementary $k$-vector.}
+\end{definition}
+\begin{proposition}
+    Let $(E_i)$ be a basis for $V$, $(\ep_i)$ be the dual basis for $V^*$, and let $\ep^I$ be an elementary $k$-covector be dual to $(E_i)$. Since $\ep^I$ is alternating, then these followings hold.
+    \begin{enumerate}
+        \item If $I$ has a repeated index, then $\ep^I = 0$.
+        \item If $J = I_{\sigma}$ for some $\sigma \in S_k$, then $\ep^I = \sgn(\sigma)\ep^J$.
+        \item $\ep^I(E_{j_1},\dots,E_{j_k}) = \delta_J^I.$
+    \end{enumerate}
+\end{proposition}
+
+\begin{definition}
+    A multi-index $I = (i_1,\dots,i_k)$ is said to be \textit{increasing} if $i_1 < i_2 < \dots < i_k$.
+\end{definition}
+\begin{theorem}
+    Let $V$ be an $n$-dimensional vector space. If $(\ep^i)$ is any basis for $V^*$, then for each positive integer $k \leq n$, the collection of $k$-covectors 
+    \[
+    \mathcal{F} = \{\ep^{I} \mid I \text{ is increasing of length }k\}
+    \]
+    is a basis for $\Lambda^k(V^*)$. Consequently, 
+    \[
+        \dim \Lambda^k(V^*) = \binom{n}{k}.
+    \]
+\end{theorem}
+\begin{proof}
+    Let $\ome \in \Lambda^k(V)$, and $(E_i)$ be the basis of $V$ dual to $V^*$ since $\ome$ is alternating, for all abitrary and increasing multi-index representation of $S_n$, say $(j_1, \dots, j_k)$ and $(i_1, \dots, i_k)$, respectively, one can rewrite
+    \begin{align*}
+        \ome &= \ome_{I}\ep^{j_1} \otimes \cdots \otimes \ep^{j_k} = \ome(E_{j_1},\dots,E_{j_k}) \ep^{j_1} \otimes \cdots \otimes \ep^{j_k}\\
+        &=\ome(E_{i_1},\dots,E_{i_k}) \left(\sum_{\sigma \in (i_1,\dots,i_k)}\sgn(\sigma)\ep^{i_1} \otimes \cdots \otimes \ep^{i_k}\right)\\
+        &= \ome(E_{i_1},\dots,E_{i_k})\ep^{(i_1,\dots, i_k)}.
+    \end{align*}
+    Therefore $\mathcal{F}$ generates the $\Lambda^k(V^*)$. To prove $\mathcal{F}$ is linearly independent, suppose $\ome = 0$ and applying both sides for each $(E_{j_1},\dots, E_{j_k})$ yields
+    \[
+        0 = \ome(E_{i_1},\dots,E_{i_k})\left[\ep^{(i_1,\dots, i_k)}(E_{j_1},\dots, E_{j_k})\right]= \ome(E_{j_1},\dots,E_{j_k})\delta^J_J = \ome(E_{j_1},\dots,E_{j_k}).
+    \]
+    Thus, $\mathcal{F}$ is basis for $\Lambda^k(V^*)$, and the rule of counting implies $\dim \Lambda^k(V^*) = \binom{n}{k}$, as desired.
+\end{proof}
+\begin{theorem}
+    Suppose $V$ is an $n$-dimensional vector space and $\ome \in \Lambda^n(V^*)$. If $T: V \to V$ is any linear map and $v_1,\dots,v_n$ are abitrary vectors in $V$, then
+    \[
+        \ome(Tv_1,\dots, Tv_n) = (\det T)\ome(v_1,\dots v_n).
+    \]
+\end{theorem}
+\begin{proof}
+    Let $(\ep_i)$ be a dual basis for $V^*$ and $(E_i)$ be a basis for $V$ dual to $(\ep_i)$. Since $\mathcal{F}$ forms a basis for $\Lambda^n(V^*)$, one can express $\ome$ as 
+    \begin{align*}
+        &\ome(Tv_1,\dots, Tv_n) = \ome(E_{i_1},\dots,E_{i_k})\ep^{(i_1,\dots, i_k)}(Tv_1,\dots, Tv_n)= \ome(E_{i_1},\dots,E_{i_k})\det\begin{bmatrix}
+            (Tv_1)^{i_1} &\cdots& (Tv_k)^{i_1}\\
+            \vdots & \ddots &\vdots \\
+            (Tv_1)^{i_k}& \cdots &  (Tv_k)^{i_k}
+        \end{bmatrix}\\
+        &= \ome(E_{i_1},\dots,E_{i_k})\det\begin{bmatrix}
+            \dsum_{j = 1}^n T_{i_1,j}v_1^j&\dots& \dsum_{j = 1}^n T_{i_1,j}v_k^j\\\vdots & \ddots & \vdots\\\dsum_{j = 1}^n T_{i_k,j}v_1^j&\cdots&\dsum_{j = 1}^n T_{i_k,j}v_k^j
+        \end{bmatrix} = \ome(E_{i_1},\dots,E_{i_k}) \det  \left(T\cdot
+        \begin{bmatrix}
+            v_1^{i_1} &\cdots& v_k^{i_1}\\
+            \vdots & \ddots &\vdots \\
+            v_1^{i^k}& \cdots &  v_k^{i^k}
+        \end{bmatrix}\right)\\
+        &= (\det T)\ome(E_{i_1},\dots,E_{i_k})\ep^{(i_1,\dots, i_k)}(v_1,\dots,v_n) = (\det T)\ome(v_1,\dots,v_n).
+    \end{align*}
+    Hence, we are done.
+\end{proof}
+\begin{lemma}
+    Suppose $\alpha \in \Lambda^m(V^*),\beta \in \Lambda^n(V^*),\ome \in \Lambda^k(V^*)$, then we have $\alpha \wedge \beta \wedge \ome := (\alpha \wedge \beta)\wedge \ome = \alpha \wedge (\beta\wedge \ome)$.
+\end{lemma}
+\begin{proof}
+    We have 
+    \begin{align*}
+        (\alpha \wedge \beta) \wedge \omega &= \frac{1}{(m + n)! k!} \sum_{\eta \in S_{m+n+k}} \sgn(\eta) \left( \frac{1}{m! n!} \sum_{\sigma \in S_{m+n}} \sgn(\sigma) \alpha \otimes \beta \right) \otimes \omega(v^\sigma) \\
+        &= \frac{1}{m! n! k! (m+n)!} \sum_{\eta \in S_{m+n+k}} \sum_{\sigma \in S_{m+n}} \sgn(\eta) \sgn(\sigma) \alpha \otimes \beta \otimes \omega(v^\sigma) \\
+        &= \frac{1}{m! n! k!} \sum_{\eta \in S_{m+n+k}} \sgn(\eta) \alpha \otimes \beta \otimes \omega(v^\sigma) \\
+        &= \frac{1}{m! n! k! (n+k)!} \sum_{\eta \in S_{m+n+k}} \sum_{\phi \in S_{n+k}} \sgn(\eta) \sgn(\phi) \alpha \otimes \beta \otimes \omega(v^\sigma) \\
+        &= \alpha \wedge (\beta \wedge \omega).
+    \end{align*}
+Hence, we are done.
+\end{proof}
+\begin{lemma}
+Let $(\ep^i)$ be any basis for $V^*$ and $I = (i_1,\dots, i_k)$ be any multi-index, then we have 
+\[
+    \ep^{i_1}\wedge\dots\wedge\ep^{i_k} = \ep^I
+\] 
+\end{lemma}
+\begin{proof}
+    Let $(v_i)$ be abitrary $k$-vector tuple in $V$ represented by the basis $(E_i)$ of $V$ dual to $(\ep^i)$. We will show the following holds by induction. For $k = 1$, this is trivial since $\ep^{I} = \ep^{i_1}$. For $n = 2$, we have 
+    \[
+        \ep^{i_1}\wedge\ep^{i_2}(v_1,v_2) = \ep^{i_1}\otimes\ep^{i_2}(v_1,v_2)- \ep^{i_1}\otimes\ep^{i_2}(v_2,v_1) = \det\begin{bmatrix}
+            v_1^1 & v_2^1 \\ v_1^2 & v_2^2 
+        \end{bmatrix}= \ep^{(i_1,i_2)}(v_1,v_2).
+    \]
+    Suppose the following hypothesis holds for $k \in \bb{N}$, it follows that 
+    \begin{align*}
+         &\ep^{i_1}\wedge \dots \wedge \ep^{i_k} \wedge \ep^{i_{k + 1}}(v_1,\dots,v_{k+ 1}) = (\ep^{i_1}\wedge \dots \wedge \ep^{i_k}) \wedge \ep^{i_{k + 1}}(v_1,\dots,v_{k+ 1}) = \ep^{(i_1,\dots,i_k)} \wedge \ep^{i_{k + 1}}(v_1,\dots,v_{k+ 1})\\
+        &= \frac{1}{k!}\sum_{\sigma \in S_{k + 1}}\sgn(\sigma) \ep^{(i_1,\dots,i_k)} \otimes \ep^{i_{k + 1}}(v_1,\dots,v_{k+ 1}) = \frac{1}{k!}\sum_{\sigma \in S_{k + 1}}\sgn(\sigma) \ep^{(i_1,\dots,i_k)} \otimes \ep^{i_{k + 1}}(v_{\sigma_1},\dots,v_{\sigma_{k + 1}})\\
+        &= \frac{1}{k!}\sum_{\sigma \in S_{k + 1}}\sgn(\sigma)\ep^{(i_1,\dots,i_k)}(v_{\sigma_1},\dots, v_{\sigma_k})\cdot \ep^{i_{k + 1}}(v_{\sigma_{k + 1}}) = \sum_{i = 1}^k (-1)^{k + 1 + i}\ep^{(i_1,\dots,i_k)}(v_1,\dots,v_{i - 1},v_{i + 1})\ep^{i_{k + 1}}(v_i)\\
+        &= \det\begin{bmatrix}
+            v_1^{i_1} &\dots& v_{k + 1}^{i_{k + 1}}\\
+            \vdots &\ddots & \vdots\\
+            v_1^{i_{k + 1}}&\dots& v_{k + 1}^{i_{k + 1}}
+        \end{bmatrix} = \ep^{(i_1,\dots, i_{k + 1})}
+    \end{align*}
+    Hence the following is proven, as desired.
+    
+\end{proof}

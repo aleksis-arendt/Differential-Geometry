@@ -1,0 +1,106 @@
+\section{Measure Theory}
+\begin{definition}[$\sigma$-algebra] Let $X$ be a set, a collection $\mathcal{X} \in \mathcal{P}(X)$ is called a $\sigma$-algebra if it is
+    \begin{enumerate}
+        \item The set $X$ is itself in $\mathcal{X}$.
+        \item \textit{Closed under unions: }Let $(E_i)\subseteq \mathcal{X}$ be countable subset of $\mathcal{X}$, then 
+        \[
+            \bigcup_{n = 1}^{\infty}E_i \in X.
+        \]
+        \item \textit{Closed under complements: } If $A \in \mathcal{X}$, then 
+        \[
+            A^c := X\backslash A \in \mathcal{X}
+        \]
+    \end{enumerate}
+\end{definition}
+\begin{proposition}
+    If $\mathcal{X}$ is a $\sigma$-algebra and $(X_i)\subseteq \mathcal{X}$ be countable subset of $\mathcal{X}$, then we have 
+    \[
+        \bigcap_{n = 1}^{\infty} X_n \in \mathcal{X}
+    \]
+\end{proposition}
+\begin{proof}
+    By the Morgan law, we have 
+    \[
+        \bigcap_{n = 1}^{\infty} E_n = X\backslash\bigcap_{n = 1}^{\infty} (X\backslash X_n)=\left(\bigcup_{n = 1}^{\infty} E_n^c\right)^c .
+    \]
+    Using those above condition yields
+    \begin{align*}
+         X_n^c \in \mathcal{X} &\ra E_n^c \in \mathcal{X} \text{ for all n,}&\text{(condition 3),}\\
+        &\ra \bigcup_{n = 1}^{\infty} E_n^c \in \mathcal{X} &\text{(condition 2),}\\
+        &\ra \left(\bigcup_{n = 1}^{\infty} X_n^c\right)^c \in \mathcal{X} &\text{(condition 3),}\\
+        &\ra \bigcap_{n = 1}^{\infty} E_n \in X
+    \end{align*}
+    Hence, we are done. 
+\end{proof}
+\begin{definition}[Measure]
+    Let $X$ be a set with $\sigma$-algebra $\mc{M}$. A \textit{measure} on $(X,\mc{M})$ is a function $\mu: \mc{M} \to [0,\infty]$ satisfying 
+    \begin{enumerate}
+        \item $\mu(\varnothing) = 0$,
+        \item If $(E_n)$ is a countably disjoint subset of $\mc{M}$, then 
+        \[
+            \mu\left(\bigcup_{n = 1}^{\infty}E_i\right) = \sum_{n = 1}^{\infty}\mu(E_i).
+        \]
+    \end{enumerate}
+    The triple $(X,\mc{M},\mu)$ is called a \textit{measure space} and the pair $(X,\mc{M})$ is called a \textit{measurable space}.
+\end{definition}
+\begin{theorem}
+    Let $(X,\mc{M},\mu)$ be a measure space, then the followings hold.
+    \begin{enumerate}
+        \item \textit{Monotonicity:} If $E,F \in \mc{M}$ and $E \subseteq F$, then $\mu(E) \leq \mu(F)$.
+        \item \textit{Subadditivity:} If $(E_n)$ is a countably disjoint subset of $\mc{M}$, then 
+        \[
+            \mu\left(\bigcup_{n = 1}^{\infty} E_n\right) \leq \sum_{n = 1}^{\infty} \mu(E_n)
+        \]
+        \item \textit{Continuity from below:} If $(E_n) \subset \mc{M}$ and $E_1 \subseteq E_2 \subseteq \cdots$, then 
+        \[
+            \mu\left(\bigcup_{n = 1}^{\infty}E_n\right) = \lim_{n \to +\infty}\mu(E_n)
+        \]
+        \item \textit{Continuity from above:} If $(E_n) \subset \mc{M}$ and $E_1 \supseteq E_2 \supseteq \cdots$, and $\mu(E_1) < \infty$, then 
+        \[
+            \mu\left(\bigcap_{n = 1}^{\infty}E_n\right) = \lim_{n \to +\infty}\mu(E_n)
+        \]
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    1. Since $F\backslash E$ and $E$ is disjoint, we have $\mu(F) = \mu((F\backslash E) \cup E)= \mu(F \backslash E) + \mu(E)\geq \mu(E)$.
+
+    2. Let $X_n = E_n \cup E_{n + 1}\cup \dots$, it follows that 
+    \begin{align*}
+        \mu\left(\bigcup_{n = 1}^{\infty}E_n\right) &= \mu\left((E_1\backslash X_1) \cup \bigcup_{n = 2}^{\infty}E_n\right) = \mu(E_1\backslash X_1) + \mu\left(\bigcup_{n = 2}^{\infty}E_n\right)\\
+        &\leq \mu(E_1) + \mu\left(\bigcup_{n = 2}^{\infty}E_n\right)\\
+        &\leq \mu(E_1) + \mu(E_2)\mu\left(\bigcup_{n = 3}^{\infty}E_n\right)\\
+        &\leq \cdots\\
+        &\leq \sum_{n = 1}^{\infty}\mu(E_n).
+    \end{align*}
+
+    3. Let $n \in \bb{N}$, we have 
+    \[
+        \mu\left(\bigcup_{i = 1}^nE_i\right) = \mu(E_n)
+    \]
+    Hence,
+    \[
+        \lim_{n \to +\infty}\mu\left(\bigcup_{i = 1}^nE_i\right) =\mu\left(\bigcup_{i = 1}^{\infty}E_i\right) \lim_{n \to +\infty}\mu(E_n)
+    \]
+    4. Similar to the third property, since 
+    \[
+        \mu\left(\bigcap_{i = 1}^nE_i\right) = \mu(E_n)
+    \]
+    This implies 
+    \[
+        \mu\left(\bigcap_{i = 1}^{\infty}E_i\right) \lim_{n \to +\infty}\mu(E_n)
+    \]
+\end{proof}
+\begin{definition}
+    Let $(X,\mc{M},\mu)$ be a measure space, define the set 
+    \[
+        \ker(\mu) := \{E \in \mc{M}\mid \mu(E)  = 0\}.
+    \]
+    A measure whose domain includes all subset of an element $E \in \ker(\mu)$ is called \textit{complete}.
+\end{definition}
+\begin{theorem}
+    Let $(X,\mc{M},\mu)$ be a measure space. Let $\overline{\mc{M}}$ be the collection satisfying 
+    \[
+        \overline{\mc{M}} = \{E \cup F \mid E \in \mc{M} \text{ and }F \in \ker(\mu)\}.
+    \]
+Then $\overline{\mc{M}}$ is a $\sigma$-algebra, and there is a unique extension $\overline{\mu}$ to $\mu$ to a comple measure on $\overline{\mc{M}}$.
+\end{theorem}

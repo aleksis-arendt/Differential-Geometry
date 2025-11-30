@@ -1,0 +1,61 @@
+\section{Orientations}
+\begin{definition}
+    Two ordered basis $(E_1,\dots,E_n)$ and $(\tilde{E_1},\dots,\tilde{E_n})$ for $V$ are called \textit{consistently oriented} if the transition matrix $[B]_{E\to\tilde{E}}$ defined by 
+    \[
+        [E] = B[\tilde{E}]
+    \]
+    has positive determeniant.
+\end{definition}
+\begin{definition}
+    Let $V$ be a vector space, We denote the set 
+    \[
+        \mathcal{O}(V) := \mathcal{B}(V)/ \mathcal{R}(V),
+    \]
+     as the set of \textit{all possible orientation of $V$}, where  $\mathcal{R}(V):= \left\{\left([E_i],[\tilde{E_i}]\right) \in V^2\mid \det[E_i]\cdot\det[\tilde{E_i}] > 0\right\}$, and each element of $\mathcal{O}(V)$ (which is a equivalent class) is said to be the \textit{orientation for $V$}.
+\end{definition}
+\begin{definition}
+    A vector space with a choice of orientation $(V,[E_i])$ (where $[E_i] \in \mathcal{O}(V)$) is called an \textit{oriented vector space}. Any ordered basis $(E_i)$ that is in the given orientation is said to be \textit{positively oriented}. Any basis that is not in the given orientation is said to be \textit{negatively oriented}.
+\end{definition}
+\begin{remark}
+    To prove a set of ordered basis determines an orientation for a vector space $V$, it suffices to prove every element of the following set belongs to only one equivalent class of $\mathcal{O}(V)$.
+\end{remark}
+\begin{theorem}
+    Let $V$ be a vector space of dimension $n \geq 1$. Each nonzero element $\ome \in \Lambda^n(V^*)$ determines an orientation of $V$ as the set of ordered bases $(E_i)$ such that $\ome(E_i) > 0$. Two nonzero $n$-covectors $\ome$ and $\eta$ determines the same orientation if and only if $\ome \cdot \eta > 0$.
+\end{theorem}
+\begin{proof}
+    Let $(E_i)$ and $(\tilde{E_i})$ be the ordered basis of $V$, we denote the set 
+    \[
+        \mathcal{O}_{\ome} =  \left\{\left([E_i],[\tilde{E_i}]\right) \mid \ome(E_i) > 0 \text{ and }\ome(\tilde{E_i}) > 0\right\}.
+    \] Since those two sets are linearly independent, one can find a linear map $\mathcal{B}: V \to V$ such that $[E_i] = B[\tilde{E_i}]$. By the above proposition, it follows that 
+    \[
+        \ome(E_i) = \det(\mathcal{B})\ome(\tilde{E_i})
+    \]
+    which implies $\det(\mathcal{B}) > 0$ or $\det[E_i]\cdot\det[\tilde{E_i}] > 0$ if and only if $\ome(E_i) > 0 \text{ and }\ome(\tilde{E_i}) > 0$. Thus $\mathcal{O}_\ome$ is an equivalent class of $\mathcal{O}(V)$, which implies it is an orientation of $V$. In addition, that $\ome$ and $\eta$ determines the same orientation implies that $\ome(E_i)\cdot \eta(E_i) > 0$ since $\eta(E_i) > 0$, and vice versa, as desired.
+\end{proof}
+\begin{definition}
+    If $V$ is an oriented $n$-dimensional vector space and $\ome$ is an $n$-covector determines the orientation of $V$ that satifying the above theorem, $\ome$ is called a \textit{positively oriented} $n$-covector.
+\end{definition}
+\begin{definition}
+    Let $M$ be a smooth manifold, a \textit{vector field on $M$} is a map 
+    \begin{align*}
+        X: M &\to TM\\
+        p &\mapsto X(p) \in T_p(M)\\
+    \end{align*}
+    such that $X$ is a smooth section of the tangent bundle $\pi \circ X = Id_{M}$, where $\pi: TM \to M$ is a projection.
+\end{definition}
+\begin{definition}
+    Let $(E_1,\dots,E_n)$ be a collection of vector fields determined on the open set $U \subseteq M$. If for every point $p \in M$, the set $(E_i(p))$ form a basis of the tangent space $T_pM$, the collection $(E_i)$ is said to be \textit{a local frame}.
+\end{definition}
+\begin{definition}
+    Let $M$ be a smooth $n$-manifold, $(E_i)$ be a local frame for $TM$ and let $\varphi$ be the map satisfying
+    \begin{align*}
+        \sigma: M \to \{-1,+1\}
+    \end{align*}
+    We say that $(E_i)$ is \textit{positively oriented} if $(E_i)$ is a positively oriented basis for $(T_pM, \sigma(p))$. The function $\sigma$ is called \textit{pointwise orientation}.
+\end{definition}
+\begin{definition}
+    A pointwise orientation $\sigma$ is said to be continuous if for every point $p \in M$, there exists an open neighborhood $U$ of $p$ and the local frame $(E_i)$ defined $U$ such that $(E_i(q))$ is positively oriented respect to restricted $\sigma_U$ for all $q \in U$. $\sigma$ is called an \textit{orientation on $M$}.
+\end{definition}
+\begin{definition}
+    An \textit{oriented manifold} is an ordered pair $(M,\mathcal{O})$, where $M$ is an orientable smooth manifold and $\mathcal{O}$ is a choice of orientation for $M$.
+\end{definition}

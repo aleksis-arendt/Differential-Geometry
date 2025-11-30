@@ -1,0 +1,466 @@
+\section{Differential Topology}
+\subsection{Topological Spaces}
+\begin{definition}
+    Let $X$ be a set, a \textit{topology on $X$} is a collection $\mc{X} \subseteq \mc{P}(X)$ satisfying
+    \begin{enumerate}
+        \item $X$ and $\varnothing$ are element of $\mc{X}$.
+        \item Union of elements of $\mc{X}$ is itself an element of $\mc{X}$.
+        \item Intersection of elements of $\mc{X}$ is itself an element of $\mc{X}$.
+    \end{enumerate}
+    A pair $(X,\mc{X})$ is called a \textit{topological space}. Elements of $X$ is called \textit{points} and every set $U \in \mc{X}$ is called an \textit{open subset of $X$}. A \textit{neighborhood} of $p \in X$ is an open subset $U \subseteq X$ containing $p$.
+\end{definition}
+\begin{definition}[Closed subsets]
+    Let $X$ be a topological space, a subset $U \subseteq X$ is said to be a \textit{closed subset of $X$} if $X \backslash U$ is an open subset.
+\end{definition}
+\begin{definition}[Closure and Interior]
+    Let $X$ be a topological space, \textit{the closure of $A$ in $X$} is the smallest closed subset of $X$ containing $A$, defined by
+    \[
+        \clo{A} := \bigcap\{B \subseteq X\mid B \supseteq A \text{ and $B$ is closed in $X$}\}.
+    \]
+    \textit{The interior of $A$} is the largest open subset of $X$ contained by $A$, defined by 
+    \[
+        \inte{A} := \bigcup\{C \subseteq X \mid C \subseteq A \text{ and $C$ is open in $X$}\}.
+    \]
+    \textit{The exterior of $A$} is the largest open subset of $X$ outside $A$, defined by 
+    \[
+        \exte{A} := X \backslash \clo{A},
+    \]
+    and \textit{the boundary of $A$} is an closed subset of $X$, defined by 
+    \[
+        \partial A := X \backslash (\inte A \cup \exte A).
+    \]
+
+
+\end{definition}
+\begin{proposition}
+     Let $X$ be a topological space and let $A \subseteq X$ be any subset.
+     \begin{enumerate}[label=(\arabic*)]
+        \item $A$ point is in $\operatorname{Int} A$ if and only if it has a neighborhood contained in $A$.
+        \item $A$ point is in $\operatorname{Ext} A$ if and only if it has a neighborhood contained in $X \backslash A$.
+        \item $A$ point is in $\partial A$ if and only if every neighborhood of it contains both a point of $A$ and a point of $X \backslash A$.
+        \item A point is in $\bar{A}$ if and only if every neighborhood of it contains a point of $A$.
+        \item $\bar{A}=A \cup \partial A=\operatorname{Int} A \cup \partial A$.
+        \item $\operatorname{Int} A$ and $\operatorname{Ext} A$ are open in $X$, while $\bar{A}$ and $\partial A$ are closed in $X$.
+        \item The following are equivalent
+        
+             (a) $A$ is open in $X$.
+
+             (b) $A = \inte{A}$.
+
+             (c) $A$ contains none of its boundary points.
+
+             (d) Every point of $A$ has a neighborhood contained in $A$.
+         \item The following are equivalent
+        
+             (a) $A$ is closed in $X$.
+
+             (b) $A = \clo{A}$.
+
+             (c) $A$ contains all of its boundary points.
+
+             (d) Every point of $X \backslash A$ has a neighborhood contained in $X \backslash A$.
+     \end{enumerate}
+\end{proposition}
+\begin{proof}
+    (1) This is trivial since for every $a \in \inte{A}$, one can find an open neighborhood $C \subset A$ which contains $a$.
+
+    (2) By the Morgan law, we can rewrite
+    \[
+        \exte{A} = X \backslash \clo{A} = \bigcup\{B \subset X\mid B \subseteq X \backslash A \text{ and $B$ is open in $X$}\}
+    \]
+    Let $a \in \exte{A}$, one can find a neighborhood $U \subseteq X \backslash A$ which contains $a$.
+
+    (3) Suppose for the sake of condition, that $\partial A$ is nonempty, pick any $a \in \partial A$. Since we have 
+    \[
+        \partial{A} = (X\backslash \inte{A}) \cap (X\backslash \exte{A}) = (X\backslash \inte{A}) \cap \clo{A},
+    \]
+    it follows that any neighborhood $U$ containing $a$ must be contained by the intersection of the following closed subsets. Since $U \cap X \backslash \inte{A} \neq \varnothing$, which means this is the largest closed set outside $A$, we can find $u \in C \cap U$ and $C \subseteq X \backslash A$, where $C$ is an closed set. Since $U \cap \clo{A} \neq \varnothing$ and $U$ is open, then one can find $v \in U$ such that $v \in \clo{A}$. We define the set 
+    \[
+        D = \{v \in U \cap \clo{A}\mid v \in A\}.
+    \]
+    If $D$ is nonempty, one can choose $v \in D$ and we are done. Suppose $D = \varnothing$, then for all $v \in U \cap \clo{A}$, we must have $v \in X \backslash A$. Thus $U \subseteq X \backslash A$, that $U$ is open implies $U \subseteq \exte{A}$. Since $\exte{A} \cap \clo{A} = \varnothing$ leading to $U \cap \clo{A} = \varnothing$, this contradicts the property that $U \cap \clo{A} \neq \varnothing$.
+
+    To establish to reverse implication, we assume the contrary holds, that is, there exists $a \in \partial A$ and its neighborhood $U$ that contain only points in $A$ (or $X \backslash A$). Since $U$ is open, it follows that $U \subseteq \inte{A}$, and the fact that $\exte{A} \cap \inte{A} = \varnothing$ implies $U \cap \exte{A} = \varnothing$, which deduces a contradiction. The case for $U \subseteq X \backslash A$ is clearly similar, and hence we are done.
+
+    (4) Suppose the contrary holds, that there exsits $a \in \clo{A}$ and a neighborhood $U$ not containing any point in $A$. Since $U$ is open, it follows that $U \subseteq \exte{A}$ and hence $U \cap \{a\} = \varnothing$, contradiction.
+
+    (5) Since \[\clo{A} \backslash A = (X \backslash {\exte{A}}) \backslash A = X \backslash (\exte {A} \cup A)  \subseteq X \backslash (\exte{A} \cup \inte{A}) = \partial{A} \ra \clo{A} \subseteq \partial A \cup A\]
+    and 
+    \[
+         A \cup \partial A = A \cup (X \backslash (\exte{A} \cup \inte{A})) = A \cup [(X \backslash \exte{A}) \cap (X \backslash \inte{A})] = A \cup (\clo{A} \cap (X \backslash \inte{A})) \subseteq A \cup \clo{A} = \clo{A}.
+    \]
+    Hence $\clo{A} \subseteq A \cup \partial A$.
+
+    (6) This is trivial since union of open subsets is open and intersection of closed subsets is closed.
+\end{proof}
+
+\begin{definition}
+    Let $X$ be a topological space and $A \subseteq X$, we say $p \in X$ is a \textit{limit point of $A$} if for every neighborhood $U$ satisfies $U\backslash \{p\} \cap A \neq \varnothing$. Conversely, a point $p \in A$ is called \textit{isolated point of $A$} if $p$ has a neighborhood $U$ satisfies $U \cap A = \{p\}$.
+\end{definition}
+\begin{proposition}
+    A subset of a topological space is closed if and only if it contains all of its limit points.
+\end{proposition}
+\begin{proof}
+    $(\ra)$ Let $A$ be a closed subset of a topoglogical space $X$ and $x \in X$ be a limit point of $A$. Then for any neighborhood $U$ containing $p$, it follows that $U \backslash \{x\} \cap A \neq \varnothing$. Suppose $x \notin A$, since $X \backslash A$ is open, it follows that $U \cap (X \backslash A)$ is nonempty and open. By the proposition above, we thus have $x \in \partial A \subseteq \clo{A} = A$, contradiction. Thus $x \in A$.
+
+    $(\Leftarrow)$ Since every limit point is in $A$ or $\partial A$, and by the fact that all of them are in $A$, we thus have $\partial A \subseteq A$, hence $A$ is closed.
+\end{proof}
+\begin{definition}
+    A subset $A$ of a topological space $X$ is said to be \textit{dense in $X$} if $\clo{A} = X$.
+\end{definition}
+\begin{proposition}
+    Show that a subset $A \subseteq X$ is dense if and only if every nonempty open subset of $X$ contains a point of $A$.
+\end{proposition}
+\begin{proof}
+    ($\Rightarrow$) Assume the contrary holds, that one can find an open subset $U \subseteq X$ satisfying $A \cap U = \varnothing$. Since $X = A \cup \partial A \ra X \backslash\partial A \subseteq A$, then 
+    \[
+        (X \backslash \partial A)\cap U = \varnothing
+    \]
+    Since $U \subseteq X \backslash A$, we thus have $U \subseteq \partial A$. By the above proposition, it follows that $A \cap U \neq \varnothing$, contradiction.
+
+    ($\Leftarrow$) Suppose $A$ is not dense, in other words $X \backslash \clo{A}$ is an nonempty open subset, consequently, this implies $(X \backslash \clo{A})\cap A \neq \varnothing$. But since $A \subseteq \clo{A}$, we thus have $X \backslash \clo{A} \subseteq X \backslash A$, or $(X \backslash \clo{A}) \cap A \subset (X \backslash A)\cap A = \varnothing$, which implies a contradiction. Hence we are done.
+\end{proof}
+\subsection{Convergence and Continuity}
+\begin{definition}[Convergence]
+    Let $X$ be a topological space, $(x_n) \subseteq X$ is a sequence of points in $X$ and $x \in X$. We say $\nlim x_n = x$ or $x_n \to x$ if for every neighborhood $U$ of $x$, there exists $N(U) \in \bb{N}$ such that $x_n \in U$ for all $n \geq N(U)$.
+\end{definition}
+\begin{proposition}
+    Let $X$ be a topological space, $A$ is a subset of $X$ and $(x_n) \subset A$. If $x_n \to x \in X$, then $x \in \clo{A}$.
+\end{proposition}
+\begin{proof}
+    Let $U$ be a neighborhood of $x$, since $x_n \to x$, there exists $N(U) \in \bb{N}$ such that $x_n \in U$ for all $n \geq N$. Thus $U \cap A \neq \varnothing$. The above proposition implies that $x \in A$ or $U$ contains a point in $A$ and a point in $X \backslash A$. In either case, we always have $x \in \clo{A}$.
+\end{proof}
+\begin{definition}[Continuity]
+    Let $X$ and $Y$ be a topological spaces, a map $f: X \to Y$ is said to be \textit{continuous} if for every open subset $U \subseteq Y$, its preimage $f^{-1}(U)$ is open in $X$.
+\end{definition}
+\begin{proposition}
+    A map between topological spaces is continuous if and only if its preimage of every closed subset is closed.
+\end{proposition}
+\begin{proof}
+    Let $f: X \to Y$ be the map between topological spaces satisfying $f^{-1}(U)$ is closed for all closed subsets $U \subseteq Y$. This implies both $Y \backslash U$ and $X \backslash f^{-1}(U)$ is open. Since we have 
+    \[
+        X \backslash f^{-1}(U) = f^{-1}(Y) \backslash f^{-1}(U) = f^{-1}(Y \backslash U) \text{ is open, }
+    \]
+    and $U$ is abitrary closed subset, $f$ also preserve openess on preimage of the open subsets. Hence $f$ is continuous.
+\end{proof}
+\begin{proposition}
+    Let $X,Y$ and $Z$ be topological spaces.
+    \begin{enumerate}
+        \item Every constant map $f: X \to Y$ is continuous.
+        \item The indentity map $\mathrm{Id}_X:X \to X$ is continuous.
+        \item If $f: X \to Y$ and $g: Y \to Z$ are both continuous, then so is their composition $g \circ f: X \to Z$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    It suffices to prove the third property. Let $U \in Z$ by any open subsets, we need to prove $(g \circ f)^{-1}(U)$ is open, in other words, this can be rewriten as 
+    \[
+        (g \circ f)^{-1}(U) = (f^{-1}\circ g^{-1})(U) = f^{-1}(g^{-1}(U))
+    \]
+    Since $g^{-1}(U)$ is open, then $f^{-1}(g^{-1}(U))$ is also open. Hence $g \circ f$ is continuous.
+\end{proof}
+\begin{proposition}
+    A map $f: X \to Y$ between topological spaces is continuous if and only if each point of $X$ has a neighborhood on which the restriction of $f$ is continuous.
+\end{proposition}
+\begin{proof}
+    ($\ra$) If $f$ is continuous and $x \in X$, we simply consider the restriction of $f_U: U \to Y$, where $U$ is any neighborhood of $x$, and $f^{-1}_U(V) = f^{-1}(V) \cap U$ is open set. Hence $f_U$ is continuous.
+
+    ($\Leftarrow$) Suppose that $f$ is restrictly continuous on a neighborhood of every point $x \in X$. Let $U \subseteq Y$ be any open subset, it suffices to prove that $f^{-1}(U)$ is open. Let $u \in f^{-1}(U)$, by the hypothesis, one can find a neighborhood $V \subseteq X$ containing $u$ such that $f_V: V \to Y$ is continuous. Thus, the preimage
+    \[
+        f_V^{-1}(U) = f^{-1}(U) \cap V \text{ is open.}
+    \]
+    Since $f_V^{-1}(U) \subseteq f^{-1}(U)$, by the above proposition, it follows that $f^{-1}(U)$ is open, hence $f$ is continuous.
+\end{proof}
+\begin{definition}
+    A map $f: X \to Y$ is said to be an \textit{open map} if $f(U)$ is open for all open subsets $U \subset X$. Conversely, $f$ is said to be a \textit{closed map} if $f(U)$ is closed for all closed subsets $U \subset X$.
+\end{definition}
+\begin{proposition}
+    Suppose $X$ and $Y$ are topological spaces, and $f: X \to Y$ is a map. 
+    \begin{enumerate}
+        \item $f$ is continuous if and only if $f(\clo{A}) \subseteq \clo{f(A)}$ for all $A \subseteq X$.
+        \item $f$ is closed if and only if $f(\clo{A}) \supseteq \clo{f(A)}$ for all $A \subseteq X$.
+        \item $f$ is continuous if and only if $f^{-1}(\inte{B}) \subseteq \inte{f^{-1}(B)}$ for all $B \subseteq X$.
+    \end{enumerate}
+\end{proposition}
+\subsection{Hausdorff Spaces}
+\begin{definition}
+    A topological space $X$ is said to be \textit{Hausdorff} if two any distinct points in $X$ can be seperated by disjoint open subsets in $X$.
+\end{definition}
+\begin{proposition}
+    Let $X$ be a Hausdorff space.
+    \begin{enumerate}
+        \item Every finite subsets of $X$ is closed.
+        \item If a sequence $(x_n) \subseteq X$ converges to a limit $p \in X$, the limit is unique.
+    \end{enumerate}
+\end{proposition}
+
+\begin{proposition}
+    Suppose $X$ is a Hausdorff space and $A \subseteq X$. If $p \in X$ is a limit point of $A$, then every neighborhood of $p$ contains infititely many points of $A$.
+\end{proposition}
+\subsection{Bases}
+\begin{definition}
+    Let $X$ be a topoglogical space, a basis for the topology $X$ is a collection $\mc{B}$ of subsets in $X$ satisfying two conditions:
+    \begin{enumerate}
+        \item Every element in $\mc{B}$ is an open subset of $X$.
+        \item Every open subset in $X$ is the union of some collection of elements of $\mc{B}$.
+    \end{enumerate}
+\end{definition}
+\subsection{Problems}
+\begin{problem}
+    Let $X$ be the set of all points $(x,y) \in \bb{R}^2$ such that $y = \pm 1$ and let $M$ be the quotient of $X$ by the equivalence relation generated by $(x,-1) \sim (x,1)$ for all $x \neq 0$. Show that $M$ is locally Euclidean and second-countable, but not Hausdorff.
+\end{problem}
+\begin{proof}
+    Consider the continuous map $\pi: X \to M$ be the quotient map satisfying $U \subseteq M$ is open if and only if $\pi^{-1}(U)$ is open in $X$. We consider two cases:
+    
+    Case 1: $x_0 \neq 0$, consider the open neighborhood on $M$ of $[x_0]$ pulled back by $\pi^{-1}$ satisfying
+    \[
+        I_{[x_0]} = (x_0 - \ep, x_0 + \ep)\times\{-1,1\},
+    \]
+    where $\ep > 0$ is abitrary small such that $I_{[x_0]} \cap \{(0,-1),(0,1)\} = \varnothing$. We define a local chart $\varphi: \pi(I_{[x_0]}) \to (x_0 - \ep, x_0 + \ep) \subseteq \bb{R}$ satisfying
+    \[
+        \varphi([t]) = t \text{ for all }[t] \in \pi(I_{[x_0]})
+    \]
+    It suffices to check that $\varphi$ is homeomorphism. Since $\varphi([x_1]) = \varphi([x_2])$ implies $\pi(x_1) = \pi(x_2)$ and $[x_1] = [x_2]$, thus $\varphi$ is injective.
+    $\varphi$ is also surjective since we can pick any equivalent class $[x]$ for given $x \in \pi(I_{[x_0]})$. The map $\varphi(\pi): (t, \pm 1) \mapsto t$ implies $\varphi$ is  continuous and the map $\varphi([t,1])^{-1} = [t,1] = \pi(i(t))$ is continuous, since the map $i: (x_0 - \ep, x_0 + \ep) \to X$ satisfying $i(t) = (t,1)$ is continuous.
+    Hence $\varphi$ is homeomorphism and $M$ is locally Euclidean.
+
+
+    Case 2: $x_0 = 0$, since $(0,1)$ and $(0,-1)$ are distinct under the following equivalent relation, we just consider the open neighborhood on $M$ for $[(0,1)]$ (the same construct for $(0,-1)$) satisfying 
+    \[
+        I^+ = (-\ep,+\ep) \times \{1\}
+    \]
+    where $\ep > 0$ is abitrary. Then we define a local chart $\varphi^+: \pi(I^+) \to (-\ep, +\ep) \subseteq \bb{R}$ such that 
+    \[
+        \varphi^+([t,1]) = t \text{ for all } [t,1] \in \varphi(I^+)
+    \]
+    Notice that $\varphi^+$ is well-defined, continuous and bijective since 
+    \[
+        \varphi^+\circ \pi((t,1)) = t
+    \]
+    is continuous and $(\varphi^+)^{-1} = [(t,1)] = \pi(i(t))$ is also continuous. Thus, $\varphi$ is homeomorphism and hence $M$ is locally Euclidean.
+
+    To prove $M$ is second-countable, it suffices to prove $X$ is countable, we define the set
+    \[
+        \mc{B}_X = \{(a,b)\times\{1\}, (a,b)\times\{-1\} \mid a,b \in \bb{Q}\}
+    \]
+    Since the set $\{(a,b)\mid a,b \in \bb{Q}\}$ admits a countable basis for $\bb{R}$, therefore $\mc{B}_X$ is a countable basis of $X$. We define the set 
+    \[
+        \mc{B}_M = \{\pi(B) \mid B \in \mc{B}_X\},
+    \]
+    Since $\pi$ is a quotient map, $\{\mc{B}_M\}$ is a second-countable basis for $M$.
+
+    Now we aim to prove $M$ is not Hausdorff at two points $(0,1)$ and $(0,-1)$. Let $U $ and $V$ be abitrary neighborhood of $[(0,1)]$ and $[(0,-1)]$ in $M$. Since $\pi^{-1}(U)$ and $\pi^{-1}(V)$ are open in Euclidean, one can find an open interval 
+    \begin{align*} 
+        (-\ep_1, +\ep_1) \times \{1 \} \subseteq \pi^{-1}(U) \text{ and }(-\ep_1, +\ep_1) \times \{-1 \} \subseteq \pi^{-1}(V)
+    \end{align*}
+    Let $\ep_0 = \min\{\ep_1,\ep_2\}$ and $I = (-\ep_0,+\ep_0)$, we thus have 
+    \[
+        \varnothing \neq \pi(I \times \{1\}) = \pi(I \times \{-1\}) \subseteq \pi(\pi^{-1}(U) \cap \pi^{-1} (V)) \subseteq U \cap V
+    \]
+    Hence $U \cap V \neq \varnothing$ which implies $M$ is not Hausdorff.
+\end{proof}
+\begin{problem}
+    For some $t \in \bb{R}$, we denote the set 
+    \[
+        \bb{R}_t = \bb{R} \times \{t\}
+    \]
+    Let $I$ be an uncountable set, prove that the set 
+    \[  
+        \mc{R} = \bigsqcup_{\alpha \in I} \bb{R}_{\alpha}
+    \]
+    is locally Euclidean and Hausdorff, but not second-countable.
+\end{problem}
+\begin{proof}
+    Let $u \in \mc{R}$. Then there exists a unique $\alpha \in I$ such that  $u \in \bb{R}_{\alpha}$. Let $\psi_\alpha: \bb{R} \to \bb{R}_{\alpha}$ be the homeomorphism satisfying
+    \[
+        \psi(x) = (x,\alpha),
+    \]
+     Let $y = \psi^{-1}(u)$ and $U = (y - \ep, y + \ep) \times\{\alpha\}$ be an open neighborhood of $u$ pulled back by $\psi$. Since $\psi$ is a homeomorphism, it serves as a local chart around $u$, which implies $\mc{R}$ is locally Euclidean.
+
+     To prove $\mc{R}$ is Hausdorff, let $x = (u,\alpha),y= (v,\beta)$ be distinct points in $\mc{R}$, we consider two cases:
+
+     Case 1: $\alpha \neq \beta$, let $\ep > 0$ be abitrary, we choose 
+     \begin{align*}
+        &U_\alpha = (u - \ep, u + \ep) \times\{\alpha\},\\
+        &V_{\beta} = (v- \ep, v + \ep) \times\{\beta\}
+     \end{align*}
+     Since $U_{\alpha}$ and $V_{\beta}$ are disjoint, $\mc{R}$ is Hausdorff in this case.
+
+     Case 2: $\alpha = \beta$. We choose
+    \begin{align*}
+        &U_\alpha = \left(u - \ep, u + \ep\right) \times\{\alpha\},\\
+        &V_{\beta} = \left(v- \ep, v + \ep\right) \times\{\beta\},
+     \end{align*}
+     where $\ep$ satisfies $0 < \ep < \dfrac{|u - v|}{2}$. Since $U_{\alpha}$ and $V_{\beta}$ are disjoint, every pair of distinct points in $\mc{R}$ can be seperated by disjoint open neighborhoods, hence $\mc{R}$ is Hausdorff in general.
+
+    To prove $\mc{R}$ is not second-countable, we consider the following proposition
+    \begin{proposition}
+        If a topological space contains uncountably many nonempty disjoint sets, then it is not second-countable.
+    \end{proposition}
+    For every $\alpha \in I$, we denote a corresponding open neighborhood $U_{\alpha} = (-\ep,+\ep) \times \{\alpha\}$. Since the collection $\{U_{\alpha}\}_{\alpha \in I}$ consists of uncountably many pairwise disjoint open sets in $\mc{R}$, the above proposition implies $\mc{R}$ is not second-countable.
+\end{proof}
+\begin{problem}
+    Let $M$ be a topological manifold, and let $\mathcal{U}$ be an open cover of $M$.
+    \begin{enumerate}
+        \item Assuming that each set in $\mathcal{U}$ intersects only finitely many others, show that $U$ is locally finite.
+        \item Give an example to show that the converse to (a) may be false.
+        \item Now assume that the sets in $\mathcal{U}$ are precompact in $M$, and prove the converse: if $\mathcal{U}$ is locally finite, then each set in $\mathcal{U}$ intersects only finitely many others.
+    \end{enumerate}
+\end{problem}
+\begin{problem}
+    Suppose $M$ is a locally Euclidean Hausdorff space. Show that $M$ is secondcountable if and only if it is paracompact and has countably many connected components. [Hint: assuming $M$ is paracompact, show that each component of $M$ has a locally finite cover by precompact coordinate domains, and extract from this a countable subcover.]
+\end{problem}
+\begin{problem}
+Let $M$ be a nonempty topological manifold of dimension $n \geq 1$. If $M$ has a smooth structure, show that it has uncountably many distinct ones. [Hint: first show that for any $s>0, F_s(x)=|x|^{s-1} x$ defines a homeomorphism from $\mathbb{B}^n$ to itself, which is a diffeomorphism if and only if $s=1$.]
+\end{problem}
+\begin{problem}
+     Let $N$ denote the north pole $(0, \ldots, 0,1) \in \mathbb{S}^n \subseteq \mathbb{R}^{n+1}$, and let $S$ denote the south pole $(0, \ldots, 0,-1)$. Define the stereographic projection $\sigma: \mathbb{S}^n \backslash\{N\} \rightarrow \mathbb{R}^n$ by
+$$
+\sigma\left(x^1, \ldots, x^{n+1}\right)=\frac{\left(x^1, \ldots, x^n\right)}{1-x^{n+1}}
+$$
+
+Let $\tilde{\sigma}(x)=-\sigma(-x)$ for $x \in \mathbb{S}^n \backslash\{S\}$.
+\begin{enumerate}
+    \item For any $x \in \mathbb{S}^n \backslash\{N\}$, show that $\sigma(x)=u$, where ($u, 0$) is the point where the line through $N$ and $x$ intersects the linear subspace where $x^{n+1}=0$ (Fig. 1.13). Similarly, show that $\tilde{\sigma}(x)$ is the point where the line through $S$ and $x$ intersects the same subspace. (For this reason, $\tilde{\sigma}$ is called stereographic projection from the south pole.)
+    \item Show that $\sigma$ is bijective, and
+$$
+\sigma^{-1}\left(u^1, \ldots, u^n\right)=\frac{\left(2 u^1, \ldots, 2 u^n,|u|^2-1\right)}{|u|^2+1}
+$$
+    \item Compute the transition map $\tilde{\sigma} \circ \sigma^{-1}$ and verify that the atlas consisting of the two charts $\left(\mathbb{S}^n \backslash\{N\}, \sigma\right)$ and $\left(\mathbb{S}^n \backslash\{S\}, \tilde{\sigma}\right)$ defines a smooth structure on $\mathbb{S}^n$ (The coordinates defined by $\sigma$ or $\tilde{\sigma}$ are called stereographic coordinates).
+\end{enumerate}
+\end{problem}
+\begin{center}
+    \includegraphics[scale=0.36]{1.png}
+\end{center}
+    \begin{proof}
+
+        (1) Define the line passing through $N$ and $x$ by
+        \[
+            L(t) = N + t(x - N) = u(t)
+        \]
+        Consider the intersection between $L(t)$ and the linear subspace of $\bb{R}^{n + 1}$ where $x^{n + 1} = 0$, we have 
+        \[
+            u(t) = (tx^1, \dots ,tx^n, 1 + t(x^{n + 1} - 1)) = (u^1,\dots, u^n, 0)
+        \]
+        The $(n+1)-$term implies that $t = \dfrac{1}{1 - x^{n + 1}}$, thus we have 
+        \[
+            u(t) = \frac{(x^1,\dots,x^n)}{1 - x^{n + 1}} = \sigma(x)
+        \]
+        (2) Let $u = (u^1,\dots, u^n) \in \bb{R}^{n}$, it suffices to prove that there exists $(x^1,\dots,x^{n+1}) \in \bb{S}^n \backslash\{N\}$ satisfying 
+        \[
+            u^i = \frac{x^i}{1 - x^{n + 1}} \text{ for all }i = 1,\dots, n.
+        \]
+        Let $|u|^2 = \sum (u^i)^2$, it follows that 
+        \begin{align*}
+            |u|^2 & = \frac{\sum (x^i)^2}{(1 - x^{n + 1})^2}= \frac{1 - (x^{n + 1})^2}{(1 - x^{n + 1})^2} = \frac{1 + x^{n + 1}}{1 - x^{n + 1}} = \frac{2}{1 - x^{n + 1}} - 1\\
+            &\lra x^{n + 1} = \frac{|u|^2 - 1}{|u|^2 + 1} 
+        \end{align*}
+        Since $-1 < \dfrac{|u|^2 - 1}{|u|^2 + 1} < 1$, set $x^{n + 1}= \dfrac{|u|^2 - 1}{|u|^2 + 1} $ and $x^i = \dfrac{2u^i}{|u|^2 + 1}$. Thus $\sigma$ is surjective onto $\bb{R}^n$.
+        
+        To prove that  $\sigma$ is injective, suppose $\sigma(x) = \sigma(y)$,  we have
+        \begin{align*}
+            \frac{x^i}{1 - x^{n + 1}} = \frac{y^i}{1 - y^{n+ 1}} &\ra \frac{\sum (x^i)^2}{( 1 - x^{n + 1})^2}=\frac{\sum (y^i)^2}{( 1 - y^{n + 1})^2}\\
+            &\lra \frac{1 + x^{n + 1}}{1 - x^{n + 1}} = \frac{1 + y^{n + 1}}{1 - y^{n +1}}\\
+            &\lra \frac{2}{1 - x^{n + 1}} - 1 =\frac{2}{1 - y^{n + 1}} - 1\\
+            &\lra\frac{2}{1 - x^{n + 1}} = \frac{2}{1 - y^{n + 1}}\\
+            &\lra 1 - x^{n + 1} = 1 - y^{n + 1},
+        \end{align*}
+        which implies $x^{n + 1} = y^{n + 1}$ and hence $x^i = y^i$ for all $i = 1,\dots,n$. Therefore $\sigma$ is bijective and its inverse satisfies 
+        $$
+        \sigma^{-1}\left(u^1, \ldots, u^n\right)=\frac{\left(2 u^1, \ldots, 2 u^n,|u|^2-1\right)}{|u|^2+1}
+        $$
+        We will verify that $\sigma^{-1}(u) \in \bb{S}^{n}$ for all $u$. Let $(x^i) = \sigma^{-1}(u)$, since we have 
+        \[
+            \sum (x^i)^2 = \frac{\sum(2u^i)^2 + (|u|^2 - 1)^2}{(|u|^2 + 1)^2} = \frac{4|u|^2 + ( |u|^2 - 1)^2}{(|u|^2 + 1)^2} = \frac{(|u|^2 + 1)^2}{(|u|^2 + 1)^2} = 1
+        \]
+        Thus $\sigma^{-1}$ maps every point in $\bb{R}^{n}$ into the sphere $\bb{S}^n$.
+        (3) By the definition of $\tilde{\sigma}$, it can be written as 
+        \[
+            \tilde{\sigma}(x^1,\dots,x^{n + 1}) = \frac{(x^1,\dots,x^{n})}{1 + x^{n + 1}},
+        \]
+        and the same computation shows that $\tilde{\sigma}$ is bijective. Let $u = (u^i) \in \bb{R}^n\backslash\{0\}$ , the composition $\tilde{\sigma}\circ \sigma^{-1}: \bb{R}^n\backslash\{0\} \to \bb{R}^n\backslash\{0\}$ is computed by expressing 
+        \begin{align*}
+            \tilde{\sigma}\circ \sigma^{-1}(u) &=\tilde{\sigma}\left(\frac{2 u^1}{|u|^2+1}, \ldots, \frac{2 u^n}{|u|^2+1},\frac{|u|^2-1}{|u|^2+1}\right)\\
+            &= \frac{(u^1,\dots, u^n)}{|u|^2}.
+        \end{align*}
+        Since $\tilde{\sigma}\circ \sigma^{-1}$ is smooth and a diffeomorphism, $\sigma$ and $\tilde{\sigma}$ are compatible. Moreover, since the union of their domains covers entire $\bb{S}^n$, then they form an atlas which generates a smooth structure on $\bb{S}^n$.
+        
+    \end{proof}
+\begin{problem}
+    By identifying $\mathbb{R}^2$ with $\mathbb{C}$, we can think of the unit circle $\mathbb{S}^1$ as a subset of the complex plane. An angle function on a subset $U \subseteq \mathbb{S}^1$ is a continuous function $\theta: U \rightarrow \mathbb{R}$ such that $e^{i \theta(z)}=z$ for all $z \in U$. Show that there exists an angle function $\theta$ on an open subset $U \subseteq \mathbb{S}^1$ if and only if $U \neq \mathbb{S}^1$. For any such angle function, show that ($U, \theta$) is a smooth coordinate chart for $\mathbb{S}^1$ with its standard smooth structure.
+\end{problem}
+\begin{proof}
+    ($\ra$) Suppose there exists an angle function $\theta:\bb{S}^1 \to \bb{R}$ which is continuous. We aim to show that $\theta$ is discontinuous at $z = 1$. If we write $z = e^{i\pi \phi}$ then it follows that $\theta = \pi\phi + k2\pi$, where $k$ is some integer. Since $\theta$ is continuous, $k$ must be fixed. Let 
+    \[
+        a_n = e^{i\pi/n} \text{ and }b_n = e^{i(2\pi - 1/n)}
+    \]
+    Then we have 
+    \[
+        \nlim \theta(a_n) = \theta(0) = k2\pi\text{ and }\nlim\theta(b_n) =  \theta(2\pi) = 2\pi + k2\pi
+    \]
+    Since $2\pi \neq 0$, $\theta$ is not continuous at $z = 1$, hence there is no angle function for the case $U = \bb{S}^1$. We define $\alpha(z)$  as a unique function satisfying $z = e^{i\pi\alpha(z)}$ and $\alpha(z) \in [0,2\pi)$.
+    
+    If $U \neq \bb{S}^1$. In case that $1 \in U$, since there must exsits $z_0 \neq 1$ and $z_0 \notin U$. Since $\alpha$ is continuous, we choose  $\theta$ satisfying
+    \begin{align*}
+         \theta(z) = \alpha(z) , ( \alpha(z)  < \alpha(z_0) ) \text{ and }\\
+         \theta(z)=2\pi -  \alpha(z) , ( \alpha(z)  \geq \alpha(z_0) )
+    \end{align*}
+    If  $1 \notin U$, we choose $\theta(z) = \alpha(z)$ for all $z\in U$.  
+
+    Since $\theta$ is continuous and a homeomorphism on from open subset $U \subset \bb{S}^1$ onto an open interval $\theta(U)$, the pair $(U,\theta)$ is a smooth coordinate chart for $\bb{S}^1$ with its standard smooth structure.
+\end{proof}
+\begin{problem}
+     Complex projective $n$-space, denoted by $\mathbb{C P}^n$, is the set of all 1-dimensional complex-linear subspaces of $\mathbb{C}^{n+1}$, with the quotient topology inherited from the natural projection $\pi: \mathbb{C}^{n+1} \backslash\{0\} \rightarrow \mathbb{C} \mathbb{P}^n$. Show that $\mathbb{C} \mathbb{P}^n$ is a compact $2 n$-dimensional topological manifold, and show how to give it a smooth structure analogous to the one we constructed for $\mathbb{R P}^n$. (We use the correspondence
+$$
+\left(x^1+i y^1, \ldots, x^{n+1}+i y^{n+1}\right) \leftrightarrow\left(x^1, y^1, \ldots, x^{n+1}, y^{n+1}\right)
+$$
+to identify $\mathbb{C}^{n+1}$ with $\mathbb{R}^{2 n+2}$.) (Used on pp. 48, 96, 172, 560, 561.)
+\end{problem}
+\begin{proof}
+    Suppose $\bb{S}^n$ is an $n$-dimensional sphere, it suffices to prove the restriction map $$\pi|_{\bb{S}^n}: \bb{S}^n \to \bb{CP}^n$$ is continuous and surjective. For the sake of condition, we assume to write $\pi$ instead of $\pi|_{\bb{S}^n}$. Given $z \in \bb{CP}^n$, by the definiton of projective space, $z$ is an equivalent class satisfying
+    \[
+        [z^0: \dots : z^n] \sim [\lambda z^0: \dots :\lambda z^n]
+    \]
+    for all nonzero complex number $\lambda$. To prove $\pi$ is surjective, let $[z] \in \bb{CP}^n$ be abitrary, one can rewrite 
+    \[
+        [z] = [z^0: \dots : z^n] \sim \left[\frac{z^0}{|z|}: \dots : \frac{z^n}{|z|}\right]
+    \]
+    Since we have 
+    \[
+        \sum \dfrac{(z^i)^2}{|z|^2} = \frac{|z|^2}{|z|^2} = 1
+    \]
+    then $\left(\dfrac{z^0}{|z|}: \dots : \dfrac{z^n}{|z|}\right) \in \bb{S}^n$ and hence it follows that $\pi\left(\dfrac{z^0}{|z|}: \dots : \dfrac{z^n}{|z|}\right) = [z]$. Since the natural projection  $\pi: \mathbb{C}^{n+1} \backslash\{0\} \rightarrow \mathbb{C} \mathbb{P}^n$ is already continuous, the its restriction on closed subset $\bb{S}^n$ is also continuous. Since $\bb{S}^{n}$ is closed and bounded in $\bb{C}^{n + 1}$ by the corresponding identify $\bb{C}^{n + 1}$ with $\bb{R}^{2n + 2}$, by the Heine-Borrel theorem, $\bb{S}^n$ is compact. And since $\pi_{\bb{S}^n}(\bb{CP}^n) =\bb{S}^n$, $\bb{CP}^n$ is a compact.
+
+    To prove $\bb{CP}^n$ is locally Euclidean, for each $i = 0,\dots,n$, let $\tilde{U_i}\subset \bb{C}^{n + 1}$ be the subset containing all points $x \in \bb{C}^{n + 1}$ satisfying $x^{i} \neq 0$ and $\varphi_i: U_i \to \bb{C}^{n}$ be the local chart (where $U_i = \pi(\tilde{U_i})$) satisfying
+    \[  
+        \varphi[z^0: \dots : z^n] = \left(\frac{z^0}{z^i},\dots,\frac{z^{i -1}}{z^{i}},\frac{z^{i + 1}}{z^{i}}, \dots,\frac{z^n}{z^i}\right).
+    \]
+    This map is well-defined since the left-hand side remains if we replace $[z^1: \dots : z^n]$ by $\lambda[z^1: \dots : z^n]$. To prove $\varphi_i$ is injective, suppose $\varphi_i[a] = \varphi_i[b]$, then we have 
+    \[  
+        \frac{a^j}{a^i} = \frac{b^j}{b^i} \text{ for all }j = 0, \dots,n + 1
+    \]
+    Let $\lambda = \dfrac{a^i}{b^i}$ be fixed, it follows that $a^j = \lambda b^j$ for all $j = 0,\dots, n + 1$, hence $[a] = [b]$. To prove $\varphi_i$ is surjective, if $x \in \bb{C}^n$, we choose $[z] \in \bb{CP}^n$ satisfying $z^j = x^{j - 1}$ for all $j \neq i$ and $z^i = 1$, this implies $\varphi_{i}[z] =  x$. Therefore $\varphi_i$ is bijective. Moreover, $\varphi$ is smooth and its inverse given by
+    \[
+        \varphi_i^{-1}(x^i) = [x^0,\dots,x^{i - 1}, 1, x^{i + 1},\dots,x^n]
+    \]
+    is also smooth. Thus $\varphi_i$ is homeomorphism and $\bb{C}^n \cong \bb{R}^{2n}$ implies that $\bb{CP}^n$ is locally $2n$-dimensional Euclidean. In particular, since $\varphi_i$  is diffeomorphism, it follows that $(U_i,\varphi_i)$ is smooth local chart and they are parwise compatible since a composition of two diffeomorphism is again a diffeomorphism. Hence, the atlas $\{(U_i,\varphi_i)\}$ defines a smooth structure on $\bb{CP}^n$.
+
+    To prove $\bb{CP}^n$ is Hausdorff, let $[a],[b]$ be distinct equivalence classes in $\bb{CP}^n$, which means $[a] \neq [b]$, pushed forward by $\varphi_i$, where $i$ is the non-negative integer satisfying $a^i, b^i \neq 0$. By consider two open disks 
+    \begin{align*}
+        &\mc{D}_{\varphi_i(a)} = \{z \in \bb{C}^n \mid |z - \varphi_i(a)| < \ep\} \text{ and }\\
+        &\mc{D}_{\varphi_i(b)} = \{z \in \bb{C}^n \mid |z - \varphi_i(b)| < \ep\}
+    \end{align*}
+    where $\ep > 0$ satisfies $\ep < \dfrac{|\varphi(a) - \varphi(b)|}{2}$ implying $\mc{D}_{\varphi(a)} \cap \mc{D}_{\varphi(b)} = \varnothing$. Since $\varphi_i$ is homeomorphism, then any distinct points in $\bb{CP}^n$ can be seperated by two open disjoint neighborhoods, which is $\mc{D}_{\varphi(a)}$ and $\mc{D}_{\varphi(b)}$ in this case. Therefore $\bb{CP}^n$ is Hausdorff.
+
+    The fact that $ \bb{C}^n$ is second-countable and $\{(U_i,\varphi_i)\}$ is a smooth structure implies that $\bb{CP}^n$ is also second-countable. In conclusion, $\bb{CP}^n$ is a compact $2 n$-dimensional topological manifold, as desired.
+    
+
+\end{proof}
+\begin{problem}
+     Let $k$ and $n$ be integers satisfying $0<k<n$, and let $P, Q \subseteq \mathbb{R}^n$ be the linear subspaces spanned by $\left(e_1, \ldots, e_k\right)$ and $\left(e_{k+1}, \ldots, e_n\right)$, respectively, where $e_i$ is the $i$ th standard basis vector for $\mathbb{R}^n$. For any $k$-dimensional subspace $S \subseteq \mathbb{R}^n$ that has trivial intersection with $Q$, show that the coordinate representation $\varphi(S)$ constructed in Example 1.36 is the unique $(n-k) \times k$ matrix $B$ such that $S$ is spanned by the columns of the matrix $\binom{I_k}{B}$, where $I_k$ denotes the $k \times k$ identity matrix.
+\end{problem}
+\begin{problem}
+    Let $M=\overline{\mathbb{B}}^n$, the closed unit ball in $\mathbb{R}^n$. Show that $M$ is a topological manifold with boundary in which each point in $\mathbb{S}^{n-1}$ is a boundary point and each point in $\mathbb{B}^n$ is an interior point. Show how to give it a smooth structure such that every smooth interior chart is a smooth chart for the standard smooth structure on $\mathbb{B}^n$. [Hint: consider the map $\pi \circ \sigma^{-1}: \mathbb{R}^n \rightarrow \mathbb{R}^n$, where $\sigma: \mathbb{S}^n \rightarrow \mathbb{R}^n$ is the stereographic projection (Problem 1-7) and $\pi$ is a projection from $\mathbb{R}^{n+1}$ to $\mathbb{R}^n$ that omits some coordinate other than the last.]    
+\end{problem}
+\begin{problem}
+    Prove Proposition 1.45 (a product of smooth manifolds together with one smooth manifold with boundary is a smooth manifold with boundary).
+\end{problem}

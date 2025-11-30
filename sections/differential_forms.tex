@@ -1,0 +1,139 @@
+\section{Differential Forms on Manifolds}
+\begin{definition}[$m$-forms]
+    Suppose $M$ is a smooth manifold with dimension $n$ and $p \in M$, an \textbf{$m$-form at $p$}  is a covector $\ome_p$, that is
+    \[
+        \ome_p: (T_pM)^m \to \bb{R} \text{ linear, or }\ome \in \Lambda^m(T^*_pM)
+    \]
+    Alternatively, a $m$-form at $p$ takes $m$ tangent vectors and returns a real number linearly. We denote the vector space of smooth $k$-forms by 
+    \[
+        \Omega^k(M) := \Gamma(\Lambda^kT^*M).
+    \]
+\end{definition}
+
+Consider a local smooth chart $(\varphi,U)$ for some neighborhood of $p$, for $m = 1$, as $\ome_p$ is linear, one can rewrite the output of $\ome_p$ by the following formula:
+\[
+    \ome_p(v) = a_1dx^1 + a_2dx^2 + \dots +a_ndx^n = \begin{bmatrix}
+        a_1 & a_2 & \dots & a_n
+    \end{bmatrix}\cdot v
+\]
+For $m = 2$, let $u = u^i\dfrac{\partial}{\partial x^i}$ and $v = v^i\dfrac{\partial}{\partial x^i} $ (Einstein's summation convention), since $\ome_p$ is multilinear and alternating, it would follow that 
+\begin{align*}
+        \ome_p(u,v) &= \ome_p\left(u^i\dfrac{\partial}{\partial x^i},v^i\dfrac{\partial}{\partial x^i}\right) = \sum_{i \neq j} u^iv^j \ome_p\left(\dfrac{\partial}{\partial x^i},\dfrac{\partial}{\partial x^j}\right)\\
+        &=\sum_{i < j}(u^iv^j - u^jv^i)\ome_p\left(\dfrac{\partial}{\partial x^i},\dfrac{\partial}{\partial x^j}\right) 
+\end{align*}
+
+Let $dx^i \wedge dx^j (u,v) := u^iv^j - u^jv^i = \det\begin{pmatrix}
+    u^i & v^i \\ u^j & v^j
+\end{pmatrix}$, and $\ome_{ij} := \ome_p\left(\dfrac{\partial}{\partial x^i},\dfrac{\partial}{\partial x^j}\right) $, one can reduce the following equality to 
+\[
+    \ome_p(u,v) = \sum_{i < j} \ome_{ij} dx^i \wedge dx^j (u,v)
+\]
+or equivalently, i would like to use the reduced notation based on Einstein's summation convention,
+\[
+    \ome_p = \ome_{N} dx^{i} \wedge dx^j,
+\]
+for each $N  \in [n]^2 := \{(i,j) \mid i,j \in [n]\}$. By our definition of $dx^i \wedge dx^j$, since $$\det[u^{i,j},v^{i,j}] = dx^i \wedge dx^j(u,v)$$ is multilinear, one can be extended to the generalized operation, which is 
+\[
+    \boxed{dx^{i_1} \wedge \dots \wedge dx^{i_n}(v_1,\dots, v_m) := \det[v_1^{i_1,\dots,i_n},\dots, v_n^{i_1,\dots,i_m}] = \det[v_i^{N}]} \tag{*}.
+\]
+
+This is called the \textbf{Wedge product}. Moreover, it is worth noting that this operation holds only for the basis of tangent space, we want it also works for any two forms. But beforehand, we state the general formula for any higher $m$-forms:
+\begin{theorem}
+    Any $m$-form of dimension $n$ can be expressed uniquely as
+    \[
+        \ome_p = \ome_N dx^{i_1} \wedge \dots \wedge dx^{i_m}
+    \]
+    where $N \in [n]^m := \{(i_1,\dots, i_m) \mid i_1,\dots,i_m \in [n]\}$. Generally, since $(T^*_pM)^m$ is a vector space, it thus have basis, which is  
+    \[
+        \{dx^{i_1}\wedge \dots \wedge dx^{i_m}\mid i_1 < i_2 < \dots < i_m \in [n] \}
+    \]
+    Consequently, the dimension of $(T^*_pM)^{m}$ is $\binom{n}{m}$.
+\end{theorem}
+Now we construct a Wedge product operation between any forms. Consider vectors $$\{v_1,\dots, v_{m + n}\} \in (T_pM)^{m + n},$$ and $m$-form $\ome_1$ and $n$-form $\ome_2$. 
+By writiting $\ome_1$ and $\ome_2$ in basis of $(*)$ and since Wedge is multilinear to forms, it follows that 
+\begin{align*}
+    &\ome_1 \wedge \ome_2 (v_1, \dots, v_{m + n}) = (\sum \ome_{1M}dx^{i_1}\wedge\dots\wedge dx^{i_m})\wedge(\sum \ome_{2N}dx^{j_1}\wedge\dots\wedge dx^{j_n})\\
+    &= \sum \ome_{1M}\ome_{2N}dx^{i_1}\wedge\dots\wedge dx^{i_m}\wedge dx^{j_1} \wedge\dots \wedge dx^{j_n}\\
+    &= \frac{1}{m!n!}\sum_{\sigma \in S_{m + n }} \sgn(\sigma)\ome_{\sigma_1\dots\sigma_m}dx^{\sigma_1}\wedge\dots\wedge dx^{\sigma_{m}}\ome_{\sigma_{m + 1}\dots\sigma_{m + n}}dx^{\sigma_{m+ 1}}\wedge\dots\wedge dx^{\sigma_{m+n}}\\
+    &= \frac{1}{m!n!}\sum_{\sigma \in S_{m + n}} \sgn(\sigma)\ome_{\sigma_1\dots\sigma_m}(v_{\sigma_1},\dots, v_{\sigma_m})\ome_{\sigma{m + 1}\dots\sigma{m +n}}(v_{\sigma_{m + 1}},\dots, v_{\sigma_{m + n}})
+\end{align*}
+
+\begin{proposition}
+    Given two any $m$-form $x$, $n$-form $y$ and $p$-form $z$ , then we have 
+    \begin{enumerate}
+        \item $x \wedge x = 0$,
+        \item $x \wedge y = (-1)^{nm}y \wedge x$,
+        \item $(x \wedge y)\wedge z = x\wedge (y \wedge z)$,
+        \item If $m = n$ then $(x + y)\wedge z = x\wedge z + y \wedge z$.
+        \item ($m$ - form)$\wedge$($n$ - form) = $(m + n)$ - form.
+    \end{enumerate}
+\end{proposition}
+\begin{definition}
+    Let $F: M \to N$ be a smooth map between smooth manifolds $M$ and $N$, $\ome$ is a differential form on $N$ . The \textit{pullback} $F^*\ome$ is a differential form on $M$, which is defined as
+    \[
+        (F^*\ome)_p(v_1,\dots,v_k) = \ome_{F(p)}(dF_p(v_1),\dots,dF_p(v_k))
+    \]
+\end{definition}
+\begin{proposition}
+    Let $F: M \to N$ be smooth map.
+    \begin{enumerate}
+        \item $F^*: \Omega^k(N) \to \Omega^k(M)$ is linear over $\bb{R}$.
+        \item $F^*(\ome \wedge \eta) = (F^*(\ome))\wedge(F^*(\eta))$.
+        \item In any smooth chart,
+        \[
+            F^*\left(\sum \ome_I dx^{i_1}\wedge\dots\wedge dx^{i_k}\right) = \sum (\ome_I \circ F)d(x^{i_1} \circ F)\wedge \dots \wedge d(x^{i_k}\circ F).
+        \]
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    Let $(v_i)$ and $(w_i)$ be abitrary $k$-vector tuple of $T_pM$, $\alpha$ be abitrary real number. We have 
+    \begin{align*}
+    (F^*\ome)_p(v_1 + \alpha w_1, \dots, v_k + \alpha w_k) &= \ome_{F(p)}(dF_p(v_1 + w_1),\dots dF_p(v_k + w_k))\\
+    &= \ome_{F(p)}(dF_p(v_1) + dF_p(\alpha w_1),\dots dF_p(v_k) + dF_p(\alpha w_k))\\
+    &= \ome_{F(p)}(dF_p(v_1),\dots,dF_p(v_k)) + \alpha\ome_{F(p)}(dF_p(w_1),\dots,dF_p(w_k))\\
+    &=  (F^*\ome)_p(v_1 , \dots, v_k ) + \alpha(F^*\ome)_p(w_1 , \dots, w_k ).
+    \end{align*}
+    Thus $F^*$ is linear over $\bb{R}$. To prove the second property, suppose $\ome$ is $k$-form and $\eta$ is $l$-form on $N$, one can be expressed so that
+    \begin{align*}
+        F^*(\ome \wedge \eta)&= \ome_{F(p)}\wedge \eta_{F(p)}(dF_p) = \frac{1}{k!l!}\sum_{\sigma \in S_{k + l}}\sgn(\sigma)\ome_{F(p)}\otimes \eta_{F(p)}(d(v_{\sigma_{1}}),\dots,d(v_{\sigma{k + l}}))\\
+        &= \frac{1}{k!l!}\sum_{\sigma \in S_{k + l}}(F^*\ome)_p\otimes (F^*\eta)(d(v_{\sigma_{1}}),\dots,d(v_{\sigma{k + l}}))\\
+        &= \frac{(k + l)!}{k!l!}\alt(F^*(\ome)_p \otimes F^*(\eta)_p)\\
+        &= F^*(\ome)_p \wedge F^*(\eta)_p.
+    \end{align*}
+    Since $F^*$ is proven to be linear and pull back of a real-valued function is just a composition, one can obtain
+    \begin{align*}
+        F^*\left(\sum \ome_I dx^{i_1}\wedge\dots\wedge dx^{i_k}\right) &= \sum F^*\left(\ome_I dx^{i_1}\wedge\dots\wedge dx^{i_k}\right)\\
+        &= \sum (\ome_I\circ F)  F^*(dx^{i_1})\wedge\dots\wedge F^*(dx^{i_k})\\
+        &= \sum (\ome_I\circ F)  dx^{i_1}(dF_p^1)\wedge\dots\wedge dx^{i_1}(dF_p^k)\\
+        &= \sum  (\ome_I \circ F) d(x^{i_1}\circ F)\wedge \dots d(x^{i_k}\circ F)
+    \end{align*}
+    Hence, we are done.
+\end{proof}
+\begin{theorem}
+    Let $F: M \to N$ be smooth map between $n$-dimensional manifolds, $(x^i)$ and $(y^i)$ be smooth coordinates on open subsets $U \subseteq M$ and $V \subseteq N$, respectively, and $u$ be a continuous real-valued function on $V$, then the following holds on $U \cap F^{-1}(V)$:
+    \[
+        F^*(udy^1\wedge \dots dy^n) = (u \circ F)(\det J_F)dx^1\wedge\dots\wedge dx^n.
+    \]
+\end{theorem}
+\begin{proof}
+    Since $F^*$ is linear over $\bb{R}$, it follows that 
+    \begin{align*}
+        &F^*(udy^1\wedge \dots dy^n) = (u \circ F) d(y^1 \circ F)\wedge\dots\wedge d(y^n\circ F) = (u \circ F) dF^1\wedge\dots \wedge dF^n\\
+    \end{align*}
+    For abitrary $1 \leq j \leq n$, by writings $dF^j$ in basis of $(x^i)$
+    \[
+        dF^j = \frac{\partial F^j}{\partial x^i}dx^i.
+    \]
+    Since $a \wedge a = 0$ for any form, this implies 
+    \begin{align*}
+    dF^1 \wedge \dots \wedge dF^n &= \sum_{\sigma \in S_n} \left(\frac{\partial F^1}{\partial x^{\sigma_1}}\cdots\frac{\partial F^n}{\partial x^{\sigma_n}}\right) dx^{\sigma_1}\wedge\dots\wedge dx^{\sigma_n}\\
+    &= \sum_{\sigma \in S_n}\sgn(\sigma)\left(\frac{\partial F^1}{\partial x^{\sigma_1}}\cdots\frac{\partial F^n}{\partial x^{\sigma_n}}\right) dx^{1}\wedge\dots \wedge dx^{n}\\
+    &= \det\begin{bmatrix}
+        \frac{\partial F^1}{\partial x^1}&\cdots& \frac{\partial F^1}{\partial x_n}\\
+        \vdots & \ddots & \vdots\\
+        \frac{\partial F_n}{x^1}& \cdots & \frac{\partial F_n}{x^n} 
+    \end{bmatrix}dx^{1}\wedge\dots \wedge dx^{n}\\
+    &= J_F  dx^{1}\wedge\dots \wedge dx^{n}\\.
+    \end{align*}
+    Hence we are done.
+\end{proof}

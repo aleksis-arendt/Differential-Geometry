@@ -1,0 +1,270 @@
+\section{Tangent Space}
+
+\subsection{Derivatives in Multivariable Calculus}
+\begin{definition}
+    Let $E$ be a subset of $\bb{R}^n, f: E \to \bb{R}^m$ be a function, $x_0 \in E$ be a point, and let $L: \bb{R}^n \to \bb{R}^m$ be a linear transformation. We say that $f$ is differentiable at $x_0$ with derivative $L$ if we have 
+    \[
+    \lim_{x \to x_0, x \in E \backslash \{x_0\}} \frac{\norm{f(x) - f(x_0) - L(x - x_0)}}{\norm{x - x_0}} = 0
+    \]
+\end{definition}
+\begin{proposition}
+    Suppose $f$ is differentiable at $x_0$ with derivative $L_1$, and also differentiable  at $x_0$ with derivative $L_2$. Then $L_1 = L_2$.
+\end{proposition}
+\begin{proof}
+    Since $f$ is differentiable at $x_0$ with derivative $L_1$ and $L_2$, we have 
+    \begin{align*}
+                \limit_{x \to x_0} \frac{\norm{L_1(x - x_0) - L_2(x - x_0)}}{\norm{x - x_0}} \leq \limit_{x \to x_0} \frac{\norm{f(x) - f(x_0) - L_2(x - x_0)}}{\norm{x - x_0}} +\\ \limit_{x \to x_0} \frac{\norm{L_1(x - x_0) - (f(x) - f(x_0))}}{\norm{x - x_0}}\\
+                = 0
+    \end{align*}
+    Let $h = x - x_0$, one obtain that 
+    \[
+        \limit_{h \to 0} \frac{\norm{L_1(h) - L_2(h)}}{\norm{h}} = 0
+    \]
+    Given $x \in E$ and $t$ be a scalar such that $t \to 0$, then it follows that $tx \to 0$. Since $L_1$ and $L_2$ are linear map, we have 
+    \[
+        \norm{L_1(x) - L_2(x)} = \frac{\norm{L_1(tx) - L2(tx)}}{\norm{tx}} \to 0
+    \]
+    Thus $L_1 = L_2$, we are done.
+\end{proof}
+
+\begin{definition}
+    Let $E$ be a subset of $\bb{R}^n$, $f: E \to \bb{R}^m$ be a function, let $x_0$ be an interior point of $E$, and let $v$ be a vector in $\bb{R}^n$. If the limit
+    \[
+        \limit_{t \to 0^+, x_0 + tv \in E} \frac{f(x_0 + tv) - f(x_0)}{t}
+    \]
+    exsists, we say that $f$ is \textit{differentiable in the direction $v$ at $x_0$}, and we denote the above limit by $D_vf(x_0)$:
+    \[
+        D_vf(x_0) := \limit_{t \to 0^+}\frac{f(x_0 + tv) - f(x_0)}{t}
+    \]
+\end{definition}
+\begin{proposition}
+    If $f$ is differentiable at $x_0$, then $f$ is also differentiable in the direction $v$ at $x_0$, and 
+    \[
+        D_vf(x_0) = f'(x_0)v
+    \]
+\end{proposition}
+\begin{proof}
+    This is trivial if $v = 0$, assume that $v \neq 0$. Since $f$ is differentiable at $a$, then there exists a linear map $f'(a): \bb{R}^n \to \bb{R}^n$ satisfying
+    \[
+        0 = \lim_{h \to 0}\frac{f(a + h) - f(a) - hf'(a)}{\norm{h}},
+    \]
+    Replacing $h$ by $tv$ and $t \to 0$ yields
+    \[
+        0 = \lim_{t \to 0^+}\frac{f(a + tv) - f(a) - tvf'(a)}{t\norm{v}}  =\lim_{t \to 0^-}\frac{f(a + tv) - f(a) - tvf'(a)}{t\norm{v}}  
+    \]
+    Since $\norm{v} \neq 0$, we thus have 
+    \[
+    0 =\lim_{t \to 0}\frac{f(a + tv) - f(a) - tvf'(a)}{t}  = D_v|af = f'(a)\cdot v.
+    \]
+
+\end{proof}
+\begin{definition} Let $E$ be a subset of $\bb{R}^n$, let $f: E \to \bb{R}^m$ be a function let $x_0$ be an interior point of $E$, and let $1 \leq j \leq n$. Then the partial derivative of $f$ respect to the $x_j$ variable at $x_0$, denoted $\de{f}{x_j}(x_j)$, is defined by
+\[
+\de{f}{x_j}(x_j) = \limit_{t \to 0, x_0 + te_j \in E} \frac{f(x_0 + te_j) - f(x_0)}{t} = \frac{d}{dt}f(x_0 + te_j)_{t = 0}
+\]
+    
+\end{definition}
+\begin{theorem}
+    Let $E$ be a subset of $\bb{R}^n$, $f: E \to \bb{R}^m$ be a function, $F$ be a subset of $E$, and $x_0$ be an interior pint of $F$. If all the partial derivatives $\de{f}{x_j}$ exist on $F$ and are continuous at $x_0$, then $f$ is differentiable at $x_0$. Moreover if $v = (v_1,v_2,\dots,v_n) \in \bb{R}^n$, the linear transformation $f'(x_0): \bb{R}^n \to \bb{R}^m$ is defined by 
+    \[
+        f'(x_0)(v) = \sum_{j = 1}^n v_j \de{f}{x_j}(x_0)
+    \]
+\end{theorem}
+\begin{proof}
+    We first suppose $L: \bb{R}^n \to \bb{R}^m$ be the linear transformation such that if $v$ is a vector of $\bb{R}^n$ and $v = (v_1,v_2,\dots,v_n)$, then
+    \[
+        L(v) = \sum_{j = 1}^n v_j \de{f}{x_j}(x_0)
+    \]
+    We attempt to prove that $L = f'(x_0)$, in other words, this is equivalent to 
+    \[
+        \limit_{h \to 0}\frac{\norm{f(x_0 + h) - f(x_0) - L(h)}}{\norm{h}}.
+    \]
+    Indeed, given $\ep > 0$, it suffices to find $\delta > 0$ such that  whenever $h \in B(0,\delta) \backslash \{0\}$, we should have 
+    \[
+        \norm{f(x_0 + h) - f(x) - L(h)} < \ep\norm{h}.
+    \]
+    For every $1 \leq j \leq n$, since the partial derivative $\de{f}{x_j}$ exists, the function $g_j(x) = \de{f}{x_j}(x)$ is also continuous in at $x_0$. Thus we can find $\delta_j > 0$ such that whenever $h \in B(0,\delta_i) \backslash \{0\}$, we have 
+    $\norm{g_j(x) - g_j(x_0)} < \frac{\ep}{mn}$. Let $\delta = \min\{\delta_1,\dots,\delta_n\}$ and fix $h \in  B(0,\delta) \backslash \{0\}$, it is possible to determine the scalars $(h_1,h_2,\dots,h_n) \in \bb{R}^n$ such that
+    \[
+        h = h_1e_1 + h_2e_2 + \dots + h_ne_n,
+    \]
+    where $\{e_1,e_2,\dots, e_n\}$ is standard ordered basis of $\bb{R}^n$. Indeed, by writing $f$ in components as $f = (f_1,\dots,f_m)$, it would follow that 
+    \[
+        \de{f}{x_j}(x_0) = \left(\de{f_1}{x_j}(x_0), \de{f_2}{x_j}(x_0),\dots, \de{f_n}{x_j}(x_0)\right) \tag{1}.
+    \]
+    Let $1 \leq i \leq n$, by the Mean Value Theorem, one may locate $t_1$ between $0$ and $h_1$ such that \[f_i(x_0 + h_1e_1) - f_i(x_0) = \de{f_i}{x_1}(x_0 + t_1e_1)h_1.\]
+    In particular, since 
+    \[
+        \norm{\de{f_i}{x_1}(x_0 + t_1e_1) - \de{f_i}{x_1}(x_0)} \leq \norm{\de{f}{x_1}(x_0) - \de{f}{x_1}(x_0)} < \frac{\ep}{mn}
+    \]
+    Multiplying both sides by $\norm{h_1}$ and replacing the left-side term with $(1)$ obtains that 
+    \[
+        \norm{f_i(x_0 + h_1e_1) - f_i(x_0) - \de{f_i}{x_1}(x_0)} < \frac{\ep}{mn}\norm{h_1} \leq \frac{\ep}{mn}\norm{h}
+    \]
+    whenever $1 \leq i \leq n$. Adding $n$ above inequalities for specific $f_1,f_2,\dots,f_n$ and using triangle inequality that $\norm{(y_1,\dots,y_m)} \leq \norm{y_1} + \dots + \norm{y_m}$ yields
+    \[  
+    \norm{f(x_0 + h_1e_1) - f(x_0) - \de{f}{x_1}(x_0)} < \frac{\ep\norm{h}}{n}.
+    \]
+    Similarly, by developing the analogous process with $x_0 + h_1e_1$ and $x_0 + h_1e_1 + h_2e_2$, we thus have 
+    \[
+     \norm{f(x_0 + h_1e_1 + h_2e_2) - f(x_0 + h_1e_1) - \de{f}{x_1}(x_0)} < \frac{\ep\norm{h}}{n}.
+    \]
+    whenever $h \in B(0,\delta)\backslash \{0\}$. More generally, for each $0 \leq k\leq n - 1$, one can obtain 
+    \[
+       \norm{u_k} = \norm{ f\left(x_0 + \sum_{j = 1}^{k + 1} h_je_j\right)  - f\left(x_0 + \sum_{j = 1}^{k} h_je_j\right) - \de{f}{x_k}(x_0)} < \frac{\ep\norm{h}}{n}.
+    \]
+    Summing all these terms together implies
+    \begin{align*}
+        \norm{u_1 + u_2 + \dots + u_n} &= \norm{f(x_0 + h_1e_1 + \dots + h_ne_n) - f(x_0) - \sum_{j = 1}^n h_j\de{f}{x_j}(x_0)}\\
+        &= \norm{f(x_0 + h) - f(x_0) - L(h)}\\
+        &\leq \norm{u_1} + \norm{u_2} + \dots + \norm{u_n}\\
+        &< \ep \norm{h}
+    \end{align*}
+    Therefore, $L$ is derivative of $f$ at $x_0$, as desired.
+    
+\end{proof}
+\begin{definition}
+    If $f: E \to \bb{R}$ is a real-valued function, and we define the gradient $d f(x_0)$ of $f$ at $x_0$ to be the $n$-dimensional row vector 
+    \[
+        d f(x_0):= \left(\de{f}{x_1}(x_0), \de{f}{x_2}(x_0), \dots, \de{f}{x_n}(x_0)\right)
+    \]
+\end{definition}
+\subsection{Tangent Vectors of Euclidean Space}
+
+\begin{definition}
+   A derivation at $p \in \bb{R}^n$ is a linear map $\ome: C^{\infty}(\bb{R}^n) \to \bb{R}$ satisfying the Leibniz product rule: 
+    \[
+        \ome(fg) = f\ome(g) + g\ome(f) \text{ for all smooth maps }g,f \in C^{\infty}(M)
+    \]
+    We denote the set $T_p\bb{R}^n$ to be the set containing all kind of following derivation, that is 
+    \[
+        T_p \bb{R}^n := \{\ome: C^{\infty}(M) \to \bb{R} \mid \ome \text{ linear and Leibniz}\}.
+    \]  
+\end{definition}
+\begin{proposition}
+    Let $a \in \bb{R}^n$, for each geometric tangent vector $v_a \in \bb{R}$, the map $d \cdot v_a: C^{\infty}(\bb{R}^n)\to \bb{R}$ is a derivation at $a$. Moreover, the operation $v_a \mapsto d(a) \cdot v_a$ is an isomorphism from $\bb{R}^n_a$ onto $T_a\bb{R}^n$.
+\end{proposition}
+\begin{proof}
+    The fact $d \cdot v_a$ is a consequence of the linearity and Lebniz implies that it is a derivation. It suffices to prove that $\mc{L}: v_a \mapsto d \cdot v_a$ is an isomorphism. 
+
+    For injectivity, suppose $\mc{L}(v_a) = \mc{L}(w_a)$ for some geometric tangent vector $v_a, w_a$, it folows that 
+    \begin{align*}
+        0 &= \mc{L}(v_a - w_a)(x^j) = d \cdot (v_a - w_a)(x^j) =  \left(\frac{\partial}{\partial x^1}(x^j), \dots, \frac{\partial}{\partial x^n}(x^j)\right)\left(v_a - w_a\right)\\
+        &= \frac{\pa}{\pa x_i}(x^j)(v^i -w^i) = \delta_{ij}(v^i - w^i) = v^j - w^j,
+    \end{align*}
+    for all $j = 1, \dots, n$. Thus $\mc{L}$ is injective. To prove surjectivity, let $w \in T_a\bb{R}^n$ be abitrary and let $v$ the the tangent vector of $\bb{R}^n_a$ such that $w(x^i)= v^i$, it suffices to prove that $w = d\cdot v_a$. By the Taylor's theorem, one can write 
+    \[
+        f(x) = f(a) + \left[\frac{\pa f}{\pa x^i}(a)(x^i - a^i)\right] + \left[(x^i - a^i)(x^j - a^j)\int_{0}^1(1 - t)\frac{\pa^2f}{\pa x^i x^j}(a + t(x-a))dt\right]
+    \]
+    Differentiating both sides by $w$ yields 
+    \[
+        w(f(x)) = w(f(a)) + \frac{\pa f}{\pa x^i}(a)(w(x^i) - a^i) = \frac{\pa f}{\pa x^i}(a)v^i = d \cdot v_a (a)
+    \]
+    Hence, $\bb{R}^n_a$ is isomorphic to $T_a\bb{R}^n$ by the following operation.
+\end{proof}
+
+\begin{definition}[Tangent Vectors on Manifolds]
+    Let $M$ be a smooth manifold, a derivation at $p \in M$ is a linear map $\ome: C^{\infty}(M) \to \bb{R}$ satisfying the Leibniz product rule: 
+    \[
+        \ome(fg) = f\ome(g) + g\ome(f) \text{ for all smooth maps }g,f \in C^{\infty}(M)
+    \]
+    We denote the set $T_p(M)$ to be the set containing all kind of following derivation, that is 
+    \[
+        T_pM := \{\ome: C^{\infty}(M) \to \bb{R} \mid \ome \text{ linear and Leibniz}\}.
+    \]
+\end{definition}
+\begin{definition}[The Differential of a Smooth Map]
+    Let $F: M \to N$ be the smooth map between smooth manifolds, for each $p \in M$, we define the map 
+    \[
+        d F_p: T_pM \to T_{F(p)}N,
+    \]
+    called the \textit{differential of $F$ at $p$} that acts on $f \in C^\infty(N)$ by the rule 
+    \[
+        d F_p(v)(f) = v(f\circ F).
+    \]
+\end{definition}
+\begin{proposition}
+    The operation $d F_p$ defined above is a derivation.
+\end{proposition}
+\begin{proposition}
+    Let $M$ be a smooth manifold, $p \in M$ and $v \in T_pM$. If $f,g \in C^{\infty}(M)$ agree on some neighborhood of $p$, then $vf = vg$.
+\end{proposition}
+\begin{proposition}
+    If $M$ is an $n$-dimensional smooth manifold, then for each $p\in M$, the tangent space $T_pM$ is an $n$-dimensional vector space.
+\end{proposition}
+
+\begin{definition}[Second definition of Tangent Space] Let $M$ be a smooth manifold and $p \in M$. We say every the smooth function $\zeta: (-\ep,+\ep) \to M$ such that $\zeta(0) = p$ is \textit{a $p$-path}. Two $p$-path $\alpha$ and $\beta$ is said to satisfies the $\sim$ equivalent relation if 
+    \[
+        \frac{d}{dt}(f(\alpha(t)))\bigg|_{t = 0}=  \frac{d}{dt}(f(\beta(t)))\bigg|_{t = 0}
+    \]
+    for all smooth map $f\in C^{\infty}(M)$. Then the tangent space at $p$ is defined as:
+    \[
+        T_p(M) := \{\left[\zeta'(0)\right]| \text{ Smooth curve }\zeta: (-\ep,+\ep) \to M, \zeta(0) = p \}
+    \]
+\end{definition}
+
+\begin{proposition}
+    The tangent spaces at $p$ in first and second definition are naturally isomorphic.
+\end{proposition}
+\begin{proposition}
+    If $M$ is a smooth manifolds with dimension $n$ and let $(x_1,x_2,\dots, x_n)$ be a smooth local chart around $p \in M$, then the set 
+    \[
+        \left\{\frac{\pa}{\pa x_1}\bigg|_p,\frac{\pa}{\pa x_2}\bigg|_p,\dots, \frac{\pa}{\pa x_n}\bigg|_p\right\}
+    \]
+    forms a basis for $T_pM$.
+\end{proposition}
+For convenience, if $v \in T_pM$ we write $v = (dx_1,dx_2,\dots,dx_n)$.
+\subsection{Problems}
+\begin{problem}\label{thm:3.1}
+     Suppose $M$ and $N$ are smooth manifolds with or without boundary, and $F: M \rightarrow N$ is a smooth map. Show that $d F_p: T_p M \rightarrow T_{F(p)} N$ is the zero map for each $p \in M$ if and only if $F$ is constant on each component of $M$.
+\end{problem}
+\begin{proof}
+    Since the converse implication is trival, we only prove the forward one. Let $(x^1,\dots,x^n)$ be a local coordinate chart for a neighborhood $U$ of $p$. Let $v \in T_pM$, then it can be expressed as a linear combination 
+    \[
+        v = v^i \frac{\pa}{\pa x^i}(p) 
+    \]
+    Differentiating both sides by $d F_p$ yields 
+    \[
+        0 = d F_p (v)(x^j) = v^i \frac{\pa (x^j \circ F)}{\pa x^i }(p) = v^i \frac{\pa F^j}{\pa{x^i}}(p) 
+    \]
+    Since this is true for all $v \in T_pM$, choosing $v = \pa_{j}$ implies that  $\dfrac{\pa F^j}{\pa x^j}(p)$ for all $j$. As a consequence, each component $F_j$ is constant, then $F$ is also constant.
+\end{proof}
+
+\begin{problem}
+     Let $M_1,\dots, M_k$ be smooth manifolds and for each $j$, let $\pi_j: M_1\times \dots \times M_k \to M_j$ be the projection onto the $M_j$ factor. For any point $p = (p_1,\dots,p_k) \in M_1\times\dots\times M_k$, the map
+     \[
+        \alpha: T_p(M_1\times\dots\times M_k) \to T_{p_1}M_1 \oplus \dots \oplus T_{p_k}M_k
+     \] 
+defined by 
+\[
+    \alpha(v) = (d(\pi_i)_p (v))
+\]
+is an isomorphism.
+\end{problem}
+\begin{proof}
+    We first verify that $\alpha$ is well-defined. For every $j = 1,\dots, k$, since the differential $$d(\pi_j)_p:  T_p(M_1\times \dots \times M_k)\to T_{\pi_j(p)}M_j= T_{p_j}M_j$$
+    sends the product tangent vector $v$ to every seperate tangent space $T_{p_j}M_j$. This ensures that the image of $\alpha$ always lies on the direct sum of following tangent spaces. We now prove that $\alpha$ is injective. Suppose $\alpha(v) = \alpha(w)$, since $\alpha$ is linear due to the linearity of the differentials, we thus have $\alpha(v) - \alpha(w) = \alpha(v - w) = 0$ implies that $d(\pi_i)_p(v - w) = 0$ for all $i = 1 ,\dots, k$. Let $k_i = \dim{M_i}$ for all $i$ and consider the local coordinate $(x^1_{1},\dots,x^{k_1}_1,x^1_{2},\dots, x^{k_k}_{k}) = (x^1,\dots, x^{k_1 + \dots + k_k})$. Let $j = 1,\dots, k$ and $t = 1,\dots, k_j$ be fixed and $i$ varies from $1 $ to $k_1 + \dots + k_k$, expressing the vector $u = v - w$ in coordinate $u = u^i\frac{\pa}{\pa x^i}(p)$ yields
+    \[
+        0 = d(\pi_j)_p(u)(x^t) = u^i\frac{\pa(x^t \circ \pi_j)}{\pa x^i}(p) = u^i \frac{\pa x^t_j}{\pa x^i} (p) = u^i \frac{\pa x^{k_{t -1} + j}}{\pa x^i}(p) = u^{k_{t - 1} +j}
+    \]
+    Since $t$ and $j$ was abitrary, then it follows that $u^i = v^i - u^i = 0$, hence $\alpha$ is injective. Let $w = (w_1,\dots, w_k) \in  T_{p_1}M_1 \oplus \dots \oplus T_{p_k}M_k$, and let 
+    \[
+        v = w^j_i\frac{\pa}{\pa x^{k_{i - 1} + j}}.
+    \]
+    The computation above implies that $\alpha(v) = w$. Thus $\alpha$ is bijective.
+\end{proof}
+\begin{problem}
+    Prove that if $M$ and $N$ are smooth manifolds, then $T(M \times N)$ is diffeomorphic to $T M \times T N$.
+\end{problem}
+\begin{problem}
+     Show that $T \mathbb{S}^1$ is diffeomorphic to $\mathbb{S}^1 \times \mathbb{R}$.
+\end{problem}
+\begin{problem}
+    Let $\mathbb{S}^1 \subseteq \mathbb{R}^2$ be the unit circle, and let $K \subseteq \mathbb{R}^2$ be the boundary of the square of side 2 centered at the origin: $K=\{(x, y): \max (|x|,|y|)=1\}$. Show that there is a homeomorphism $F: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ such that $F\left(\mathbb{S}^1\right)=K$, but there is no diffeomorphism with the same property. [Hint: let $\gamma$ be a smooth curve whose image lies in $\mathbb{S}^1$, and consider the action of $d F\left(\gamma^{\prime}(t)\right)$ on the coordinate functions $x$ and $y$.] (Used on p. 123.)
+\end{problem}
+\begin{problem}
+    Consider $\mathbb{S}^3$ as the unit sphere in $\mathbb{C}^2$ under the usual identification $\mathbb{C}^2 \leftrightarrow \mathbb{R}^4$. For each $z=\left(z^1, z^2\right) \in \mathbb{S}^3$, define a curve $\gamma_z: \mathbb{R} \rightarrow \mathbb{S}^3$ by $\gamma_z(t)=$ ($e^{i t} z^1, e^{i t} z^2$). Show that $\gamma_z$ is a smooth curve whose velocity is never zero.
+\end{problem}
+\begin{problem}
+    Let $M$ be a smooth manifold with or without boundary and $p \in M$. Let $\mathcal{V}_p M$ denote the set of equivalence classes of smooth curves starting at $p$ under the relation $\gamma_1 \sim \gamma_2$ if $\left(f \circ \gamma_1\right)^{\prime}(0)=\left(f \circ \gamma_2\right)^{\prime}(0)$ for every smooth real-valued function $f$ defined in a neighborhood of $p$. Show that the map $\Psi: \mathcal{V}_p M \rightarrow T_p M$ defined by $\Psi[\gamma]=\gamma^{\prime}(0)$ is well defined and bijective. (Used on p. 72.)
+\end{problem}

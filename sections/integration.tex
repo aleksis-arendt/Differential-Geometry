@@ -1,0 +1,22 @@
+\section{Integration on Manifolds}
+\begin{definition}[Measure Zero set]
+    An \textit{open rectangle} is the set of the form \[C^b_a := (a^1,b^1)\times\dots\times(a^n, b^n),\] where $a^i < b^i$. The \textit{volume of $C^b_a$} is denoted by:
+    \[
+        \vol(C^b_a) := (b^1 - a^1)\dots(b^n - a^n).
+    \]
+    A subset $X \subset \bb{R}^n$ is said to have \textit{measure zero} if for every $\ep > 0$, there exists a countable cover of open rectangles $\{C_i\}$ such that 
+    \[
+        \sum_{i} \vol(C_i) < \ep.
+    \]
+    A \textit{domain of integration} in $\bb{R}^n$ is the bounded subset whose boundary has measure zero.
+\end{definition}
+\begin{definition}
+    Let $D \subset \bb{R}^n$ be a domain of integration and $\ome = fdx^1\wedge\dots \wedge dx^n$ be a differential n-form on $\clo{D}$, where $f: \clo{D} \to \bb{R}$ is some continuous function. We define the integral of $\ome$ over $D$ as
+    \[
+        \int_{D}\ome = \int_D fdx^1\dots dx^n = \int_D f dV.
+    \]
+    More generally, let $U$ be an open subset of $\bb{R}^n$ or $\bb{H}^n$, and $D$ be any domain of integration containing the compact set $\mathrm{supp} (\ome)$, then 
+    \[
+        \int_U \ome = \int_D \ome.
+    \]
+\end{definition}

@@ -1,0 +1,342 @@
+\section{Partition of Unity}
+\subsection{Construction}
+\begin{lemma}
+    The function $f: \bb{R} \to \bb{R}$ defined by 
+    \[  
+        f(t) = \begin{cases}
+            e^{-1/t}, t > 0,\\
+            0, t \leq 0,
+        \end{cases}
+    \]
+    is smooth.
+\end{lemma}
+\begin{lemma}
+    Given any real numbers $r_1$ and $r_2$ such that $r_1 < r_2$, there exists a smooth function $h: \bb{R} \to \bb{R}$ such that $h(t) = 1$ for $t \leq r_1$, $0 < h(t) <1$ for $r_1 < t < r_2$ and $h(t) = 0$ for $t \geq r_2$.
+\end{lemma}
+\begin{proof}
+    Let $f$ be the smooth function of the previous lemma, and set 
+    \[
+        h(t) = \frac{f(r_2 - t)}{f(r_2 - t) + f(t - r_1)}
+    \]
+    Then $h$ satisfies the desired properties.
+\end{proof}
+\begin{lemma}
+    Given any positive numbers $r_1 < r_2$, there exists a smooth function $H: \bb{R}^n \to \bb{R}$ such that $H = 1$ on $\clo{B}_{r_1}(0)$, $0 < H < 1$ for all $x \in B_{r_2}(0)\backslash \clo{B}_{r_1}(0)$ and $H = 0$ on $\bb{R}^n\backslash B_{r_2}(0)$.
+\end{lemma}
+\begin{proof}
+    By setting $H(x) = h(|x|)$ and we are done.
+\end{proof}
+\begin{definition}
+    Let $\mc{X} = (X_{\alpha})_{\alpha \in }$ be an abitrary open cover of $M$. A \textit{partition of unity subordinate to $\mc{X}$} is an indexed family $(\psi_{\alpha})_{\alpha \in A}$ of continuous functions $\psi_{\alpha}: M \to \bb{R}$ satisfying the following:
+    \begin{enumerate}
+        \item $0 \leq \psi_{\alpha}(x) \leq 1$ for all $\alpha \in A$ and all $x \in M$.
+        \item $\supp \psi_{\alpha} \subseteq X_{\alpha}$ for each $\alpha \in A$.
+        \item Every point has a neighborhood that intersects $\supp \psi_{\alpha}$ for finite values of $\alpha$.
+        \item $\dsum_{\alpha \in A}\psi_{\alpha} = 1$ for all $x \in M$.
+    \end{enumerate}
+\end{definition}
+\begin{theorem}
+    Suppose $M$ is a smooth manifold with or without boundary, and $\mc{X} = (X_\alpha)_{\alpha \in A}$ is any indexed open cover of $M$. Then there exists a smooth partition of unity subordinate to $\mc{X}$.
+\end{theorem}
+
+\begin{proof}
+    Naturally, if we can find an indexed family support where each of them is a regular coordinate ball, then the construction of smooth function satisfying those following conditions is possible. However, its worth noting that the given open cover $\mc{X}$ is not locally finite. Therefore, our idea to find an indexed locally finite refinement of $\mc{X}$ and every element also a regular coordinate ball.
+
+    The fact that $M$ is smooth manifold implies that there exsists an atlas $\{(U_{i},\varphi_{i}) \}$ where $\{ U_i\}$ is a basis for the topology of $M$ and we can define every regular coordinate ball by some charts of this atlas. Since every $X_\alpha$ is itself a smooth manifold, thus it has a basis of regular coordinate balls $\mc{B}_{\alpha}$, and then $\mc{B} = \bigcup_{\alpha \in A} \mc{B}_{\alpha}$ defines a basis for the topology on $M$. Since $M$ is Hausdorff and second-countable, hence it is paracompact, then there exists a subset of $\mc{B}$, denoted by $\{ B_i\}$, is a locally finite open refinement of $\mc{X}$, and hence $\{ \clo{B}_i\}$ is also locally finite.  Since each $B_i$ is an open subset of some $X_{\alpha}$, then there exists a larger coordinate ball $ \ti{B}_i$ of $X_{\alpha}$ such that  $\ti{B}_i \supset B_i$ and a corresponding local chart $\varphi_i: \ti{B}_i \to \bb{R}^n$ that maps $\varphi(B_i) = B_{r_1}(0)$ and $\varphi(\ti{B}_i) = B_{r_2}(0)$, where $r_1 < r_2$ are two positive real numbers. Then we can define a smooth function $f_i: M \to \bb{R}$ as follows: 
+    \begin{equation*}
+        f_i(x) = \begin{cases}
+            H_i \circ \varphi_i (x) \text{ on }\ti{B}_i\\
+            0 \text{ on }M \backslash \clo{\ti{B}_i}
+        \end{cases}
+    \end{equation*}
+    where $H_i$ is the smooth function defined in the previous lemma for  $B_{r_1}(0)$ and $B_{r_2}(0)$.Consequently, it follows that $\supp f_i = \clo{\ti{B_i}}$ for all $i$. Since every $f_i$ is non-negative everywhere on $M$ and each point in $M$ is contained by some $B_i$, then the function $f: M \to \bb{R}$ defined by 
+    \[
+        f(x) = \sum_{i} f_i(x)
+    \]
+    never vanishing to zero and $f$ is well-defined since the following sum is finite for all point in $M$. Hence, $f$ is smooth. Let $g_i := \dfrac{f_i}{f}$, we thus have 
+    \[
+        \sum_{i} g_i(x) = 1 \text{ for all }x \in M.
+    \]
+    For every $\alpha \in A$, we define $\psi_{\alpha}$ as the partition sum of $g_i$ satisfying
+    \[
+        \psi_{\alpha} = \sum_{i \mid \ti{B}_i \subseteq X_{\alpha}}g_i,
+    \]
+    This partition of $\psi_{\alpha}$ satisfies $\sum_{\alpha \in A} \psi_{\alpha} = 1$ and $$\supp \psi_\alpha \subseteq \bigcup_{i \mid \ti{B}_i \subseteq X_{\alpha}} \supp g_i \subseteq X_{\alpha},$$ and is a smooth function as we can verify. Hence the indexed family $\{\psi_{\alpha}\}_{\alpha \in A}$ is a smooth partition of unity subordinate to $\mc{X}$.
+\end{proof}
+\begin{definition}
+    Let $M$ be a topological space, $A \subseteq M$ is a closed subset and $U \subseteq M$ is an open subset containing $A$, a continuous function $\psi: M \to \bb{R}$ is called a \textit{bump function for $A$ supported in $U$} if $0 \leq \psi \leq 1$ on $M$, $\psi = 1$ on $A$ and $\supp \psi \subseteq U$.
+\end{definition}
+\begin{theorem}
+    Let $M$ be a smooth manifold. For any closed subset $A \subseteq M$ and any open subset $U$ containing $A$, there exists a smooth bump function for $A$ supported in $U$.
+\end{theorem}
+\begin{proof}
+    Since the collection $\{M \backslash A , U   \}$ is an open cover of $M$, there exists a partition of unity $\{\psi_1,\psi_2 \}$ subordinate to $M$, where $\supp \psi_2 \subseteq U$ and $\psi_2 = 1$ on $A$ since $\psi_1 = 0$ on $A$. Thus $\psi_2$ is a bump function for $A$ supported in $U$.
+\end{proof}
+\begin{theorem}
+    Suppose $M$ is a smooth manifold, $A \subseteq M$ is a closed subset, and $f: M \to \bb{R}^k$ is a smooth function. For any open subset $U$ containing $A$, there exists a smooth function $\ti{f}: M \to \bb{R}^k$ such that $\ti{f}|_A = f$ and $\supp \ti{f} \subseteq U$.
+\end{theorem}
+\begin{proof}
+    Since every smooth function on closed subset can be extended into another smooth function on a small neighborhood, for each $p \in A$, choose an open neighborhood $W_p \subseteq U$ containing $p$ such that there exists $\ti{f}_p: W_p \to \bb{R}^k$ as a smooth function that agrees with $f$ on $W_p \cap A$. Let $W_0 = M \backslash A$, then the collection $\{W_p\}_{p \in A} \cup \{W_0\}$ induces an open cover on $M$. Then there exists a smooth partition of unity $\{\psi_{p}\}_{p \in A}\cup \{ \psi_0\}$ subordinate to $M$. One can define $\ti{f}: M \to \bb{R}^k$ by 
+    \[
+        \ti{f}(x) = \sum_{p \in A}\psi_p(x)\ti{f}_p(x) \text{ for all } x \in M
+    \]
+    Since every product $\psi_p \ti{f}_p$ is a smooth function and $\ti{f}$ is well-defined, $\ti{f}$ is thus a smooth function. Moreover, it's easy to verify that  $\supp \ti{f} \subseteq \bigcup_{p \in A}W_p \subseteq U$ and $\ti{f}$ agrees with $f$ on $A$ since 
+    \[
+        \ti{f(x)}  = \sum_{p \in A}\psi_p(x)f(x) = \left(\sum_{p \in A}\psi_p(x)\right)f(x)= f(x) \text{ for all }x \in A.
+    \]
+    Thus, $\ti{f}$ is indeed an extension of $f$ and $\supp \ti{f} \subseteq U$.
+\end{proof}
+\begin{theorem}\label{thm:smooth_cutoff}
+    Let $M$ be a smooth manifold. If $K$ is any closed subset of $M$, there is a smooth nonnegative function $f: M \to \bb{R}$ such that $f^{-1}(0) = K$.
+\end{theorem}
+\begin{proof}
+     Since every smooth coordinate balls is diffeomorphic to $\bb{R}^n$, it suffices to prove there exsits a desired function $f: \bb{R}^n \to \bb{R}$ such that $f^{-1}(0) = K$, where $K$ is a closed subset of $\bb{R}^n$. For every $x \in M \backslash K$, there exists a real number $r > 0$ such that $B_{r}(x) \subseteq M \backslash K$. Then $M \backslash K$ is the union of countably many such balls $\{B_{r_n}(x_n)\}$. We wish to construct a smooth nonnegative function $f: M \to \bb{R}$ such that $f$ vanishes to zero once $x$ reach outside all of those coordinate balls. Let $H: \bb{R}^n \to R$ be a smooth bump function that $H = 1$ on $B_q(0)$ and supported in $B_1(0)$, where $q$ is abitrary positive number that $q < 1$. 
+
+    Since we need $f$ to be nonnegative if $x$ lies in some $B_{r_i}(x_i)$, let $H_i(x) = H\left(\dfrac{x - x_i}{r_i}\right)$ for all $i$, one can express $f$ as a countably infinite nonnegative linear combination of $H_i$'s. For each positive integer $n$, let $M_i$ be the bounded constant of the absolute value of $h$ and all of its partial derivation up to order $n$. We define $f: \bb{R}^n \to \bb{R}$ by     
+    \[
+        f(x) = \sum_{n = 1}^{\infty} \frac{(r_n)^n}{2^nM_n} H_n(x)
+    \]
+    Since every term of this series is nonnegative, bounded by the sum $\dsum_{n = 1}^{\infty}\frac{1}{2^n}$, and is continuous, it follows that $f$ is well-defined and continuous. Let $k \in \bb{N}$, consider the partial derivation of order $k$
+    \[
+        \norm{d^k f(x) }= \norm{\sum_{n = 1}^{\infty} \frac{(r_n)^{n - k}}{2^nM_n} d^k H_n(x)} \leq  \sum_{n = k}^{\infty} \frac{(r_n)^{n - k}}{2^nM_n} \norm{d^k H_n(x)} \leq \sum_{n = k}^{\infty} \frac{(r_n)^{n - k}}{2^nM_n}M_n = \sum_{n = k}^{\infty}\frac{(r_n)^{n - k}}{2^n},
+    \]
+    which is a convergent series, by the criteria of series, $d^k f(x)$ is well-defined for all $k$, and is continuous. Hence $f$ is smooth. 
+
+    Let $\{ B_{\alpha}\}_{\alpha \in A}$ be an open cover of $M$ by smooth coordinate balls and $K$ be any closed subset of $M$. Consider the partition of unity $\{ \psi \}_{\alpha\in A}$ subordinate to $M$. For every $\alpha \in A$, since $B_{\alpha}$ is diffeomorphic to $\bb{R}^n$, then there exsits a smooth nonnegative function $f_{\alpha}: B_{\alpha} \to \bb{R}$ such that $f_{\alpha}^{-1}(0) = K \cap B_{\alpha}$. Let $f(x) = \sum_{\alpha \in A} \psi_{\alpha}(x)f_{\alpha}(x)$, it follows that 
+    \[
+        f^{-1}(0) = \bigcup_{\alpha \in A} f_{\alpha}^{-1}(0) =\bigcup_{\alpha \in A} K \cap B_{\alpha} = K,
+    \]
+    as desired.
+\end{proof}
+\subsection{Problems}
+\begin{problem}
+    Define $f: \mathbb{R} \rightarrow \mathbb{R}$ by
+$$
+f(x)= \begin{cases}1, & x \geq 0 \\ 0, & x<0\end{cases}
+$$
+
+Show that for every $x \in \mathbb{R}$, there are smooth coordinate charts $(U, \varphi)$ containing $x$ and $(V, \psi)$ containing $f(x)$ such that $\psi \circ f \circ \varphi^{-1}$ is smooth as a map from $\varphi\left(U \cap f^{-1}(V)\right)$ to $\psi(V)$, but $f$ is not smooth in the sense we have defined in this chapter.
+\end{problem}
+\begin{problem}
+    Prove Proposition 2.12 (smoothness of maps into product manifolds).
+\end{problem}
+\begin{problem}
+    For each of the following maps between spheres, compute sufficiently many coordinate representations to prove that it is smooth.
+\begin{enumerate}
+    \item $p_n: \mathbb{S}^1 \rightarrow \mathbb{S}^1$ is the ${n}$-th power map ${n} \in \mathbb{Z}$, given in complex notation by $p_n(z)=z^n$.
+    \item $\alpha: \mathbb{S}^n \rightarrow \mathbb{S}^n$ is the antipodal map $\alpha(x)=-x$.
+    \item  $F: \mathbb{S}^3 \rightarrow \mathbb{S}^2$ is given by $F(w, z)=(z \bar{w}+w \bar{z}, i w \bar{z}-i z \bar{w}, z \bar{z}-w \bar{w})$, where we think of $\mathbb{S}^3$ as the subset $\left\{(w, z):|w|^2+|z|^2=1\right\}$ of $\mathbb{C}^2$.
+\end{enumerate}
+\end{problem}
+\begin{proof}
+    (1) Since $\bb{S}^1 \subset \bb{C}$, consider the global coordinate chart $\varphi: \bb{S}^1 \to [0,2\pi)$ satisfying
+    \[
+        \varphi(z) = \varphi(e^{i\theta}) = \theta \in [0,2\pi)
+    \]
+    Thus, the coordinate representation in this case is 
+    \[
+    \tilde{f(x)} = \varphi \circ f \circ \varphi^{-1}(\theta) = n\theta
+    \]
+    Since $\varphi$ is smooth and $f$ is a smooth map, it follows that $\tilde{f}$ is also smooth.
+
+    (2) Consider the stereographic projection $\sigma: \bb{S}^n\backslash\{N\} \to \bb{C}^{n}$ satisfying
+    \[
+        \sigma\left(z^1, \ldots, z^{n+1}\right)=\frac{\left(x^1, \ldots, x^n\right)}{1-x^{n+1}}.
+    \]
+    Then the coordinate representation is computed by 
+    \[
+        \tilde{f}(x) = \sigma \circ f \circ \sigma^{-1}(u)= \sigma\left(\frac{-2u^1}{|u|^2 + 1},\dots, \frac{-2u^n}{|u|^2 + 1}, \frac{1 - |u|^2}{|u|^2 + 1}\right) = (-u^1,\dots,-u^n),
+    \]
+    which is smooth, the same construction on $\bb{S}^n\backslash \{S\}$.
+
+
+\end{proof}
+\begin{problem}
+    Show that the inclusion map $\overline{\mathbb{B}}^n \hookrightarrow \mathbb{R}^n$ is smooth when $\overline{\mathbb{B}}^n$ is regarded as a smooth manifold with boundary.
+2-5. Let $\mathbb{R}$ be the real line with its standard smooth structure, and let $\widetilde{\mathbb{R}}$ denote the same topological manifold with the smooth structure defined in Example 1.23. Let $f: \mathbb{R} \rightarrow \mathbb{R}$ be a function that is smooth in the usual sense.
+\begin{enumerate}
+    \item Show that $f$ is also smooth as a map from $\mathbb{R}$ to $\widetilde{\mathbb{R}}$.
+    \item Show that $f$ is smooth as a map from $\widetilde{\mathbb{R}}$ to $\mathbb{R}$ if and only if $f^{(n)}(0)=0$ whenever $n$ is not an integral multiple of 3.
+\end{enumerate}
+\end{problem}
+\begin{problem}
+    Let $P: \mathbb{R}^{n+1} \backslash\{0\} \rightarrow \mathbb{R}^{k+1} \backslash\{0\}$ be a smooth function, and suppose that for some $d \in \mathbb{Z}, P(\lambda x)=\lambda^d P(x)$ for all $\lambda \in \mathbb{R} \backslash\{0\}$ and $x \in \mathbb{R}^{n+1} \backslash\{0\}$. (Such a function is said to be homogeneous of degree $\boldsymbol{d}$.) Show that the map $\tilde{P}: \mathbb{R} \mathbb{P}^n \rightarrow \mathbb{R} \mathbb{P}^k$ defined by $\tilde{P}([x])=[P(x)]$ is well defined and smooth.
+\end{problem}
+\begin{proof}
+    We first prove that $\tilde{P}$ is well-defined. Suppose that $[x] = [y]$, it suffices to prove that $\tilde{P}([x]) = \tilde{P}([y])$ or $[P(x)] = [P(y)]$. Since we have the relation 
+    \[
+        [x^1,\dots,x^{n + 1}] =  [\lambda x^1,\dots,\lambda x^{n + 1}] \text{ for all }\lambda,
+    \]
+    it follows that
+    \[
+        \tilde{P}([\lambda x]) = [P(\lambda x)] = [\lambda P(x)] = [P(x)] =P([\lambda x]).
+    \]
+    Thus $\tilde{P}$ is well-defined. To prove $\ti{P}$ is smooth, for each $i = 0,\dots,n$, let $\tilde{U_i}\subset \bb{R}^{k + 1}$ be the subset containing all points $x \in \bb{R}^{n + 1}$ satisfying $x^{i} \neq 0$ and $\varphi_i: U_i \to \bb{R}^{k}$ be the local chart (where $U_i = \pi(\tilde{U_i})$, and $\pi$ is a natural quotient mapping from $\bb{R}^{k + 1}$ to $\bb{RP}^n$) satisfying
+    \[  
+        \varphi_i[x^1, \dots, x^{k + 1}] = \left(\frac{x^1}{x^i},\dots,\frac{x^{i -1}}{x^{i}},\frac{x^{i + 1}}{x^{i}}, \dots,\frac{x^{k + 1}}{x^i}\right).
+    \]
+    As proven above, $\varphi_i$ is well-defined and smooth, and $\{ \varphi_i\}$ defines a smooth structure on $\bb{RP}^k$. Let $x \in \bb{RP}^n$ and a neighborhood $U_i$ containing $x$, it suffices to prove the map $\varphi_i \circ \ti{P} \circ \varphi_i^{-1}: \varphi(U) \to \varphi(U)$ is smooth. Computating sufficiently yields
+    \begin{align*}
+        \varphi_i \circ \ti{P} \circ \varphi_i^{-1}(x) &= \varphi_i \circ \ti{P} ([x^1,\dots, x^{i - 1},1,\dots, x^k])\\
+        &=\varphi_i ([P(x^1,\dots, x^{i - 1},1,\dots,x^k)]).
+    \end{align*}
+    Let $P_i([x]) = P([x^1,\dots, x^{i - 1},1,\dots,x^k])$, we have 
+    \begin{align*}
+        \varphi_i ([P(x^1,\dots, x^{i - 1},1,\dots,x^k)]) = \varphi\circ P_i([x])\\
+        = \left(\frac{P_i^1}{P_i^i},\dots,\frac{P_i^{i -1}}{P_i^{i}},\frac{P_i^{i + 1}}{P_i^{i}}, \dots,\frac{P_i^{k + 1}}{P_i^i}\right).
+    \end{align*}
+    Since every component of $P$ is smooth, then the following composition is also smooth. Thus $\ti{P}$ is smooth, as desired. 
+\end{proof}
+\begin{problem}
+     Let $M$ be a nonempty smooth $n$-manifold with or without boundary, and suppose $n \geq 1$. Show that the vector space $C^{\infty}(M)$ is infinite-dimensional. [Hint: show that if $f_1, \ldots, f_k$ are elements of $C^{\infty}(M)$ with nonempty disjoint supports, then they are linearly independent.]
+\end{problem}
+\begin{proof}
+    We first prove that $M$ contains infinite closed subset. Since $M$ is locally Euclidean, there exists a smooth local chart $(U,\varphi)$ which maps the open subset $U \subseteq M$ into $\tilde{U} = \varphi(U)$, which is open in $\bb{R}^n$. Then we can find an open ball $B(x,q) \subseteq U$, and it contains infinitely disjoint open balls, denoted by the set $\{B(x_{\alpha}, q_{\alpha})\}_{\alpha \in A}$, where $A$ is a countably infinite set. Since $\varphi$ is a homeomorphism, one can consider the pull back $\{\varphi^{-1}(\clo{B(x_{\alpha}, q_{\alpha})})\}_{\alpha}$ as a disjoint collection of closed subsets of $M$. 
+
+    In particular, let $U \subseteq M$ be an closed subset, it suffices to construct a smooth function $f \in C^{\infty}(M)$ which support 
+    \[
+        \mathrm{supp}(f) = \clo{\{p \in M \mid f(p) \neq 0\}}
+    \]
+    is a subset of $U$. We consider the following lemma 
+    \begin{lemma}
+        Suppose $M$ is a smooth manifold with or without boundary, $A \subset M$ is a closed subset, and $f: A \to \bb{R}^k$ is a a smooth function. For any open subset $U$ containing $A$, there exists a smooth function $\tilde{f}: M \to \bb{R}^k$ such that $f_A = f$ and $\mathrm{supp} \tilde{f} \subseteq U$
+    \end{lemma}
+    \begin{proof}
+Use Partition of unity.
+\end{proof}
+The above lemma implies that there is a way to contruct a smooth function as required, and we denote the set of nonzero smooth functions $\{f_n\}_{n \in N}$  such that $f_i$ has support is a subset of $U_{\alpha_i}$. Now we supoose there exists $n \in \bb{N}$ and a $n$-tuple $(a_1,\dots,a_n) \in \bb{R}^n$ satisfying 
+\[
+    a_1f_1 + a_2f_2 + \dots + a_nf_n = 0 \text{ for all } x \in M
+\]
+Since the support of $f_1,\dots,f_n$ are disjoint. For every $i = 1,\dots,n $ by choosing  $x \in U_{\alpha_i}$, it follows that $f_i(x) = 0$ but $f_j(x) \neq 0$ for all $j \neq i$. We thus obtain a homogeneous system of equations
+\begin{equation}
+    \begin{aligned}
+    a_2 f_2 + a_3 f_3 + \dots + a_n f_n &= 0 \quad \text{for all } x \in M \\
+    a_1 f_1 + a_3 f_3 + \dots + a_n f_n &= 0 \quad \text{for all } x \in M \\
+    \dots\\
+    a_1 f_1 + a_2 f_2 + \dots + a_{n-1} f_{n-1} &= 0 \quad \text{for all } x \in M
+    \end{aligned}
+\end{equation}
+which implies $a_if_i = 0$ for all $i = 1,\dots, n$ and for all $x \in M$. Thus $a_1 = \dots = a_n$. Therefore $\{f_1,\dots, f_n\}$ is linearly independent in $C^{\infty}(M)$, but since $n$ is abitrary, $C^{\infty}(M)$ must be infinite-dimensional, as desired.
+\end{proof}
+
+\begin{problem}
+    Define $F: \mathbb{R}^n \rightarrow \mathbb{R P}^n$ by $F\left(x^1, \ldots, x^n\right)=\left[x^1, \ldots, x^n, 1\right]$. Show that $F$ is a diffeomorphism onto a dense open subset of $\mathbb{R P}^n$. Do the same for $G: \mathbb{C}^n \rightarrow \mathbb{C} \mathbb{P}^n$ defined by $G\left(z^1, \ldots, z^n\right)=\left[z^1, \ldots, z^n, 1\right]$ (see Problem 1-9).
+\end{problem}
+\begin{proof}
+    Let $U$ be the open subset of $\bb{R}^{n + 1}$ where $x^{n + 1} \neq 0$ and $\ti{U} = \pi(U)$ is an open subset of $\bb{RP}^n$, where $\pi: \bb{R}^{n + 1} \to \bb{RP}^n$ is a natural projection. It suffices to prove the restricted map $F: \bb{R}^n \to \ti{U}$ is a diffeomorphism. 
+
+    To prove $F$ is injective, suppose $F(x) = F(y)$, then there exists $\lambda \in \bb{R}$ such that 
+    \[
+        (x^1,\dots,x^n,1) = (\lambda y^1,\dots,\lambda y^n,\lambda),
+    \]
+    which implies $\lambda = 1$ and hence $x = y$. To prove $F$ is surjective, let $[y] \in \ti{U}$ be abitrary, we have 
+    \[
+        [y^1,\dots, y^{n + 1}] = \left[\frac{y^1}{y^{n + 1}},\dots, \frac{y^{n}}{y^{n + 1}},1\right] = F\left(\frac{y^1}{y^{n + 1}},\dots, \frac{y^n}{y^{n + 1}}\right).
+    \]
+    Thus, $F$ is a bijection. Since the map $F: \bb{R}^n \to \bb{RP}^n$ is smooth, then $F: \bb{R}^n \to \ti{U}$ is also smooth. Therefore, $F$ is a diffeomorphism onto $\ti{U}$. Now we prove $\ti{U}$ is a dense subset of $\bb{RP}^n$. Let $x \in \bb{RP}^n \backslash \ti{U}$, and $i$ be the positive integer such that $x_i \neq 0$, consider the sequence $(x_n) \in \bb{R}^{n + 1}$ satisfying
+    \[
+        x_n = \left(\frac{x^1}{x^i},\dots, \frac{x^n}{x^i}, \frac{1}{n} \right), n \in \bb{N}
+    \]
+    Then we have 
+    \[
+        \nlim \pi([x_n]) = \left[\nlim x_n \right]= \left[\frac{x^1}{x^i},\dots, \frac{x^n}{x^i}, 0\right] = [x^1,\dots,x^n,0] = [x]
+    \]
+    Therefore, for any $[x] \in \bb{RP}^n \backslash \ti{U}$, there exists $(x_n) \in \bb{R}^{n + 1}$ such that $\pi(y_n) \to [x]$. Hence $\ti{U}$ is dense in $\bb{RP}^n$, as desired.
+\end{proof}
+
+\begin{problem}
+    Given a polynomial $p$ in one variable with complex coefficients, not identically zero, show that there is a unique smooth map $\tilde{p}: \mathbb{C P}^1 \rightarrow \mathbb{C} \mathbb{P}^1$ that makes the following diagram commute, where $\mathbb{C P}{ }^1$ is 1-dimensional complex projective space and $G$ : $\mathbb{C} \rightarrow \mathbb{C} \mathbb{P}^1$ is the map of Problem 2-8: 
+    \[
+    \begin{tikzcd}
+    \mathbb{C} \arrow[r, "G"] \arrow[d, "p"'] & \mathbb{C}\mathbb{P}^1 \arrow[d, "\tilde{p}"] \\
+    \mathbb{C} \arrow[r, "G"] & \mathbb{C}\mathbb{P}^1
+    \end{tikzcd}
+    \]
+\end{problem}
+\begin{proof}
+    It suffices to prove there exsits a unique map $\ti{p}: \bb{CP}^1 \to \bb{CP}^1$ satisfying $G \circ p = \ti{p} \circ G$. Suppose $p(z) = a_nz^n + \dots + a_1z + a_0$. By computing sufficiently, we have 
+    \begin{align*}
+            G \circ p (z) = [a_nz^n + \dots + a_1z + a_0,1] = [p(z),1].     
+    \end{align*}
+    Let $q(z_1,z_2) = \dsum_{i = 0}^n a_i z_1^{i}z_2^{n - i}$, this implies $q(z_1,z_2) =z_2^n P\left(\dfrac{z_1}{z_2}\right)$ if $z_2 \neq 0$, then we can construct the map $\ti{p}$ satisfying
+    \[  
+        \ti{p}(z_1,z_2) = [q(z_1,z_2),z_2^n].
+    \]
+    One can verify that $\ti{p} \circ G(z) = \ti{p}[z,1] = [q(z,1),1] = [p(z),1] = G \circ p(z)$. We now prove that $\ti{p}$ is unique. Assume that there exists $h : \bb{CP}^1 \to \bb{CP}^1$ satisfying $G \circ p = h\circ G$. If $z_2 \neq 0$, it follows that 
+    \[
+        h[z_1,z_2] = h\left[\frac{z_1}{z_2},1\right] = h \circ G \left(\frac{z_1}{z_2} \right) = \left[p\left(\frac{z_1}{z_2}\right),1\right] = \left[z_2^np\left(\frac{z_1}{z_2}\right),z_2^n\right] = \ti{p}[z_1,z_2]
+    \]
+    for all $z_1 \in \bb{C}$. Since $h$ is smooth on $\bb{CP}^1$, it must be continuous at $[1,0]$. Since $p$ is a polynomial, then there exists $K \in \bb{N}$ such that  $|p(k)| > 0$ for all real numbers $k > K$. Since $h$ is continuous at $[1,0]$, it follows that 
+    \[
+       h[1,0]=  \lim_{k \to +\infty}h\left[1, \frac{1}{k}\right] =\lim_{k \to +\infty} [p(k),1] = \lim_{k \to +\infty}\left[1,\frac{1}{p(k)}\right] = [1,0]
+    \]
+    Therefore $h[z] = \ti{p}[z]$ for all $[z] \in \bb{CP}^1$, which means $\ti{p}$ is unique, as desired.
+
+\end{proof}
+\begin{problem}
+    For any topological space $M$, let $C(M)$ denote the algebra of continuous functions $f: M \rightarrow \mathbb{R}$. Given a continuous map $F: M \rightarrow N$, define $F^*: C(N) \rightarrow C(M)$ by $F^*(f)=f \circ F$.
+    \begin{enumerate}
+        \item Show that $F^*$ is a linear map.
+        \item Suppose $M$ and $N$ are smocth manifolds. Show that $F: M \rightarrow N$ is smooth if and only if $F^*\left(C^{\infty}(N)\right) \subseteq C^{\infty}(M)$.
+        \item Suppose $F: M \rightarrow N$ is a homeomorphism between smooth manifolds. Show that it is a diffeomorphism if and only if $F^*$ restricts to an isomorphism from $C^{\infty}(N)$ to $C^{\infty}(M)$.
+        
+    \end{enumerate}
+[Remark: this result shows that in a certain sense, the entire smooth structure of $M$ is encoded in the subset $C^{\infty}(M) \subseteq C(M)$. In fact, some authors define a smooth structure on a topological manifold $M$ to be a subalgebra of $C(M)$ with certain properties; see, e.g., [Nes03].] (Used on p. 75.)
+\end{problem}
+\begin{proof}
+    1. Since we have 
+    \[
+        F^*(f + g) = (f + g)\circ F = f \circ F + g\circ F,
+    \]
+    and
+    \[
+        F^*(\alpha f) = (\alpha f) \circ F = \alpha (f \circ F) = \alpha F^*(f).
+    \]
+    Hence $F^*$ is linear.
+
+    2. Suppose $F: M \to N$ is smooth. Since $F^*(f) = f\circ F$ is smooth in $M$, we thus have $F^*\left(C^{\infty}(N)\right) \subseteq C^{\infty}(M)$. To prove the converse implication, since $\mathrm{Id}_N \in C^{\infty}(N) \subset C(N)$, we have 
+    \[
+        F^*(\mathrm{Id}_N) = \mathrm{Id}_N \circ F  = F \in C^{\infty}(M),
+    \]
+    which implies $F$ is smooth on $M$.
+\end{proof}
+\begin{problem}
+    Suppose $V$ is a real vector space of dimension $n \geq 1$. Define the projectivization of $V$, denoted by $\mathbb{P}(V)$, to be the set of 1 -dimensional linear subspaces of $V$, with the quotient topology induced by the map $\pi: V \backslash\{0\} \rightarrow \mathbb{P}(V)$ that sends $x$ to its span. (Thus $\mathbb{P}\left(\mathbb{R}^n\right)=\mathbb{R} \mathbb{P}^{n-1}$.) Show that $\mathbb{P}(V)$ is a topological $(n-1)$-manifold. and has a unique smooth structure with the property that for each basis $\left(E_1, \ldots, E_n\right)$ for $V$, the map $E: \mathbb{R P}^{n-1} \rightarrow \mathbb{P}(V)$ defined by $E\left[v^1, \ldots, v^n\right]=\left[v^i E_i\right]$ (where brackets denote equivalence classes) is a diffeomorphism. (Used on p. 561.)
+
+\end{problem}
+\begin{problem}
+     State and prove an analogue of Problem 2-11 for complex vector spaces.
+\end{problem}
+\begin{problem}
+    Suppose $M$ is a topological space with the property that for every indexed open cover $\mathcal{X}$ of $M$, there exists a partition of unity subordinate to $\mathcal{X}$. Show that $M$ is paracompact.
+\end{problem}
+
+\begin{problem}
+    Suppose $A$ and $B$ are disjoint closed subsets of a smooth manifold $M$. Show that there exists $f \in C^{\infty}(M)$ such that $0 \leq f(x) \leq 1$ for all $x \in M$, $f^{-1}(0)=A$, and $f^{-1}(1)=B$.
+\end{problem}
+\begin{proof}
+    The theorem~\ref{thm:smooth_cutoff} implies that there exists two smooth nonnegative real valued $f_1, f_2$ satisfying $f_1^{-1}(0) = A$ and $f_2^{-1}(0) = B$. Then we set $f(x) = \frac{f_1(x)}{f_1(x) + f_2(x)}$, it follows that $f(x) = 1$ if and only if $f_2(x) = 0$, and $f(x) = 0$ if and only if $f_1 = 0$. Hence we are done.
+
+    However, the previous contruction relies mostly on the the fact that the preimage of two closed subsets $A$ and $B$ are simply $0$ and $1$, but not extend for other general situation. Therefore, we aim to construct a universal method step by step using partition of unity, which can be extended for more complicated cases. First, one can again choose two smooth nonnegative real valued $f_1, f_2$ such that  $f_1^{-1}(0) = A$, $f_2^{-1}(1) = B$, and  $0 \leq f_1,f_2 \leq 1$. Since $M$ is Hausdorff and $M \backslash (A \cup B)$ is open, for every point $x$ outside $A$ and $B$, then we can choose an open coordinate all $B_x$ for $x$ such that $B_x \cap A = \varnothing$ and $B_x \cap B = \varnothing$, denoted by the collection $\{B_x\}$. Let $B = \{ B_{\alpha}\}_{\alpha \in A} \cup \{ B_{\beta}\}_{\beta\in A}$ be the union of abitrary smooth coordinate balls contained by disjoint open subset $U \supseteq A$ and $V \supseteq B$ for each point in $A$ and $B$. Then there exsits a partition of unity $\{ \psi \}$ subordinate to $B \cup \{B_x\}$. Consider the function 
+    \[
+        f = \sum_{\alpha \in A}\psi_{\alpha} f_1|_{B_{\alpha}}+ \sum_{\beta \in B}\psi_{\beta} f_2|_{B_{\beta}} + \sum_{x \in M \backslash (A \cup B)}\psi_x = f_{\alpha} + f_{\beta} + f_x
+    \]
+    If $x \in A$, then $f_{\beta} = f_x = 0$, and $f_{\alpha}  =  f_1 = 0$. 
+    
+    If $x \in B$, then $f_\alpha = f_x = 0$ and $f_{\beta} = f_2 = 1$. If $x \in M \backslash (A \cup B)$, then we have 
+    \[
+        f = \sum_{x \in M \backslash (A \cup B)}\psi_x 
+    \]
+    which implies that $0 < f < 1$ since every point is covered by finite coordinate balls.
+
+    We consider the case that $x \in U \backslash A$, using the fact that $0 \leq f_1 \leq $, we thus have 
+    \[
+        f = \sum \psi_{\alpha} f_1+ \sum_x \psi_x < \sum \psi_{\alpha}+ \sum_x \psi_x < 1
+    \]
+    and 
+    \[
+         f = \sum \psi_{\alpha} f_1+ \sum_x \psi_x  \geq \sum_x \psi_x  > 0
+    \]
+    Since the case for $ x \in V \backslash B$ is analogous, we obtain $f(x) = 1$ if and only if $x \in A$ and $f(x) = 0$ if and only if $x \in B$. Hence $f$ satisfies the desired condition.
+\end{proof}
