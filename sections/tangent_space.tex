@@ -64,7 +64,7 @@
 \]
     
 \end{definition}
-\begin{theorem}
+\begin{theorem}\label{thm:derivation}
     Let $E$ be a subset of $\bb{R}^n$, $f: E \to \bb{R}^m$ be a function, $F$ be a subset of $E$, and $x_0$ be an interior pint of $F$. If all the partial derivatives $\de{f}{x_j}$ exist on $F$ and are continuous at $x_0$, then $f$ is differentiable at $x_0$. Moreover if $v = (v_1,v_2,\dots,v_n) \in \bb{R}^n$, the linear transformation $f'(x_0): \bb{R}^n \to \bb{R}^m$ is defined by 
     \[
         f'(x_0)(v) = \sum_{j = 1}^n v_j \de{f}{x_j}(x_0)
@@ -214,6 +214,26 @@
     forms a basis for $T_pM$.
 \end{proposition}
 For convenience, if $v \in T_pM$ we write $v = (dx_1,dx_2,\dots,dx_n)$.
+\begin{definition}[Tangent Bundle]
+    Let $M$ be a smooth manifold, we define the \textit{tangent bundle of $M$} to be the disjoint union of the tangent spaces at all points on $M$ 
+    \[
+        TM = \coprod_{p \in M} T_pM.
+    \]
+\end{definition}
+\begin{proposition}
+    For any $n$-dimensional smooth manifold $M$, the tangent bundle $TM$ has a natural topology and a smooth structure that make it into a $2n$-dimensional smooth manifold. With respect to this structure, the projection $\pi: TM \to M$ is smooth.
+\end{proposition}
+\begin{proof}
+    We first prove that $\pi$ is smooth. Consider the local coordinate chart $(U,\varphi)$ for $M$ which has the form $(x^1,\dots,x^n)$. Notice that $\pi^{-1}(U)$ is an open set in $TM$ and $$\pi^{-1}(U) = TU = \displaystyle \coprod_{p \in U} T_pM,$$ which motivates us to consider the local chart $\ti{\varphi}: \pi^{-1}(U) \to \bb{R}^{2n}$ satisfying 
+    \[
+        \ti{\varphi}\left(v^i\frac{\pa}{\pa x^i}(p)\right) = (x^i(p),v^i) \text{ and }\ti{\varphi}^{-1}(x^i, v^i) = v^i \frac{\pa}{\pa x^i}(\varphi^{-1}(x))
+    \]
+    for all $v = v^i\dfrac{\pa}{\pa x^i} \in T_pM$ and $p \in U$. Let $(V,\psi)$ and $(\pi^{-1}(V), \ti{\psi})$ be the similarly defined smooth local chart on $M$ and $TM$, respectively. Since $\varphi$ and $\psi$ is a homeomorphism, they are smoothly compatible. Then it suffices to verify the compatibility of the transition map $\ti{\psi}\circ \ti{\varphi}^{-1}: \ti{\varphi}({\pi^{-1}(U) \cap \pi^{-1}(V)}) \to \ti{\psi}({\pi^{-1}(U) \cap \pi^{-1}(V)})$, which can be computed sufficiently 
+    \[
+        \ti{\psi}\circ \ti{\varphi}^{-1}( x^i(p),v^i) = \ti{\psi}\left(v^i \frac{\pa}{\pa x^i}(p)\right) = (\ti{x}^i(p),\ti{v}^i )
+    \]
+    which is clearly a smooth function. Since $M$ is second-countable, one can choose a countable cover $\{U_i\}$ for $M$ and a smooth structure $\{(U_i,\varphi_i)\}$ defined above. Hence we obtain a countable cover $\{\pi{U_i}\}$ for $TM$ which implies that $TM$ is locally Euclidean and second-countable. The Hausdorff property is trival since two points in the same fiber can be seperated by the same chart and in different fiber can be mapped through $\pi$ onto $M$, which is Hausdorff. Hence $TM$ is a manifold, and the corresponding smooth structure $\{(\pi^{-1}(U_i),\ti{\varphi}_i)\}$ implies that $TM$ is smooth manifold. Finally, to see that $\pi$ is smooth, with respect to the charts $(U,\varphi)$ and $(\pi^{-1}(U),\ti{\varphi})$, the coordinate representation is $\pi(x,v) = x$. Hence we are done.  
+\end{proof}
 \subsection{Problems}
 \begin{problem}\label{thm:3.1}
      Suppose $M$ and $N$ are smooth manifolds with or without boundary, and $F: M \rightarrow N$ is a smooth map. Show that $d F_p: T_p M \rightarrow T_{F(p)} N$ is the zero map for each $p \in M$ if and only if $F$ is constant on each component of $M$.
@@ -259,12 +279,74 @@ is an isomorphism.
 \begin{problem}
      Show that $T \mathbb{S}^1$ is diffeomorphic to $\mathbb{S}^1 \times \mathbb{R}$.
 \end{problem}
+\begin{proof}
+    We begin to construct by viewing $\bb{S}^1$ in $\bb{C}$. Let $(U,\theta)$ and $(V, \psi)$ be the angle local chart such that $\theta: \bb{S}^1\backslash\{1\} \to (0,2\pi)$ and $\psi: \bb{S}^1\backslash\{-1\} \to (-\pi,\pi)$. We consider the map $F: T\bb{S}^1 \to \bb{S}^1 \times\bb{R}$ satisfying
+    \[
+        F \left(x, v\pa_{\theta}|_x\right) = (x,v) \text{ on } U \text{ and }
+        F\left(x, v\pa_{\psi}|_x\right) = (x,v) \text{ on }V.
+    \]
+    Since we have $\theta = \psi - \pi$ and $\dfrac{d \psi}{d\theta} = 1$ then $\pa_{\theta}|_x=\pa_{\psi}|_x$ on the restriction to $F$ on $U \cap V$ since , it follows that $F$ is well-defined. To check that $F$ is bijection, define the candidate function $G: \bb{S}^1 \times \bb{R} \to T\bb{S}^1$ satisfying
+    \[
+G(x,v) =\begin{cases}
+     \left(x, v\pa_{\theta}|_x\right), &\quad x \in U,\\
+     \left(x, v\pa_{\psi}|_x\right), &\quad x \in V
+\end{cases}
+    \]
+    Since $G$ is well-defined and $F \circ G(x,v) = G \circ F(x,v) = (x,v)$, thus $F$ is bijective.
+
+    In addition, $F$ is smooth on $U$ and $V$ since the coordinate expression $(x,v) \mapsto (x,v)$ is smooth on $U$ and $V$, and agrees smoothly on $U \cap V$. Computing the transition $\theta \circ \psi^{-1}:\psi(U \cap V) \to \theta(U \cap V)$, we obtain
+    \[
+        \theta \circ \psi^{-1}(\psi(x)) =\theta(x )
+    \] 
+    which is smooth, the gluing lemma implies that $F$ is smooth globally. As $G$ is smooth by the analogous argument, hence $F$ is diffeomorphism $T \mathbb{S}^1 \cong \mathbb{S}^1 \times \mathbb{R}$.
+\end{proof}
 \begin{problem}
     Let $\mathbb{S}^1 \subseteq \mathbb{R}^2$ be the unit circle, and let $K \subseteq \mathbb{R}^2$ be the boundary of the square of side 2 centered at the origin: $K=\{(x, y): \max (|x|,|y|)=1\}$. Show that there is a homeomorphism $F: \mathbb{R}^2 \rightarrow \mathbb{R}^2$ such that $F\left(\mathbb{S}^1\right)=K$, but there is no diffeomorphism with the same property. [Hint: let $\gamma$ be a smooth curve whose image lies in $\mathbb{S}^1$, and consider the action of $d F\left(\gamma^{\prime}(t)\right)$ on the coordinate functions $x$ and $y$.] (Used on p. 123.)
 \end{problem}
+\begin{proof}
+    Suppose that there is a diffeomorphism $F: \bb{R}^2 \to \bb{R}^2$ such that $F(\circl^1) = K$. Following to the hint, let $\gamma: [0,2\pi) \to \bb{S}^1$ be the smooth curve satisfying $\gamma(t) = (\cos(t),\sin(t))$. Since $\gamma$ is a homeomorphism and has smooth inverse, which is 
+    \[
+    \gamma^{-1}(x,y) = \gamma^{-1}(x,\pm \sqrt{1 - x^2}) = \arctan\left(\frac{\pm \sqrt{1 - x^2}}{ x}\right)
+    \]
+    Then $\gamma$ is also a diffeomorphism, thus the composition $F \circ \gamma: [0,2\pi) \to K$ is also a diffeomorphism. Since $F \circ \gamma$ is onto, then there exists $t_0$ such that $F \circ \gamma(t_0) = (1,1)$. Let $I$ be an open interval containing $(F \circ \gamma)^{-1}(1,1)$, then one can split $I$ such that $F \circ \gamma (I_x) \subseteq (-1,1)\times \{1\}$
+    and $F \circ \gamma (I_y) \subseteq \{1\}\times \subseteq (-1,1)$. Consequently, we have 
+    \begin{equation}\label{eq:2}
+        F \circ \gamma(t) = \begin{cases}
+            (x \circ F \circ \gamma(t), 1) &\text{ if }t \in I_x\\
+            (1,y \circ F \circ \gamma(t)) &\text{ if }t \in I_y\\
+        \end{cases}
+    \end{equation}
+    Since the velocity of $F \circ \gamma$ at $t_0$ is 
+    \[
+    \left(\dfrac{d(x \circ F \circ \gamma)}{dt}(t_0),0\right) \text{ and } \left(0,\dfrac{d(y \circ F \circ \gamma)}{dt}(t_0)\right)
+    \] by ~\eqref{eq:2}, respectively, then two expressions for $(F \circ \gamma)(t_0)$ must concide, which means $(F \circ \gamma)'(t_0) =0$, it follows that $dF(\gamma'(t_0)) = (F \circ \gamma)'(t_0) = 0$, which leads to contradiction since $dF_{\gamma'(t_0)}$ is globally homeomorphism and $\gamma'(t_0) \neq 0$, hence no such diffeomorphism $F$ can exists.
+\end{proof}
 \begin{problem}
     Consider $\mathbb{S}^3$ as the unit sphere in $\mathbb{C}^2$ under the usual identification $\mathbb{C}^2 \leftrightarrow \mathbb{R}^4$. For each $z=\left(z^1, z^2\right) \in \mathbb{S}^3$, define a curve $\gamma_z: \mathbb{R} \rightarrow \mathbb{S}^3$ by $\gamma_z(t)=$ ($e^{i t} z^1, e^{i t} z^2$). Show that $\gamma_z$ is a smooth curve whose velocity is never zero.
 \end{problem}
+\begin{proof}
+    Let $z^1 = x^1 + iy^1 $and $z^2 = x^2 + iy^2$, then we can write $\gamma_z$ under the usual identification as 
+    \begin{equation}
+        \begin{aligned}
+            \gamma_z(t) &= (e^it z^1, e^it z^2) = \left((\cos(t) + i\sin(t))(x^1 + iy^1),(\cos(t) + i\sin(t))(x^2 + iy^2)\right)\\
+            &= (x^1\cos(t) - y^1\sin(t) + i(x^1\sin(t) + y^1\cos(t)),x^2\cos(t) - y^2\sin(t) + i(x^2\sin(t) + y^2\cos(t)))\\
+            &\lra (x^1\cos(t) - y^1\sin(t),x^1\sin(t) + y^1\cos(t),x^2\cos(t) - y^2\sin(t),x^2\sin(t) + y^2\cos(t) )
+        \end{aligned}
+    \end{equation}
+    Let $\alpha(t) = y^1\sin(t) + x^1\cos(t) $ and $\beta(t) = y^2\sin(t) + x^2\cos(t)$, one can rewrite 
+    \begin{equation}
+        \gamma_z(t) = (\alpha'(t),\alpha(t), \beta'(t),\beta(t))
+    \end{equation}
+    Since the components $\alpha$ and $\beta$ are smooth, it follows that $\gamma_z(t)$ is smooth. Consider the local chart $(U_1^+,\varphi_1^+)$ for $\bb{S}^3$, where $U^+_1 = \{(x^1,\dots,x^4) \in \circl^3 \mid x^1 > 0\}$ and $\varphi_1^+$ satisfies 
+    \[
+        \varphi_1^+(x_1,x_2,x_3,x_4) = (x_2,x_3,x_4)
+    \]
+    Then the coordinate representation respect to this chart is $\varphi_1^+ \circ \gamma: \gamma_z^{-1}(U^+_1) \to \bb{R}^3$ and $\varphi_1^+\circ \gamma_z(t) = (\alpha(t), \beta'(t),\beta(t))$. Then the velocity of $\varphi_1^+ \circ\gamma_z$ is 
+    \[
+        (\varphi_1^+ \circ \gamma_z)'(t) = (\alpha'(t),\beta''(t),\beta'(t)) = (\alpha'(t),-\beta(t),\beta'(t))
+    \]
+    Since $\alpha(t)' > 0$, then its velocity is nonzero for all $t \in \gamma_z^{-1}(U^+_1)$. An analogous computation for the chart $(U_1^-,\varphi_1^-),(U_2^{\pm},\varphi_2^{\pm}),\dots, (U_4^{\pm},\varphi_4^{\pm})$, since the domain of the collection $\{(U_i^{\pm},\varphi_i^{\pm})\}$ covers $\bb{S}^3$, it follows that the velocity of the smooth curve $\gamma_z$ is never zero.
+\end{proof}
 \begin{problem}
     Let $M$ be a smooth manifold with or without boundary and $p \in M$. Let $\mathcal{V}_p M$ denote the set of equivalence classes of smooth curves starting at $p$ under the relation $\gamma_1 \sim \gamma_2$ if $\left(f \circ \gamma_1\right)^{\prime}(0)=\left(f \circ \gamma_2\right)^{\prime}(0)$ for every smooth real-valued function $f$ defined in a neighborhood of $p$. Show that the map $\Psi: \mathcal{V}_p M \rightarrow T_p M$ defined by $\Psi[\gamma]=\gamma^{\prime}(0)$ is well defined and bijective. (Used on p. 72.)
 \end{problem}

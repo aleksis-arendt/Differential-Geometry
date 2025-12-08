@@ -1,0 +1,54 @@
+\section{Embeddings}
+\subsection{Immersion and Submersion}
+\begin{definition}
+    Let $M^m$ and $N^n$ be smooth manifolds, and $F: M \to N$ is a smooth map. For abitrary point $p \in M$, we define \text{the rank of $F$ at $p$} to be the rank of the differential $dF_p$. If $\rank (dF_p) = r$ for all $p \in M$, we say $F$ \textit{has the constant rank $r$}.
+\end{definition}
+\begin{lemma}
+    Let $F: M^m \to N^n$ be a smooth map. For abitrary $p \in M$, $dF_p$ is injective if and only if $\rank(dF_p) = n$ and is surjective if and only if $\rank(dF_p) = m$. Consequently, $dF_p$ is bijective if and only if $\rank(dF_p)= m = n$.
+\end{lemma}
+\begin{definition}
+    Let $F: M^m \to N^n$ be the smooth map. Then $F$ is called a \text{smooth immersion} if its differential is injective at each point, and is called a \text{smooth submersion} if its is surjective at each point. 
+\end{definition}
+\begin{proposition}
+    Injectivity and surjectivity of the differential implies local immersion and submersion, respectively.
+\end{proposition}
+\begin{theorem}[Inverse Function Theorem on Manifolds]
+    Let $F: M^m \to N^n$ be a smooth map. If $p \in M$ is point such that $dF_p$ is invertable, then there are connected neighborhoods $U_p$ and $V_{F(p)}$ such that $F|_{U_p}: U_p \to V_{F(p)}$ is a diffeomorphism.
+\end{theorem}
+\begin{theorem}[Rank theorem]
+    Let $M^m$ and $N^n$ be smooth manifolds and $F: M \to N$ be a smooth map with constant rank $r$. For each $p \in M$, there exists smooth charts $(U,\varphi)$ for $M$ containing $p$ and $(V,\psi)$ for $N$ containing $F(p)$ such that $F(U) \subseteq V$, in which $F$ has a coordinate representation of the form 
+    \[
+        \psi \circ F \circ \varphi^{-1}(x^1,\dots, x^r,\dots,x^m) = (x^1,\dots,x^r,0,\dots,0)
+    \]
+\end{theorem}
+\begin{proof}
+    Since the theorem is local, one can view $M$ and $N$ as open subsets $U$ and $V$ in $\bb{R}^m$ and $\bb{R}^n$, respectively. Since $\rank(dF_p) = \rank(DF_p) = r$, then there exists two invertable matrices $P \in M_n(\bb{R}) $ and $Q \in M_m(\bb{R})$ such that 
+    \[
+        P\circ DF_p\circ Q^{-1} = \begin{bmatrix}
+            I_r & 0\\
+            0 & 0
+        \end{bmatrix}
+    \]
+    For the sake of condition, we can reorder coordinate such that the $r \times r$ block of $DF_p$ has nonzero determinant. Consider the indentification 
+    \begin{align*}
+     (x,y) &\lra (x^1,\dots,x^r,y^1,\dots,y^{m-r}),\\
+    (u,v) &\lra  (u^1,\dots,u^r,v^1,\dots,v^{n-r}).
+    \end{align*}
+    Then one can view $F(x,y) = (F_1(x,y),F_2,(x,y))$ for some smooth map $F_1: U \to \bb{R}^r$ and $F_2: V \to \bb{R}^{n - r}$. Let $p=(x_p,y_p)$ and $\varphi: U \to \bb{R}^m$ satisfying $\varphi(x,y) = (F_1(x,y),y)$, we have 
+    \[
+        D\varphi(x_p,y_p)= \begin{bmatrix}
+            DF_1(x,y) & \dfrac{\pa F_1}{\pa y}(x,y)\\
+            0 & \delta^i_j
+        \end{bmatrix}
+    \]
+    The above assumption implies that $DF_1(x,y)$ and $\delta_i^j$ are invertable, then $D\varphi(x_p,y_p)$ is invertable.  Apply the inverse function theorem for the map $\varphi$ and $p \in U$, there exists connected neighborhoods $U_p$ and $V_{F_1(p)}$ such that $\varphi|_{U_p}: U_p \to \varphi(U_p)$ is a diffeomorphism. Then we can consider the local chart $(U_p,\varphi)$ which is a restricted diffeomorphism. On the following restriction, we can let $A,B: \varphi(U_p)\to U_p$ be the smooth function satisfying $\varphi^{-1}(x,y) = (A(x,y),B(x,y))$, then we obtain 
+    \[
+        (x,y) = \varphi(A(x,y),B(x,y)) = (F_1(A(x,y),B(x,y)),B(x,y)).
+    \]  
+    It follows that $B(x,y) = y$ and $F_1(A(x,y),y) = x$. Hence $F\circ \varphi^{-1}$ is calculated by 
+    \[
+        F \circ \varphi^{-1}(x,y) = F(A(x,y),y) = (F_1(A(x,y),y),F_2(A(x,y),y)) = (x, C(x,y)),
+    \]
+    where $C: \varphi(U_p) \to \bb{R}^{n - r}$ defined by $C(x,y) = F_2(A(x,y),y)$
+\end{proof}
+
