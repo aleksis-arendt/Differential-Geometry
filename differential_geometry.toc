@@ -15,7 +15,7 @@
 \contentsline {subsection}{\numberline {4.1}Immersion and Submersion}{26}{subsection.4.1}%
 \contentsline {section}{\numberline {5}Cotangent Space}{27}{section.5}%
 \contentsline {section}{\numberline {6}Wedge Product}{27}{section.6}%
-\contentsline {section}{\numberline {7}Differential Forms on Manifolds}{29}{section.7}%
-\contentsline {section}{\numberline {8}Measure Theory}{32}{section.8}%
-\contentsline {section}{\numberline {9}Orientations}{34}{section.9}%
+\contentsline {section}{\numberline {7}Differential Forms on Manifolds}{30}{section.7}%
+\contentsline {section}{\numberline {8}Measure Theory}{33}{section.8}%
+\contentsline {section}{\numberline {9}Orientations}{35}{section.9}%
 \contentsline {section}{\numberline {10}Integration on Manifolds}{36}{section.10}%
