@@ -15,21 +15,15 @@
 \begin{theorem}[Inverse Function Theorem on Manifolds]
     Let $F: M^m \to N^n$ be a smooth map. If $p \in M$ is point such that $dF_p$ is invertable, then there are connected neighborhoods $U_p$ and $V_{F(p)}$ such that $F|_{U_p}: U_p \to V_{F(p)}$ is a diffeomorphism.
 \end{theorem}
-
-\begin{theorem}[Rank theorem]
+\subsection{Constant Rank Theorem}
+\begin{theorem}[Constant Rank Theorem]
     Let $M^m$ and $N^n$ be smooth manifolds and $F: M \to N$ be a smooth map with constant rank $r$. For each $p \in M$, there exists smooth charts $(U,\varphi)$ for $M$ containing $p$ and $(V,\psi)$ for $N$ containing $F(p)$ such that $F(U) \subseteq V$, in which $F$ has a coordinate representation of the form 
-    \[
+    \begin{equation}\label{thm:rank}
         \psi \circ F \circ \varphi^{-1}(x^1,\dots, x^r,\dots,x^m) = (x^1,\dots,x^r,0,\dots,0)
-    \]
+    \end{equation}
 \end{theorem}
 \begin{proof}
-    Since the theorem is local, one can view $M$ and $N$ as open subsets $U$ and $V$ in $\bb{R}^m$ and $\bb{R}^n$, respectively. Since $\rank(dF_p) = \rank(DF_p) = r$, then there exists two invertable matrices $P \in M_n(\bb{R}) $ and $Q \in M_m(\bb{R})$ such that 
-    \[
-        P\circ DF_p\circ Q^{-1} = \begin{bmatrix}
-            I_r & 0\\
-            0 & 0
-        \end{bmatrix}
-    \]
+    Since the theorem is local, one can view $M$ and $N$ as open subsets $U$ and $V$ in $\bb{R}^m$ and $\bb{R}^n$, respectively.
     For the sake of condition, we can reorder coordinate such that the $r \times r$ block of $DF_p$ has nonzero determinant. Consider the indentification 
     \begin{align*}
      (x,y) &\lra (x^1,\dots,x^r,y^1,\dots,y^{m-r}),\\
@@ -69,4 +63,41 @@
     \]
     Since $(\varphi,U_p)$ and $(\psi,V_p)$ satisfy the following conditions, the proof is done.
 \end{proof}
+\begin{corollary} 
+    Let $F: M^m \to N^n$ be a smooth map between smooth manifolds and suppose $M$ is connected. Then the followings are equivalent:
+    \begin{enumerate}
+        \item For each $p \in M$, there exists smooth charts containing $p$ and $F(p)$ in which the coordinate representation of $F$ is linear.
+        \item $F$ has constant rank.
+    \end{enumerate}
+\end{corollary}
+\begin{proof}
+    First we suppose $F$ has linear coordinate representation in a neighborhoods of each point. Since every linear map has constant rank, it follows that $F$ has constant rank on the following neighborhoods and the fact that $M$ is connected implies that the rank of $F$ is constant on every point of $M$. 
+    
+    Conversely, if $F$ has constant rank, it follows from the previous theorem that there exists following smooth charts such that $F$ has the representation of the form ~\ref{thm:rank}, which is linear.
+\end{proof}
+\begin{theorem}
+    Let $F: M^m \to N^n$ be a smooth map of constant rank between smooth manifolds.
+    \begin{enumerate}
+        \item If $F$ is surjective, then it is a smooth submersion.
+        \item If $F$ is injective, then it is a smooth immersion.
+        \item If $F$ is bijective, then it is a diffeomorphism.
+    \end{enumerate}
+\end{theorem}
+\begin{proof}
+    (1) Suppose $F$ is surjective and has constant rank $r < n$. Let $p \in M$, by the Constant Rank Theorem, there exists smooth local charts $(U_p,\varphi_p)$ and $(V_{F(p)},\psi_{F(p)})$ corresponding to $p$ and $F(p)$  such that $F(U_p) \subseteq V_{F(p)}$ in which $F$ has a coordinate representation of the form
+    \begin{equation}
+        \tilde{F_p}(x^1,\dots,x^m) = (x^1,\dots,x^r,0,\dots).
+    \end{equation}
+    For the sake of condition, we can shrink $U$ into an $r$-dimensional regular coordinate ball and $F(\clo{U_p}) \subseteq V$. Then $F(\clo{U_p})$ is a compact subset of the set \[\{y \in V \mid y^{r +1} = \dots = y^n = 0\}.\]
+    Since such a closed $r$-dimensional cannot contain any $n$-dimensional regular coordinate bals in $N$, $F(\clo{U_p})$ does not include any open subset of $N$. Hence it is nowhere dense in $N$. 
 
+    Since charts $\{(U_p,\varphi_p)\}_{p \in M}$ is an open cover of $M$, then we can choose a subcover $\{(U_p,\varphi_p)\}_{p \in A}$ on $M$. Since $F(M)$ is covered by the corresponding subcover $\{F(\clo{U_p})\}_{p \in A}$, which is countable and every element is nowhere dense, by the Baire category theorem, $\clo{F(M)} = \varnothing$, which contradicts the fact that $F$ is surjective, hence it must be a smooth submersion.
+     
+    (2)  Suppose $F$ is injective and $r < m$, follows from $(7)$, we have 
+    \[
+    \tilde{F_p}(x^1,\dots,x^m) = \tilde{F_p}(x^1,\dots,x^r,0,\dots)
+    \]
+    which implies that $U$ is $r$-dimensional, contradiction. Hence $F$ must be a smooth immersion.
+
+    (3) Follows from $(1)$ and $(2)$, $F$ is both smooth submersion and immersion, it thus is local diffeomorphism. The fact that $F$ is bijective implies that it is diffeomorphism from $M$ onto $N$.
+\end{proof}
