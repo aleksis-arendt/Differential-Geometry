@@ -106,8 +106,62 @@
     Let $M^m$ and $N^n$ be smooth manifolds. A \text{smooth embedding of $M$ into $N$} is a smooth immersion $F: M \to N$ that yields a homeomorphism onto its image $F(M) \subseteq N$.
 \end{definition}
 \begin{proposition}
-    
+Let $F: M^m \to N^n$ be an injective smooth immersion. If any of the following holds, then $F$ is a smooth embedding.
+\begin{enumerate}
+    \item $F$ is an open or closed map.
+    \item $F$ is a proper map.
+    \item $M$ is compact.
+    \item $M$ has empty boundary and $\dim M = \dim N$.
+\end{enumerate}
 \end{proposition}
+\begin{proof}
+    If $F$ is open or closed map, then the inverse map $F^{-1}: F(M) \to M$ is continuous and thus $F$ is a smooth embedding. If $F$ is proper, then it is closed, and if $M$ is compact, $F$ is also closed. Finally assume $M$ has empty boundary and $\dim M = \dim N$. Since $F$ is both smooth immersion and submersion, then $dF_p$ is nonsingular everywhere, and the problem 4.2 implies that $F(M) \subseteq \inte(N)$. Then $F: M \to \inte{N}$ is locally diffeomorphism, so it is open map. Hence $F: M \to N$ is an embedding.
+\end{proof}
+\begin{theorem}[Local Embedding Theorem]
+    Suppose $M^m$ and $N^n$ are smooth manifolds, and $F: M \to N$ is a smooth map. Then $F$ is a submersion if and only if every point in $M$ has a neighborhood $U \subseteq M$ such that $F|_U: U \to N$ is a smooth embedding.
+\end{theorem}
+\subsection{Submersions}
+\begin{definition}
+    Let $\pi:M \to N$ be a continuous map, a \textit{section of $\pi$} is a continuous right inver for $\pi$, which is a continuous map $\sigma: N \to M$ such that $\pi \circ \sigma = \mathrm{Id}_N$. Analogously, a \textit{local section of $\pi$} is a continuous map $\sigma: U \to M$ defined by some open subset $U \subseteq N$ such that $\pi \circ \sigma = \mathrm{Id}_U$.
+\end{definition}
+\begin{theorem}
+    Let $M^m$ and $N^n$ be smooth manifolds, and $\pi: M \to N$ be a smooth map. Then $\pi$ is a smooth submersion if and only if every point of $M$ is in the image of a smooth local section of $\pi$.
+\end{theorem}
+\begin{theorem}
+    Let $M$ and $N$ be smooth manifolds, and suppose $\pi: M \to N$ is a smooth submersion. Then $\pi$ is an open map, and if it is surjective it is a quotient map.
+\end{theorem}
+\begin{theorem}
+    Let $\pi: M^m \to N^n$ be a surjective smooth submersion. For any smooth manifold $P$ with or without boundary, a map $F: N \to P$ is smooth if and only if $F \circ \pi$ is smooth. 
+    \[
+\begin{tikzcd}
+M \arrow[dr, "F\circ \pi"'] \arrow[r, "\pi"] 
+& N \arrow[d, "F"] \\
+& P
+\end{tikzcd}
+\]
+
+\end{theorem}
+\subsection{Smooth Covering Maps}
+\begin{definition}
+    Let $\pi: M \to N$ is called a \textit{smooth covering map} if
+    \begin{enumerate}
+        \item $\pi$ is smooth and surjective.
+        \item For abitrary $q \in N$, there exists an open neighborhoods $V$ containing $q$ such that 
+        \[
+            \pi^{-1}(V) = \bigsqcup_{\alpha} U_{\alpha},
+        \]
+        where $U_{\alpha} \subseteq M$ are open, disjoint and connected. 
+        \item For each $\alpha$, we have 
+        \(
+            \pi_{U_\alpha}:U_{\alpha}\to V
+        \)
+        is a diffeomorphism.
+    \end{enumerate}
+\end{definition}
+\begin{proposition}
+    Let $E$ and $M$ be nonempty connected smooth manifolds. If $\pi: E \to M$ is a proper local diffeomorphism, then $\pi$ is a smooth covering map.
+\end{proposition}
+
 \subsection{Problems}
 \begin{problem}
     Suppose $M$ is a smooth manifold (without boundary), $N$ is a smooth manifold with boundary, and $F: M \rightarrow N$ is smooth. Show that if $p \in M$ is a point such that $d F_p$ is nonsingular, then $F(p) \in \operatorname{Int} N$. (Used on pp. 80, 87.)
@@ -275,12 +329,20 @@
 \begin{problem}
      Let $M$ be a nonempty smooth compact manifold. Show that there is no smooth submersion $F: M \rightarrow \mathbb{R}^k$ for any $k>0$.
 \end{problem}
+\begin{proof}
+    Assume the contrary holds that there exists a smooth submersion $F: M \to \bb{R}^k$ for some $k > 0$. Since $F$ is continuous, then $F(M)$ is compact, hence $F(M)$ is bounded and closed by the Heine-Borel theorem. Applying Constant Rank theorem, there exists local coordinate charts such that one can write $F$ as the following coordinate representation
+    \[
+        \ti{F}(x^1,\dots,x^m) = (x^1,\dots,x^n)
+    \]
+    which is an open map, then $F$ is also an open map. Hence $F(M)$ is open, which contradicts the fact that  there is no open compact subset in $\bb{R}^k$.
+\end{proof}
 \begin{problem}
     Suppose $M$ and $N$ are smooth manifolds, and $\pi: M \rightarrow N$ is a surjective smooth submersion. Show that there is no other smooth manifold structure on $N$ that satisfies the conclusion of Theorem 4.29; in other words, assuming that $\widetilde{N}$ represents the same set as $N$ with a possibly different topology and smooth structure, and that for every smooth manifold $P$ with or without boundary, a map $F: \tilde{N} \rightarrow P$ is smooth if and only if $F \circ \pi$ is smooth, show that $\mathrm{Id}_N$ is a diffeomorphism between $N$ and $\tilde{N}$. [Remark: this shows that the property described in Theorem 4.29 is "characteristic" in the same sense as that in which Theorem A.27(a) is characteristic of the quotient topology.]
 \end{problem}
 \begin{problem}
     This problem shows that the converse of Theorem 4.29 is false. Let $\pi: \mathbb{R}^2 \rightarrow \mathbb{R}$ be defined by $\pi(x, y)=x y$. Show that $\pi$ is surjective and smooth, and for each smooth manifold $P$, a map $F: \mathbb{R} \rightarrow P$ is smooth if and only if $F \circ \pi$ is smooth; but $\pi$ is not a smooth submersion.
 \end{problem}
+
 \begin{problem}
     Let $M$ be a connected smooth manifold, and let $\pi: E \rightarrow M$ be a topological covering map. Complete the proof of Proposition 4.40 by showing that there is only one smooth structure on $E$ such that $\pi$ is a smooth covering map. [Hint: use the existence of smooth local sections.]
 \end{problem}
