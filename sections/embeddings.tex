@@ -105,16 +105,162 @@
 \begin{definition}
     Let $M^m$ and $N^n$ be smooth manifolds. A \text{smooth embedding of $M$ into $N$} is a smooth immersion $F: M \to N$ that yields a homeomorphism onto its image $F(M) \subseteq N$.
 \end{definition}
+\begin{proposition}
+    
+\end{proposition}
 \subsection{Problems}
 \begin{problem}
     Suppose $M$ is a smooth manifold (without boundary), $N$ is a smooth manifold with boundary, and $F: M \rightarrow N$ is smooth. Show that if $p \in M$ is a point such that $d F_p$ is nonsingular, then $F(p) \in \operatorname{Int} N$. (Used on pp. 80, 87.)
+
 \end{problem}
+\begin{proof}
+    Suppose the contrary holds that $F(p) \in \pa{N}$.  Let $(x^i)$ for $i = 1,\dots,m$  and $y^j(x^i)$ and $j = 1,\dots, n$ be the coordinate chart containing $p$ and the boundary chart containing $F(p)$. Since $F(p) \in \pa N$, it follows that $y^n(x^i)(x) = 0$ for all $x \in V$, we thus have 
+    \[
+        \frac{\pa (y^n)}{\pa x^i}\bigg|_{\varphi(p)} = 0 
+    \]
+    for all $i = 1,2,\dots,m$. Since we have 
+    \[
+        dF_p\left(\frac{\pa}{\pa x^i }\bigg|_{p}\right) = \sum_{j = 1}^n\frac{\pa F^j}{\pa x^i}\frac{\pa}{\pa y^j}\bigg|_{F(p)} 
+    \]
+    Then the last row of $DF_p$ vanishes to zero, which means $dF_p$ is singular, contradiction.
+\end{proof}
 \begin{problem}
         Formulate and prove a version of the rank theorem for a map of constant rank whose domain is a smooth manifold with boundary. [Hint: after extending $F$ arbitrarily as we did in the proof of Theorem 4.15, follow through the proof of the rank theorem until the point at which the constant-rank hypothesis is used, and then explain how to modify the extended map so that it has constant rank.]
 \end{problem}
-\begin{problem}
-     Let $\gamma: \mathbb{R} \rightarrow \mathbb{T}^2$ be the curve of Example 4.20. Show that the image set $\gamma(\mathbb{R})$ is dense in $\mathbb{T}^2$. (Used on pp. 502, 542.)
+\begin{problem} We denote $\bb{T}^2 = \bb{S}^1 \times \bb{S}^1$ be the 2-dimensional torus.
+     Let $\alpha \in \bb{R}$ be an irrational number and $\gamma: \mathbb{R} \rightarrow \mathbb{T}^2$ be the curve satisfying:
+     \[
+            \gamma(t) = (e^{2\pi \alpha t},e^{2\pi \alpha i t})
+     \] Show that the image set $\gamma(\mathbb{R})$ is dense in $\mathbb{T}^2$. 
 \end{problem}
+\begin{proof}
+    We aim to prove the following lemma:
+    \begin{lemma}[Kronecker's Density Theorem]
+        Let $\alpha \in \bb{R}$ be an irrational number, then the set 
+        \[
+            S = \{\{n \alpha\} \mid n \in \bb{Z}\}
+        \]
+        is dense in $[0,1)$.
+    \end{lemma}
+    \begin{proof}[Proof of the lemma]
+        Observe that every element of $S$ is dinstict since $\{n_1\alpha\} = \{n_2\alpha\}$ implies that 
+        \[
+            n_1\alpha - \lfloor n_1 \alpha \rfloor =n_2\alpha - \lfloor n_2 \alpha \rfloor \lra (n_1 - n_2)\alpha = \lfloor n_1 \alpha \rfloor - \lfloor n_2 \alpha \rfloor.
+        \]
+        Then it follows that $\alpha$ is rational, which leads to contradiction.
+        Let $m \in N$, divide $(0,1)$ into the following interval:
+        \[
+            \left[0,\frac{1}{m}\right), \left[\frac{1}{m},\frac{2}{m}\right), \dots, \left[\frac{m - 1}{m},\frac{m}{m}\right)
+        \]
+        The Dirichlet principle implies that there exists $k \leq m$ and $n_1,n_2 \in \bb{Z}$ such that \[\{n_1\alpha\}, \{n_2\alpha\} \in \left[\frac{k - 1}{m},\frac{k}{m}\right).\]
+        For the sake of condition, we can assume that $n_1 < n_2$. Since we have the following expression
+        \begin{equation}
+            \begin{aligned}
+                 \{(n_2 - n_1)\alpha\} &= (n_2 - n_1)\alpha - \lfloor(n_2 - n_1)\alpha\rfloor\\
+                &=  \lfloor n_2\alpha\rfloor + \{n_2\alpha\} - \lfloor n_1\alpha\rfloor - \{n_1\alpha\} - \lfloor(n_2 - n_1)\alpha\rfloor
+            \end{aligned}
+        \end{equation}
+        If $\lfloor n_2\alpha\rfloor  = \lfloor n_1\alpha \rfloor+\lfloor(n_2 - n_1)\alpha\rfloor$, we have 
+        \begin{equation}\label{thm:case1}
+            \begin{aligned}
+         \{(n_2 - n_1)\alpha\} &=\lfloor n_2\alpha\rfloor + \{n_2\alpha\} - \lfloor n_1\alpha\rfloor - \{n_1\alpha\} - \lfloor(n_2 - n_1)\alpha\rfloor\\
+        &= \{n_2\alpha\} - \{n_1\alpha\} < \frac{k}{m} - \frac{k - 1}{m} = \frac{1}{m}
+        \end{aligned}
+        \end{equation}
+        
+        Let $q = \{(n_2 - n_1)\alpha\} < \dfrac{1}{m}$, for each $p \leq m$, we need to find $N \in \bb{N}$ and such that 
+        \begin{equation}\label{thm:p}
+            \dfrac{p - 1}{m} < Nq < \dfrac{p}{m}
+        \end{equation}
+            
+        
+        As we calculate the distance between two side of the inequality
+        \[
+           \frac{1}{q}\left(\frac{p}{m} - \frac{p - 1}{m}\right) = \frac{1}{qm} > 1
+        \]
+        Then it is possible to choose an integer $N$ satisfying~\ref{thm:p}. And since $q < \dfrac{1}{m}$, we thus have 
+        \[
+        \{N(n_2 - n_1)\alpha\} = qN \in \left[\frac{p- 1}{m},\frac{p}{m}\right).
+        \]
+        If $\lfloor n_2\alpha\rfloor  = \lfloor n_1\alpha \rfloor+\lfloor(n_2 - n_1)\alpha\rfloor + 1$, we also have
+                \begin{align*}
+         \{(n_2 - n_1)\alpha\} &=\lfloor n_2\alpha\rfloor + \{n_2\alpha\} - \lfloor n_1\alpha\rfloor - \{n_1\alpha\} - \lfloor(n_2 - n_1)\alpha\rfloor\\
+        &= \{n_2\alpha\} - \{n_1\alpha\} + 1 \geq \frac{k - 1}{m} - \frac{k}{m} + 1 = \frac{m - 1}{m}
+        \end{align*}
+        Let $q = \{(n_2 - n_1)\alpha\} > \dfrac{m - 1}{m}$, we wish to scale $q$ by by integer such that $qN =  \{N(n_2 - n_1)\alpha\} < \frac{1}{m}$. Indeed, this motivates us to prove the following approximation lemma:
+        \begin{lemma}[Dirichlet's Approximation Theorem]
+            Given $\alpha \in \bb{R}$ and any positive integer $N$. Then there exists $m,n \in \bb{N}$ such that 
+            \[
+                |n\alpha - m| < \frac{1}{N}
+            \]
+        \end{lemma}
+        \begin{proof}[Proof of the Dirichlet's lemma]
+            Let $f(x) = \{x\}$. Apply the Dirichlet's principle for $N + 1$ numbers 
+            \[
+                \{f(i\alpha): i = 0,\dots, N\}
+            \]
+            lying in 
+            \[
+                \left[0,\frac{1}{N}\right),\dots, \left[\frac{N -1}{N},1\right)
+            \]
+            Then there exists $f(i\alpha)$ and $f(j\alpha)$ lies in one of the subintervals above. This implies that 
+            \[
+                |f(j\alpha) - f(i\alpha)| < \frac{1}{N}
+            \]
+            Setting $n = j - i$ and $m = \lfloor j \alpha\rfloor -\lfloor i\alpha\rfloor$ and we are done.
+        \end{proof}
+        Back to the main lemma, since there exists $m, n \in \bb{N}$ such that 
+        \[
+            |nq - m| < \frac{1}{m}.
+        \]
+        Then we can choose $N = n$ and then our wishing statement is proven. Since $\{N(n_2 - n_1)\alpha\} \in \left(0,\frac{1}{m}\right]$, we establish the same proof in~\ref{thm:case1}. In general, for any $m \in \bb{N}$ and $k \in \bb{N}$ such that $k \leq m$, the open interval 
+        \[
+           I^k_m = \left(\frac{k - 1}{m},\frac{k}{m}\right)
+        \]
+        contains at least an element in $S$. And since the collection $\{I^k_m\}$ defines an open cover of $[0,1)$. Hence every open subset of $[0,1)$ contains at least an element in $S$. $S$ thus is dense in $[0,1)$.
+    \end{proof}
+    We would rather use the below corollary of the above lemma.
+    \begin{corollary}
+        Let $\alpha \in \bb{R}$ be an irrational number, then the set
+        \[
+            S = \{m + n \alpha \mid m,n \in \bb{Z}\}
+        \]
+        is dense in $\bb{R}$
+    \end{corollary}
+    Back to the problem, let $\alpha(x,y) = (e^{2\pi i x}, e^{2 \pi i y}) \in \bb{T}^2$ be abitrary. Using the notation $\exp(x)$ for $e^{2\pi i x}$, we consider the following substraction
+    \begin{equation}
+        \begin{aligned}
+            \norm{\gamma(t) - \alpha(x,y)} &= \norm{e^{2 \pi i t} - e^{2\pi i x}, e^{2 \pi i\alpha t} - e^{2\pi i y}}\\
+        \end{aligned}
+    \end{equation}
+    Let $m,n \in \bb{N}$ be abitrary and substitute $t = x + n$. Since $2p\pi  \equiv 0 \pmod{2\pi}$ for all $p \in \bb{N}$, we obtain 
+    \begin{equation}\label{thm:absolute}
+        \begin{aligned}
+            \norm{\gamma(t) - \alpha(x,y)} &= \norm{\exp(x + n) - \exp(x), \exp(\alpha x + \alpha n + m) -\exp(y)}\\
+            &= \norm{0, \exp(\alpha x + \alpha n + m) -\exp(y)}
+        \end{aligned}
+    \end{equation}
+    Since we have \[|e^{i t_1} - e^{it_2}| \leq |t_1 - t_2|\] for all $t_1, t_2 \in \bb{R}$, using this inequality for~\ref{thm:absolute} yields 
+    \begin{equation}\label{thm:36}
+        \begin{aligned}
+        \norm{\gamma(t) - \alpha(x,y)} &= |\exp(\alpha x + \alpha n + m) -\exp(y)|\\
+        &\leq |\alpha x + \alpha n + m - y|\\
+        &= |(\alpha n + m)- ( y-\alpha x)|
+    \end{aligned}
+    \end{equation}
+    
+    Since $y-\alpha x \in \bb{R}$ and the set 
+    \[
+        S= \{\alpha n + m \mid n,m \in \bb{N}\}
+    \]
+    is dense in $\bb{R}$, then one can choose a sequence $(a_n)_{n \in \bb{N}} \subseteq S$ which has the form $a_n = x_n \alpha + y_n$ and $$\nlim a_n =  y-\alpha x.$$
+    For each $k$,  set $n = x_k$ and $m = y_k$. From~\ref{thm:36}, we obtain
+    \[
+        \norm{\gamma(t) - \alpha(x,y)} \leq |a_n - (y -\alpha x)| \to 0
+    \]
+    Therefore, for all $x,y \in \bb{R}$, since we can already choose $t_n \in \bb{R}$ such that $\norm{\gamma(t) - \alpha(x,y)} \to 0$, then $\gamma(\bb{R})$ must be dense in $\bb{T}^2$.
+\end{proof}
+
 \begin{problem}
     Let $\mathbb{C P}^n$ denote the $n$-dimensional complex projective space, as defined in Problem 1-9.
 (Used on pp. 172, 560.)
@@ -123,9 +269,11 @@
         \item Show that $\mathbb{C} \mathbb{P}^1$ is diffeomorphic to $\mathbb{S}^2$.
     \end{enumerate}
 \end{problem}
+\begin{proof}
+    
+\end{proof}
 \begin{problem}
      Let $M$ be a nonempty smooth compact manifold. Show that there is no smooth submersion $F: M \rightarrow \mathbb{R}^k$ for any $k>0$.
-
 \end{problem}
 \begin{problem}
     Suppose $M$ and $N$ are smooth manifolds, and $\pi: M \rightarrow N$ is a surjective smooth submersion. Show that there is no other smooth manifold structure on $N$ that satisfies the conclusion of Theorem 4.29; in other words, assuming that $\widetilde{N}$ represents the same set as $N$ with a possibly different topology and smooth structure, and that for every smooth manifold $P$ with or without boundary, a map $F: \tilde{N} \rightarrow P$ is smooth if and only if $F \circ \pi$ is smooth, show that $\mathrm{Id}_N$ is a diffeomorphism between $N$ and $\tilde{N}$. [Remark: this shows that the property described in Theorem 4.29 is "characteristic" in the same sense as that in which Theorem A.27(a) is characteristic of the quotient topology.]

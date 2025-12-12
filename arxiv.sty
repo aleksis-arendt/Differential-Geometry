@@ -2,7 +2,14 @@
 
   \ProcessOptions\relax
 \newcommand{\mc}{\mathcal}
-\usepackage[hidelinks]{hyperref}
+\usepackage{xcolor}
+
+
+% ToC không có link/màu
+\usepackage{etoolbox}
+\pretocmd{\tableofcontents}{\hypersetup{hidelinks}}{}{}
+\apptocmd{\tableofcontents}{\hypersetup{colorlinks=true,linkcolor=magenta}}{}{}
+
 \usepackage{tikz}
 \usetikzlibrary{calc,arrows.meta}
 \usepackage{tikz-cd}
@@ -51,7 +58,14 @@
 
 % Bỏ inputenc và fontenc vì XeLaTeX không cần
 \usepackage{enumitem}
-\usepackage{hyperref}       % hyperlinks
+\usepackage{hyperref}
+\usepackage[nameinlink,noabbrev]{cleveref}
+
+\crefformat{equation}{(#2#1#3)}
+\Crefformat{equation}{(#2#1#3)}
+
+
+
 \usepackage{url}            % simple URL typesetting
 \usepackage{booktabs}       % professional-quality tables
 \usepackage{amsfonts}       % blackboard math symbols
@@ -125,7 +139,7 @@
   \renewcommand{\headrulewidth}{0pt}
   \fancyheadoffset{0pt}
   \rhead{\scshape \today}
-  
+  \lhead{\scshape Aleksis J. Arendt}
   \cfoot{\thepage}
 
 
