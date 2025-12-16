@@ -1,6 +1,6 @@
-\section{Tangent Space}
+\chapter{Tangent Space}
 
-\subsection{Derivatives in Multivariable Calculus}
+\section{Derivatives in Multivariable Calculus}
 \begin{definition}
     Let $E$ be a subset of $\bb{R}^n, f: E \to \bb{R}^m$ be a function, $x_0 \in E$ be a point, and let $L: \bb{R}^n \to \bb{R}^m$ be a linear transformation. We say that $f$ is differentiable at $x_0$ with derivative $L$ if we have 
     \[
@@ -129,7 +129,7 @@
         d f(x_0):= \left(\de{f}{x_1}(x_0), \de{f}{x_2}(x_0), \dots, \de{f}{x_n}(x_0)\right)
     \]
 \end{definition}
-\subsection{Tangent Vectors of Euclidean Space}
+\section{Tangent Vectors of Euclidean Space}
 
 \begin{definition}
    A derivation at $p \in \bb{R}^n$ is a linear map $\ome: C^{\infty}(\bb{R}^n) \to \bb{R}$ satisfying the Leibniz product rule: 
@@ -234,7 +234,7 @@ For convenience, if $v \in T_pM$ we write $v = (dx_1,dx_2,\dots,dx_n)$.
     \]
     which is clearly a smooth function. Since $M$ is second-countable, one can choose a countable cover $\{U_i\}$ for $M$ and a smooth structure $\{(U_i,\varphi_i)\}$ defined above. Hence we obtain a countable cover $\{\pi{U_i}\}$ for $TM$ which implies that $TM$ is locally Euclidean and second-countable. The Hausdorff property is trival since two points in the same fiber can be seperated by the same chart and in different fiber can be mapped through $\pi$ onto $M$, which is Hausdorff. Hence $TM$ is a manifold, and the corresponding smooth structure $\{(\pi^{-1}(U_i),\ti{\varphi}_i)\}$ implies that $TM$ is smooth manifold. Finally, to see that $\pi$ is smooth, with respect to the charts $(U,\varphi)$ and $(\pi^{-1}(U),\ti{\varphi})$, the coordinate representation is $\pi(x,v) = x$. Hence we are done.  
 \end{proof}
-\subsection{Problems}
+\section{Problems}
 \begin{problem}\label{thm:3.1}
      Suppose $M$ and $N$ are smooth manifolds with or without boundary, and $F: M \rightarrow N$ is a smooth map. Show that $d F_p: T_p M \rightarrow T_{F(p)} N$ is the zero map for each $p \in M$ if and only if $F$ is constant on each component of $M$.
 \end{problem}

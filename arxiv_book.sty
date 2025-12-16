@@ -73,8 +73,9 @@
 \usepackage{microtype}      % microtypography
 \usepackage{lipsum}
 \usepackage{graphicx}
-  \usepackage{amsthm}
-  \renewcommand{\refname}{\large\bfseries References}
+\usepackage{amsthm}
+\renewcommand{\bibname}{\large\bfseries References}
+
 
 
 \newenvironment{sol}{%
@@ -98,13 +99,21 @@
 
   \theoremstyle{sfstyle}
   \newtheorem{theorem}[mythm]{Theorem}
-  \newtheorem{problem}{Problem}[section]
+  \newtheorem{problem}{Problem}[chapter]
 
 % Định nghĩa lại cách đánh số
-\renewcommand{\thesection}{\thechapter.\arabic{section}}
+
+% Sections are numbered within each chapter: 1,2,3,... (reset every chapter)
+\renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
-\renewcommand{\theproblem}{\thesection.\arabic{problem}}
+
+% If you also want subsection/subsubsection to NOT show numbers at all:
+% \setcounter{secnumdepth}{1}
+
+% Problem resets each chapter and shows Chapter.Problem
+
+\renewcommand{\theproblem}{\thechapter.\arabic{problem}}
 
 
   \newtheorem{definition}[mythm]{Definition}
@@ -162,6 +171,8 @@
                   { 1.5ex \@plus  0.3ex \@minus  0.2ex}%
                   {\large\bf\raggedright}%
   }
+
+
   \providecommand{\subsection}{}
   \renewcommand{\subsection}{%
     \@startsection{subsection}{2}{\z@}%
@@ -332,14 +343,14 @@
   }
 
   % abstract styling
-  \renewenvironment{abstract}
-  {
-    \centerline
-    {\large \bfseries \scshape Abstract}
-    \begin{quote}
-  }
-  {
-    \end{quote}
-  }
+ \newenvironment{abstract}
+{
+  \chapter*{Abstract}
+  \addcontentsline{toc}{chapter}{Abstract}
+  \begin{quote}
+}
+{
+  \end{quote}
+}
 
   \endinput

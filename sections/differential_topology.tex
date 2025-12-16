@@ -1,5 +1,71 @@
-\section{Differential Topology}
-\subsection{Topological Spaces}
+\chapter{Differential Topology}
+\section{Zermelo-Fraenkel axiom}
+In different geomeotry, especially manifolds, on proof, instead of contruct by axiom of choice, we only need the basic logical foundation to think and write, that is ZF axiom
+\begin{definition}[ZF Axioms]
+The axioms of Zermelo--Fraenkel set theory describe the fundamental properties of sets.  
+All variables are understood to range over sets.
+\end{definition}
+
+\begin{enumerate}
+    \item \textit{Axiom of Extensionality.}  
+    \[
+    \forall A, B \; \big( \forall x\, (x \in A \Leftrightarrow x \in B) \Rightarrow A = B \big).
+    \]
+    Two sets are equal if and only if they have the same elements.
+
+    \item \textit{Axiom of Pairing.}  
+    \[
+    \forall a,b \; \exists c \; \forall x\, \big( x \in c \Leftrightarrow (x = a \lor x = b) \big).
+    \]
+    For any sets \(a,b\), there exists the set \(\{a,b\}\).
+
+    \item \textit{Axiom of Union.}  
+    \[
+    \forall A \; \exists U \; \forall x\, \big( x \in U \Leftrightarrow \exists B\in A,\; x\in B \big).
+    \]
+    For any set \(A\), there exists a set \(U\) that contains exactly the elements of elements of \(A\).
+
+    \item \textit{Axiom of Power Set.}  
+    \[
+    \forall A \; \exists P \; \forall x\, \big( x \in P \Leftrightarrow x \subseteq A \big).
+    \]
+    For every set \(A\), there exists the set \(\mathcal{P}(A)\) of all subsets of \(A\).
+
+    \item \textit{Axiom of Infinity.}  
+    \[
+    \exists I \; \big( \emptyset \in I \wedge \forall x\in I,\; x\cup\{x\}\in I \big).
+    \]
+    There exists an infinite set containing \(\emptyset\) and closed under the operation \(x \mapsto x\cup\{x\}\).
+
+    \item \textit{Axiom Schema of Separation (Specification).}  
+    For any property \(P(x)\),
+    \[
+    \forall A \; \exists B \; \forall x\, \big( x \in B \Leftrightarrow (x\in A \wedge P(x)) \big).
+    \]
+    You can form subsets of a given set by filtering with a predicate \(P(x)\).
+
+    \item \textit{Axiom Schema of Replacement.}  
+    If \(F\) is a definable function, then the image of any set under \(F\) is also a set:
+    \[
+    \forall A \; \exists B \; \forall y\, \big( y \in B \Leftrightarrow \exists x\in A,\; y = F(x) \big).
+    \]
+
+    \item \textit{Axiom of Foundation (Regularity).}  
+    \[
+    \forall A \neq \emptyset \; \exists x\in A,\; (x\cap A = \emptyset).
+    \]
+    Every nonempty set has an element disjoint from itself; no infinite descending membership chains exist.
+
+\end{enumerate}
+
+\begin{remark}
+Adding the \textit{Axiom of Choice (AC)}
+\[
+\forall \{A_i\}_{i\in I} \, \Big( \forall i,\; A_i \neq \emptyset \Rightarrow \exists f : I \to \bigcup A_i, \; f(i)\in A_i \Big)
+\]
+yields the theory \textit{ZFC}.
+\end{remark}
+\section{Topological Spaces}
 \begin{definition}
     Let $X$ be a set, a \textit{topology on $X$} is a collection $\mc{X} \subseteq \mc{P}(X)$ satisfying
     \begin{enumerate}
@@ -120,7 +186,7 @@
 
     ($\Leftarrow$) Suppose $A$ is not dense, in other words $X \backslash \clo{A}$ is an nonempty open subset, consequently, this implies $(X \backslash \clo{A})\cap A \neq \varnothing$. But since $A \subseteq \clo{A}$, we thus have $X \backslash \clo{A} \subseteq X \backslash A$, or $(X \backslash \clo{A}) \cap A \subset (X \backslash A)\cap A = \varnothing$, which implies a contradiction. Hence we are done.
 \end{proof}
-\subsection{Convergence and Continuity}
+\section{Convergence and Continuity}
 \begin{definition}[Convergence]
     Let $X$ be a topological space, $(x_n) \subseteq X$ is a sequence of points in $X$ and $x \in X$. We say $\nlim x_n = x$ or $x_n \to x$ if for every neighborhood $U$ of $x$, there exists $N(U) \in \bb{N}$ such that $x_n \in U$ for all $n \geq N(U)$.
 \end{definition}
@@ -181,7 +247,7 @@
         \item $f$ is continuous if and only if $f^{-1}(\inte{B}) \subseteq \inte{f^{-1}(B)}$ for all $B \subseteq X$.
     \end{enumerate}
 \end{proposition}
-\subsection{Hausdorff Spaces}
+\section{Hausdorff Spaces}
 \begin{definition}
     A topological space $X$ is said to be \textit{Hausdorff} if two any distinct points in $X$ can be seperated by disjoint open subsets in $X$.
 \end{definition}
@@ -196,7 +262,7 @@
 \begin{proposition}
     Suppose $X$ is a Hausdorff space and $A \subseteq X$. If $p \in X$ is a limit point of $A$, then every neighborhood of $p$ contains infititely many points of $A$.
 \end{proposition}
-\subsection{Bases}
+\section{Bases}
 \begin{definition}
     Let $X$ be a topoglogical space, a basis for the topology $X$ is a collection $\mc{B}$ of subsets in $X$ satisfying two conditions:
     \begin{enumerate}
@@ -204,7 +270,7 @@
         \item Every open subset in $X$ is the union of some collection of elements of $\mc{B}$.
     \end{enumerate}
 \end{definition}
-\subsection{Connectedness}
+\section{Connectedness}
 \begin{definition}
     A topological space $X$ is said to be \textit{disconnected} if it can be seperated by two disjoint, nonempty, open subset. If $X$ is not disconnected, then $X$ is said to be \textit{connected}.
 \end{definition}
@@ -214,14 +280,64 @@
 \begin{proof}
     
 \end{proof}
-\subsection{Compactness}
+\section{Compactness}
 \begin{definition}
     A topological space $X$ is said to be \textit{compact} if every open cover of it attains a finite subcover.
 \end{definition}
 \begin{theorem}
     Let $f: X \to Y$ be a continuous map between topological spaces. If $X$ is compact, then $f(X)$ is compact. 
 \end{theorem}
-\subsection{Problems}
+
+\section{Topological Manifolds}
+\begin{definition}[Topological Space]
+    Let $T$ be a collection of subsets of $X$ such that following axioms hold:
+    \begin{enumerate}
+        \item $X, \varnothing \in T$.
+        \item Any union of sets in $T$ is still in $T$.
+        \item Any finite intersection of sets in $T$ is still in $T$.
+    \end{enumerate}
+    The pair $(X,T)$ is called \textit{topological space}.
+\end{definition}
+\begin{definition}[Basis of Topological Space]
+    Let $X$ be a set. A basis $\mathcal{B}$ for a topology on $X$ is a collection of subsets of $X$ satisfying two properties:
+    \begin{enumerate}
+        \item Covering:
+        \[
+        \forall x \in X, \exists b \in B: x \in \mathcal{B}
+        \]
+        \item Intersection condition: For any $B_1,B_2 \in \mathcal{B}$ and any point $x \in B_1 \cap B_2$, there exists $B_3 \in \mathcal{B}$ such that $x \in B_3 \subseteq B_1 \cap B_2$.
+    \end{enumerate}
+\end{definition}
+\begin{definition}[Topological Manifolds]
+    Suppose $M$ is a topological space. We say that $M$ is a \textit{topological manifold of dimension $n$} or a \textit{topological n-manifold} if it has the following properties:
+    \begin{enumerate}
+        \item $M$ is a \textit{Hausdorff space}: for every pair of distinct points $p,q \in M$, there are disjoint open subsets $U,V \subseteq M$ such that $p \in U$ and $q \in V$.
+        \item $M$ is \textit{second-countable}: there exists a countable basis for the topology of $M$.
+        \item $M$ is \textit{locally Euclidean of dimension $n$}: each point of $M$ has a neighborhood that is homeomorphic to an open subset of $\bb{R}^n$.
+    \end{enumerate}
+\end{definition}
+\begin{remark}
+    The third properties means, for each $p \in M$ we can find
+    \begin{enumerate}
+        \item an open subset $U \subseteq M$ containing $p$,
+        \item an open subset $V \subseteq \bb{R}^n$, and
+        \item a homeomorphism $\varphi: U \to V$.
+    \end{enumerate}
+\end{remark}
+\begin{theorem}
+    A nonempty topological $n$-manifold cannot be homeomorphic to an topological $m$-manifold unless $m = n$.
+\end{theorem}
+\begin{definition}
+    Let $M$ be a topological $n$-manifold. A \textit{coordinate chart} on $M$ is a pair $(U,\varphi)$, where $U$ is an open subset of $M$ and $\varphi: U \to V$ is a homeomorphism from $U$ to an open subset $V = \varphi(U) \subseteq \bb{R}^n$
+\end{definition}
+\begin{definition}
+    Given a chart $(U,\varphi)$, we call the set $U$ a \textit{coordinate domain} of each of its point. If $\varphi(U)$ is an open ball in $\bb{R}^n$, then $U$ is called \textit{coordinate ball}.
+\end{definition}
+
+    \begin{proposition}
+        Homeomorphism preserves those following properties of the set: openess, closedness, compactness, precompactness, connectedness, path-connectedness and Hausdorff.
+    \end{proposition} 
+\section{Problems}
 \begin{problem}
     Let $X$ be the set of all points $(x,y) \in \bb{R}^2$ such that $y = \pm 1$ and let $M$ be the quotient of $X$ by the equivalence relation generated by $(x,-1) \sim (x,1)$ for all $x \neq 0$. Show that $M$ is locally Euclidean and second-countable, but not Hausdorff.
 \end{problem}

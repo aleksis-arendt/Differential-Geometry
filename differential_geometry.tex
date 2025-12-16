@@ -1,18 +1,60 @@
-\documentclass[10pt]{article}
+\documentclass[10pt,oneside,openany]{book}
+\let\cleardoublepage\clearpage
 
-\usepackage{arxiv}
+
+\usepackage{arxiv_book}
 % --- Thông tin tài liệu ---
-\title{Differential Geometry}
-\author{\scshape Aleksis J. Arendt \thanks{Contact email: aleksisdg@gmail.com}\\ \scshape HCMC University of Science,\\ \scshape Federal Institute of Technology Zurich}
+\title{Notes on Differential Geometry}
+
+\author{
+  \scshape Aleksis J. Arendt\\[0.5em]
+  \normalsize
+  HCMC University of Science\\
+  Federal Institute of Technology Zürich\\[0.5em]
+  \texttt{aleksisdg@gmail.com}
+}
+
 \date{\today}
 
 \begin{document}
 
-\maketitle
+\frontmatter
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+\vspace*{2cm}
 
-% (optional) nếu mày muốn có mục lục:
-% \tableofcontents
+\rule{0.95\textwidth}{1.5pt}\par
+\vspace{0.25cm}
+
+{\LARGE\scshape Notes on Differential Geometry\par}
+
+\vspace{0.25cm}
+\rule{0.95\textwidth}{1.5pt}\par
+
+\vspace{2.2cm}
+
+{\large\bfseries Aleksis J. Arendt\par}
+\vspace{0.3cm}
+\scshape HCMC University of Science\par
+\scshape Federal Institute of Technology Zurich\par
+\vspace{0.3cm}
+\texttt{aleksisdg@gmail.com}\par
+
+\vspace{1.8cm}
+\textsc{\today}\par
+
+\end{center}
+\end{titlepage}
+
 \tableofcontents
+
+
+\chapter*{Preface}
+\addcontentsline{toc}{chapter}{Preface}
+
+\mainmatter
+
 
 \input{sections/differential_topology}
 \input{sections/partition_of_unity}
