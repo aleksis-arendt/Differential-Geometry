@@ -164,9 +164,15 @@ M \arrow[dr, "F\circ \pi"'] \arrow[r, "\pi"]
 
 \subsection{Problems}
 \begin{problem}
-    Suppose $M$ is a smooth manifold (without boundary), $N$ is a smooth manifold with boundary, and $F: M \rightarrow N$ is smooth. Show that if $p \in M$ is a point such that $d F_p$ is nonsingular, then $F(p) \in \operatorname{Int} N$. (Used on pp. 80, 87.)
-
+    Use the inclusion map $\bb{H}^n \hookrightarrow \bb{R}^n$ to show that the Inverse Function Theorem does not extend to the case which $M$ is a manifold with boundary.
 \end{problem}
+\begin{proof}
+    Suppose the theorem holds for manifolds with boundary. Let $p = (x^1,\dots,x^{n - 1},0) \in \partial \bb{H}^n$, then there exists open neighborhoods $U_0$ and $V_0$ centered at $p$ and $F(p)$, respectively such that $F|_{U_0}:U_0 \to V_0$ is a diffeomorphism. This leads to contradiction since $U_0$ and $V_0$ have dimension $n$ and $n - 1$, respectively.
+\end{proof}
+\begin{problem}
+    Suppose $M$ is a smooth manifold (without boundary), $N$ is a smooth manifold with boundary, and $F: M \rightarrow N$ is smooth. Show that if $p \in M$ is a point such that $d F_p$ is nonsingular, then $F(p) \in \operatorname{Int} N$. (Used on pp. 80, 87.)
+\end{problem}
+
 \begin{proof}
     Suppose the contrary holds that $F(p) \in \pa{N}$.  Let $(x^i)$ for $i = 1,\dots,m$  and $y^j(x^i)$ and $j = 1,\dots, n$ be the coordinate chart containing $p$ and the boundary chart containing $F(p)$. Since $F(p) \in \pa N$, it follows that $y^n(x^i)(x) = 0$ for all $x \in V$, we thus have 
     \[
@@ -324,7 +330,14 @@ M \arrow[dr, "F\circ \pi"'] \arrow[r, "\pi"]
     \end{enumerate}
 \end{problem}
 \begin{proof}
-    
+    Since $\pi$ is already surjective, it suffices to prove that it is smooth submersion. For each $i = 1,\dots, n +1$, let $U_i \subset N$ be the set of equivalent classes satisfying 
+    \[
+        U_i = \{[z^1,\dots,z^{n + 1}] \mid (z^1,\dots, z^{n + 1}) \in \bb{C}^{n + 1}\backslash \{0\} \text{ and } z^i \neq 0\}
+    \] 
+    Consider the map $\sigma_i: U_i \to M$ satisfying $$\sigma_i[z^1,\dots, z^{n + 1}] = \left(\frac{z^1}{z^i},\dots,\frac{z^{n + 1}}{z^i}\right).$$ In fact, we already proved that $\sigma_i$ is well-defined and a homeomorphism. Moreover, $\sigma_i$ is a local section of $\pi$ since we have 
+    \[
+        \pi \circ \sigma_i[z^1,\dots, z^{n + 1}] =  \left[\frac{z^1}{z^i},\dots,\frac{z^{n + 1}}{z^i}\right] = [z^1,\dots,z^{n + 1}] = \mathrm{Id}_{\sigma_i(N)}
+    \] As the domain of $\{(U_i,\sigma_i)\}$ admits an open cover of $\bb{C}^{n + 1} \backslash\{0\}$, then every point of $\bb{C}^{n + 1} \backslash\{0\}$ is in the image of some smooth local section of $\pi$. Therefore $\pi$ is a surjective smooth submersion.
 \end{proof}
 \begin{problem}
      Let $M$ be a nonempty smooth compact manifold. Show that there is no smooth submersion $F: M \rightarrow \mathbb{R}^k$ for any $k>0$.
