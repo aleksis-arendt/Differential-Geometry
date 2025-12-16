@@ -161,7 +161,24 @@ M \arrow[dr, "F\circ \pi"'] \arrow[r, "\pi"]
 \begin{proposition}
     Let $E$ and $M$ be nonempty connected smooth manifolds. If $\pi: E \to M$ is a proper local diffeomorphism, then $\pi$ is a smooth covering map.
 \end{proposition}
-
+\begin{lemma}\label{thm:torus-covering}
+    Let $\ep^n: \bb{R}^n \to \bb{T}^n$ be the map satisfying 
+    \[
+        \ep^n(x^j) = \left(e^{2\pi i x^j}\right).
+    \]
+    We claim that $\ep^n$ is a smooth covering map.
+\end{lemma}
+\begin{proof}
+    Observe that $\ep^n$ is smooth and surjective, it suffices to prove that $\ep^n$ is local diffeomorphism. For any $x \in \bb{R}^n$, consider the open cube 
+    \[
+        U_x = x + \left(-\frac{1}{2},\frac{1}{2}\right)^n
+    \]
+    Consider the restriction map $\ep^n|_{U_x} : U_x \to \ep^n(U_x)$. If $a,b \in U_x$ and $\ep^n(a) = \ep^n(b)$, it follows that $a - b \in \bb{Z}^n$ since $|a^i - b^i| < 1$ for all $i = 1,\dots, n$. Thus $\ep^n|_{U_x}$ is injective and has smooth inverse, thus it is diffeomorphism, following that $\ep^n$ is local diffeomorphism. Now we decay the preimage of $V = \ep^n(U)$ into union of disjoint connected subsets, which is
+    \[
+        \left(\ep^n\right)^{-1}(V) = \bigsqcup_{k \in \bb{Z}^n}(U_x + k)
+    \]
+    And since each map $:\ep^n: U_x + k \to \bb{T}^n$ is already a diffeomorphism, hence $\ep^n$ is indeed a smooth covering map.
+\end{proof}
 \subsection{Problems}
 \begin{problem}
     Use the inclusion map $\bb{H}^n \hookrightarrow \bb{R}^n$ to show that the Inverse Function Theorem does not extend to the case which $M$ is a manifold with boundary.
@@ -352,16 +369,48 @@ M \arrow[dr, "F\circ \pi"'] \arrow[r, "\pi"]
 \begin{problem}
     Suppose $M$ and $N$ are smooth manifolds, and $\pi: M \rightarrow N$ is a surjective smooth submersion. Show that there is no other smooth manifold structure on $N$ that satisfies the conclusion of Theorem 4.29; in other words, assuming that $\widetilde{N}$ represents the same set as $N$ with a possibly different topology and smooth structure, and that for every smooth manifold $P$ with or without boundary, a map $F: \tilde{N} \rightarrow P$ is smooth if and only if $F \circ \pi$ is smooth, show that $\mathrm{Id}_N$ is a diffeomorphism between $N$ and $\tilde{N}$. [Remark: this shows that the property described in Theorem 4.29 is "characteristic" in the same sense as that in which Theorem A.27(a) is characteristic of the quotient topology.]
 \end{problem}
+\begin{proof}
+    For the sake of condition, let $\pi_1: M \to N$ be a surjective smooth submersion and $\pi_2: M \to \ti{N}$ be the surjective map that agrees with $\pi_1$ on any points in $M$. Since the map $\mathrm{Id}_N: N \to \ti{N}$ is a bijection, it thus have inverse. Since we have 
+    \[
+    \mathrm{Id}^{-1}_N \circ \pi_2 = \pi_1
+    \]
+    which is a smooth map, then the above hypothesis implies that $\mathrm{Id}^{-1}_N$ is smooth. Let $i: \ti{N} \to \ti{N}$ be the inclusion, since $\ti{N}$ is a smooth manifold, then $i$ is smooth. Hence it follows that $i \circ \pi_2 = \pi_2$ is smooth. Analogously, the map
+    \[
+        \mathrm{Id}_N \circ \pi_1 = \pi_2
+    \]
+    is smooth.  Apply the theorem 4.29, we obtain that $\mathrm{Id}_N$ is smooth. Therefore, $\mathrm{Id}_N$ is a diffeomorphism.
+\end{proof}
 \begin{problem}
     This problem shows that the converse of Theorem 4.29 is false. Let $\pi: \mathbb{R}^2 \rightarrow \mathbb{R}$ be defined by $\pi(x, y)=x y$. Show that $\pi$ is surjective and smooth, and for each smooth manifold $P$, a map $F: \mathbb{R} \rightarrow P$ is smooth if and only if $F \circ \pi$ is smooth; but $\pi$ is not a smooth submersion.
 \end{problem}
+\begin{proof}
+    For every $t \in \bb{R}$, just pick $\pi(t,1) = t$, then $\pi$ is surjective. Since the maps $f,g: \bb{R}^2 \to \bb{R}$ satisfying $f(x,y) = x$ and $g(x,y) = y$ is smooth, then $\pi$ is also smooth. Let $F: \bb{R} \to P$ the any map. The fact $F$ is smooth implies that the composition $F \circ \pi: \bb{R}^2 \to P$ is also smooth. Now we assume that $F \circ \pi$ is smooth, then the resitricted map $F \circ \pi : \bb{R} \times \{1\} \to \bb{R}$ is smooth, hence $F$ is smooth. Let $p = (0,0) \in \bb{R}^2$ and $v_p \in T_p\bb{R}^2$, suppose $d\pi_p(v_p) = w_{\pi(p)} \neq 0$, we have 
+    \[
+        D\pi_p(v_p) = \begin{bmatrix}
+            y & x
+        \end{bmatrix}\begin{bmatrix}
+            v^1 \\ v^2
+        \end{bmatrix} = w_{\pi(p)}
+    \]
+    Then it follows that $w_{\pi(p)} = 0$, thus $\pi$ is not a smooth submersion.
+\end{proof}
 
 \begin{problem}
     Let $M$ be a connected smooth manifold, and let $\pi: E \rightarrow M$ be a topological covering map. Complete the proof of Proposition 4.40 by showing that there is only one smooth structure on $E$ such that $\pi$ is a smooth covering map. [Hint: use the existence of smooth local sections.]
 \end{problem}
 \begin{problem}
-    Show that the map $q: \mathbb{S}^n \rightarrow \mathbb{R} \mathbb{P}^n$ defined in Example 2.13(f) is a smooth covering map. (Used on p. 550.)
+    Show that the map $q: \mathbb{S}^n \rightarrow \mathbb{R} \mathbb{P}^n$ defined by
+    \[
+        q(x^1,\dots,x^n) = [x^1,\dots,x^n]
+    \] is a smooth covering map. 
 \end{problem}
+\begin{proof}
+    We already proved that $q$ is smooth and surjective. For each $x \in \bb{S}^n$, consider the neighborhood $U_x$ containing $x$ where $U_x$ is abitrarily small such that $U_x \cap (-U_x) = \varnothing$ The fact that $q(a) = q(b)$ implies that $a = \pm b$, since $U_x \cap (-U_x) = \varnothing$. Then it follows that  $a = b$ and $q$ is injective. Then the restricted map $q: U_x \to q(U_x)$ is diffeomorphism since it is also smooth and has smooth inverse. Let $V_x = q(U_x)$, since we have 
+    \[
+        q^{-1}(V_x) = U_x \sqcup U_{-x}
+    \]
+    and each of component of $q^{-1}(V_x)$ is mapped diffeomorpically into corresponding $U_x$ and $U_{-x}$, hence $q$ is a smooth covering map.
+\end{proof}
 \begin{problem}
     Show that a topological covering map is proper if and only if its fibers are finite, and therefore the converse of Proposition 4.46 is false.
 \end{problem}
@@ -371,3 +420,29 @@ M \arrow[dr, "F\circ \pi"'] \arrow[r, "\pi"]
 \begin{problem}
     Define a map $F: \mathbb{S}^2 \rightarrow \mathbb{R}^4$ by $F(x, y, z)=\left(x^2-y^2, x y, x z, y z\right)$. Using the smooth covering map of Example 2.13(f) and Problem 4-10, show that $F$ descends to a smooth embedding of $\mathbb{R} \mathbb{P}^2$ into $\mathbb{R}^4$.
 \end{problem}
+\begin{proof}
+    Let $U = \{[x,y,z] \mid (x,y,z) \in \bb{S}^2\}$, then we have $U = \bb{RP}^4$. Consider the map $\ti{F}: U \to \bb{R}^4$ be the map satisfying $F = \ti{F} \circ \pi$. Then we have 
+    \[
+    \ti{F}[x,y,z] = (x^2 - y^2,xy,xz,yz),
+    \]
+    Where $x^2 + y^2 + z^2 = 1$. Since $[x,y,z] =[\lambda x, \lambda y, \lambda z]$ implies that $\lambda = \pm 1$, then it follows that 
+    \[
+        \ti{F}[-x,-y,-z] = (x^2 - y^2,xy,xz,yz) = \ti{F}[x,y,z].
+    \]
+    Thus $\ti{F}$ is well-defined. Since $F$ is smooth and $\pi$ is a smooth covering, then the above proposition follows that $\ti{F}$ is smooth. It is clear to show that $\ti{F}$ is bijective onto $\ti{F}(\bb{R}^4)$. Let $p = (x,y,z)$ and $v_p = v^i\dfrac{\pa}{x^i}\bigg|_p \in T_p(\bb{S}^2)$ be abitrary.  Suppose we have $d\ti{F}_{[p]}([v_p]) = 0$, it follows that 
+    \[
+        dF_p(v_p) = d\ti{F}_{[p]}\circ d\pi_p(v_p) = d\ti{F}_{[p]}([v_p]) = 0
+    \]
+    Computing the Jacobian $DF_p$ we obtain
+    \[
+        DF_p(v_p) =\begin{bmatrix}
+            2x & -2y & 0\\
+            y & x & 0\\
+            z& 0 & x\\
+            0 & z & y
+        \end{bmatrix}\cdot \begin{bmatrix}
+            v^1\\v^2\\v^3
+        \end{bmatrix}
+    \]
+    Since $x,y,z$ cannot vanish simultaneously, then the only solution for $dF_p(v) = 0$ is $v = 0$, thus $\kernel(d\ti{F}_p) =\{0\}$. Therefore, $\ti{F}$ is an immersion and since $\bb{RP}^2$ is compact, $\ti{F}$ must be a smooth embedding.
+\end{proof}
