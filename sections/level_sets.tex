@@ -1,5 +1,5 @@
 \chapter{Level Sets Theorem}
-\section{Submanifolds}
+\section{Embedded Submanifolds}
 \begin{definition}
     Let $M^m$ be a smooth manifold, an \textit{embedded submanifold of $M$} is a subset $S \subseteq M$ that is a manifold in the subspace topology, endowed with a smooth structure with respect to which the inclusion $S \to M$ is a smooth embedding.
 \end{definition}
@@ -9,12 +9,19 @@
 \begin{proposition}
     Suppose $M^m$ is a smooth manifold. Then embedded submanifolds of codimension $0$ in M are exactly open submanifolds.
 \end{proposition}
+
+\begin{proposition}
+    Let $M$ and $N$ be smooth manifolds, and $F: M \to N$ be a smooth embedding. Let $S = F(N)$. With the subspace topology, $S$ is a topological manifold, and it has a unique smooth structure making it into an embedded submanifold of $M$ with the property that $F$ is a diffeomorphism onto its image.
+\end{proposition}
 \begin{proof}
-    
+    If we let $S$ inherit subspace topology from $M$, then $S$ is a topological manifold. Since $F$ is a homeomorphism onto its image, for any chart $(U,\varphi)$ in $N$, then we can choose the corresponding chart $(F(U),\varphi \circ F^{-1})$ for $S$. Since every different choosed chart in $S$ is compatible, it follows that $S$ attains a smooth structure. Then $F$ is local diffeomorphism, the Gluing lemma follows that $F$ is diffeomorphism onto its image, hence $S$ has a unique smooth structure sent from $N$. Let $i: S \hookrightarrow M$ be the inclusion. Since $i = F \circ F^{-1}$ which is a composition of two smooth embedding, then $i$ is also a smooth embedding. Hence $S$ is a embedded submanifold of $M$.
 \end{proof}
 \begin{proposition}
     Suppose $M$ and $N$ are smooth manifolds. For each $p \in N$, the slice $M \times \{p\}$ is an embedded submanifold of $M \times N$ diffeomorphic to $M$.
 \end{proposition}
+\begin{proof}
+    Since $M \times \{p\}$ is an image of the smooth embedding $x \mapsto (x,p)$, it follows from the above proposition that $M \times \{p\}$ is an embedded submanifold.
+\end{proof}
 \begin{proposition}
     Suppose $M$ is a smooth $m$-manifold without boundary. $N$ is a smooth $n$ manifold, $U \subseteq M$ is open, and $f:U \to N$ is a smooth map. Let $\Gamma(f)\subseteq M \times N$ denote the graph of $f$
     \[
@@ -22,6 +29,23 @@
     \]
     Then $\Gamma(f)$ is an embedded $m$-dimensional submanifold of $M \times N$.
 \end{proposition}
+\begin{proof}
+    Let $\gamma: U \to M \times N$ be the map satisfying $\gamma(x) = (x,f(x))$. Since the projection $\pi_M: M \times N \to M$ mapping $(x,y) \mapsto x$ which is a surjective submersion. Then composition $\pi_M \circ \gamma = i: U \hookrightarrow U$ is a smooth map. Hence $\gamma$ is a smooth map by the Characteristic Property Theorem and is injective.
+
+    In addition, the differential $d(\pi_M \circ \gamma)_{p}: T_pM \to T_pM$ satisfying
+    \[
+        d(\pi_M \circ \gamma)_{p} = d(\pi_M)_{\gamma(p)} \circ d(\gamma)_p = \mathrm{Id}_{T_pM}
+    \]
+    Thus $d(\gamma)_p$ is injective and it follows that $\gamma$ is a smooth immersion. Hence $\gamma$ is a smooth embedding, then its image $\Gamma(f)$ is an embdedded $m$-dimensional submanifold of $M \times N$.
+\end{proof}
+\section{Slice Charts}
+\begin{definition}
+    Let $U \subseteq \bb{R}^n$ be an open subset. A \textit{$k$-slice of U} is any subset $S$ which has the form 
+    \[
+        S = \{(x^1,\dots,x^n)\in U\mid (x^{k + 1},\dots,x^n) = \text{constant}  \}.
+    \]
+    Moreover, let $M^m$ be a smooth manifold and $(U,\varphi)$ be a smooth chart on $M$. If $S$ is a subset of $U$ such that $\varphi(S)$ is a $k$-slice of $\varphi(U)$, then we say that $S$ is a $k$-slice of $U$.
+\end{definition}
 
 \section{Level Sets}
 \begin{definition}

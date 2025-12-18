@@ -337,6 +337,95 @@ yields the theory \textit{ZFC}.
     \begin{proposition}
         Homeomorphism preserves those following properties of the set: openess, closedness, compactness, precompactness, connectedness, path-connectedness and Hausdorff.
     \end{proposition} 
+    \begin{lemma}
+Every topological manifold has a countable basis of precompact coordinate balls.
+\end{lemma}
+\begin{proof}
+    We call a topological manifold is \textit{sweet} if it has countable basis satisfies the following required result.
+
+    Let $M$ be a topological $n$-manifold. We first suppose the special case that $M$  could be globally covered by a chart $\varphi: M \to \varphi(M) \subset \bb{R}^n$. Let $\mathcal{B}$ be a collection of open balls $B(x,r) \subset \bb{R}^n$ where $x$ is a rational point and $r$ is a positive rational number. Since every $n$-dimensional point $x$ can be placed between two rational balls, we thus can find $B \in \mathcal{B}$ such that $x \in B$. Moreover, given $B_1, B_2 \in \mathcal{B}$ such that $ L = B_1 \cap B_2 \neq \varnothing$ and $x_0 \in B_1 \cap B_2$. Since $L$ is open, one can choose an open ball $B_3 \in \mathcal{B}$ such that $x \in B_3$ and $B_3 \subseteq B_1 \cap B_2$. In addition, by definition, since $\mathcal{B}$ is countable and $\varphi(M)$ is open, hence $\varphi(M)$ can be covered by countable subset $\mathcal{B}_1 \subseteq \mathcal{B}$ and if $B \in \mathcal{B}$, it would follow that  $B \subset \varphi(M)$. 
+
+     It suffices to prove $\varphi^{-1}(\mathcal{B}_1) = \{\varphi^{-1}(B): B \in \mathcal{B}_1\}$ is a basis of precompact of coordinate balls of $M$. That $\mathcal{B}_1$ is basis of the space $\varphi(M)$ implies that $\varphi^{-1}(B)$ is basis of $M$. One should check that $\varphi^{-1}(\mathcal{B}_1)$ is countable, since we can write $\mathcal{B}_1$ as a sequence $(B_n)_{n = 1}^{\infty} = \mathcal{B}_1$, so does $(\varphi(B_n)^{-1})_{n = 1}^{\infty} = \varphi^{-1}(\mathcal{B}_1)$.
+
+    Secondly, we need to check that every element of $\varphi^{-1}(\mathcal{B}_1)$ is precompact. Let $B \in \mathcal{B}_1$ be an open ball, since $\mathrm{closure}(B)$ is compact, $B$ is compact. Since homeomorphism preverves precompactness, $\varphi^{-1}(B) $ is also precompact. Thus $\varphi^{-1}$ satisfies every following required properties and. Hence $M$ has $\varphi$ which is sweet.
+
+    Now we suppose $M$ be an abitrary $n$-manifold. By the definition, $M$ is locally Euclidean of dimension $n$, that is, for every $x \in M$, we can find an open subset $U \subseteq M$ containing $x$ and a homeomorphism $\varphi: U \to \varphi(U) \subseteq \bb{R}^n$ such that $\varphi(U)$ is open. Thus $U$ restricted by the chart $\varphi$, by the argument in the preceding paragraph, $U$ is sweet. In additon, since $M$ is second-countable, $M$ also has countable basis which is sweet by choose countably infinite basis in every set $U$. Hence we are done.
+\end{proof}
+
+\begin{proposition}
+    Let $M$ be a topological manifold.
+    \begin{enumerate}
+        \item $M$ is locally path-connected.
+        \item $M$ is connected if and only if it is path-connected.
+        \item The components of $M$ are the same as its path components.
+        \item $M$ has countably many components, each of which is an open subset of $M$ and a connected topological manifold.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+     Since each coordinate ball is path-connected, 1. follows from the fact that $M$ has a basis of coordinate balls.
+\end{proof}
+\begin{definition}
+    If $U$ and $V$ are open subsets of Euclidean spaces $\bb{R}^n$ and $\bb{R}^m$, respectively, a function $F: U \to V$ is said to be \textit{smooth} or $C^{\infty}$ if each of its component functions has continuous partial derivatives of all orders. If in addition $F$ is bijective and has a smooth inverse map, it is called a \textit{diffeomorphism}.
+\end{definition}
+\begin{definition}
+    Let $M$ be a topological $n$-manifolds. If $(U,\varphi)$ and $(V,\psi)$ are two charts such that $U \cap V \neq \varnothing$, the composite map
+    \[
+    \psi \circ \varphi^{-1}: \varphi(U \cap V) \to \psi(U \cap V)
+    \]
+    is called the \textit{transition map from $\varphi$ to $\psi$}. In addition, if either $U \cap V = \varnothing$ or the composite map $\psi \circ \varphi^{-1}$ is a diffeomorphism, two chart $(U,\varphi)$ and $(V, \psi)$ are said to be \textit{smoothly compatible}, denoted by the relation ''$\sim$''.
+\end{definition}
+\begin{definition}
+    Let $M$ be a topological $n$-manifold and $\mathcal{A}$ be the collection of charts $(U_{\alpha},\varphi_{\alpha})$ such that $\bigcup U_{\alpha} = M$, we say $\mathcal{A}$ is an \textit{atlas for} $M$.
+\end{definition}
+\begin{definition}
+    A smooth atlas $\mathcal{A}$ on $M$ is \textit{maximal} if it is not properly contained in any larger smooth atlas. If $M$ is a topological manifold, a \textit{smooth structure on $M$} is a maximal smooth atlas. 
+\end{definition}
+\begin{definition}
+    Let $M$ be topological $n$-manifold and $\mathcal{A}$ is an atlas for $M$. If for abitrary $(U,\varphi), (V,\psi) \in \mathcal{A}$, we have $(U,\varphi) \sim (V,\psi)$,  then $\mathcal{A}$ is called \textit{a smooth atlas} or \textit{maximal atlas}.
+\end{definition}
+\begin{definition}
+    A \textit{smooth manifold} is a pair $(M,\mathcal{A})$, where $M$ is a topological manifold and $\mathcal{A}$ is a smooth structure on $M$.
+\end{definition}
+\begin{proposition}
+    Let $M$ be a topological manifold.
+    \begin{enumerate}
+        \item Every smooth atlas $\atlas$ for $M$ is contained in a unique maximal smooth atlas, called \textit{smooth structure determined by }$\atlas$.
+        \item Two smooth atlases for $M$ determine the same smooth structure if and only if their union is a smooth atlas.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    1. Let $\atlas$ be a smooth atlas for $M$, and let $[\atlas]$ be the set of all charts that are smoothly compatible to every chart in $\atlas$. Since $\atlas \subseteq [\atlas]$, it suffices to prove that $[\atlas]$ is smooth atlas, in other words, let $(X,f)$ and $(Y,g)$ be abitrary two charts in $[\atlas]$, one should verify that $(X,f) \sim (Y,g)$.
+
+    Let $x = f(t) \in f(X \cap Y)$, since $\atlas$ has domain covering $M$, one can find $(Z,h)_x \in \atlas$ such that $t \in Z$ and the hypothesis deduces that $(X,f) \sim (Z,h)_x$ and $(Y,g) \sim (Z,h)_x$. Consider the transition:
+    \[
+        g \circ f^{-1}: f^{-1}(X \cap Y \cap Z) \to g(X \cap Y \cap Z)
+    \]
+    It would follow that $g \circ f^{-1} = (g \circ h^{-1}) \circ (h \circ f^{-1})$, where each term of the composition is diffeomorphism, thus $g \sim f$ in a neighborhood of $x $. Therefore $g \sim f$ on the whole domain $(X \cap Y)$, thus $[\atlas]$ is smooth atlas. To prove that it is maximal, since $[\atlas]$ is transitive, if there is a chart $(U,\varphi)$ which is smoothly compatible with a chart in $[\atlas]$, one can find $(V,\psi) \in \atlas$ such that $(U, \varphi) \sim (V, \psi)$, by the definition of $[\atlas]$, we have $(U,\varphi) \in [\atlas]$. Moreover, if there is another maximal chart $[\mathcal{B}]$ containing $\atlas$, also because $[\atlas]$ is transitive, it would follows that $[\mathcal{B}] \subseteq [\atlas]$. Thus $[\atlas]$ is unique maximal atlas.
+
+    2. We first prove the foward implication. Suppose $\atlas$ and $\btlas$ determine the same atlas $[\atlas]$. Since every chart in $[\atlas]$ is compatible with all charts in both atlas $\atlas$ and $\btlas$, every atlas in $\atlas$ is smoothly comptatible with all atlas in $\btlas$, and vice versa. Thus $\atlas \cup \btlas$ is a smooth atlas.
+
+    The reverse statement holds since $\atlas \cup \btlas$ determine $[\atlas]$ implies both $\atlas$ determine $[\atlas]$ and $\btlas$ determine $[\atlas]$. Hence the second proposition is clearly proven.
+\end{proof}
+\begin{corollary}
+    The relation $\sim$ is equivalent in maximal atlas.
+\end{corollary}
+\section{Local Coordinate Representations}
+\begin{definition}
+    Let $M$ be a smooth manifold and $[\atlas]$ be its maximal atlas. Any chart $(U,\varphi) \in [\atlas]$ is called a \textit{smooth chart}, and the corresponding map $\varphi$ is called \textit{smooth coordinate map}.
+\end{definition}
+\begin{definition}
+    We say that a set $B \subseteq M$ is a \textit{regular coordinate ball} if there exists a coordinate ball $B' \supseteq B$ and a smooth coordinate map $\varphi: B' \to \bb{R}^n$ such that for some positive real numbers $r < r'$,
+    \[
+        \varphi(B) = B(0,r), \quad \varphi(\overline{B}) = \overline{B(0,r)} \quad \text{ and}\quad \varphi(B') = B(r',0).
+    \]
+\end{definition}
+\begin{proposition}
+    Every smooth manifold has a countable basis of regular coordinate balls.
+\end{proposition}
+\section{Manifolds with Boundary}
+\begin{definition}
+    An $n$-dimensional topological manifold with boundary is a second-countable Hausdorff space $M$ in which every point has a neighborhood homeomorphic either to an open subset of $\bb{R}^n$ or to a relatively open subset of $\bb{H}^n$.
+\end{definition}
 \section{Problems}
 \begin{problem}
     Let $X$ be the set of all points $(x,y) \in \bb{R}^2$ such that $y = \pm 1$ and let $M$ be the quotient of $X$ by the equivalence relation generated by $(x,-1) \sim (x,1)$ for all $x \neq 0$. Show that $M$ is locally Euclidean and second-countable, but not Hausdorff.

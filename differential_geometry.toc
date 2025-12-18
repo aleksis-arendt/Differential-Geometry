@@ -8,27 +8,30 @@
 \contentsline {section}{\numberline {6}Connectedness}{6}{section.1.6}%
 \contentsline {section}{\numberline {7}Compactness}{6}{section.1.7}%
 \contentsline {section}{\numberline {8}Topological Manifolds}{6}{section.1.8}%
-\contentsline {section}{\numberline {9}Problems}{7}{section.1.9}%
-\contentsline {chapter}{\numberline {2}Partition of Unity}{13}{chapter.2}%
-\contentsline {section}{\numberline {1}Construction}{13}{section.2.1}%
-\contentsline {section}{\numberline {2}Problems}{16}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Tangent Space}{21}{chapter.3}%
-\contentsline {section}{\numberline {1}Derivatives in Multivariable Calculus}{21}{section.3.1}%
-\contentsline {section}{\numberline {2}Tangent Vectors of Euclidean Space}{23}{section.3.2}%
-\contentsline {section}{\numberline {3}Problems}{25}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Embeddings}{29}{chapter.4}%
-\contentsline {section}{\numberline {1}Immersion and Submersion}{29}{section.4.1}%
-\contentsline {section}{\numberline {2}Constant Rank Theorem}{29}{section.4.2}%
-\contentsline {section}{\numberline {3}Embeddings}{31}{section.4.3}%
-\contentsline {section}{\numberline {4}Submersions}{31}{section.4.4}%
-\contentsline {section}{\numberline {5}Smooth Covering Maps}{32}{section.4.5}%
-\contentsline {section}{\numberline {6}Problems}{32}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Level Sets Theorem}{38}{chapter.5}%
-\contentsline {section}{\numberline {1}Submanifolds}{38}{section.5.1}%
-\contentsline {section}{\numberline {2}Level Sets}{38}{section.5.2}%
-\contentsline {section}{\numberline {3}Cotangent Space}{38}{section.5.3}%
-\contentsline {chapter}{\numberline {6}Wedge Product}{39}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Differential Forms on Manifolds}{42}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Measure Theory}{46}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Orientations}{49}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Integration on Manifolds}{51}{chapter.10}%
+\contentsline {section}{\numberline {9}Local Coordinate Representations}{8}{section.1.9}%
+\contentsline {section}{\numberline {10}Manifolds with Boundary}{9}{section.1.10}%
+\contentsline {section}{\numberline {11}Problems}{9}{section.1.11}%
+\contentsline {chapter}{\numberline {2}Partition of Unity}{15}{chapter.2}%
+\contentsline {section}{\numberline {1}Construction}{15}{section.2.1}%
+\contentsline {section}{\numberline {2}Problems}{18}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Tangent Space}{23}{chapter.3}%
+\contentsline {section}{\numberline {1}Derivatives in Multivariable Calculus}{23}{section.3.1}%
+\contentsline {section}{\numberline {2}Tangent Vectors of Euclidean Space}{25}{section.3.2}%
+\contentsline {section}{\numberline {3}Problems}{27}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Embeddings}{31}{chapter.4}%
+\contentsline {section}{\numberline {1}Immersion and Submersion}{31}{section.4.1}%
+\contentsline {section}{\numberline {2}Constant Rank Theorem}{31}{section.4.2}%
+\contentsline {section}{\numberline {3}Embeddings}{33}{section.4.3}%
+\contentsline {section}{\numberline {4}Submersions}{33}{section.4.4}%
+\contentsline {section}{\numberline {5}Smooth Covering Maps}{34}{section.4.5}%
+\contentsline {section}{\numberline {6}Problems}{34}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Level Sets Theorem}{40}{chapter.5}%
+\contentsline {section}{\numberline {1}Embedded Submanifolds}{40}{section.5.1}%
+\contentsline {section}{\numberline {2}Slice Charts}{41}{section.5.2}%
+\contentsline {section}{\numberline {3}Level Sets}{41}{section.5.3}%
+\contentsline {section}{\numberline {4}Cotangent Space}{41}{section.5.4}%
+\contentsline {chapter}{\numberline {6}Wedge Product}{42}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Differential Forms on Manifolds}{45}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Measure Theory}{49}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Orientations}{52}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Integration on Manifolds}{54}{chapter.10}%

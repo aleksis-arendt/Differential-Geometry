@@ -9,7 +9,8 @@
 \usepackage{etoolbox}
 \pretocmd{\tableofcontents}{\hypersetup{hidelinks}}{}{}
 \apptocmd{\tableofcontents}{\hypersetup{colorlinks=true,linkcolor=magenta}}{}{}
-
+\usepackage{graphicx}
+\usepackage{pdfpages} % nếu bìa là PDF 1 trang
 \usepackage{tikz}
 \usetikzlibrary{calc,arrows.meta}
 \usepackage{tikz-cd}
@@ -17,6 +18,9 @@
 \newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
 \newcommand{\ti}{\tilde}
 \newcommand{\vol}{\mathrm{Vol}}
+\newcommand{\atlas}{\mathcal{A}}
+\newcommand{\btlas}{\mathcal{B}}
+\newcommand{\ctlas}{\mathcal{C}}
 \newcommand{\clo}{\overline}
 \newcommand{\vect}{\overrightarrow}
 \newcommand{\multi}{\mathrm{Multi}}
@@ -98,7 +102,7 @@
     {\thmname{#1}~\thmnumber{#2}\thmnote{\normalfont\ (#3)}}
 
   \theoremstyle{sfstyle}
-  \newtheorem{theorem}[mythm]{Theorem}
+  
   \newtheorem{problem}{Problem}[chapter]
 
 % Định nghĩa lại cách đánh số
@@ -112,7 +116,7 @@
 % \setcounter{secnumdepth}{1}
 
 % Problem resets each chapter and shows Chapter.Problem
-
+\renewcommand{\themythm}{\thechapter.\arabic{mythm}}
 \renewcommand{\theproblem}{\thechapter.\arabic{problem}}
 
 
@@ -124,6 +128,7 @@
   \newtheorem{remark}[mythm]{Remark}
   \newtheorem{proposition}[mythm]{Proposition}
   \newmdtheoremenv{boxedlemma}{Lemma}
+  \newtheorem{theorem}[mythm]{Theorem}
   \usepackage{array}
   \usepackage{booktabs}
 
