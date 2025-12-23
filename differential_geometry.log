@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.7.30)  18 DEC 2025 18:39
+This is XeTeX, Version 3.141592653-2.6-0.999995 (MiKTeX 24.1) (preloaded format=xelatex 2025.7.30)  24 DEC 2025 00:48
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
@@ -1259,25 +1259,26 @@ Chapter 4.
 Chapter 5.
 [40
 
-]) (sections/cotangent_space.tex) (sections/wedge_product.tex [41]
+] [41] [42] [43] [44]) (sections/cotangent_space.tex)
+(sections/wedge_product.tex [45]
 Chapter 6.
-[42
+[46
 
-] [43]) (sections/differential_forms.tex [44]
+] [47]) (sections/differential_forms.tex [48]
 Chapter 7.
-[45
-
-] [46] [47]) (sections/measure_theory.tex [48]
-Chapter 8.
 [49
 
-] [50]) (sections/orientations.tex [51]
-Chapter 9.
-[52
+] [50] [51]) (sections/measure_theory.tex [52]
+Chapter 8.
+[53
 
-]) (sections/integration.tex [53]
+] [54]) (sections/orientations.tex [55]
+Chapter 9.
+[56
+
+]) (sections/integration.tex [57]
 Chapter 10.
-) [54
+) [58
 
 ] (differential_geometry.aux)
  ***********
@@ -1285,7 +1286,7 @@ LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-04>
  ***********
 Package rerunfilecheck Info: File `differential_geometry.out' has not changed.
-(rerunfilecheck)             Checksum: 802FB4261EFB31C57FEA7BE3326E05EA;5164.
+(rerunfilecheck)             Checksum: F0235846A1A7C667F739645B816B1DB9;5259.
  ) 
 Here is how much of TeX's memory you used:
  30314 strings out of 409617
@@ -1296,4 +1297,4 @@ Here is how much of TeX's memory you used:
  1348 hyphenation exceptions out of 8191
  99i,17n,107p,1243b,1066s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on differential_geometry.pdf (59 pages).
+Output written on differential_geometry.pdf (63 pages).
