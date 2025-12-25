@@ -29,7 +29,21 @@ After some calculation, i obtain a result that is quite nice: the kernel tangent
 - Reason stuck: brute-force Jacobian hides geometry
 - Kernel of dF must be radial; radial vectors cannot lie in T_p M.
 - Direct Jacobian rank computation is inefficient.
-### Next action
-- [ ] Read paper X
-- [ ] Try variant Y
-- [ ] Abandon direction Z
+
+## Entry 2025-12-24
+
+### Question / Goal
+Not embedded submanifolds problem
+
+### Context
+- Related papers: Problem 5.7.
+
+### Attempt
+So this is a really tiring problem. The hardest part lies in the case F^{-1}(0). My first approach is trying to prove the level set R: x^3 + xy + y^3 = 0 is a connected topological manifold to use Classification theorem. However, i realize R is not actually a manifold while its only singularity messed everything up, moreover, just from a pure equation, how to prove it is connected by the way? Polar coordinate save us all. 
+
+Changing the coordinate, then this abtract set become a not very simple curve. The target is to prove that i can seperate the set into 3 connected parts after removing the origin. It's quite disturbing because the radius jumps from positive to negative sometimes, and trigonometry formula does not allow me to control it easily. But it's okay. I could finally handle it (spend one night for it). Just split the graph of R^2 into 6 parts, removing 3 parts that make the radius negative (it is just a symmetry with angle pi anyway). Then with those three remaining parts, it gave me what i needed, each one contain only one single curve. Then by using the k-slice conditon (from embedding) i can point out the contradiction easily. The case for c = 1/27 is simple.
+
+### Insight
+- Classification is quite unreliable useless for some non-manifold or almost manifold structure. It is better used for global problem.
+- Polar coordinate is still good for parametrization. But the price is a quite huge cognitive load for trigonometry (but still worth it).
+- Don't trust any topology-only-one-line solution until solving it by yourself (by analysis or something you good at).

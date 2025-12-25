@@ -140,8 +140,15 @@ Show that $(0,1)$ is a regular value of $\Phi$, and that the level set $\Phi^{-1
     This is true if and only if $k = 0$, follows that $(5.1)$ is true. Then $dF_p$ is injective on $\Phi^{-1}(0,1)$, thus $G$ has constant rank $2$, which implies that it is a diffeomorphism.
 \end{proof}
 \begin{problem}
-    Prove Theorem 5.11 (the boundary of a manifold with boundary is an embedded submanifold).
+    If $M^n$ is a smooth manifold with boundary, then with the subspace topology, $\pa M$ is a topological $(n - 1)$-manifold (without boundary), and has a smooth structure such that it is a properly embedded submanifold of $M$.
 \end{problem}
+\begin{proof}
+    Let $i: \pa M \to M$ be the natural inclusion, it suffices to prove it is an embedding. Let $p \in \pa M$, then there is a smooth local boundary chart $(U,\varphi) $ centered at $p$, then $\varphi(U)$ to an open subset of $\bb{H}^n$ with the boundary condition. We define another inclusion $j: \pa\bb{H}^n \to \bb{H}^n$, which is a smooth map, then $i$ can be viewed through the composition
+    \[
+        i|_{U \cap \pa M} = \varphi^{-1}\circ j \circ \varphi: U \cap \pa M \to U 
+    \]
+    Since the composition of smooth map are smooth, this implies that $i$ is smooth locally in charts, thus it is smooth. Since $i$ is injective and has constant rank $n - 1$, it is immersion. Moreover, since $\pa{M}$ inherits subspace topology from $M$, then the inclusion $i$ must be a homeomorphism onto its image, and since $\pa M$ is closed, $i$ is proper. Thus $i$ is a smooth proper embedding. Hence, $\pa M$ is a topological $(n - 1)$-manifold, it has a smooth structure defined above and is a properly embedded submanifold in $M$.
+\end{proof}
 \begin{problem}
     Prove Proposition 5.21 (sufficient conditions for immersed submanifolds to be embedded).
 \end{problem}
@@ -151,7 +158,7 @@ Show that $(0,1)$ is a regular value of $\Phi$, and that the level set $\Phi^{-1
 \begin{proof}
     Let $S = \beta(-\pi,\pi)$, suppose $S$ is an embedded submanifold of $\mathbb{R}^2$. Then $S$ is either $0,1$ or $2$-dimensional topological manifold. If $S$ is $0$-dimensional, then the singleton $\{0\}$ is open in $S$, then its preimage $\beta^{-1}(0) = (0,0)$ must be open in $(-\pi,\pi)$, which is a contradiction. We also have that $S$ is not $2$-dimensional since $(-\pi,\pi)$ is $1$-dimensional. Excluding those cases, then $S$ must be $1$-dimensional. Since the every limit points of $S$ lies in $S$, so is $0 = \limit_{t \to -\pi}\beta(t) = \limit_{t \to -\pi}\beta(t)$, then $S$ is compact.
     
-    Since $S$ is connected and compact, then the Classification theorem establishes that $S$ is homeomorphic to $\bb{S}^1$, denoted by the map $F: S \to \bb{S}^1$. Let $p \in \bb{S}^1$, since $ \bb{S}^1 \backslash \{p\}$ is still a connect manifold, whereas $S\backslash \{F(p)\}$ is not, then $S$ cannot be embbeded into a submanifold of $\bb{R}^2$.
+    Since $S$ is connected and compact, then the Classification theorem establishes that $S$ is homeomorphic to $\bb{S}^1$, denoted by the map $F: S \to \bb{S}^1$. Let $p \in \bb{S}^1$, since $ \bb{S}^1 \backslash \{p\}$ is still a connect manifold, whereas $S\backslash \{F(p)\}$ is not, then $S$ cannot be embedded into a submanifold of $\bb{R}^2$.
 \end{proof}
 
 
@@ -166,41 +173,55 @@ $$
 
 It is called the unit tangent bundle of $M$. Prove that $U M$ is an embedded ( $2 m-1$ )-dimensional submanifold of $T \mathbb{R}^n \approx \mathbb{R}^n \times \mathbb{R}^n$. (Used on p. 147.)
 \end{problem}
+\begin{proof}
+    
+\end{proof}
 \begin{problem}
     Let $F: \mathbb{R}^2 \rightarrow \mathbb{R}$ be defined by $F(x, y)=x^3+x y +y^3$. Which level sets of $F$ are embedded submanifolds of $\mathbb{R}^2$ ? For each level set, prove either that it is or that it is not an embedded submanifold.
 \end{problem}
 \begin{proof}
-    Solving the equation $DF(x,y) = 0$ yields $(x,y)$ equals to $(0,0)$ or $\left(\frac{-1}{3},\frac{-1}{3}\right)$. We have $F(0,0) = 0$ and $F(\frac{-1}{3},\frac{-1}{3}) =\frac{-1}{27}$, then for any $c \neq 0,\frac{-1}{27}$, the level set $F^{-1}(c)$ is regular, thus it is embbeded submanifold of $\bb{R}^2$. We now consider two following cases:
+    Solving the equation $DF(x,y) = 0$ yields $(x,y)$ equals to $(0,0)$ or $\left(\frac{-1}{3},\frac{-1}{3}\right)$. We have $F(0,0) = 0$ and $F(\frac{-1}{3},\frac{-1}{3}) =\frac{1}{27}$, then for any $c \neq 0,\frac{-1}{27}$, the level set $F^{-1}(c)$ is regular, thus it is embedded submanifold of $\bb{R}^2$. We now consider two following cases:
 
-    If $c = 0$, suppose $F^{-1}(0)$ is an embbeded submanifold. Consider the equation 
+    If $c = 0$, suppose $F^{-1}(0)$ is an embedded submanifold. Consider the equation 
     \begin{equation}
            x^3 + xy + y^3 = 0
     \end{equation}
-    where $y$ is solution by $x$. Since for $x$ large enough, it only has 1 root $y$, then it must be $1$-dimensional embbeded submanifold of $\bb{R}^2$. Since $F^{-1}(0)$  is closed but unbounded, by the Heine-Borel theorem, it is not compact. Then the classification theorem follows that $F^{-1}(0)$ is homeomorphic to $\bb{R}$. Define the following polar coordinate $(x,y) \mapsto (r\cos(\phi), r\sin(\phi))$, then it follows that 
+    where $y$ is solution by $x$. Define the following polar coordinate $(x,y) \mapsto (r\cos(\phi), r\sin(\phi))$, then it follows that 
     \[
         F(x,y) = x^3 + xy + y^3 = r^2( \cos(\phi)^3 + r\sin(\phi)\cos(\phi) + \sin(\phi)^3)
     \]
-    Let $I = [0,2\pi)\backslash\{\frac{-\pi}{4},\frac{3\pi}{4}\}$, then we can define $r: I \to \bb{R}$ as the embbeded curve on $F^{-1}(0)$ satisfying 
+    Let $I = [0,2\pi)\backslash\{\frac{3\pi}{4},\frac{7\pi}{4}\}$, and a parametrization $r: I \to \bb{R}$ for $F^{-1}(0)$ defined by
     \[
         r(\phi) = \frac{-\sin(\phi)\cos(\phi)}{\sin(\phi)^3 + \cos(\phi)^3}, \phi \in I.
     \]
-    Since $(0,0)$ is the only critical point of $F^{-1}(0)$, we aim to estimate how many times $r$ passes through this point as a curve. Let $r(\phi) = 0$, then we have 
+    Since $(0,0)$ is the only critical point on the level set $F^{-1}(0)$, we aim to count how many times $r$ passes through this point as a curve. Let $r(\phi) = 0$, then we have 
     \[
         -\sin(\phi)\cos(\phi) = \frac{-\sin(2\phi)}{2} = 0 \lra \phi = \frac{k\pi}{2}, k \in \bb{Z}
     \]
-    Set $\phi \in I$, then the following solution is $0,\dfrac{\pi}{2},\pi, \dfrac{3\pi}{2}$. Moreover, we also have 
+    Since $\phi \in I$, then the following solution is $\left\{0,\dfrac{\pi}{2},\pi, \dfrac{3\pi}{2}\right\}$. 
+
+    Now we divide the $I$ into 3 sections, which is 
     \[
-        \limit_{\phi \to 0}r(\phi) = \limit_{\phi \to \frac{\pi}{2}}r(\phi) =\limit_{\phi \to \pi}r(\phi) = \limit_{\phi \to \frac{3\pi}{2}}r(\phi) = 0
+       I_1 =\left(\frac{\pi}{2},\frac{3\pi}{4}\right), I_2 =\left(\pi,\frac{3\pi}{2}\right),I_3 = \left(\frac{7\pi}{4},2\pi\right)
     \]
-    Now we divide the domain of $r$ into 4 sections, which is 
+    and define the corresponding restriction $r_i: I_i \to \bb{R}$ for $i = 1,2,3$. Then it follows that $r_1,r_2,r_3 >0$. In particular, since we have $r(I_1  + \pi) = -r(I_1)$, $r(I_2 - \pi) = -r_2(I_2)$ and $r(I_3 -\pi) = -r_3(I_3)$ . Let $J =I_1\cup I_2\cup I_3$, then the restricted map $r|_{J}: J \to r(I)$ is a homeomorphism. Moreover, since every $r_i$ is a homeomorphism onto its image, then $r_i(I_i)$ is connected. However, since $F^{-1}(0)$ is an embedded $1$-submanifold, then there exists a neighborhood $U \subseteq r(I)$ centered at $0$ such that $U$ is homeomorphic to an open interval $(-\ep,\ep)$. Since $r(I)$ can be seperated into three connected components after removing the point $0$, but removing any single point splits   $(-\ep,\ep)$ into two connected components, which leads to contradiction.
+
+    If $c = \frac{1}{27}$, then the level set condition can be rewritten as 
     \[
-        I_1 = \left[0,\frac{\pi}{2}\right), I_2 = \left[\frac{\pi}{2},\pi\right],I_3 = \left[\pi,\frac{3\pi}{2}\right), I_4 = \left[\frac{3\pi}{2},2\pi\right)
+        x^3 + xy + y^3 - \frac{1}{27} = \frac{1}{27}(3x + 3y - 1)(9x^2 - 9xy + 3x + 9y^2 + 3y + 1) = 0
     \]
-    For each $i = 1,2,3,4$, define the restriction $r_i: I_i \to \bb{R}_{\geq 0}$ that agrees with $r$ on $I_i$. Then we have $r_1(\phi + \pi) = -r_3(\phi)$
+    The solution for this equation is $x = y = \frac{-1}{3}$ and the line $L: 3x + 3y - 1 = 0$. If $F^{-1}(\frac{1}{27})$ is an embdedded submanifold, since the single seperated point$(\frac{-1}{3},\frac{-1}{3})$ is an embdedded $0$-submanifold, whether $L$ is $1$-dimension submanifold, since the general dimension cannot be different, $F^{-1}(\frac{1}{27})$ cannot be an embedded submanifold.
 \end{proof}
 \begin{problem}
     Suppose $M$ is a smooth $n$-manifold and $B \subseteq M$ is a regular coordinate ball. Show that $M \backslash B$ is a smooth manifold with boundary, whose boundary is diffeomorphic to $\mathbb{S}^{n-1}$. (Used on p. 225.)  
 \end{problem}
+\begin{proof}
+    Let $\{(U_{\alpha},\varphi_{\alpha})\}$ be a smooth structure defined on $M$. Let $p$ be a point in the interior of $M \backslash B$, then there exists a smooth local chart $(U,\varphi)$ containing $p$ and $U \cap B = \varnothing$, then it is also a chart on $M \backslash B$.
+    
+    Let $p \in \pa{B}$. Since $B$ is a regular coordinate ball, then there exists a smooth local chart $(U_{p},\varphi_{p})$ containing $p$ such that $\varphi_p( U_p \cap B)$ is an open subset of the ball $B(0,1)$ and $\varphi(\pa B \cap U ) = \pa B(0,1) \cap \varphi(U)$. Since every neighborhood containing boundary point of $B(0,1)$ is diffeomorphic with an open subset of $\bb{H}^n$, then $U_p \cap \clo{B}$ is homeomorphic to an open subset of $\bb{H}^n$ with the boundary condition. 
+
+     Since every constructed chart is restricted from $M$, then it also defines a smooth structure on $M\backslash B$. Thus $M \backslash B$ is a smooth manifold with boundary. By our chart construction, then it follows that $\pa (M\backslash B )= \pa B$, which is diffeomorphic to $\bb{S}^{n - 1}$.
+\end{proof}
 \begin{problem}
     Let $S \subseteq \mathbb{R}^2$ be the boundary of the square of side 2 centered at the origin (see Problem 3-5). Show that $S$ does not have a topology and smooth structure in which it is an immersed submanifold of $\mathbb{R}^2$.
 \end{problem}
