@@ -87,9 +87,30 @@
 \begin{proposition}
     Let $S$ be a subset of a smooth manifold $M^m$. Then $S$ is an embedded $k$-submanifold of $M$ if and only if every point of $S$ has a neighborhood $U$ in $M$ such that $U \cap S$ is a level set of a smooth submersion $\Phi: U \to \bb{R}^{m - k}$.
 \end{proposition}
+\section{Tangent Space of Submanifolds}
 \begin{definition}
     Let $S \subseteq M$ be an embedded submanifold, a smooth map $\Phi: M \to N$ such that $S$ is a regular level set of $\Phi$ is called a \textit{defining map for $S$}.
 \end{definition}
+\begin{proposition}
+    Suppose $M$ is a smooth manifold with or without boundary, $S \subseteq M$ is an immersed or embedded submanifold, and $p \in S$. A vector $v \in T_pM$ is in $T_pS$ if and only if there is a smooth curve $\gamma: J \to M$ whole image in $S$, which is also smooth as a map into $S$, such that $0 \in J, \gamma(0) = p$ and $\gamma'(0) = v$
+\end{proposition}
+\begin{proposition}
+    Suppose $M$ is a smooth manifold, $S \subseteq M$ is an embedded submanifold, and $p \in S$, as a subspace of $T_pM$, the tangent space $T_pS$ is characterized by 
+    \[
+        T_pS = \{v \in T_pM\ \mid vf = 0 \lra f \in C^\infty(M) \text{ and }f|_S = 0\}
+    \]
+
+\end{proposition}
+\begin{proposition}[Regular Level Set theorem]
+    Suppose $M$ is a smooth manifold and $S \subseteq M$ is an embedded submanifold. If $\Phi: U \to N$ is any local defining map for $S$, then 
+    \[
+        T_pS = \kernel(d\Phi_p): T_p M \to T_{\Phi(p)}N
+    \]
+    for each $p \in S \cup U$.
+\end{proposition}
+\begin{corollary}
+    Suppose $S \subseteq M$ is a level set of a smooth submersion $\Phi:M \to \bb{R}^k$. A vector $v \in T_pM$  is tangent to $S$ if and only if $v\Phi^i  = 0$ for all $i = 1 ,\dots, k$. 
+\end{corollary}
 \section{Problems}
 \begin{problem}
     Consider the map $\Phi: \mathbb{R}^4 \rightarrow \mathbb{R}^2$ defined by
@@ -165,16 +186,26 @@ Show that $(0,1)$ is a regular value of $\Phi$, and that the level set $\Phi^{-1
 \begin{problem}
     Let $\gamma: \mathbb{R} \rightarrow \mathbb{T}^2$ be the curve of Example 4.20. Show that $\gamma(\mathbb{R})$ is not an embedded submanifold of the torus. [Remark: the warning in Problem 5-4 applies in this case as well.]
 \end{problem}
+
 \begin{problem}
     Suppose $M \subseteq \mathbb{R}^n$ is an embedded $m$-dimensional submanifold, and let $U M \subseteq T \mathbb{R}^n$ be the set of all unit tangent vectors to $M$ :
 $$
 U M=\left\{(x, v) \in T \mathbb{R}^n: x \in M, v \in T_x M,|v|=1\right\}
 $$
 
-It is called the unit tangent bundle of $M$. Prove that $U M$ is an embedded ( $2 m-1$ )-dimensional submanifold of $T \mathbb{R}^n \approx \mathbb{R}^n \times \mathbb{R}^n$. (Used on p. 147.)
+It is called the unit tangent bundle of $M$. Prove that $U M$ is an embedded ($2 m-1$)-dimensional submanifold of $T \mathbb{R}^n \approx \mathbb{R}^n \times \mathbb{R}^n$. (Used on p. 147.)
 \end{problem}
 \begin{proof}
-    
+    Let $i: UM \hookrightarrow T \bb{R}^n$ be the natural inclusion. Then we have $i$ to be the topological embdedding. Let $\Phi: TM \to \bb{R}$ be the smooth map defined by $(x,v) \to \norm{v}^2$. Let $(\mu,\zeta) \in T_{(x,v)}(TM)$, and consider the coordinate representation $(x^i)$ on $M$ and $(v^i)$ on $T_xM$, then we have 
+    \[
+        d\Phi_{(x,v)}(\mu,\zeta) = \begin{bmatrix}
+            \dfrac{\pa\Phi}{\pa x^i}, \dfrac{\pa \Phi}{\pa v^i}
+        \end{bmatrix}\cdot (\mu,\zeta) = [0,2v^i]\cdot (\mu,\zeta) = 2 \langle v,\zeta \rangle.
+    \] Since any tangent vector $v \in T_xM$ such that $\norm{v} = 1$ cannot vannish the differential, then $UM = \Phi^{-1}(1)$ is a regular set. Then the inclusion $j: UM \to TM$ is a smooth embedding. Since $M$ is embedded, there is a smooth embedding $F: M \to \bb{R}^n$. Then the global differential $dF: TM \to T\bb{R}^n$ is homeomorphism onto its image. As we can view $i$ as the composition of the smooth map. 
+    \[
+        i = j \circ dF: UM \to T\bb{R}^n
+    \]
+    then $i$ is smooth. Moreover, since $dF$ is also a smooth embedding, then $i$ is a smooth embedding. To calculate the dimension of $UM$, let $G: UM \to M \times \bb{S}^{n - 1}$ be the map satisfying $G(x,v) = (x,v^i)$. Since it is straightforward to check that $G$ is a homeomorphism by the fact that every tangent section of $UM$ is just an intersection of the $m$-dimensional tangent space with the sphere has the same origin $x$ (when embedded in $\bb{R}^n$). Then $UM$ is $(2m-1)$-dimensional embdedded submanifold of $T\bb{R}^n$.
 \end{proof}
 \begin{problem}
     Let $F: \mathbb{R}^2 \rightarrow \mathbb{R}$ be defined by $F(x, y)=x^3+x y +y^3$. Which level sets of $F$ are embedded submanifolds of $\mathbb{R}^2$ ? For each level set, prove either that it is or that it is not an embedded submanifold.
@@ -241,12 +272,40 @@ For which values of $a$ is $M_a$ an embedded submanifold of $\mathbb{R}^2$ ? For
         \item Answer the same two questions for $\Psi: \mathbb{R}^2 \rightarrow \mathbb{R}$ defined by $\Psi(x, y)= x^2-y^3$.
     \end{enumerate}
 \end{problem}
+\begin{proof}
+    
+\end{proof}
 \begin{problem}
     Suppose $E$ and $M$ are smooth manifolds with boundary, and $\pi: E \rightarrow M$ is a smooth covering map. Show that the restriction of $\pi$ to each connected component of $\partial E$ is a smooth covering map onto a component of $\partial M$. (Used on p. 433.)
 \end{problem}
+\begin{proof}
+     Let $p \in \pa M$, then one can choose a local boundary chart $(U,\varphi)$ centered at $p$ such that $U \cap \pa E$ is connected. Since $\pi$ is a smooth covering, we have 
+    \[
+        \pi^{-1}(U) = \bigsqcup_{\alpha \in A}U_{\alpha}
+    \] 
+    and each restriction $\pi_{U_{\alpha}}: U_{\alpha} \to U$ is a diffeomorphism. Since $U_{\alpha}$ is open in $E$ and $U \pa E$ is an embdedded submanifold in $E$,  then $U_{\alpha} \cap \pa E$ is open in $\pa E$. This imples that $\pi(U_{\alpha} \cap \pa E) = U \cap \pa M$, then the restriction $\pi|_{\pa E}: \pa E \to \pa M$ is well-defined. We thus have 
+     \[
+     \pi^{-1}(U\cap \pa M) = \bigsqcup_{\alpha \in A}(U_{\alpha} \cap \pa E)
+     \]
+     and each restriction $\pi|_{U_{\alpha}\cap \pa E}: U_{\alpha} \cap \pa E \to U\cap \pa M$ is a diffeomorphism. Moreover, every component $U_{\alpha}\cap \pa E$ is also connected since it is diffeomorphic to the connected set $U \cap \pa E$. Thus  $\pi|_{\pa E}: \pa E \to \pa M$  is a smooth covering.
+\end{proof}
+
 \begin{problem}
-    Prove that the image of the dense curve on the torus described in Example 4.20 is a weakly embedded submanifold of $\mathrm{T}^2$.
+    Prove that the image of the dense curve on the torus described in Example 4.20 is a weakly embedded submanifold of $\bb{T}^2$.
 \end{problem}
+\begin{proof}
+    Let $\ep: \bb{R} \to \bb{T}^2$ be the curve defined by $\ep(t) = (e^{2\pi i t}, e^{2\pi i \alpha t})$, where $S = \ep(\bb{R})$ and $\alpha$ is irrational. We first prove that $S$ is a smooth manifold. Let $t \in \bb{R}$, since we have 
+    \[
+        d\ep_p =2\pi i (e^{2\pi i t}, \alpha e^{2\pi i \alpha t}) \neq 0
+    \]
+    Then $\ep$ has constant rank $1$. Then the proposition 4.8 implies that the map $\ep: \bb{R} \to S$ is local diffeomorphism. Endowed $S$ with the unique smooth structure making for which $\ep: \bb{R} \to S$ is a diffeomorphism, $S$ is a smooth manifold. And since we already proved that $\ep$ is an immersion, then $S$ is indeed an immersed manifold. 
+    
+    Let $i: S \hookrightarrow \bb{T}^2$ be a natural inclusion, we claim that $S$ satisfies the initial property. Let $N$ be a smooth manifold and $h: N \to S$ be any map. If $h$ is smooth, then $i \circ h$ is smooth. Conversely, suppose that $i \circ h: N \to \bb{T}^2$ is a smooth map. Since $\ep$ is an endowed diffeomorphism, then we have
+    \[
+     i \circ h = \ep \circ \ep^{-1} \circ h: N\to \bb{T}^2
+    \]
+    is a smooth map, then $\ep^{-1} \circ h: N\to \bb{R}$ is smooth, follows that $h: N \to S$ is smooth. Then $h$ is smooth if and only if $i \circ h$ is smooth for any smooth manifold $N$.
+\end{proof}
 \begin{problem}
     Prove Theorem 5.32 (uniqueness of the smooth structure on an immersed submanifold once the topology is given).
 \end{problem}

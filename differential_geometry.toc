@@ -22,17 +22,19 @@
 \contentsline {section}{\numberline {1}Immersion and Submersion}{31}{section.4.1}%
 \contentsline {section}{\numberline {2}Constant Rank Theorem}{31}{section.4.2}%
 \contentsline {section}{\numberline {3}Embeddings}{33}{section.4.3}%
-\contentsline {section}{\numberline {4}Submersions}{33}{section.4.4}%
+\contentsline {section}{\numberline {4}Submersions}{34}{section.4.4}%
 \contentsline {section}{\numberline {5}Smooth Covering Maps}{34}{section.4.5}%
-\contentsline {section}{\numberline {6}Problems}{34}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Level Sets Theorem}{40}{chapter.5}%
-\contentsline {section}{\numberline {1}Embedded Submanifolds}{40}{section.5.1}%
-\contentsline {section}{\numberline {2}Slice Charts}{41}{section.5.2}%
-\contentsline {section}{\numberline {3}Level Sets}{41}{section.5.3}%
-\contentsline {section}{\numberline {4}Problems}{42}{section.5.4}%
-\contentsline {section}{\numberline {5}Cotangent Space}{45}{section.5.5}%
-\contentsline {chapter}{\numberline {6}Wedge Product}{46}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Differential Forms on Manifolds}{49}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Measure Theory}{53}{chapter.8}%
-\contentsline {chapter}{\numberline {9}Orientations}{56}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Integration on Manifolds}{58}{chapter.10}%
+\contentsline {section}{\numberline {6}Problems}{35}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Level Sets Theorem}{41}{chapter.5}%
+\contentsline {section}{\numberline {1}Embedded Submanifolds}{41}{section.5.1}%
+\contentsline {section}{\numberline {2}Slice Charts}{42}{section.5.2}%
+\contentsline {section}{\numberline {3}Level Sets}{42}{section.5.3}%
+\contentsline {section}{\numberline {4}Tangent Space of Submanifolds}{43}{section.5.4}%
+\contentsline {section}{\numberline {5}Problems}{43}{section.5.5}%
+\contentsline {section}{\numberline {6}Cotangent Space}{49}{section.5.6}%
+\contentsline {chapter}{\numberline {6}Wedge Product}{50}{chapter.6}%
+\contentsline {chapter}{\numberline {7}Differential Forms on Manifolds}{53}{chapter.7}%
+\contentsline {chapter}{\numberline {8}Measure Theory}{57}{chapter.8}%
+\contentsline {section}{\numberline {1}Measure in Euclidean Space}{57}{section.8.1}%
+\contentsline {chapter}{\numberline {9}Orientations}{60}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Integration on Manifolds}{62}{chapter.10}%

@@ -1,4 +1,38 @@
 \chapter{Measure Theory}
+\section{Measure in Euclidean Space}
+\begin{definition}
+    A rectangle $R$ in $\bb{R}^n$ is a closed set given by 
+    \[
+        R = [a_1,b_1]\times \dots \times [a_n\times b_n]
+    \]
+\end{definition}
+\begin{definition}The volume of $R$, denoted by $\vol(R)$, is defined to be 
+    \[
+        \vol(R) = \prod_{i = 1}^n (b_i - a_i)
+    \]
+\end{definition}
+\begin{definition}
+    A union of rectangles is said to be \textit{almost disjoint} if the interior of rectangles are disjoint.
+\end{definition}
+\begin{lemma}
+    If $R = \displaystyle\bigsqcup_{k = 1}^nR_k$, then 
+    \[
+        \vol(R) = \sum_{k = 1}^n \vol(R_k)
+    \]
+\end{lemma}
+
+\begin{theorem}
+    Every open subset $U$ of $\bb{R}$ can be writen uniquely as a countable union of disjoint open intervals.
+\end{theorem}
+
+
+
+
+
+
+
+
+
 \begin{definition}[$\sigma$-algebra] Let $X$ be a set, a collection $\mathcal{X} \in \mathcal{P}(X)$ is called a $\sigma$-algebra if it is
     \begin{enumerate}
         \item The set $X$ is itself in $\mathcal{X}$.
