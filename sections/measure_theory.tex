@@ -1,143 +1,247 @@
 \chapter{Measure Theory}
 \section{Measure in Euclidean Space}
 \begin{definition}
-    A rectangle $R$ in $\bb{R}^n$ is a closed set given by 
-    \[
-        R = [a_1,b_1]\times \dots \times [a_n\times b_n]
-    \]
+    A rectangle $C^a_b$ in $\bb{R}^n$ is a closed set given by 
+    \(
+        C^a_b = [a_1,b_1]\times \dots \times [a_n\times b_n]
+    \). The volume of $C^a_b$, denoted by $\vol(C^a_b)$, is defined to be 
+    \(
+      \displaystyle  \vol(C^a_b) = \prod_{i = 1}^n (b_i - a_i)
+    \). A union of rectangles is said to be \textit{almost disjoint} if the interior of rectangles are disjoint.
 \end{definition}
-\begin{definition}The volume of $R$, denoted by $\vol(R)$, is defined to be 
-    \[
-        \vol(R) = \prod_{i = 1}^n (b_i - a_i)
-    \]
-\end{definition}
-\begin{definition}
-    A union of rectangles is said to be \textit{almost disjoint} if the interior of rectangles are disjoint.
-\end{definition}
+
 \begin{lemma}
-    If $R = \displaystyle\bigsqcup_{k = 1}^nR_k$, then 
-    \[
-        \vol(R) = \sum_{k = 1}^n \vol(R_k)
-    \]
+    If $C^a_b = \displaystyle\bigsqcup_{k = 1}^nR_k$, then 
+    \(
+      \displaystyle  C^a_b= \sum_{k = 1}^n \vol(R_k)
+    \).
 \end{lemma}
 
 \begin{theorem}
     Every open subset $U$ of $\bb{R}$ can be writen uniquely as a countable union of disjoint open intervals.
 \end{theorem}
-
-
-
-
-
-
-
-
-
-\begin{definition}[$\sigma$-algebra] Let $X$ be a set, a collection $\mathcal{X} \in \mathcal{P}(X)$ is called a $\sigma$-algebra if it is
-    \begin{enumerate}
-        \item The set $X$ is itself in $\mathcal{X}$.
-        \item \textit{Closed under unions: }Let $(E_i)\subseteq \mathcal{X}$ be countable subset of $\mathcal{X}$, then 
-        \[
-            \bigcup_{n = 1}^{\infty}E_i \in X.
-        \]
-        \item \textit{Closed under complements: } If $A \in \mathcal{X}$, then 
-        \[
-            A^c := X\backslash A \in \mathcal{X}
-        \]
-    \end{enumerate}
+\begin{definition}[Exterior Measure]    
+    Let $A \subseteq \bb{R}^n$, the \textit{outer measure} of $A$ is 
+    \[
+        m^*(A) = \inf\left\{\sum_{i}\vol(C_i)\mid \{C_i\} \text{ covers } A\right\}
+    \]
+    
 \end{definition}
 \begin{proposition}
-    If $\mathcal{X}$ is a $\sigma$-algebra and $(X_i)\subseteq \mathcal{X}$ be countable subset of $\mathcal{X}$, then we have 
+     If $A \subseteq B$, then $m^*(A) \leq m^*(B)$.
+\end{proposition}
+\begin{proof}
+     Since every $\{C_i\}$ covering $B$ also covers $A$, then $m^*(A) \leq m^*(B)$ follows from the infimum property.
+\end{proof}
+
+\begin{proposition}
+    Let $A,B \subseteq \bb{R}^n$, then $m^*(A\cup B)  \leq m^*(A) + m^*(B)$, the equality holds if and only if $d(A,B) > 0$.
+\end{proposition}
+\begin{proof}
+    Without loss of generality, assume that $A$ and $B$ are bounded. Given $\ep > 0$, then there exists finite coverings $\{C_i\}$ of $A$ and $\{D_j\}$ of $B$ by cubes such that 
     \[
-        \bigcap_{n = 1}^{\infty} X_n \in \mathcal{X}
+        m^*(A) + \ep \geq \sum_{i}\vol(C_i) \text{ and }m^*(B) + \ep \geq \sum_{j}\vol(D_j).
+    \]Then every element $x \in A \cup B$ must be contained in some $C_i \cup D_j$, then $\{C_i\} \cup \{D_j\}$ is a covering of $A \cup B$ by cubes.
+ it follows that 
+    \begin{equation}
+        \begin{aligned}
+             m^*(A \cup B ) & \leq \sum_i \vol(C_i) + \sum_j\vol(D_j) \leq  m^*(A) + m^*(B) + 2\ep
+        \end{aligned}
+    \end{equation}
+    Since $\ep$ was arbitrary, the following inequality holds. Now we suppose $d(A,B) = \delta >0$,  for every $\ep < \delta$, there exists a covering of $A \cup B$ by cubes of size $\ep$ such that it can be decomposed into two finite coverings $\{C_i\}$ of $A$ and $\{D_i\}$ of $B$, and we have
+    \[
+        m^*(A\cup B) + \ep \geq \sum_i\vol(C_i) + \sum_j \vol(D_j)
+    \] Then it follows that 
+    \begin{equation}
+        m^*(A) + m^*(B) \leq \sum_{i} \vol(C_i) + \sum_{j} \vol(D_j) \leq m^*(A \cup B ) + \ep
+    \end{equation}
+        
+
+    As every $\ep$ is arbitrarily small, it follows from $(6.2)$ that
+    \[
+    m^*(A) + m^*(B) \leq m^*(A \cup B),
+    \]
+    Hence, the equality holds, as desired.
+\end{proof}
+\begin{proposition}
+    If $E = \bigcup_{j = 1}^\infty E_j$, then $m^*(E) \leq \dsum_j m^*(E_j)$
+\end{proposition}
+\begin{proof}
+    If there is some $j \in \bb{N}$ such that $m^*(E_i) = \infty$, then the inequality is trivial. Now we suppose that each $m^*(E_i) < \infty$.  For each $j$, there exists a covering $\{C_{k}^j\}$ of $E_j$ by cubes such that 
+\[
+    \sum_{k}\vol(C_{k}^j) \leq m^*(E_j) + \frac{\ep}{2^j}
+\]
+Since $E = \bigcup_j E_j$ and $E_j \subseteq \bigcup_k C^j_k$, then we have $E \subseteq \bigcup_{j,k}C^j_k$, it follows that 
+\begin{equation}
+    \begin{aligned}
+        m^*(E) &\leq \sum_{k,j}\vol(C_k^j) = \sum_{j = 1}^{\infty} \sum_k \vol(C_k^j)\\
+        &\leq \sum_{j = 1}^{\infty} \left(m^*(E_j) + \frac{ \ep}{2^j}\right)\\
+        &= \left( \sum_{j = 1}^{\infty}  m^*(E_j)\right) + \ep.
+    \end{aligned}
+\end{equation}
+    
+
+Since $\ep > 0$ was arbitrary, then it yields the claim follows from $(6.3)$, as desired
+\end{proof}
+\begin{proposition}
+    If $E \subseteq \bb{R}^n$, then 
+    \[
+        m^*(E) = \inf\{m^*(U)\mid U \supseteq E \text{ open}\}
     \]
 \end{proposition}
 \begin{proof}
-    By the Morgan law, we have 
+    If $V\supseteq E$ is an open set, by monotonicity, we have $m^*(E) \leq m^*(V)$. To prove the converse inequality, let $\ep > 0$ be arbitrary, choose a covering $\{C_i\}$ of $E$ by cubes such that 
     \[
-        \bigcap_{n = 1}^{\infty} E_n = X\backslash\bigcap_{n = 1}^{\infty} (X\backslash X_n)=\left(\bigcup_{n = 1}^{\infty} E_n^c\right)^c .
+        \sum_i \vol(C_i) \leq m^*(E) + \frac{\ep}{2}
     \]
-    Using those above condition yields
+    For each $i$, let $C_i^0$ be an open cube containing $C_i$ such that \[\vol(C_i^0) \leq \vol(C_i) + \frac{\ep}{2^{i + 1}}.\] Then $U = \bigcup_i C^0_i$ is an open set containing $E$, then we have 
     \begin{align*}
-         X_n^c \in \mathcal{X} &\ra E_n^c \in \mathcal{X} \text{ for all n,}&\text{(condition 3),}\\
-        &\ra \bigcup_{n = 1}^{\infty} E_n^c \in \mathcal{X} &\text{(condition 2),}\\
-        &\ra \left(\bigcup_{n = 1}^{\infty} X_n^c\right)^c \in \mathcal{X} &\text{(condition 3),}\\
-        &\ra \bigcap_{n = 1}^{\infty} E_n \in X
+        m^*(U) &\leq \sum_i \vol(C_i^0)\leq \sum_i \left(\vol(C_i) + \frac{\ep}{2^i}\right) = \left(\sum_i\vol(C_i)\right) + \frac{\ep}{2} \leq  m^*(E) + \ep
     \end{align*}
-    Hence, we are done. 
+    Moreover, since we have 
+    \[
+        m^*(U) \geq \inf_{V \supseteq E \text{ open}}m^*(V),
+    \] then we obtain 
+    \[
+        m^*(E) +\ep \geq \inf_{V \supseteq E\text{ open}} m^*(V)
+    \]
+    Since $\ep > 0$ was abitrary, combining with the reverse inequality yields the equality.
 \end{proof}
-\begin{definition}[Measure]
-    Let $X$ be a set with $\sigma$-algebra $\mc{M}$. A \textit{measure} on $(X,\mc{M})$ is a function $\mu: \mc{M} \to [0,\infty]$ satisfying 
-    \begin{enumerate}
-        \item $\mu(\varnothing) = 0$,
-        \item If $(E_n)$ is a countably disjoint subset of $\mc{M}$, then 
-        \[
-            \mu\left(\bigcup_{n = 1}^{\infty}E_i\right) = \sum_{n = 1}^{\infty}\mu(E_i).
-        \]
-    \end{enumerate}
-    The triple $(X,\mc{M},\mu)$ is called a \textit{measure space} and the pair $(X,\mc{M})$ is called a \textit{measurable space}.
+\begin{proposition}
+    If $E = \bigsqcup_{j = 1}^\infty C_i$, then 
+    \[
+        m^*(E) = \sum_{j = 1}^\infty\vol(C_i)
+    \]
+\end{proposition}
+\section{Lebesgue measure}
+\begin{definition}[Lebesgue measurable sets]
+    A subset $E \subseteq \bb{R}^n$ is said to be \textit{Lebesgue measurable} if for any $\ep > 0$, there exists an open set $U \supseteq E$ such that 
+    \[
+            m^*(U \backslash E) < \ep
+    \]
+    If $E$ is measurable, then we define its \textit{Lebesgue measure} $m(E)$ by 
+    \[
+        m(E) = m^*(E)
+    \]
 \end{definition}
-\begin{theorem}
-    Let $(X,\mc{M},\mu)$ be a measure space, then the followings hold.
-    \begin{enumerate}
-        \item \textit{Monotonicity:} If $E,F \in \mc{M}$ and $E \subseteq F$, then $\mu(E) \leq \mu(F)$.
-        \item \textit{Subadditivity:} If $(E_n)$ is a countably disjoint subset of $\mc{M}$, then 
-        \[
-            \mu\left(\bigcup_{n = 1}^{\infty} E_n\right) \leq \sum_{n = 1}^{\infty} \mu(E_n)
-        \]
-        \item \textit{Continuity from below:} If $(E_n) \subset \mc{M}$ and $E_1 \subseteq E_2 \subseteq \cdots$, then 
-        \[
-            \mu\left(\bigcup_{n = 1}^{\infty}E_n\right) = \lim_{n \to +\infty}\mu(E_n)
-        \]
-        \item \textit{Continuity from above:} If $(E_n) \subset \mc{M}$ and $E_1 \supseteq E_2 \supseteq \cdots$, and $\mu(E_1) < \infty$, then 
-        \[
-            \mu\left(\bigcap_{n = 1}^{\infty}E_n\right) = \lim_{n \to +\infty}\mu(E_n)
-        \]
-    \end{enumerate}
-\end{theorem}
+\begin{definition}
+    A subset $X \subseteq \bb{R}^n$ is said to have \textit{measure zero} if for every $\ep > 0$, there exists a countable cover of $X$ by open rectangles $\{C_i\}$ such that 
+    \[
+         \sum_i \vol(C_i) < \ep.
+    \]
+\end{definition}
+\begin{proposition}
+    Every open set $\bb{R}^n$ is countable.
+\end{proposition}
+\begin{proposition}
+    If $m^*(E) = 0$, then $E$ is measurable. In particular, if $F$ is a subset of a set of exterior measure $0$, then $F$ is measurable.
+\end{proposition}
 \begin{proof}
-    1. Since $F\backslash E$ and $E$ is disjoint, we have $\mu(F) = \mu((F\backslash E) \cup E)= \mu(F \backslash E) + \mu(E)\geq \mu(E)$.
-
-    2. Let $X_n = E_n \cup E_{n + 1}\cup \dots$, it follows that 
+    Let $\ep > 0$ be arbitrary, then there exists a covering $\{C_i\}$ of $E$ such that 
+    \[
+    \sum_i \vol(C_i) \leq \frac{\ep}{2}
+    \]
+    For each $i$, let $C^0_i$ be an open cube containing $C_i$ such that $\vol(C^0_i) \leq \vol(C_i) + \frac{\ep}{2^{i + 1}}$. Then $U = \bigcup_i C^0_i$ is an open set containing $E$. By monotonicity, we have 
     \begin{align*}
-        \mu\left(\bigcup_{n = 1}^{\infty}E_n\right) &= \mu\left((E_1\backslash X_1) \cup \bigcup_{n = 2}^{\infty}E_n\right) = \mu(E_1\backslash X_1) + \mu\left(\bigcup_{n = 2}^{\infty}E_n\right)\\
-        &\leq \mu(E_1) + \mu\left(\bigcup_{n = 2}^{\infty}E_n\right)\\
-        &\leq \mu(E_1) + \mu(E_2)\mu\left(\bigcup_{n = 3}^{\infty}E_n\right)\\
-        &\leq \cdots\\
-        &\leq \sum_{n = 1}^{\infty}\mu(E_n).
+        m^*(U \backslash E) &\leq m^*(U)\leq \sum_i \vol(C_i^0)\leq \sum_i\left(\vol(C_i) + \frac{\ep}{2^{i + 1}}\right)\\
+        &= \sum_i\vol(C_i) + \frac{\ep}{2} \leq \frac{\ep}{2} + \frac{\ep}{2} = \ep
     \end{align*}
-
-    3. Let $n \in \bb{N}$, we have 
-    \[
-        \mu\left(\bigcup_{i = 1}^nE_i\right) = \mu(E_n)
-    \]
-    Hence,
-    \[
-        \lim_{n \to +\infty}\mu\left(\bigcup_{i = 1}^nE_i\right) =\mu\left(\bigcup_{i = 1}^{\infty}E_i\right) \lim_{n \to +\infty}\mu(E_n)
-    \]
-    4. Similar to the third property, since 
-    \[
-        \mu\left(\bigcap_{i = 1}^nE_i\right) = \mu(E_n)
-    \]
-    This implies 
-    \[
-        \mu\left(\bigcap_{i = 1}^{\infty}E_i\right) \lim_{n \to +\infty}\mu(E_n)
-    \]
+     Thus $E$ is measurable. For any $F \subseteq E$, monotonicity implies $m^*(F) \leq m^*(E) = 0$. Applying the same argument as above, $F$ is  measurable.
 \end{proof}
-\begin{definition}
-    Let $(X,\mc{M},\mu)$ be a measure space, a set $E \in \mc{M}$ such that $\mu(E) = 0$ is called a \textit{null set}. If a statement about points $x \in X$ is true except for $x$ in some null set, we say that it is true \textit{almost everywhere}, or for \textit{almost every} $x$.
-\end{definition}
-\begin{definition}
-    Let $(X,\mc{M},\mu)$ be a measure space, define the set 
+\begin{proposition}
+    A countable union of measurable sets is measurable.
+\end{proposition}
+\begin{proposition}
+    Closed sets are measurable.
+\end{proposition}
+\begin{lemma}
+    If $F$ is closed, $K$ is compact, and these sets are disjoint, then \[d(F,K) > 0\]
+\end{lemma}
+\begin{proof}
+    Since $F$ is closed, for every $x \in K$, there exists $\delta_x > 0$ such that 
     \[
-        \ker(\mu) := \{E \in \mc{M}\mid \mu(E)  = 0\}.
+    d(x,F) > 3\delta_x
     \]
-    A measure whose domain includes all subset of an element $E \in \ker(\mu)$ is called \textit{complete}.
-\end{definition}
-\begin{theorem}
-    Let $(X,\mc{M},\mu)$ be a measure space. Let $\overline{\mc{M}}$ be the collection satisfying 
+    Since $X = \bigcup_{x \in K}B(x,2\delta_x)$ is an open cover of $K$ and $K$ is compact, then $X$ attains a finite subcover $X_N = \bigcup_{n = 1}^NB(x_n,2\delta_{x_n})$. Let $\delta = \min\{\delta_{x_1},\dots,\delta_{x_N}\}$, it follows that $d(F,K) \geq d(F,X_N) \geq \delta$. Moreover, let $x \in F$ and $y \in K$, then there exists $j < N$ such that $d(x,x_j) \leq 2\delta_j$, we have 
     \[
-        \overline{\mc{M}} = \{E \cup F \mid E \in \mc{M} \text{ and }F \in \ker(\mu)\}.
+        d(x,y) \geq  d(x_n,y) - d(x,x_n) \geq 3\delta_j - 2\delta_j = \delta_j \geq \delta
     \]
-Then $\overline{\mc{M}}$ is a $\sigma$-algebra, and there is a unique extension $\overline{\mu}$ to $\mu$ to a comple measure on $\overline{\mc{M}}$.
-\end{theorem}
+    Hence, we are done.
+\end{proof}
+\begin{proposition}
+    The complement of a measurable set is measurable.
+\end{proposition}
+\begin{proposition}
+    A countable intersection of measure sets is measurable.
+\end{proposition}
+\begin{proposition}
+    If $E_1,E_2,\dots$ are disjoint measurable sets, and $E = \bigcup_j E_j$, then 
+    \[
+        m(E) = \sum_j m(E_j)
+    \]
+\end{proposition}
+\begin{proposition}
+    Let $(E_n)$ be measurable subset of $\bb{R}^n$.
+    \begin{enumerate}
+        \item If $(E_n)$ is increasing to $E$, then $m(E) = \nlim m(E_n)$.
+        \item If $(E_n)$ is decreasing to $E$ and $m(E_n) < \infty$ for some $n$, then $m(E) = \nlim m(E_n)$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    1. Let $(G_n)$ be a sequence of subsets defined by $G_1 = E_1$ and $G_n = E_{n} \backslash E_{n -1}$ for all $n \geq 2$. Observe that $(G_n)$ is pairwise disjoint, measurable and we have 
+$E = \bigcup_j G_j$. Then $E$ is measurable whose measure is calculated by 
+\begin{align*}
+     m(E) &= \sum_{j = 1}^{\infty}m(G_j) =\nlim  \sum_{j = 1}^{n}m(G_j) \\
+     &= \nlim \left(\sum_{j = 2}^n m(E_n) - m(E_{n - 1})\right) + m(E_1)\\
+    &=\nlim m(E_n)
+\end{align*}
+   
+2. Assume that $m(E_1) < \infty$. Let $(G_n)$ be a sequence defined by $G_1 = E_1$ and $G_n = E_{n - 1} \backslash E_{n}$ for all $n \geq 2$, then $(G_n)$ is also pairwise disjoint, measurable and we have 
+\[
+    E_1 = E \cup \bigcup_j G_j
+\]
+Since $E \cap G_j=\varnothing$  for all $j$, it follows that 
+\begin{align*}
+    m(E_1) &= m(E) + \nlim \sum_{j = 1}^n m(G_j)\\
+    &= m(E) + \nlim \left(\sum_{j = 2}^n m(E_{j - 1}) - m(E_{j})\right) + m(E_1)\\
+    &= m(E) + m(E_1) - \nlim m(E_{n})
+\end{align*}
+Thus $m(E) = \nlim m(E_{n})$, as desired.
+\end{proof}
+\section{Measurable functions}
+\begin{definition}
+    A function $f: E \to \bb{R}^n$ is said to be \textit{measurable} if for all $a \in \bb{R}$, the set 
+    \[
+        \{ f < a\} := f^{-1}([-\infty,a)) 
+    \]
+    is measurable.
+\end{definition}
+\begin{proposition}
+    The function $f: E \to \bb{R}^n$ is measurable if and only if one of the followings hold:
+    \begin{enumerate}
+        \item $\{f < a\}$ is measurable.
+        \item $\{f \leq a\}$ is measurable.
+        \item $\{f > a\}$ is measurable.
+        \item $\{f \geq a\}$ is measurable.
+    \end{enumerate}
+\end{proposition}
+\begin{proposition}
+    If $f$ is continuous on $\bb{R}^n$, then $f$ is measurable. If $f$ is measurable and finite-valued, and $\Phi$ is continuous, then $\Phi \circ f$ is measurable.
+\end{proposition}
+\begin{proposition}
+    If $(f_n)$ is a sequence of measurable functions, then 
+    \[
+        \sup f_n(x), \quad \inf f_n(x), \quad\lim_{n \to +\infty} \sup f_n(x) \quad \text{and} \quad \nlim \inf f_n(x)
+    \]
+    are measurable.
+\end{proposition}
+\begin{proposition}
+    If $(f_n)$ is a sequence of measurable functions and $f_n \to f$, then $f$ is measurable.
+\end{proposition}
+\begin{proposition}
+    If $f$ and $g$ are measurable, then 
+    \begin{enumerate}
+        \item $f^k$ is measurable for $k \in \bb{N}$.
+        \item $f + g$ and $fg$ are measurable if both $f$ and $g$ are finite-valued.
+    \end{enumerate}
+\end{proposition}

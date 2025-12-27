@@ -1,40 +1,44 @@
-\contentsline {chapter}{Preface}{iii}{chapter*.2}%
+\contentsline {chapter}{Preface}{iv}{chapter*.2}%
 \contentsline {chapter}{\numberline {1}Differential Topology}{1}{chapter.1}%
 \contentsline {section}{\numberline {1}Zermelo-Fraenkel axiom}{1}{section.1.1}%
 \contentsline {section}{\numberline {2}Topological Spaces}{2}{section.1.2}%
-\contentsline {section}{\numberline {3}Convergence and Continuity}{4}{section.1.3}%
-\contentsline {section}{\numberline {4}Hausdorff Spaces}{5}{section.1.4}%
-\contentsline {section}{\numberline {5}Bases}{5}{section.1.5}%
-\contentsline {section}{\numberline {6}Connectedness}{6}{section.1.6}%
-\contentsline {section}{\numberline {7}Compactness}{6}{section.1.7}%
-\contentsline {section}{\numberline {8}Topological Manifolds}{6}{section.1.8}%
-\contentsline {section}{\numberline {9}Local Coordinate Representations}{8}{section.1.9}%
-\contentsline {section}{\numberline {10}Manifolds with Boundary}{9}{section.1.10}%
-\contentsline {section}{\numberline {11}Problems}{9}{section.1.11}%
-\contentsline {chapter}{\numberline {2}Partition of Unity}{15}{chapter.2}%
-\contentsline {section}{\numberline {1}Construction}{15}{section.2.1}%
-\contentsline {section}{\numberline {2}Problems}{18}{section.2.2}%
-\contentsline {chapter}{\numberline {3}Tangent Space}{23}{chapter.3}%
-\contentsline {section}{\numberline {1}Derivatives in Multivariable Calculus}{23}{section.3.1}%
-\contentsline {section}{\numberline {2}Tangent Vectors of Euclidean Space}{25}{section.3.2}%
-\contentsline {section}{\numberline {3}Problems}{27}{section.3.3}%
-\contentsline {chapter}{\numberline {4}Embeddings}{31}{chapter.4}%
-\contentsline {section}{\numberline {1}Immersion and Submersion}{31}{section.4.1}%
-\contentsline {section}{\numberline {2}Constant Rank Theorem}{31}{section.4.2}%
-\contentsline {section}{\numberline {3}Embeddings}{33}{section.4.3}%
-\contentsline {section}{\numberline {4}Submersions}{34}{section.4.4}%
-\contentsline {section}{\numberline {5}Smooth Covering Maps}{34}{section.4.5}%
-\contentsline {section}{\numberline {6}Problems}{35}{section.4.6}%
-\contentsline {chapter}{\numberline {5}Level Sets Theorem}{41}{chapter.5}%
-\contentsline {section}{\numberline {1}Embedded Submanifolds}{41}{section.5.1}%
-\contentsline {section}{\numberline {2}Slice Charts}{42}{section.5.2}%
-\contentsline {section}{\numberline {3}Level Sets}{42}{section.5.3}%
-\contentsline {section}{\numberline {4}Tangent Space of Submanifolds}{43}{section.5.4}%
-\contentsline {section}{\numberline {5}Problems}{43}{section.5.5}%
-\contentsline {section}{\numberline {6}Cotangent Space}{49}{section.5.6}%
-\contentsline {chapter}{\numberline {6}Wedge Product}{50}{chapter.6}%
-\contentsline {chapter}{\numberline {7}Differential Forms on Manifolds}{53}{chapter.7}%
-\contentsline {chapter}{\numberline {8}Measure Theory}{57}{chapter.8}%
-\contentsline {section}{\numberline {1}Measure in Euclidean Space}{57}{section.8.1}%
-\contentsline {chapter}{\numberline {9}Orientations}{60}{chapter.9}%
-\contentsline {chapter}{\numberline {10}Integration on Manifolds}{62}{chapter.10}%
+\contentsline {section}{\numberline {3}Convergence and Continuity}{6}{section.1.3}%
+\contentsline {section}{\numberline {4}Hausdorff Spaces}{8}{section.1.4}%
+\contentsline {section}{\numberline {5}Bases}{8}{section.1.5}%
+\contentsline {section}{\numberline {6}Connectedness}{8}{section.1.6}%
+\contentsline {section}{\numberline {7}Compactness}{8}{section.1.7}%
+\contentsline {section}{\numberline {8}Topological Manifolds}{9}{section.1.8}%
+\contentsline {section}{\numberline {9}Local Coordinate Representations}{12}{section.1.9}%
+\contentsline {section}{\numberline {10}Manifolds with Boundary}{13}{section.1.10}%
+\contentsline {section}{\numberline {11}Problems}{13}{section.1.11}%
+\contentsline {chapter}{\numberline {2}Partition of Unity}{22}{chapter.2}%
+\contentsline {section}{\numberline {1}Construction}{22}{section.2.1}%
+\contentsline {section}{\numberline {2}Problems}{26}{section.2.2}%
+\contentsline {chapter}{\numberline {3}Tangent Space}{34}{chapter.3}%
+\contentsline {section}{\numberline {1}Derivatives in Multivariable Calculus}{34}{section.3.1}%
+\contentsline {section}{\numberline {2}Tangent Vectors of Euclidean Space}{38}{section.3.2}%
+\contentsline {section}{\numberline {3}Problems}{40}{section.3.3}%
+\contentsline {chapter}{\numberline {4}Embeddings}{45}{chapter.4}%
+\contentsline {section}{\numberline {1}Immersion and Submersion}{45}{section.4.1}%
+\contentsline {section}{\numberline {2}Constant Rank Theorem}{46}{section.4.2}%
+\contentsline {section}{\numberline {3}Embeddings}{48}{section.4.3}%
+\contentsline {section}{\numberline {4}Submersions}{49}{section.4.4}%
+\contentsline {section}{\numberline {5}Smooth Covering Maps}{50}{section.4.5}%
+\contentsline {section}{\numberline {6}Problems}{51}{section.4.6}%
+\contentsline {chapter}{\numberline {5}Level Sets Theorem}{59}{chapter.5}%
+\contentsline {section}{\numberline {1}Embedded Submanifolds}{59}{section.5.1}%
+\contentsline {section}{\numberline {2}Slice Charts}{60}{section.5.2}%
+\contentsline {section}{\numberline {3}Level Sets}{61}{section.5.3}%
+\contentsline {section}{\numberline {4}Tangent Space of Submanifolds}{62}{section.5.4}%
+\contentsline {section}{\numberline {5}Problems}{62}{section.5.5}%
+\contentsline {chapter}{\numberline {6}Measure Theory}{70}{chapter.6}%
+\contentsline {section}{\numberline {1}Measure in Euclidean Space}{70}{section.6.1}%
+\contentsline {section}{\numberline {2}Lebesgue measure}{73}{section.6.2}%
+\contentsline {section}{\numberline {3}Measurable functions}{75}{section.6.3}%
+\contentsline {chapter}{\numberline {7}Sard Theorem}{77}{chapter.7}%
+\contentsline {section}{\numberline {1}The Set of Measure Zero}{77}{section.7.1}%
+\contentsline {chapter}{\numberline {8}Cotangent Space}{78}{chapter.8}%
+\contentsline {chapter}{\numberline {9}Wedge Product}{79}{chapter.9}%
+\contentsline {chapter}{\numberline {10}Differential Forms on Manifolds}{83}{chapter.10}%
+\contentsline {chapter}{\numberline {11}Orientations}{88}{chapter.11}%
+\contentsline {chapter}{\numberline {12}Integration on Manifolds}{90}{chapter.12}%

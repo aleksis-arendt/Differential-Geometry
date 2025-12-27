@@ -3,7 +3,9 @@
   \ProcessOptions\relax
 \newcommand{\mc}{\mathcal}
 \usepackage{xcolor}
-
+\renewcommand{\@seccntformat}[1]{%
+  \csname the#1\endcsname.\quad
+}
 % ToC không có link/màu
 \usepackage{etoolbox}
 \pretocmd{\tableofcontents}{\hypersetup{hidelinks}}{}{}
@@ -61,6 +63,7 @@
 
 
 
+
 % Bỏ inputenc và fontenc vì XeLaTeX không cần
 \usepackage{enumitem}
 \usepackage{hyperref}
@@ -92,19 +95,24 @@
 
   \newtheorem{mythm}{dummy}[subsection]
   % --- Theorem-style things ---
-  \newtheoremstyle{sfstyle}% name
-    {\topsep}   % space above
-    {\topsep}   % space below
-    {\normalfont}  % body font
-    {}          % indent
-    {\bfseries}    % theorem head font
-    {.}         % punctuation after theorem head
-    {0.5em}     % space after theorem head
-    {\thmname{#1}~\thmnumber{#2}\thmnote{\normalfont\ (#3)}}
+\definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
+\definecolor{amber}{rgb}{1.0, 0.49, 0.0}
+\newtheoremstyle{sfstyle}
+  {\topsep}   % space above
+  {\topsep}   % space below
+  {\normalfont} % body font
+  {}          % indent
+  {}          % theorem head font (để trống, mình tự format ở head spec)
+  {.}         % punctuation after theorem head
+  {0.5em}     % space after theorem head
+  {%
+    {\bfseries \thmname{#1}~\thmnumber{#2}}%
+    \thmnote{{\bfseries\ (#3)}}%
+  }
 
-  \theoremstyle{sfstyle}
-  
-  \newtheorem{problem}{Problem}[chapter]
+\theoremstyle{sfstyle}
+\newtheorem{problem}{Problem}[chapter]
+
 
 % Định nghĩa lại cách đánh số
 
@@ -136,14 +144,15 @@
   % set page geometry
   \usepackage[verbose=true,letterpaper]{geometry}
   \AtBeginDocument{
-    \newgeometry{
-      textheight=9in,
-      textwidth=6.5in,
-      top=1in,
-      headheight=14pt,
-      headsep=25pt,
-      footskip=30pt
-    }
+      \newgeometry{
+    left=1.25in,
+    right=1.25in,
+    top=1.5in,
+    bottom=1.5in,
+    headheight=14pt,
+    headsep=25pt,
+    footskip=30pt
+  }
   }
 
   \widowpenalty=10000
