@@ -245,3 +245,130 @@ Thus $m(E) = \nlim m(E_{n})$, as desired.
         \item $f + g$ and $fg$ are measurable if both $f$ and $g$ are finite-valued.
     \end{enumerate}
 \end{proposition}
+\section{Problems}
+\begin{problem}
+    Prove that the Cantor set $C$ constructed in the text is totally disconnected and perfect. In other words, given two distinct points $x, y \in C$, there is a point $z \notin C$ that lies between $x$ and $y$, and yet $C$ has no isolated points.
+\end{problem}
+\begin{problem} The Cantor set $C$ can also be described in terms of ternary expansions.
+    \begin{enumerate}
+        \item Every number in [0, 1] has a ternary expansion
+$$
+x = \sum_{k=1}^{\infty} a_k 3^{-k}, \text{ where } a_k = 0, 1, \text{ or } 2.
+$$
+Note that this decomposition is not unique since, for example, $1/3 = \sum_{k=2}^{\infty} 2/3^k$.
+Prove that $x \in C$ if and only if $x$ has a representation as above where every $a_k$ is either 0 or 2.
+        \item The Cantor-Lebesgue function is defined on $C$ by
+        $$
+        F(x) = \sum_{k=1}^{\infty} \frac{b_k}{2^k} \text{ if } x = \sum_{k=1}^{\infty} a_k 3^{-k}, \text{ where } b_k = a_k/2.
+        $$
+        In this definition, we choose the expansion of $x$ in which $a_k = 0$ or 2.
+        Show that $F$ is well defined and continuous on $C$, and moreover $F(0) = 0$ as well as $F(1) = 1$.
+
+        \item Prove that $F: C \rightarrow [0, 1]$ is surjective, that is, for every $y \in [0, 1]$ there exists $x \in C$ such that $F(x) = y$.
+
+        \item One can also extend $F$ to be a continuous function on [0, 1] as follows. Note that if $(a, b)$ is an open interval of the complement of $C$, then $F(a) = F(b)$.
+        Hence we may define $F$ to have the constant value $F(a)$ in that interval.
+    \end{enumerate}
+
+\end{problem}
+\begin{problem}
+    If $\delta = (\delta_1, ..., \delta_d)$ is a $d$-tuple of positive numbers $\delta_i > 0$, and $E$ is a subset of $\mathbb{R}^d$, we define $\delta E$ by
+$$
+\delta E = \{(\delta_1 x_1, ..., \delta_d x_d) : \text{where } (x_1, ..., x_d) \in E\}.
+$$
+Prove that $\delta E$ is measurable whenever $E$ is measurable, and
+$$
+m(\delta E) = \delta_1 \cdots \delta_d m(E).
+$$
+\end{problem}
+\begin{problem}
+    Suppose $L$ is a linear transformation of $\mathbb{R}^d$. Show that if $E$ is a measurable subset of $\mathbb{R}^d$, then so is $L(E)$, by proceeding as follows:
+
+\begin{enumerate}
+    \item  Note that if $E$ is compact, so is $L(E)$. Hence if $E$ is an $F_\sigma$ set, so is $L(E)$.
+    \item Because $L$ automatically satisfies the inequality
+$$
+|L(x) - L(x')| \leq M|x - x'|
+$$
+for some $M$, we can see that $L$ maps any cube of side length $\ell$ into a cube of side length $c_d M \ell$, with $c_d = 2\sqrt{d}$. Now if $m(E) = 0$, there is a collection of cubes $\{Q_j\}$ such that $E \subset \bigcup_j Q_j$, and $\sum_j m(Q_j) < \epsilon$. Thus $m_*(L(E)) \leq c' \epsilon$, and hence $m(L(E)) = 0$. Finally, use Corollary 3.5.
+\end{enumerate}
+\end{problem}
+\begin{problem}
+    The purpose of this exercise is to show that covering by a *finite* number of intervals will not suffice in the definition of the outer measure $m_*$.
+The outer Jordan content $J_*(E)$ of a set $E$ in $\mathbb{R}$ is defined by
+$$
+J_*(E) = \inf \sum_{j=1}^{N} |I_j|,
+$$
+where the inf is taken over every *finite* covering $E \subset \bigcup_{j=1}^{N} I_j$, by intervals $I_j$.
+
+\begin{enumerate}
+ \item Prove that $J_*(E) = J_*(\overline{E})$ for every set $E$ (here $\overline{E}$ denotes the closure of $E$).
+ \item Exhibit a countable subset $E \subset [0,1]$ such that $J_*(E) = 1$ while $m_*(E) = 0$.
+\end{enumerate}
+\end{problem}
+\begin{problem}[The Borel-Cantelli lemma]
+    Suppose $\{E_k\}_{k=1}^{\infty}$ is a countable family of measurable subsets of $\mathbb{R}^d$ and that
+$$
+\sum_{k=1}^{\infty} m(E_k) < \infty.
+$$
+Let
+$$
+\begin{aligned}
+E &= \{x \in \mathbb{R}^d : x \in E_k, \text{ for infinitely many } k \} \\
+&= \limsup_{k \to \infty} (E_k).
+\end{aligned}
+$$
+\begin{enumerate}
+    \item Show that $E$ is measurable.
+    \item Prove $m(E) = 0$.
+\end{enumerate}
+[Hint: Write $E = \bigcap_{n=1}^{\infty} \bigcup_{k \geq n} E_k$.]
+\end{problem}
+\begin{problem}
+    Let $\{f_n\}$ be a sequence of measurable functions on $[0, 1]$ with $|f_n(x)| < \infty$ for a.e $x$. Show that there exists a sequence $c_n$ of positive real numbers such that
+$$
+\frac{f_n(x)}{c_n} \to 0 \quad \text{a.e. } x
+$$
+
+[Hint: Pick $c_n$ such that $m(\{x : |f_n(x)/c_n| > 1/n\}) < 2^{-n}$, and apply the Borel-Cantelli lemma.]
+\end{problem}
+\begin{problem}
+    Given an irrational $x$, one can show (using the pigeon-hole principle, for example) that there exists infinitely many fractions $p/q$, with relatively prime integers $p$ and $q$ such that
+$$
+\left|x - \frac{p}{q}\right| \leq \frac{1}{q^2}.
+$$
+However, prove that the set of those $x \in \mathbb{R}$ such that there exist infinitely many fractions $p/q$, with relatively prime integers $p$ and $q$ such that
+$$
+\left|x - \frac{p}{q}\right| \leq \frac{1}{q^3} \quad (\text{or } \leq 1/q^{2+\epsilon}),
+$$
+is a set of measure zero.
+\end{problem}
+\begin{problem}
+    Complete the following outline to prove that a bounded function on an interval $[a, b]$ is Riemann integrable if and only if its set of discontinuities has measure zero. This argument is given in detail in the appendix to Book I.
+
+Let $f$ be a bounded function on a compact interval $J$, and let $I(c,r)$ denote the open interval centered at $c$ of radius $r > 0$. Let $osc(f, c, r) = \sup |f(x) - f(y)|$, where the supremum is taken over all $x, y \in J \cap I(c,r)$, and define the oscillation of $f$ at $c$ by $osc(f, c) = \lim_{r \to 0} osc(f, c, r)$. Clearly, $f$ is continuous at $c \in J$ if and only if $osc(f, c) = 0$.
+
+Prove the following assertions:
+
+(a) For every $\epsilon > 0$, the set of points $c$ in $J$ such that $osc(f, c) \geq \epsilon$ is compact.
+
+(b) If the set of discontinuities of $f$ has measure 0, then $f$ is Riemann integrable.
+
+[Hint: Given $\epsilon > 0$ let $A_{\epsilon} = \{c \in J : osc(f, c) \geq \epsilon \}$. Cover $A_{\epsilon}$ by a finite number of open intervals whose total length is $\leq \epsilon$. Select an appropriate partition of $J$ and estimate the difference between the upper and lower sums of $f$ over this partition.]
+\end{problem}
+\begin{problem}
+    Suppose $E$ is measurable with $m(E) < \infty$, and
+$$
+E = E_1 \cup E_2, \quad E_1 \cap E_2 = \emptyset.
+$$
+If $m(E) = m_*(E_1) + m_*(E_2)$, then $E_1$ and $E_2$ are measurable.
+
+In particular, if $E \subset Q$, where $Q$ is a finite cube, then $E$ is measurable if and only if $m(Q) = m_*(E) + m_*(Q-E)$.
+
+\end{problem}
+\begin{problem}
+    Suppose $A$ and $B$ are open sets of finite positive measure. Then we have equality in the Brunn-Minkowski inequality (8) if and only if $A$ and $B$ are convex and similar, that is, there are a $\delta > 0$ and an $h \in \mathbb{R}^d$ such that
+$$
+A = \delta B + h.
+$$
+\end{problem}
