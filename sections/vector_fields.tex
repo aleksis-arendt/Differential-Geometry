@@ -1,0 +1,51 @@
+\chapter{Vector Fields}
+
+\section{Vector Fields on Manifolds}
+\begin{definition}[Section of a map]
+   Let $\pi: M \to N$ be a continuous map, a \textbf{section of $\pi$} is a continuous right inverse for $\pi$.
+\end{definition}
+\begin{definition}
+    Let $M$ be a smooth manifold, a \textbf{vector field on $M$} is a section $X: TM \to M$ of the map $\pi: TM \to M$. Generally, we call $X$ a \textbf{rough vector field on $M$} if its continuity is not given. The set of all smooth vector fields of $M$ is denoted by $\mathcal{X}(M)$
+\end{definition}
+Let $(U,x^i)$ be a local chart, as the case of tangent vectors, a rough vector field can be represented locally in terms of basis vector:
+\[
+    X_p = X^i(p) \frac{\pa}{\pa x^i}\bigg|_{p}
+\]
+Each function $X^i: U \to \bb{R}$ is called the \textbf{component function of $X$} in the given chart.
+\begin{proposition}
+    Let $X: M \to TM$ be a rough vector field. If $(U,x^i)$ is any smooth coordinate chart on $M$, the restriction $X: U \to TM$ is smooth if and only if its component functions reprect to this chart is smooth.
+\end{proposition}
+\begin{proof}
+    Let $(x^i,v^i)$ be the natural coordinae on $\pi^{-1}(U) \subseteq TM$ associated with the chart $(U,x^i)$, then the coordinate representation of $X: M \to TM$ on $U$ is 
+    \[
+        \hat{X}(x) = (x^i,X^i(x))
+    \]
+    It follows immediately that the smoothness of $X$ on $U$ is equivalent to smoothness of its component functions.
+\end{proof}
+\begin{example}[Coordinate Vector Fields] Let $(U,x^i)$ be any smooth chart on $M$, the assignment 
+    \[
+        p \mapsto \frac{\pa}{\pa x^i}\bigg|_p
+    \]
+    determines a vector field on $U$.
+\end{example}
+
+\begin{example}[The Euler Vector Field]
+    
+\end{example}
+\begin{definition}[Integral curve]
+    Let $M$ be a smooth manifold, $X \in \mathcal{X}(M)$, and $I \subseteq \bb{R}$ be an open interval. A differentiable function $\gamma: I \to M$ is called an \textbf{integral curve of $X$} if it satisfies
+    \[
+        \gamma'(t) = X(\gamma(t))
+    \]
+    for every $t \in I$.
+\end{definition}
+\begin{theorem}
+Every integral curve of the smooth vector field is  smooth.
+\end{theorem}
+\begin{proof}
+
+We prove this by induction. Let $(U, x^i)$ be the coordinate chart of $M$ such that $\gamma(I) \subset U$ Since $\gamma \in C^1$, then $X\circ \gamma \in C^1$. It follows that $\gamma' \in C^1$ or $\gamma' \in C^2$.  Suppose that $\gamma \in C^k$ then $X\circ \gamma \in C^k$, we obtain $\gamma' \in C^k$ or $\gamma \in C^{k + 1}$. Thus $\gamma$ is smooth.
+\end{proof}
+\begin{proposition}
+    Let $M$ be a smooth manifold and $X \in \mathcal{M}$, then there exists an integral curve $\gamma: (-\ep,\ep) \to M$ such that $\gamma(0) = p \in M$ and $\gamma'(t) = X(\gamma(t))$. Moreover, if any curve satisfying these condition of $\gamma$, then it must be equal to $\gamma$ at any point.
+\end{proposition}

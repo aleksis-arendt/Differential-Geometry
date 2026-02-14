@@ -1,364 +1,329 @@
-  \NeedsTeXFormat{LaTeX2e}
 
-  \ProcessOptions\relax
-\newcommand{\mc}{\mathcal}
+% LaTeX Preamble for a Custom Document Class
+% This preamble sets up packages, custom commands, theorem environments,
+% page geometry, headers, and other document configurations.
+
+\NeedsTeXFormat{LaTeX2e}
+\ProcessOptions\relax
+
+% Basic packages and color settings
 \usepackage{xcolor}
+\usepackage{mathtools}
+\usepackage{amsmath, amssymb}
+\usepackage{graphicx}
+\usepackage{tikz}
+\usetikzlibrary{calc, arrows.meta}
+\usepackage{tikz-cd}
+\usepackage{pdfpages}  % For including PDF pages, e.g., covers
+\usepackage{enumitem}
+\usepackage{hyperref}
+\usepackage[nameinlink, noabbrev]{cleveref}
+\usepackage{url}       % Simple URL typesetting
+\usepackage{booktabs}  % Professional-quality tables
+\usepackage{amsfonts}  % Blackboard math symbols
+\usepackage{nicefrac}  % Compact fractions like 1/2
+\usepackage{microtype} % Microtypography improvements
+\usepackage{lipsum}    % Lorem ipsum text for testing
+\usepackage{amsthm}
+\usepackage{fontspec}  % Font settings for XeLaTeX
+\usepackage{mdframed}
+\usepackage{array}
+\usepackage{titlesec}
+\usepackage{fancyhdr}
+\usepackage[verbose=true, letterpaper]{geometry}
+\usepackage{etoolbox}
+
+% Redefine section counter format to include a period and space
 \renewcommand{\@seccntformat}[1]{%
   \csname the#1\endcsname.\quad
 }
-% ToC không có link/màu
-\usepackage{etoolbox}
+
+% Custom math commands
+\newcommand{\mc}{\mathcal}
+\DeclarePairedDelimiterX{\ip}[2]{\langle}{\rangle}{#1,\,#2}  % Inner product
+\newcommand{\ipdot}{\langle \cdot,\cdot\rangle}             % Dot inner product
+\newcommand{\supp}{\mathrm{supp}}                           % Support
+\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}          % Norm
+\newcommand{\ti}{\tilde}                                    % Tilde
+\newcommand{\vol}{\mathrm{Vol}}                             % Volume
+\newcommand{\atlas}{\mathcal{A}}                            % Atlas A
+\newcommand{\btlas}{\mathcal{B}}                            % Atlas B
+\newcommand{\ctlas}{\mathcal{C}}                            % Atlas C
+\newcommand{\clo}{\overline}                                % Closure
+\newcommand{\vect}{\overrightarrow}                         % Vector arrow
+\newcommand{\multi}{\mathrm{Multi}}                         % Multi
+\newcommand{\pa}{\partial}                                  % Partial derivative
+\newcommand{\de}[2]{\frac{\partial #1}{\partial #2}}        % Partial derivative fraction
+\newcommand{\ome}{\omega}                                   % Omega
+\newcommand{\bb}{\mathbb}                                   % Blackboard bold
+\newcommand{\ep}{\varepsilon}                               % Epsilon
+\newcommand{\limit}{\displaystyle \lim}                     % Display limit
+\newcommand{\ra}{\Rightarrow}                               % Implies
+\newcommand{\lra}{\Leftrightarrow}                          % If and only if
+\newcommand{\dsum}{\displaystyle \sum}                      % Display sum
+\newcommand{\dprof}{\displaystyle \prod}                    % Display product
+\newcommand{\nlim}{\displaystyle \lim_{n \to +\infty}}      % Limit as n to infinity
+\newcommand{\series}{\dsum_{n = 1}^{\infty}}                 % Infinite series
+\newcommand{\diam}{\mathrm{diam}}                           % Diameter
+
+% Linear algebra operators
+\newcommand{\rank}{\mathrm{rank}}                           % Rank
+\newcommand{\kernel}{\mathrm{ker}}                          % Kernel
+\newcommand{\im}{\mathrm{Im}}                               % Image
+\newcommand{\spann}{\mathrm{span}}                          % Span
+\newcommand{\cl}{\mathrm{cl}}                               % Closure (alternative)
+\newcommand{\inte}{\mathrm{Int}}                            % Interior
+\newcommand{\exte}{\mathrm{Ext}}                            % Exterior
+\newcommand{\alt}{\mathrm{Alt}}                             % Alternating
+\newcommand{\sng}{\mathrm{sgn}}                             % Sign (duplicate, keeping one)
+\newcommand{\sgn}{\mathrm{sgn}}                             % Sign
+
+% Common mathematical spaces
+\newcommand{\circl}{\bb{S}}                                 % Circle (Sphere)
+\newcommand{\real}{\bb{R}}                                 % Real numbers
+\newcommand{\comple}{\bb{C}}                               % Complex numbers (corrected from 'complex')
+
+% Configure Table of Contents to hide links initially, then restore colors
 \pretocmd{\tableofcontents}{\hypersetup{hidelinks}}{}{}
-\apptocmd{\tableofcontents}{\hypersetup{colorlinks=true,linkcolor=magenta}}{}{}
-\usepackage{graphicx}
-\usepackage{pdfpages} % nếu bìa là PDF 1 trang
-\usepackage{tikz}
-\usetikzlibrary{calc,arrows.meta}
-\usepackage{tikz-cd}
-\newcommand{\supp}{\mathrm{supp}}
-\newcommand{\norm}[1]{\left\lVert #1 \right\rVert}
-\newcommand{\ti}{\tilde}
-\newcommand{\vol}{\mathrm{Vol}}
-\newcommand{\atlas}{\mathcal{A}}
-\newcommand{\btlas}{\mathcal{B}}
-\newcommand{\ctlas}{\mathcal{C}}
-\newcommand{\clo}{\overline}
-\newcommand{\vect}{\overrightarrow}
-\newcommand{\multi}{\mathrm{Multi}}
-\newcommand{\pa}{\partial}
-\newcommand{\de}[2]{\frac{\partial #1}{\partial #2}}
-\newcommand{\ome}{\omega}
-\newcommand{\bb}{\mathbb}
-\newcommand{\ep}{\varepsilon}
-\newcommand{\limit}{\displaystyle \lim}
-\newcommand{\ra}{\Rightarrow}
-\newcommand{\lra}{\Leftrightarrow}
-\newcommand{\dsum}{\displaystyle \sum}
-\newcommand{\dprof}{\displaystyle \prod}
-\newcommand{\nlim}{\displaystyle \lim_{n \to +\infty}}
-\newcommand{\series}{\dsum_{n = 1}^{\infty}}
-\newcommand{\diam}{\mathrm{diam}}
-% Common linear algebra operators
-\newcommand{\rank}{\mathrm{rank}}
-\newcommand{\kernel}{\mathrm{ker}}
-\newcommand{\im}{\mathrm{Im}}
-\newcommand{\spann}{\mathrm{span}}
-\newcommand{\cl}{\mathrm{cl}}
-\newcommand{\inte}{\mathrm{Int}}
-\newcommand{\exte}{\mathrm{Ext}}
-\newcommand{\alt}{\mathrm{Alt}}
-\newcommand{\sng}{\mathrm{sgn}}
-\newcommand{\sgn}{\mathrm{sgn}}
-%Some useful spaces
-\newcommand{\circl}{\bb{S}}
-\newcommand{\real}{\bb{R}}
-\newcommand{\comple}{\bb{complex}}
+\apptocmd{\tableofcontents}{\hypersetup{colorlinks=true, linkcolor=magenta}}{}{}
 
-\usepackage{amsmath,amssymb}
-\usepackage{mdframed}
-
-\usepackage{fontspec}
-
-
-
-
-
-
-% Bỏ inputenc và fontenc vì XeLaTeX không cần
-\usepackage{enumitem}
-\usepackage{hyperref}
-\usepackage[nameinlink,noabbrev]{cleveref}
-
+% Cross-reference formats for equations
 \crefformat{equation}{(#2#1#3)}
 \Crefformat{equation}{(#2#1#3)}
 
-
-
-\usepackage{url}            % simple URL typesetting
-\usepackage{booktabs}       % professional-quality tables
-\usepackage{amsfonts}       % blackboard math symbols
-\usepackage{nicefrac}       % compact symbols for 1/2, etc.
-\usepackage{microtype}      % microtypography
-\usepackage{lipsum}
-\usepackage{graphicx}
-\usepackage{amsthm}
+% Bibliography name
 \renewcommand{\bibname}{\large\bfseries References}
 
-
-
+% Custom solution environment
 \newenvironment{sol}{%
   \begin{proof}[Solution]%
 }{%
   \end{proof}%
 }
-  % fonts
 
-  \newtheorem{mythm}{dummy}[subsection]
-  % --- Theorem-style things ---
+% Theorem styles and environments
 \definecolor{darkblue}{rgb}{0.0, 0.0, 0.55}
 \definecolor{amber}{rgb}{1.0, 0.49, 0.0}
-\newtheoremstyle{sfstyle}
-  {\topsep}   % space above
-  {\topsep}   % space below
-  {\normalfont} % body font
-  {}          % indent
-  {}          % theorem head font (để trống, mình tự format ở head spec)
-  {.}         % punctuation after theorem head
-  {0.5em}     % space after theorem head
-  {%
-    {\bfseries \thmname{#1}~\thmnumber{#2}}%
-    \thmnote{{\bfseries\ (#3)}}%
-  }
+
+\newtheoremstyle{sfstyle}% Name
+  {\topsep}              % Space above
+  {\topsep}              % Space below
+  {\normalfont}          % Body font
+  {}                     % Indent amount
+  {\sffamily\bfseries}   % Head font
+  {.}                    % Punctuation after head
+  {0.5em}                % Space after head
+  {\thmname{#1}~\thmnumber{#2}\thmnote{~(#3)}}  % Head spec
 
 \theoremstyle{sfstyle}
+\newtheorem{mythm}{dummy}[chapter]  % Base theorem counter
 \newtheorem{problem}{Problem}[chapter]
 
-
-% Định nghĩa lại cách đánh số
-
-% Sections are numbered within each chapter: 1,2,3,... (reset every chapter)
+% Numbering schemes
 \renewcommand{\thesection}{\arabic{section}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
 \renewcommand{\thesubsubsection}{\thesubsection.\arabic{subsubsection}}
-
-% If you also want subsection/subsubsection to NOT show numbers at all:
-% \setcounter{secnumdepth}{1}
-
-% Problem resets each chapter and shows Chapter.Problem
 \renewcommand{\themythm}{\thechapter.\arabic{mythm}}
-\renewcommand{\theproblem}{\thechapter.\arabic{problem}}
+\renewcommand{\theproblem}{\arabic{problem}}
 
+% Redefine \textbf to use sans-serif bold
+\renewcommand{\textbf}[1]{\textsf{\bfseries #1}}
 
-  \newtheorem{definition}[mythm]{Definition}
-  \newtheorem{lemma}[mythm]{Lemma}
-  \newtheorem{example}[mythm]{Example}
-  \newtheorem{corollary}[mythm]{Corollary}
-  \newtheorem{claim}[mythm]{Claim}
-  \newtheorem{remark}[mythm]{Remark}
-  \newtheorem{proposition}[mythm]{Proposition}
-  \newmdtheoremenv{boxedlemma}{Lemma}
-  \newtheorem{theorem}[mythm]{Theorem}
-  \usepackage{array}
-  \usepackage{booktabs}
+% Title formats using titlesec
+\titleformat{\chapter}[display]
+  {\sffamily\Huge\bfseries}   % Format for label and title
+  {Chapter \thechapter}       % Label
+  {0.5em}                     % Vertical space between label and title
+  {}                          % Code before title
 
-  % set page geometry
-  \usepackage[verbose=true,letterpaper]{geometry}
-  \AtBeginDocument{
-      \newgeometry{
-    left=1.25in,
-    right=1.25in,
+\titleformat{\section}
+  {\sffamily\Large\bfseries}  % Sans-serif bold large
+  {\thesection.}              % Section number with period
+  {0.5em}{}                   % Spacing
+
+\titleformat{\subsection}
+  {\sffamily\large\bfseries}  % Sans-serif bold large
+  {\thesubsection.}           % Subsection number with period
+  {0.5em}{}                   % Spacing
+
+% Theorem environments
+\newtheorem{definition}[mythm]{Definition}
+\newtheorem{lemma}[mythm]{Lemma}
+\newtheorem{example}[mythm]{Example}
+\newtheorem{corollary}[mythm]{Corollary}
+\newtheorem{claim}[mythm]{Claim}
+\newtheorem{remark}[mythm]{Remark}
+\newtheorem{proposition}[mythm]{Proposition}
+\newmdtheoremenv{boxedlemma}{Lemma}  % Boxed lemma
+\newtheorem{theorem}[mythm]{Theorem}
+
+% Page geometry settings
+\AtBeginDocument{
+  \newgeometry{
+    left=1.3in,
+    right=1.3in,
     top=1.5in,
     bottom=1.5in,
     headheight=14pt,
     headsep=25pt,
     footskip=30pt
   }
-  }
+}
 
-  \widowpenalty=10000
-  \clubpenalty=10000
-  \flushbottom
-  \sloppy
+% Page layout penalties and settings
+\widowpenalty=10000
+\clubpenalty=10000
+\flushbottom
+\sloppy
 
-  \usepackage{fancyhdr}
-  \fancyhf{}
-  \pagestyle{fancy}
-  \renewcommand{\headrulewidth}{0pt}
-  \fancyheadoffset{0pt}
-  \rhead{\scshape \today}
-  \lhead{\scshape Aleksis J. Arendt}
-  \cfoot{\thepage}
+% Header and footer setup with fancyhdr
+\fancyhf{}  % Clear all headers and footers
+\pagestyle{fancy}
+\renewcommand{\headrulewidth}{0pt}  % No header rule
+\fancyheadoffset{0pt}
+\rhead{\scshape \today}             % Right header: today's date
+\lhead{\scshape Aleksis J. Arendt}  % Left header: author name
+\cfoot{\thepage}                   % Center footer: page number
 
+% Float placement parameters
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.4}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.7}
 
-  %Handling Keywords
-  \def\keywordname{{\bfseries \emph Keywords}}%
-  \def\keywords#1{\par\addvspace\medskipamount{\rightskip=0pt plus1cm
+% Caption spacing
+\newlength{\@abovecaptionskip}\setlength{\@abovecaptionskip}{7\p@}
+\newlength{\@belowcaptionskip}\setlength{\@belowcaptionskip}{\z@}
+\setlength{\abovecaptionskip}{\@abovecaptionskip}
+\setlength{\belowcaptionskip}{\@belowcaptionskip}
+
+% Swap caption skips for tables
+\renewenvironment{table}
+  {\setlength{\abovecaptionskip}{\@belowcaptionskip}%
+   \setlength{\belowcaptionskip}{\@abovecaptionskip}%
+   \@float{table}}
+  {\end@float}
+
+% Footnote formatting
+\setlength{\footnotesep}{6.65\p@}
+\setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
+\renewcommand{\footnoterule}{\kern-3\p@ \hrule width 12pc \kern 2.6\p@}
+\setcounter{footnote}{0}
+
+% Paragraph formatting
+\setlength{\parindent}{\z@}  % No paragraph indentation
+\setlength{\parskip}{5.5\p@} % Space between paragraphs
+
+% List formatting
+\setlength{\topsep}{4\p@ \@plus 1\p@ \@minus 2\p@}
+\setlength{\partopsep}{1\p@ \@plus 0.5\p@ \@minus 0.5\p@}
+\setlength{\itemsep}{2\p@ \@plus 1\p@ \@minus 0.5\p@}
+\setlength{\parsep}{2\p@ \@plus 1\p@ \@minus 0.5\p@}
+\setlength{\leftmargin}{3pc}
+\setlength{\leftmargini}{\leftmargin}
+\setlength{\leftmarginii}{2em}
+\setlength{\leftmarginiii}{1.5em}
+\setlength{\leftmarginiv}{1.0em}
+\setlength{\leftmarginv}{0.5em}
+\def\@listi{\leftmargin\leftmargini}
+\def\@listii{\leftmargin\leftmarginii
+             \labelwidth\leftmarginii
+             \advance\labelwidth-\labelsep
+             \topsep 2\p@ \@plus 1\p@ \@minus 0.5\p@
+             \parsep 1\p@ \@plus 0.5\p@ \@minus 0.5\p@
+             \itemsep \parsep}
+\def\@listiii{\leftmargin\leftmarginiii
+              \labelwidth\leftmarginiii
+              \advance\labelwidth-\labelsep
+              \topsep 1\p@ \@plus 0.5\p@ \@minus 0.5\p@
+              \parsep \z@
+              \partopsep 0.5\p@ \@plus 0\p@ \@minus 0.5\p@
+              \itemsep \topsep}
+\def\@listiv{\leftmargin\leftmarginiv
+             \labelwidth\leftmarginiv
+             \advance\labelwidth-\labelsep}
+\def\@listv{\leftmargin\leftmarginv
+            \labelwidth\leftmarginv
+            \advance\labelwidth-\labelsep}
+\def\@listvi{\leftmargin\leftmarginvi
+             \labelwidth\leftmarginvi
+             \advance\labelwidth-\labelsep}
+
+% Title page setup
+\providecommand{\maketitle}{}
+\renewcommand{\maketitle}{%
+  \par
+  \begingroup
+    \renewcommand{\thefootnote}{\fnsymbol{footnote}}
+    \renewcommand{\@makefnmark}{\hbox to \z@{$^{\@thefnmark}$\hss}}
+    \long\def\@makefntext##1{%
+      \parindent 1em\noindent
+      \hbox to 1.8em{\hss $\m@th ^{\@thefnmark}$}##1
+    }
+    \thispagestyle{empty}
+    \@maketitle
+    \@thanks
+  \endgroup
+  \let\maketitle\relax
+  \let\thanks\relax
+}
+
+% Title bar rules
+\newcommand{\@toptitlebar}{
+  \hrule height 2\p@
+  \vskip 0.25in
+  \vskip -\parskip%
+}
+\newcommand{\@bottomtitlebar}{
+  \vskip 0.29in
+  \vskip -\parskip
+  \hrule height 2\p@
+  \vskip 0.09in%
+}
+
+% Keywords handling
+\def\keywordname{{\bfseries \emph Keywords}}%
+\def\keywords#1{\par\addvspace\medskipamount{\rightskip=0pt plus1cm
   \def\and{\ifhmode\unskip\nobreak\fi\ $\cdot$
   }\noindent\keywordname\enspace\ignorespaces#1\par}}
 
-  % font sizes with reduced leading
-
-  % sections with less space
-  \providecommand{\section}{}
-  \renewcommand{\section}{%
-    \@startsection{section}{1}{\z@}%
-                  {-2.0ex \@plus -0.5ex \@minus -0.2ex}%
-                  { 1.5ex \@plus  0.3ex \@minus  0.2ex}%
-                  {\large\bf\raggedright}%
-  }
-
-
-  \providecommand{\subsection}{}
-  \renewcommand{\subsection}{%
-    \@startsection{subsection}{2}{\z@}%
-                  {-1.8ex \@plus -0.5ex \@minus -0.2ex}%
-                  { 0.8ex \@plus  0.2ex}%
-                  {\normalsize\bf\raggedright}%
-  }
-  \providecommand{\subsubsection}{}
-  \renewcommand{\subsubsection}{%
-    \@startsection{subsubsection}{3}{\z@}%
-                  {-1.5ex \@plus -0.5ex \@minus -0.2ex}%
-                  { 0.5ex \@plus  0.2ex}%
-                  {\normalsize\bf\raggedright}%
-  }
-  \providecommand{\paragraph}{}
-  \renewcommand{\paragraph}{%
-    \@startsection{paragraph}{4}{\z@}%
-                  {1.5ex \@plus 0.5ex \@minus 0.2ex}%
-                  {-1em}%
-                  {\normalsize\bf}%
-  }
-  \providecommand{\subparagraph}{}
-  \renewcommand{\subparagraph}{%
-    \@startsection{subparagraph}{5}{\z@}%
-                  {1.5ex \@plus 0.5ex \@minus 0.2ex}%
-                  {-1em}%
-                  {\normalsize\bf}%
-  }
-  \providecommand{\subsubsubsection}{}
-  \renewcommand{\subsubsubsection}{%
-    \vskip5pt{\noindent\normalsize\rm\raggedright}%
-  }
-
-  % float placement
-  \renewcommand{\topfraction      }{0.85}
-  \renewcommand{\bottomfraction   }{0.4}
-  \renewcommand{\textfraction     }{0.1}
-  \renewcommand{\floatpagefraction}{0.7}
-
-  \newlength{\@abovecaptionskip}\setlength{\@abovecaptionskip}{7\p@}
-  \newlength{\@belowcaptionskip}\setlength{\@belowcaptionskip}{\z@}
-
-  \setlength{\abovecaptionskip}{\@abovecaptionskip}
-  \setlength{\belowcaptionskip}{\@belowcaptionskip}
-
-  % swap above/belowcaptionskip lengths for tables
-  \renewenvironment{table}
-    {\setlength{\abovecaptionskip}{\@belowcaptionskip}%
-    \setlength{\belowcaptionskip}{\@abovecaptionskip}%
-    \@float{table}}
-    {\end@float}
-
-  % footnote formatting
-  \setlength{\footnotesep }{6.65\p@}
-  \setlength{\skip\footins}{9\p@ \@plus 4\p@ \@minus 2\p@}
-  \renewcommand{\footnoterule}{\kern-3\p@ \hrule width 12pc \kern 2.6\p@}
-  \setcounter{footnote}{0}
-
-  % paragraph formatting
-  \setlength{\parindent}{\z@}
-  \setlength{\parskip  }{5.5\p@}
-
-  % list formatting
-  \setlength{\topsep       }{4\p@ \@plus 1\p@   \@minus 2\p@}
-  \setlength{\partopsep    }{1\p@ \@plus 0.5\p@ \@minus 0.5\p@}
-  \setlength{\itemsep      }{2\p@ \@plus 1\p@   \@minus 0.5\p@}
-  \setlength{\parsep       }{2\p@ \@plus 1\p@   \@minus 0.5\p@}
-  \setlength{\leftmargin   }{3pc}
-  \setlength{\leftmargini  }{\leftmargin}
-  \setlength{\leftmarginii }{2em}
-  \setlength{\leftmarginiii}{1.5em}
-  \setlength{\leftmarginiv }{1.0em}
-  \setlength{\leftmarginv  }{0.5em}
-  \def\@listi  {\leftmargin\leftmargini}
-  \def\@listii {\leftmargin\leftmarginii
-                \labelwidth\leftmarginii
-                \advance\labelwidth-\labelsep
-                \topsep  2\p@ \@plus 1\p@    \@minus 0.5\p@
-                \parsep  1\p@ \@plus 0.5\p@ \@minus 0.5\p@
-                \itemsep \parsep}
-  \def\@listiii{\leftmargin\leftmarginiii
-                \labelwidth\leftmarginiii
-                \advance\labelwidth-\labelsep
-                \topsep    1\p@ \@plus 0.5\p@ \@minus 0.5\p@
-                \parsep    \z@
-                \partopsep 0.5\p@ \@plus 0\p@ \@minus 0.5\p@
-                \itemsep \topsep}
-  \def\@listiv {\leftmargin\leftmarginiv
-                \labelwidth\leftmarginiv
-                \advance\labelwidth-\labelsep}
-  \def\@listv  {\leftmargin\leftmarginv
-                \labelwidth\leftmarginv
-                \advance\labelwidth-\labelsep}
-  \def\@listvi {\leftmargin\leftmarginvi
-                \labelwidth\leftmarginvi
-                \advance\labelwidth-\labelsep}
-
-  % create title
-  \providecommand{\maketitle}{}
-  \renewcommand{\maketitle}{%
-    \par
-    \begingroup
-      \renewcommand{\thefootnote}{\fnsymbol{footnote}}
-      % for perfect author name centering
-      \renewcommand{\@makefnmark}{\hbox to \z@{$^{\@thefnmark}$\hss}}
-      % The footnote-mark was overlapping the footnote-text,
-      % added the following to fix this problem               (MK)
-      \long\def\@makefntext##1{%
-        \parindent 1em\noindent
-        \hbox to 1.8em{\hss $\m@th ^{\@thefnmark}$}##1
-      }
-      \thispagestyle{empty}
-      \@maketitle
-      \@thanks
-      %\@notice
-    \endgroup
-    \let\maketitle\relax
-    \let\thanks\relax
-  }
-
-  % rules for title box at top of first page
-  \newcommand{\@toptitlebar}{
-    \hrule height 2\p@
-    \vskip 0.25in
-    \vskip -\parskip%
-  }
-  \newcommand{\@bottomtitlebar}{
-    \vskip 0.29in
-    \vskip -\parskip
-    \hrule height 2\p@
-    \vskip 0.09in%
-  }
-
-  % create title (includes both anonymized and non-anonymized versions)
-  \providecommand{\@maketitle}{}
-  \renewcommand{\@maketitle}{%
-    \vbox{%
-      \hsize\textwidth
-      \linewidth\hsize
-      \vskip 0.1in
-      \@toptitlebar
-      \centering
-      {\LARGE\sc \@title\par}
-      \@bottomtitlebar
-      \textsc{}\\
-      \vskip 0.1in
-      \def\And{%
-        \end{tabular}\hfil\linebreak[0]\hfil%
-        \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
-      }
-      \def\AND{%
-        \end{tabular}\hfil\linebreak[4]\hfil%
-        \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
-      }
-      \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\@author\end{tabular}%
-    \vskip 0.4in \@minus 0.1in \center{\today}   \vskip 0.2in
+% Title creation (anonymized and non-anonymized versions)
+\providecommand{\@maketitle}{}
+\renewcommand{\@maketitle}{%
+  \vbox{%
+    \hsize\textwidth
+    \linewidth\hsize
+    \vskip 0.1in
+    \@toptitlebar
+    \centering
+    {\LARGE\sc \@title\par}
+    \@bottomtitlebar
+    \textsc{}\\
+    \vskip 0.1in
+    \def\And{%
+      \end{tabular}\hfil\linebreak[0]\hfil%
+      \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
     }
+    \def\AND{%
+      \end{tabular}\hfil\linebreak[4]\hfil%
+      \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\ignorespaces%
+    }
+    \begin{tabular}[t]{c}\bf\rule{\z@}{24\p@}\@author\end{tabular}%
+    \vskip 0.4in \@minus 0.1in \center{\today} \vskip 0.2in
   }
+}
 
-  % add conference notice to bottom of first page
-  \newcommand{\ftype@noticebox}{8}
-  \newcommand{\@notice}{%
-    % give a bit of extra room back to authors on first page
-    \enlargethispage{2\baselineskip}%
-    \@float{noticebox}[b]%
-      \footnotesize\@noticestring%
-    \end@float%
-  }
+% Conference notice box
+\newcommand{\ftype@noticebox}{8}
+\newcommand{\@notice}{%
+  \enlargethispage{2\baselineskip}%
+  \@float{noticebox}[b]%
+    \footnotesize\@noticestring%
+  \end@float%
+}
 
-  % abstract styling
- \newenvironment{abstract}
+% Abstract environment
+\newenvironment{abstract}
 {
   \chapter*{Abstract}
   \addcontentsline{toc}{chapter}{Abstract}
@@ -368,4 +333,4 @@
   \end{quote}
 }
 
-  \endinput
+\endinput

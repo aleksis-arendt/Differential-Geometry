@@ -1,2 +1,19 @@
 \chapter{Sard Theorem}
 \section{The Set of Measure Zero}
+\begin{lemma}
+    Let $A \subseteq \bb{R}^{n - 1}$ be a compact subset whose intersection with $\{c\} \times \bb{R}^{n - 1}$ has $(n - 1)$-dimensional measure zero for every $c \in \bb{R}$. Then $A$ has measure zero.
+\end{lemma}
+\begin{proof}
+    Since $A$ is compact, there exists a closed interval $[a,b]$ such that $A \subseteq [a,b] \times\bb{R}^{n - 1}$. Denote the $A_c = \{(c,x) \mid (c,x) \in A\}$, it follows that $c \in [a,b]$. Let $\ep > 0$ be abitrary, then there exists finite $(n-1)$-dimensional open cubes $\{C_i\}$ with total size less than $\ep$ covering $A_c$, let $U_c = C_1  \cup \dots \cup C_k$. We claim that there exists an open interval $J_c \subseteq [a,b]$ containing $c$ such that $$A \cap (J_c \times \bb{R}^{n - 1})\subseteq J_c \times U_c. $$
+    Otherwise, there would exist a sequence of points $(c_i,x_i)$ in $A$ such that $c_i \to c$ and $x_i \notin U_c$ which admits a subsequence $(x_i)$ that converges to $x \in  A_c \backslash U_c$, which is a contradiction. Since $\{J_c\}$ is an open cover of $[a,b]$, then it can be reduced into an finite refinement $\{J_{n_1},\dots, J_{n_m}\}$ covering $[a,b]$ and if necessary, we can shrink the overlapping part such that the total length of $\{J_{n_k}\}$ is no more than $2(b - a)$. Notice that the volume of $A$ is less than the union of $(J_{n_k}\times U_{n_k})$, the we obtain the estimate 
+    \[
+        |A| \leq \sum_{k  =1}^m |J_{n_k}\times U_{n_k}| \leq 2(b - a)\ep
+    \]
+    Thus $A$ has measure zero, as desired.
+\end{proof}
+\begin{proposition}
+    Let $A$ be an open or closed subset of $\bb{R}^{n - 1}$ or $\bb{H}^{n - 1}$ and $f:A \to \bb{R}$ is a continuous function. Then the graph of $f$ has measure zero in $\bb{R}^n$.
+\end{proposition}
+\begin{proof}
+    
+\end{proof}

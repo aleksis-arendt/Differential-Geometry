@@ -245,10 +245,107 @@ Thus $m(E) = \nlim m(E_{n})$, as desired.
         \item $f + g$ and $fg$ are measurable if both $f$ and $g$ are finite-valued.
     \end{enumerate}
 \end{proposition}
+\section{Lebesgue Integral}
+\begin{definition}
+    Let $\varphi(x) = \sum_{k = 1}^M c_k \mc{X}_{E_k}(x)$ be a cannoncial simple function, \textit{Lebesgue integral} of $\varphi$ by 
+    \[
+        \int \varphi(x) dm(x) = \sum_{k = 1}^M c_k m(F_k)
+    \]
+    Where $E_k = \{x \in \bb{R}^n \mid \varphi(x) = c_k\}$
+\end{definition}
+\begin{proposition}
+    The integral of simple functions satisfies the following properties:
+    \begin{enumerate}
+        \item If $\varphi = \sum_{k = 1}^N a_k \mc{X}_{F_k}$, then 
+        \[
+            \int \varphi = \sum_{k = 1}^N a_k m(F_k)
+        \]
+        \item If $\varphi$ and $\psi$ are simple, $a,b \in \bb{R}$, then 
+        \[
+            \int(a \varphi + b \psi) = a \int \varphi + b \int \psi.
+        \]
+        \item If $E$ and $F$ are subsets of $\bb{R}^n$ with finite measure
+        \[
+            \int_{E \cup F} \varphi = \int_E \varphi + \int_F \varphi
+        \]
+        \item If $\varphi \leq \psi$, then
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    It suffices to prove that the following integral is well defined, that is, if 
+    \[
+        \sum_{i = 1}^N a_i \mc{X}_{E_i} = \sum_{j = 1}^M b_j \mc{X}_{F_j}
+    \]
+    then $\sum_{k = 1}^N a_k m(E_k) = \sum_{j = 1}^M b_j m(F_j)$. Without loss of generality, we can suppose that $\{E_k\}$ is pairwise disjoint, so is $\{F_k\}$. For each $i,j$, define $G_{ij} = E_i \cap F_j$, then $\{G_{ij}\}$ is measurable and  parwise disjoint. Note that if $G_{ij} \neq \varnothing$ then $a_i = b_j$. Since we have 
+    \[
+        E_i = \bigcup_{j = 1}^M G_{ij} \text{ and } F_j = \bigcup_{i  = 1}^N G_{ij}
+    \]
+    Then we obtain 
+    \[
+        \sum_{i = 1}^N a_i m(E_i) = \sum_{i = 1}^N \sum_{j = 1}^M a_i m(G_{ij}),
+    \]
+    and
+    \[
+        \sum_{i = 1}^N b_i m(E_i) = \sum_{i = 1}^N \sum_{j = 1}^M b_i m(G_{ij}),
+    \]
+    If $m(G_{ij}) \neq 0$, it follows that $a_i = b_j$. Hence the two following sums are equal.
+    
+\end{proof}
+\begin{lemma}
+    Let $f$ be a bounded function supported on a set $E$ of finite measure. If $(\varphi_n)$ is any sequence of simple function bounded by $M$, supported on $E$, and $\varphi_n \to f$ for almost $x$, then 
+    \begin{enumerate}
+        \item The limit $\nlim \int \varphi_n$ exists.
+        \item If $f = 0$ almost everywhere, then the limit $\nlim \int \varphi_n= 0$
+    \end{enumerate}
+\end{lemma}
+\begin{proof}
+    Let $\ep > 0$, the Ergov's theorem guarantees that there exists a closed subset $A_{\ep} \subseteq E$ such that $m(E \backslash A_{\ep}) \leq \ep$ and $\varphi_n \to f$ uniformly on $A_{\ep}$. Let $I_n = \int \varphi_n$,  and set $m,n$ arbitrarily large such that the estimate $|\varphi_n(x) - \varphi_m(x)| < \ep$ for all $x \in A_{\ep}$ then we have 
+    \begin{align*}
+        |I_n - I_m| &\leq \int_E|\varphi_n - \varphi_m|dx\\
+        &=\int_{A_{\ep}}|\varphi_n - \varphi_m|dx + \int_{E \backslash A_{\ep}}|\varphi_n - \varphi_m|dx\\
+        &\leq m(E)\ep + M \ep = (m(E) + 2M )\ep
+    \end{align*}
+    Since $\ep$ was arbitrary and $m(E)$ is finite, it follows that $(I_n)$ is Cauchy, then it converges, as desired. If $f = 0$ for almost $x$, then $m(E) = 0$. We have the following estimate 
+    \begin{align*}
+         |I_n| &\leq \int_E |\varphi_n| dx\\
+        &= \int_{A_\ep}|\varphi_n|dx + \int_{E \backslash A_\ep}|\varphi_n| dx\\
+        &\leq m(E)M + \ep M = \ep M
+    \end{align*}
+    Thus $I_n \to 0$.
+\end{proof}
 \section{Problems}
 \begin{problem}
     Prove that the Cantor set $C$ constructed in the text is totally disconnected and perfect. In other words, given two distinct points $x, y \in C$, there is a point $z \notin C$ that lies between $x$ and $y$, and yet $C$ has no isolated points.
 \end{problem}
+\begin{proof}
+    Let $x, y \in C$, we prove the following claim:
+    \begin{claim}
+         If $x \in C$, then for every $n \in \bb{N}$, there exists a $0,2$ ternary number $a_n$ such that  $a_n < 3^n$ and
+        \[
+           x \in \left[\frac{a_n}{3^n}, \frac{a_n + 1}{3^n}\right] \subseteq C_n
+        \]
+    \end{claim}
+    \begin{proof}[Proof of the claim]
+        Let $(C_n)_{n \in \bb{N}}$ be the Cantor sequence, which can be expressed as 
+        \[
+            C_n = \bigcup_{i = 1}^{2^n} \left[\frac{a^n_i}{3^n},\frac{a^n_i + 1}{3^n}\right]
+        \]
+        where $(a^n_k)_{k \leq 2^n}$ is the sequence of first indices of $C_n$-division. We aim to prove by induction that $(a^n_k)$ is equal to the set of all $0,2$-ternary numbers less than $3^{n}$. For $n = 1$, we have $C_1 = [0,1/3] \cup [2/3,1]$, then $a^1_1 = 0$ and $a^1_2 = 2$. Suppose the following hypothesis holds for $n \geq 1$, then we have 
+        \[
+            C_{n + 1} = \bigcup_{i = 1}^{2^n} \left[\frac{3a^n_i}{3^{n + 1}}, \frac{3a^n_i + 1}{3^{n + 1}}\right]\cup\left[\frac{3a^n_i + 2}{3^{n + 1}},\frac{3a^n_i + 3}{3^{n + 1}}\right]
+        \]
+        Then the sequence of first indices of $C_{n + 1}$-division is 
+        \[
+        (a^{n + 1}_k) = \{3a^n_1,3a^n_1 + 2, 3a^n_2, 3a^n_2 + 2,\dots, 3a^n_{2^n}, 3a^n_{2^n} + 2\} = 3(a^n_k) \cup (3(a^n_k) + 2)
+        \]
+         For all $k \leq 2^n$, since $a_k^n < a_{k + 1}^{n}$, then we have 
+        \[
+            3a_k^n < 3a_k^n + 2 \text{ and }3a_k^n + 2 < 3a_{k + 1}^n
+        \]
+        Thus $(a^{n + 1}_k)$ is increasing. Note that $a^n_{2^n} = 3^n - 1$ implies $(a^{n + 1}_k)$ has maximal element which is $a^{n + 1}_{2^{n + 1}} = 3a^n_{2^n} + 2 = 3^{n + 1} -1$.  Since every elements of $(a_k^{n + 1})$ has $0,2$ ternary form, it follows that $(a^{n + 1}_k)$  is the set of all $0,2$-ternary numbers less than $3^{n+1}$. The hypothesis is proven. If $x \in C$, then $x \in C_n$ for all $n \in \bb{N}$, as a consequence, for all $n \in \bb{N}$, there exists $a^n_k \in (a^n_k)$ such that $x \in  \left[\frac{a^n_k}{3^n}, \frac{a^n_k + 1}{3^{n}}\right]$ .
+    \end{proof}
+    since $x$ and $y$ are distinct, then we can choose $n \in \bb{N}$ large enough such that $x$ and $y$ is contaned by two disjoint interval $I_x \subseteq C_n$ and $I_y\subseteq C_n$. Choose $z$ between $I_x$ and $I_y$, then $z \notin C_n$ implies $z \notin C$. The claimx also follows that that every point in $C$ is a limit point.
+\end{proof}
 \begin{problem} The Cantor set $C$ can also be described in terms of ternary expansions.
     \begin{enumerate}
         \item Every number in [0, 1] has a ternary expansion
@@ -271,6 +368,43 @@ Prove that $x \in C$ if and only if $x$ has a representation as above where ever
     \end{enumerate}
 
 \end{problem}
+\begin{proof}
+    1. Let $x \in C$ and $n \in \bb{N}$ be arbitrary, then exists a $0,2$-ternary sequence $(b_n)$ such that $x \in I_n =  \left[\frac{b_n}{3^n}, \frac{b_n + 1}{3^{n}}\right] \subseteq C$ for all $n \in \bb{N}$ and $(I_n)$ is a decreasing sequence. Let $n \in \bb{N}$, we have
+    \[
+        3 b_n \leq b_{n + 1} \text{ and } b_{n + 1} \leq 3b_n + 2
+    \]
+    It follows that $b_{n +1 } = 3b_n$ or $b_{n + 1} =3 b_{n} + 2$, then $b_n$ can be written as the form 
+    \[
+        b_n = \sum_{i = 0}^{n - 1}a_i3^{n - i}
+    \]
+    where $a_i = 0,1,2$ are fixed. Consequently, the series 
+    \[
+        \frac{b_n}{3^n} = \sum_{i = 0}^{n - 1}\frac{a_i}{3^{i}} \leq \sum_{i = 0}^{n - 1}\frac{2}{3^{ i}} =\leq 3
+    \]
+    converges to $\alpha < \infty$ and the inequality 
+    \[
+        \frac{b_n}{3^n} \leq x \leq \frac{b_n + 1}{3^{n}}
+    \]
+    implies that $\alpha = x$. Hence, we obtain 
+    \[
+        x = \sum_{i = 0}^\infty \frac{a_i}{3^i}.
+    \]
+    2. To prove $F$ is well-defined, let $x \in C$ and suppose 
+    \[
+        F(x) = \sum_{k = 1}^\infty \frac{b_k}{2^k} = \sum_{k = 1}^\infty \frac{a_k}{2^k}
+    \]
+    it follows that 
+    \[
+        \sum_{k = 1}^\infty \frac{b_k - a_k}{2^k}  =0
+    \]
+    Suppose that $b_k -a_k \neq 0$ for some $k$ and we can assume that $b_1 - a_1 \neq 0$. If $b_1 - a_1 = 1$, it follows that  
+    \[  
+    \sum_{k = 1}^\infty \frac{b_k - a_k}{2^k} = \frac{1}{2} + \sum_{k = 2}^\infty \frac{b_k - a_k}{2^k} \geq \frac{1}{2} - \sum_{k = 2}^\infty\frac{1}{2^k} \geq 0
+    \]
+    The equality holds if and only if $b_k = 0$ and $a_k = 1$ for all $k \geq 2$, which implies that $x = 1$. On the other cases, we must have $a_k = b_k$ for all $k \in \bb{N}$. Morover, since $F$ is bounded above by $2$, it always converges, thus it is well defined.
+
+    3. Let $(a_n)$ be the sequence defined by $a_n = \lfloor 10^nx \rfloor$,  
+\end{proof}
 \begin{problem}
     If $\delta = (\delta_1, ..., \delta_d)$ is a $d$-tuple of positive numbers $\delta_i > 0$, and $E$ is a subset of $\mathbb{R}^d$, we define $\delta E$ by
 $$
@@ -281,6 +415,9 @@ $$
 m(\delta E) = \delta_1 \cdots \delta_d m(E).
 $$
 \end{problem}
+\begin{proof}
+    Let $\ep > 0$, be arbitrary, then there exists a covering $(C_i)$ of $E$ by cubes such that 
+\end{proof}
 \begin{problem}
     Suppose $L$ is a linear transformation of $\mathbb{R}^d$. Show that if $E$ is a measurable subset of $\mathbb{R}^d$, then so is $L(E)$, by proceeding as follows:
 
@@ -349,10 +486,10 @@ is a set of measure zero.
 Let $f$ be a bounded function on a compact interval $J$, and let $I(c,r)$ denote the open interval centered at $c$ of radius $r > 0$. Let $osc(f, c, r) = \sup |f(x) - f(y)|$, where the supremum is taken over all $x, y \in J \cap I(c,r)$, and define the oscillation of $f$ at $c$ by $osc(f, c) = \lim_{r \to 0} osc(f, c, r)$. Clearly, $f$ is continuous at $c \in J$ if and only if $osc(f, c) = 0$.
 
 Prove the following assertions:
-
-(a) For every $\epsilon > 0$, the set of points $c$ in $J$ such that $osc(f, c) \geq \epsilon$ is compact.
-
-(b) If the set of discontinuities of $f$ has measure 0, then $f$ is Riemann integrable.
+\begin{enumerate}
+    \item For every $\epsilon > 0$, the set of points $c$ in $J$ such that $osc(f, c) \geq \epsilon$ is compact.
+    \item  If the set of discontinuities of $f$ has measure 0, then $f$ is Riemann integrable.
+\end{enumerate}
 
 [Hint: Given $\epsilon > 0$ let $A_{\epsilon} = \{c \in J : osc(f, c) \geq \epsilon \}$. Cover $A_{\epsilon}$ by a finite number of open intervals whose total length is $\leq \epsilon$. Select an appropriate partition of $J$ and estimate the difference between the upper and lower sums of $f$ over this partition.]
 \end{problem}
@@ -363,12 +500,6 @@ E = E_1 \cup E_2, \quad E_1 \cap E_2 = \emptyset.
 $$
 If $m(E) = m_*(E_1) + m_*(E_2)$, then $E_1$ and $E_2$ are measurable.
 
-In particular, if $E \subset Q$, where $Q$ is a finite cube, then $E$ is measurable if and only if $m(Q) = m_*(E) + m_*(Q-E)$.
+In particular, if $E \subset Q$, where $Q$ is a finite cube, then $E$ is measurable if and only if $m(Q) = m_*(E) + m_*(Q\backslash E)$.
 
-\end{problem}
-\begin{problem}
-    Suppose $A$ and $B$ are open sets of finite positive measure. Then we have equality in the Brunn-Minkowski inequality (8) if and only if $A$ and $B$ are convex and similar, that is, there are a $\delta > 0$ and an $h \in \mathbb{R}^d$ such that
-$$
-A = \delta B + h.
-$$
 \end{problem}
