@@ -1,0 +1,63 @@
+\chapter{Lie groups}
+\section{Basic definition}
+\begin{definition}
+    A \textbf{Lie group} is a smooth manifold $G$ without boundary that is also a group in the algebraic sense, with the property that the multiplication map $m: G \times G \to G$ and inversion map $i: G \to G$ given by 
+    \[
+        m(g,h) = gh, \qquad i(g) = g^{-1}
+    \]
+    are both smooth.
+\end{definition}
+\begin{lemma}
+    If $G$ is a smooth manifold with a group structure such that the map $G \times G \to G$ given by $(g,h) \mapsto gh^{-1}$ is smooth, then $G$ is a Lie group.
+\end{lemma}
+\begin{proof}
+    We have the map composition 
+    \[
+        (g,(h,g)) = (g,hg^{-1}) = gg^{-1}h^{-1} = h^{-1}
+    \]
+    is smooth, thus the inversion map is smooth and $m(g,h) = (g,h^{-1})$ is also smooth. Then $G$ is a Lie group.
+\end{proof}
+\begin{definition}
+    If $G$ is a Lie group, let $L_g,R_g: G \to G$ be the \textbf{left translation} and \textbf{right translation}, respectively, defined by 
+    \[
+        L_g(h) = gh, \qquad R_g(h) = hg.
+    \]
+\end{definition}
+\begin{definition}
+    Define some following sets:
+    \begin{align*}
+    \text{GL}(n,\bb{R}) &:= \{A \in M_n(\bb{R}) \mid \det(A) \neq 0\},\\
+    \text{GL}^+(n,\bb{R}) &:= \{A \in M_n(\bb{R})\mid \det(A) > 0\},\\
+    \text{SL}(n,\bb{R}) &:= \{A \in M_n(\bb{R})\mid \det(A) =1\},\\
+    O(n) &:= \{A \in M_n(\bb{R}) \mid A^TA = I\},\\
+    \text{SO}(n) &:= \{A \in M_n(\bb{R}) \mid \det(A) = 1\},\\
+    U(n) &:= \{A \in M_n(\bb{C}) \mid \clo{A}^TA= I \},\\
+    \text{SU}(n) &:= \{ A \in U(n) \mid \det(A) = 1\},\\
+    E(n)&:= \{A \in M_n(\bb{R}) \mid \norm{Ax - Ay} = \norm{x - y}, \forall x,y \in \bb{R}^n\}.
+    \end{align*}
+\end{definition}
+\begin{lemma}
+    All of those sets are Lie groups under multiplication.
+\end{lemma}
+\section{Lie group homomorphism}
+\begin{definition}
+    Let $(G,.)$ and $(H,*)$ be Lie groups, a \textbf{Lie group homeomorphism from $G$ to $H$} is a smooth map $F: G \to H$ that is 
+    \[
+        F(g.h) = F(g)*F(h),\quad \text{ for all }g,h \in G.
+    \]
+    It is called a \textbf{a Lie group isomorphism} if it is also a diffeomorphism, implies that it has an inverse that is also a Lie group homeomorphism.
+\end{definition}
+\begin{theorem}
+    Every Lie group homomorphism has constant rank.
+\end{theorem}
+\begin{proof}
+    Let $F: G \to H$ be a Lie group homomorphism, let $e,e'$ be unit elements of $G$ and $H$, and let  $g_0 \in G$ be arbitrary, we will show that $dF_{g_0}$ and $dF_e$ has the same rank. For all $g \in G$, we have 
+    \[
+        F(L_{g_0}(g)) = F(g_0g) = F(g_0)F(g) = L_{F(g_0)}F(g),
+    \] 
+    or more explicitly, we have $F \circ L_{g_0} = L_{F(g_0)}\circ F$, Taking differential both sides at $e$, we obtain 
+    \[
+        d(F\circ L_{g_0})_e  = dF_{L_{g_0}(e)}\circ d(L_{g_0})_e = dF_{g_0}\circ d(L_{g_0})_e = d(L_{F_{g_0}})_{e'}\circ dF_e.
+    \]
+    Since any left multiplication is a diffeomorphism, it follows that $\rank( dF_{g_0}) = dF_e$.
+\end{proof}

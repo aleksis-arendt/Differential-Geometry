@@ -1,0 +1,157 @@
+\chapter{Integral Curves and Flows}
+\section{Picard-Lindelöf Theorem}
+\begin{lemma}
+    Let $K$ be a compact metric space and $(E,\norm{\cdot})$ be a Bannach space. Then the space $C(K,E)$ equipped with a suprenum norm $\norm{f}_{\infty} = \sup_{x \in K}\norm{f(x)}$ is Banach space.
+\end{lemma}
+\begin{proof}
+    Let $\ep > 0$ be abitrary and $(f_n) \subseteq C(K,E)$ be a Cauchy sequence, then there exists $N \in \bb{N}$ such that $\norm{f_n - f_m}_{\infty}$ whenever $n,m > N$. Fix $x \in K$, then we have 
+    \[
+        \norm{f_n(x) - f_m(x)}_E \leq \norm{f_n - f_m}_{\infty} < \ep
+    \]
+    Then $(f_n)$ is Cauchy in $E$. Since $E$ is complete, there exists $f \in E$ such that $f_n \to f$. We claim that $f_n \to f$ uniformly. Fix $n > N$ and $x \in K$, then we have 
+    \[
+        \norm{f_n(x) - f(x)}_{E} = \lim_{m \to +\infty}\norm{f_n(x) - f_m(x)}\leq \lim_{m \to +\infty}\norm{f_n - f_m}_{\infty} \leq \ep
+    \]
+    Then $f_n \to f$ in $E$. In addition, taking $m \to \infty$ we obtain $\norm{f_n - f} \leq \ep$ for all $n \geq N$. Thus $f_n \to f$ in the sup norm. To prove $f \in C(K,E)$, fix $x_0 \in K$, we choose $N \in \bb{N}$ large enough such that 
+    \[
+        \norm{f -f_n}_{\infty} < \frac{\ep}{3} \text{ for all }n > N.
+    \]
+    Since $f_n$ is pointwise continuous, then there exists $\delta > 0$ such that $\norm{f_n(x) - f_n(x_0)}< \frac{\ep}{3}$ whenever $d(x,x_0) > \delta$. Then we obtain 
+    \begin{align*}
+        \norm{f(x) - f(x_0)} &\leq \norm{f(x) - f_n(x)} + \norm{f_n(x) - f_n(x_0)} + \norm{f_n(x_0) - f(x_0)}\\
+        &\leq 2\norm{f - f_n}_\infty + \norm{f_n(x) - f_n(x_0)}\\
+        &< \ep
+    \end{align*}
+    Since $x_0 \in K$ was abitrary, then $f \in C(K,E)$, which implies that $C(K,E)$ with the suprenum norm is a Banach space.
+\end{proof}
+\begin{theorem}[Banach Fixed Point theorem]
+    Let $(X,d)$ be a complete metric space, $q \in [0,1)$ and $T: X \to X$ be a mapping on $X$ satisfying
+    \[
+         d(T(x),T(y)) \leq qd(x,y) \text{ for all }x,y.
+    \]
+    Then $T$ admits a unique fixed point $x^*$ in $X$.
+\end{theorem}
+\begin{proof}
+    Let $x_0 \in X$ be abitrary and let $(x_n)$ be the sequence defined by $x_n = T(x_{n - 1})$ for all $n \geq 1$. Notice that for all $n \in \bb{N}$ we have we claim the estimate 
+    \[
+        d(x_m,x_n) \leq \frac{q^n}{1 - q}d(x_1,x_0)
+    \]
+    for all $m > n$ can be reached by using the inequality 
+    \[
+        d(x_{n + 1}, x_n)\leq q^nd(x_1,x_0), \text{ for all }n \in \bb{N}
+    \]
+    Let $\ep > 0$ be abitrary, then one can choose $N \in \bb{N}$ large enough such that $\frac{q^n}{1 - q}d(x_1,x_0) < \ep$. Thus $(x_n)$ is a Cauchy sequence, and since $X$ is complete, then $x_n$ coverges to some $x^* \in X$ and we obtain 
+    \[  
+        x^* = \nlim x_n = \nlim T(x_{n - 1}) = T(x^*)
+    \]
+    Thus $x^*$ is a fixed point in $X$. To prove the uniqueness, suppose $p_1 \neq p_2$ are two fixed point in $X$, then we have 
+    \[
+        d(p_1,p_2) = d(T(p_1),T(p_2)) \leq qd(p_1,p_2) < d(p_1,p_2),
+    \]
+    which is a contradiction, as desired.
+\end{proof}
+\begin{theorem}[Grönwall inequality]
+    Let $u: [t_0,T] \to [0,\infty)$ be a continuous function, $C,L \geq 0$ and we have 
+    \[
+        u(t) \leq C + L\int_{t_0}^tu(s) ds \text{ for all } t \in [t_0,T]
+    \]
+    Then we have the estimate 
+    \[
+    u(t) \leq Ce^{L(t - t_0)}\text{ for all } t \in [t_0,T]
+    \]
+\end{theorem}
+\begin{proof}
+    Let $v(t) = C + L\int_{t_0}^tu(s) ds$ then we have $u(t) \leq v(t)$ and $v'(t) = Lu(t) \leq  Lv(t)$. Consider $w(t) = e^{-L(t - t_0)}v(t)$, differentiating $w$ yields 
+    \[
+         w'(t) = e^{-L(t - t_0)}(v'(t) - Lv(t)) \leq 0
+    \]
+    Thus $w(t) \leq w(t_0) = v(t_0) = C$, we obtain
+    \[
+        u(t) \leq v(t) \leq Ce^{L(t - t_0)}
+    \]
+    Hence we are done.
+\end{proof}
+\begin{theorem}[Picard-Lindelöf Theorem]
+    Consider the Cauchy problem 
+    \begin{equation}
+        \begin{cases}
+        x(t_0) = x_0,\\
+        x'(t) =F(t,x(t))
+    \end{cases}
+    \end{equation}
+
+    Let $U \subseteq \bb{R} \times \bb{R}^n$ be a closed set and $F: U \to \bb{R}^n$ be a continuous function in $t$, locally Lipchitz in $x$, i.e for every compact set $K \subseteq U$, there exists a local constant $L > 0$ such that
+    \[
+        \norm{F(t,x) - F(t,y)}\leq L\norm{(t,x) -(t,y)}
+    \]
+    for all $(t,x), (t,y) \in K$. Then there exists an interval $I$ containing $t_0$ and a unique solution $x \in C^1(I, \bb{R}^n)$.
+\end{theorem}
+
+\begin{proof}[Proof of the theorem]
+    Let $a, r \in \bb{R}$ such that $r > 0$ and $W = [t_0 - a,t_0 +a] \times \clo{B(x_0,r)} \subseteq U$. Since $W$ is closed and bounded, it is compact. Then $f$ is bounded on $W$. 
+    
+    Let $M = \sup_{(t,x) \in M}\norm{f(t)}$, $h = \min\{\frac{b}{M}, \frac{1}{2L},a\}$ and $I = [t_0 -h, t_0 + h]$. We define the metric space $(X, \norm{\cdot}_{\infty})$
+    \[
+        X = \{x \in C(I,W) \mid \norm{x - x_0} \leq b\}.
+    \] As $ C(I,W) \subseteq C^1(I, \bb{R}^n)$, $I$ is compact and $W$ is complete, then the above lemma follows that $C^1(I,W)$ is Banach. Since $X \subseteq C(I,W)$ is closed, then $X$ is also a Banach space. Integrating both sides of the second (6.1) yields
+    \[
+        x(t) = x_0 + \int_{t_0}^t F(x(s),s) ds
+    \]
+    Let $T: X \to C(I, \bb{R}^n)$ be the operator defined by $T[x] = x_0 + \int_{t_0}^t F(x(s),s) ds$. We claim that $T$ is invariant. Indeed, we have 
+    \begin{align*}
+        \norm{T[x] - x_0} = \norm{\int_{t_0}^t F(x(s),s) ds}\leq \int_{t_0}^t\norm{F(x(s),x)}ds \leq Mh \leq b
+    \end{align*}
+    Thus $T[x] \in X$. Futhermore, we aim to prove that $T$ is a contraction. Since $W$ is compact, then there exists $L > 0$ such that $f$ is Lipchitz with constant $L$ on $W$. Consider the following estimate 
+    \begin{align*}
+        \norm{(Tx)(t) - (Ty)(t)} &= \norm{\int_{t_0}^t F(x(s),s) - F(y(s),s)ds}\\
+        &\leq \int_{t_0}^t\norm{F(x(s),s) - F(y(s),s)}ds\\
+        &\leq L\int_{t_0}^t\norm{(x(s),s) - (y(s),s)}ds\\
+        &\leq Lh\norm{x - y}\\
+        &\leq \frac{1}{2}\norm{x - y}
+    \end{align*}
+    Taking the norm to suprenum yields $\norm{(Tx)(t) - (Ty)(t)} \leq \frac{1}{2}\norm{x - y}$. Thus $T$ is contraction. Apply the Banach Fixed Point theorem, then there exists unique $x^* \in X$ such that $T[x^*] = x^*$, or equivalently,
+    \[
+         x^*(t) = x_0 + \int_{t_0}^t F(x^*(s),s) ds
+    \]
+    Then $F(x^*(s),s)$ is continuous, the fudamental theorem implies that 
+    \[
+        \frac{d}{dt}x^*(t) = F(x^*(t),t).
+    \]
+    Hence $x^*$ is a solution $C^1(I,\bb{R}^n)$ of (6.1). To prove the uniqueness, suppose $x_1,x_2 \in C^1(I,\bb{R}^n)$ are solutions of (6.1), using the similar estimate we obtain
+    \begin{align*}
+        \norm{x_1(t) - x_2(t)} = \norm{(Tx_1)(t) - (Tx_2)(t)} \leq L \int_{t_0}^t\norm{x_1(t) - x_2(t)}ds
+    \end{align*}
+    If $t < t_0$, the RHS must vanish to zero, which implies that $\norm{x_1(t) - x_2(t)} = 0$ or $x_1(t) = x_2(t)$. If $t \geq t_0$, apply the Grönwall inequality for the function $u(t) = \norm{x_1(t) - x_2(t)}$, we obtain that $u(t) = 0$ for all $t \geq t_0$. Therefore $u_1(t) = u_2(t)$ for all $t \in I$, it follows that the existence of the solution $x^*$ in $C^1(I,\bb{R}^n)$ is unique.
+    
+\end{proof}
+
+\section{Integral Curves}
+\begin{definition}
+    Let $X$ be a vector field on $M$, an \textbf{integral curve of $X$} is a $C^1$ curve $\gamma: I \to M$ defined by
+    \[
+        \gamma'(t) = X_{\gamma(t)} \quad \text{ for all }t \in I.
+    \]
+\end{definition}
+\begin{proposition}
+    Let $X$ be a smooth vector field on a smooth manifold $M$. For each point $p \in M$, there exists $\ep > 0$ and a smooth curve $\gamma: (-\ep, \ep) \to M$ that is an integral curve of $V$ starting at $p$.
+\end{proposition}
+\begin{lemma}
+    Let $X$ be a smooth vector field on a smooth manifold $M$, let $I \subseteq \bb{R}$ be an interval and let $\gamma: I \to M$ be an integral curve on $X$. 
+    \begin{enumerate}
+        \item For any $a \in \bb{R}$, the curve $\zeta: aJ \to M$ defined by $\zeta(t) = \gamma(at)$ is an integral curve of the vector field $aX$.
+        \item For any $a \in \bb{R}$, the curve $\zeta: J + a\to M$ defined by $\zeta(t) = \gamma(t + a)$ is also an integral curve of $X$.
+    \end{enumerate}
+\end{lemma}
+\section{Flows}
+\begin{definition}
+    Let $M$ be a smooth manifold and let $X$ be a smooth vector field on $M$. For $p_0 \in M$, let 
+    \[
+        I(p_0) := \bigcup \left\{
+        \, I \;\middle|\;
+        \begin{array}{l}
+        I \subset \mathbb{R} \text{ is an open interval containing } 0 \\
+        \text{and there is an integral curve } \gamma : I \to M 
+        \end{array}
+        \right\}.
+    \]
+\end{definition}

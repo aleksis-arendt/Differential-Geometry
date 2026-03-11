@@ -7,6 +7,8 @@
 \ProcessOptions\relax
 
 % Basic packages and color settings
+\usepackage{bm} %Bold math
+
 \usepackage{xcolor}
 \usepackage{mathtools}
 \usepackage{amsmath, amssymb}
@@ -40,6 +42,7 @@
 
 % Custom math commands
 \newcommand{\mc}{\mathcal}
+\newcommand{\tri}{\triangle}
 \DeclarePairedDelimiterX{\ip}[2]{\langle}{\rangle}{#1,\,#2}  % Inner product
 \newcommand{\ipdot}{\langle \cdot,\cdot\rangle}             % Dot inner product
 \newcommand{\supp}{\mathrm{supp}}                           % Support
@@ -65,6 +68,7 @@
 \newcommand{\nlim}{\displaystyle \lim_{n \to +\infty}}      % Limit as n to infinity
 \newcommand{\series}{\dsum_{n = 1}^{\infty}}                 % Infinite series
 \newcommand{\diam}{\mathrm{diam}}                           % Diameter
+\newcommand{\sm}{\setminus}
 
 % Linear algebra operators
 \newcommand{\rank}{\mathrm{rank}}                           % Rank
@@ -137,7 +141,7 @@
   {}                          % Code before title
 
 \titleformat{\section}
-  {\sffamily\Large\bfseries}  % Sans-serif bold large
+  {\sffamily\large\bfseries}  % Sans-serif bold large
   {\thesection.}              % Section number with period
   {0.5em}{}                   % Spacing
 

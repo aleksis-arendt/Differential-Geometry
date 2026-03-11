@@ -29,23 +29,183 @@ Each function $X^i: U \to \bb{R}$ is called the \textbf{component function of $X
     determines a vector field on $U$.
 \end{example}
 
-\begin{example}[The Euler Vector Field]
+\begin{example}[The Euler Vector Field] The vector field $V: \bb{R}^n \to T\bb{R}^n$ defined by 
+    \[
+        V(x) = x^1\frac{\pa}{\pa x^1}\bigg|_p + \dots + x^n\frac{\pa}{\pa x^n}\bigg|_p
+    \]
+is called the \textbf{the Euler vector field}.
     
 \end{example}
-\begin{definition}[Integral curve]
-    Let $M$ be a smooth manifold, $X \in \mathcal{X}(M)$, and $I \subseteq \bb{R}$ be an open interval. A differentiable function $\gamma: I \to M$ is called an \textbf{integral curve of $X$} if it satisfies
-    \[
-        \gamma'(t) = X(\gamma(t))
-    \]
-    for every $t \in I$.
-\end{definition}
-\begin{theorem}
-Every integral curve of the smooth vector field is  smooth.
-\end{theorem}
+\begin{lemma}[Extension Lemma for Vector Fields]
+    Let $M$ be a smooth manifold, let $A \subseteq M$ be a closed subset. Suppose $X$ is a smooth vector field along $A$. Given any open subset $U$ containing $A$, there exists a smooth global vector field $\hat{X}$ on $M$ such that $\hat{X}|_A = X$ and $\supp \hat{X} \subseteq U$.
+\end{lemma}
 \begin{proof}
-
-We prove this by induction. Let $(U, x^i)$ be the coordinate chart of $M$ such that $\gamma(I) \subset U$ Since $\gamma \in C^1$, then $X\circ \gamma \in C^1$. It follows that $\gamma' \in C^1$ or $\gamma' \in C^2$.  Suppose that $\gamma \in C^k$ then $X\circ \gamma \in C^k$, we obtain $\gamma' \in C^k$ or $\gamma \in C^{k + 1}$. Thus $\gamma$ is smooth.
+    Use extension lemma for smooth function.
 \end{proof}
 \begin{proposition}
-    Let $M$ be a smooth manifold and $X \in \mathcal{M}$, then there exists an integral curve $\gamma: (-\ep,\ep) \to M$ such that $\gamma(0) = p \in M$ and $\gamma'(t) = X(\gamma(t))$. Moreover, if any curve satisfying these condition of $\gamma$, then it must be equal to $\gamma$ at any point.
+    Let $M$ be a smooth manifold, then $\mc{X}(M)$ is a vector space.
+\end{proposition}
+\section{Local and Global Frames}
+\begin{definition}
+    Let $M^n$ be a smooth manifold and let $U \subseteq M$ be an open set. A collection of vector fields $\{E_i\}_{1 \leq i \leq n}$ called a \textbf{local frame} if for every point $p \in U$, the collection
+    \[
+        \{E_1|_p,\dots, E_n|_p\}
+    \]
+    forms a basis for $T_pM$. It is called a \textbf{global frame} if $U = M$.
+\end{definition}
+\begin{lemma}[Gram-Schmidt Algorithm for Frames] Let $(X_j)$ be a smooth local frame of $T\bb{R}^n$ over an open subset $U \subseteq \bb{R}^n$. Then there exists a smooth orthogonal frame $(E_j)$ over $U$ such that $\spann\{E_1|_p,\dots,E_j|_p\} = \spann \{X_1|_p,X_j|_p\}$ for each $j = 1,\dots, n$ and all $p \in U$.
+
+\end{lemma}
+\section{Vector Fields as Derivations}
+\begin{proposition}
+    Let $M$ be a smooth manifold and let $X: T \to TM$ be a rough vector field. The following are equivalent:
+    \begin{enumerate}
+        \item $X$ is smooth.
+        \item $Xf$ is smooth on $M$ for all $f \in C^\infty(M)$.
+        \item For every open subset $U \subseteq M$ and $f  \in C^\infty(M)$, the function $Xf$ is smooth on $U$.
+    \end{enumerate}
+\end{proposition}
+\begin{proof}
+    $(1 \ra 2)$. Suppose $X$ is smooth, let $(U,x^i)$ be any smooth coordinate on $U$ centered at $p$. Then for $x \in U$, one can write
+    \[
+        Xf(x) = \left(X^i(x)\frac{\pa}{\pa x^i}\bigg|_x\right)f = X^i(x)\frac{\pa f}{\pa x^i}(x)
+    \]
+    Since each component of $X$ is smooth, it follows that $Xf$ is smooth.
+
+    $(2 \ra 3)$ follows since smoothness is a local property. Finally, to prove $(3 \ra 1)$, let $(U,x^i)$ be a smooth coordinate chart, for each $i = 1,\dots, n$ the function $X x^i X^i$ is smooth on $U$. Since each component of $X$ is smooth on $U$, then $X$ is smooth on $U$, implies that it is smooth on $M$.
+    
+\end{proof}
+\begin{proposition}
+    The vector field $X$ on $M$, in fact, is a derivation.
+\end{proposition}
+\begin{proposition}
+    Let $M$ be a smooth manifold. A map $D: C^\infty(M) \to C^\infty(M)$ is a derivation if and only if it is of the form $Df = Xf$ for some smooth vector field $X \in \mc{X}(M)$.
+\end{proposition}
+\section{Pushforwarding Vector Fields}
+\begin{definition}
+    Let $F: M^m \to N^n$ be a smooth map between smooth manifolds. We say two vector field $X \in \mc{X}(M)$ and $Y \in \mc{X}(N)$ are \textbf{F-related} if $dF_p(X_p) = Y_{F(p)}$ for all $p \in M$.
+\end{definition}
+\begin{proposition}
+    Let $F: M \to N$ be a smooth map and let $X \in \mc{X}(M), Y \in \mc{N}$. Then $X$ and $Y$ are $F$-related if and only if for all smooth real-valued function $f$ defined on an open subset of $N$, 
+    \[
+        X(f \circ F) = (Yf)\circ F.
+    \]
+\end{proposition}
+\begin{proof}
+    For any $p \in M$ and any smooth real-valued function $f$ defined on a neighborhood of $F(p)$,
+    \[
+        X(f \circ F)(p) = X_p (f \circ F) = dF_p(X_p)f,
+    \]
+    and 
+    \[
+        (Y f) \circ F(p)= Y_{F(p)}f
+    \]
+    Thus, this is true for all $f$ if and only if $X$ and $Y$ are $F$-related.
+\end{proof}
+\begin{proposition}
+    Let $M$ and $N$ are smooth manifolds, and $F: M \to N$ is a diffeomorphism. For every $X \in \mc{X}(M)$, there is a unique smooth vector field on $N$ that is $F$-related to $X$.
+\end{proposition}
+\begin{proof}
+    Since $F$ is a diffeomorphism, then one can define $Y$ by 
+    \[
+        Y_p = dF_{F^{-1}(p)}(X_{F^{-1}(p)}).
+    \]
+    Then $Y$ is a (rough) vector field, and since we have $Y = dF \circ X \circ F^{-1}$, it follows that $Y$ is smooth.
+\end{proof}
+\begin{definition}
+    Let $F: M \to N$ be a diffeomorphism. The \textbf{pushforward of $X$ by $F$}, denoted by $F_*X$, is a unique vector field that is $F$-related to $X$, and can be defined explicitly by the formula
+    \[
+    \boxed{
+    (F_*X)_p = dF_{F^{-1}(p)}(X_{F^{-1}(p)})}
+    \]
+\end{definition}
+\begin{example}
+    Let $M$ and $N$ be open submanifolds of $\bb{R}^2$ such that 
+    \begin{align*}
+        M &= \{(x,y) \mid y > 0 \text{ and }x + y > 0\},\\
+        N &= \{(x,y) \mid x,y > 0\}.
+    \end{align*}
+    Let $F: M \to N$ be the function defined by $F(x,y) = \left(x + y, \dfrac{x}{y} + 1\right)$. Then $F$ is diffeomorphism since its inverse can be easily computed, we thus obtain $F^{-1}(x,y) = \left(x - \dfrac{x}{y}, \dfrac{x}{y}\right)$. Let 
+    \[
+        X_{(x,y)} = y^2 \frac{\pa}{\pa x}\bigg|_{(x,y)}.
+    \]
+    We have 
+    \[
+        DF(x,y) = \begin{pmatrix}
+                1 & 1\\
+                \dfrac{1}{y} & \dfrac{-x}{y^2}
+        \end{pmatrix} \ra DF(F^{-1}(x,y)) = \begin{pmatrix}
+            1 & 1\\
+            \dfrac{y}{x} & \dfrac{y - y^2}{x}
+        \end{pmatrix}.
+    \]
+    And 
+    \[
+        X_{F^{-1}(x,y)} = \frac{x^2}{y^2}\frac{\pa}{\pa x}\bigg|_{(x,y)}.
+    \]
+    It follows that 
+    \[
+        (F_*X)_{(x,y)} = \frac{x^2}{y^2}\frac{\pa}{\pa x}\bigg|_{(x,y)} + \frac{x}{y}\frac{\pa}{\pa y}\bigg|_{(x,y)}.
+    \]
+\end{example}
+\section{Lie Bracket}
+\begin{definition}
+    Let $X,Y \in \mc{X}(M)$ be smooth vector fields. The \textbf{Lie bracket of $X$ and $Y$} is an operator $[X,Y] : C^\infty(M) \to C^\infty(M)$ defined by 
+    \[
+        [X,Y]f = XYf - YXf,\quad \text{for all }f \in C^\infty(M).
+    \]
+    The value of the bracket $[X,Y]$ at a point $p \in M$ is given by 
+    \[
+        [X,Y]_pf = X_p(Yf) - Y_p(Xf).
+    \]
+\end{definition}
+\begin{lemma}
+    The Lie bracket of any pair of smooth vector fields is a smooth vector field.
+\end{lemma}
+\begin{proof}
+    Let $X,Y$ be smooth vector fields on $M$, since $[X,Y]$ is clearly linear by its definition, it is enough to show that $[X,Y]$ satisfies the Leibniz rule. For arbitrary $f,g \in C^\infty(M)$, we compute
+    \begin{align*}
+        [X,Y](fg) &= XY(fg) - YX(fg)\\
+        &= X(gY(f) + fY(g)) - Y(gX(f) + fX(g))\\
+        &= gXY(f) +Y(f)X(g) + fXY(g) + Y(g) X(f)\\
+        &- gYX(f) - X(f)Y(g)- fYX(g) - X(g)Y(f)\\
+        &= g[X,Y]f + f[X,Y]g.
+    \end{align*}
+\end{proof}
+\begin{proposition}
+    Let $X,Y$ be smooth vector fields on smooth manifold $M$, suppose $X = X^i \pa/\pa x^i$ and $Y = Y^j \pa/ \pa x^j$ in some coordinate chart $(x^i)$ for $M$. Then 
+    \[
+        [X,Y] = (XY^j - YX^j)\frac{\pa}{\pa x^j}.
+    \]
+\end{proposition}
+\begin{proof}
+    We have 
+    \begin{align*}
+        [X,Y]f &= X^i \frac{\pa}{\pa x^i}\left(Y^j\frac{\pa f}{\pa x^j}\right) - Y^j\frac{\pa}{\pa x^j}\left(X^i \frac{\pa f}{\pa x^i}\right)\\
+        &= X^i\frac{\pa Y^j}{\pa x^i}  \frac{\pa f}{\pa x^j}+ X^iY^j\frac{\pa^2 f}{\pa x^i \pa x^j}- Y^j\frac{\pa X^i}{\pa x^j}\frac{\pa f}{\pa x^i} - X^iY^j\frac{\pa^2 f}{\pa x^j\pa x^i}\\
+        &= X^i\frac{\pa Y^j}{\pa x^i}  \frac{\pa f}{\pa x^j} - Y^j\frac{\pa X^i}{\pa x^j}\frac{\pa f}{\pa x^i}\\
+        &= \left(X^j\frac{\pa Y^i}{\pa x^j} - Y^j \frac{\pa X^i}{\pa x^j}\right)\frac{\pa f}{\pa x^i}\\
+        &= (XY^i - YX^i)\frac{\pa}{\pa x^i}
+    \end{align*}
+\end{proof}
+\begin{proposition}
+    Let $X,Y,Z$ be smooth vector fields, then
+    \begin{enumerate}
+        \item Antisymmetry:
+        \[
+            [X,Y] = -[Y,X].
+        \]
+        \item Bilinearity: For $a,b \in \bb{R}$,
+        \[
+                [aX + bY,Z] = a[X,Z] + b[Y,Z].
+        \]
+        \item Jacobi identity: 
+        \[
+            [X,[Y,Z]] + [Y,[Z,X]] + [Z,[X,Y]] = 0.
+        \]
+        \item For $f,g \in C^\infty(M)$,
+        \[
+            [fX,gY] = fg[X,Y] + (fXg)Y - (gYf)X.
+        \]
+    \end{enumerate}
 \end{proposition}
